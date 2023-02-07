@@ -68,7 +68,7 @@ const Navbar = () => {
     <header>
       <nav className="navbar navbar-expand-sm   " style={{ paddingTop: "0px" }}>
         <div className="container-fluid">
-          <a href="#" className="navbar-brand" style={{ color: "white" }}>
+          <a href="/" className="navbar-brand" style={{ color: "white" }}>
             <img src="/navLogo.png" style={{ width: "18%" }} />
           </a>
           <button

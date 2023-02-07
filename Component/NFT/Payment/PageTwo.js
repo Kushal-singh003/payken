@@ -175,7 +175,7 @@ const PageTwo = ({
                     name={item.name}
                     onChange={(e) => handleChange(index, e)}
                     type="number"
-                    defaultValue={upCount}
+                    // defaultValue={upCount}
                   />
                 </div>
                 {/* <div className="arrows-section">

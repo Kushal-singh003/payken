@@ -2,7 +2,7 @@ import axios from "axios";
 
 // This is your test secret API key.
 const stripe = require("stripe")(
-  "sk_test_51LxThRSIs5MqMViAZ3OsgBvRZGDXLfPt8O79TceEoz48GRh3XirNYWocF8kS0TX6DfUu2rYVpZH5eUOssrGLAuej00fU6fWPr2"
+  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
 
 const calculateOrderAmount = (items) => {
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     //     country: 'US',
     //   },
     // },
-    currency: "inr",
+    currency: "usd",
     description,
     automatic_payment_methods: {
       enabled: true,

@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import supabase from "../../utils/SupabaseClient";
 
 const stripePromise = loadStripe(
-  "pk_test_51LxThRSIs5MqMViAdKdpIT57Qgx7wgxC34MBxRUofCRsIl6DYak8752zIBemujzjTPG5dmX5RSBTYe32DQjn7ot300ICSJGUXN"
+  "pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU5LoW1odTriiIm4vMZ7Vzk3aHf0YWOul4TFYpQU2JsR759vmsP0J00YDXzZqOm"
 );
 
 const Purchase = ({ props, price }) => {
