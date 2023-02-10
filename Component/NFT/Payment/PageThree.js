@@ -10,11 +10,11 @@ import axios from "axios";
 const stripePromise = loadStripe("pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU5LoW1odTriiIm4vMZ7Vzk3aHf0YWOul4TFYpQU2JsR759vmsP0J00YDXzZqOm");
 
 export default function pay({ clientSecret }) {
-//   const [clientSecret, setClientSecret] = React.useState("");
-  console.log(clientSecret,'clientsecret3')
+  //   const [clientSecret, setClientSecret] = React.useState("");
+  console.log(clientSecret, 'clientsecret3')
 
-  
-  const appearance = { 
+
+  const appearance = {
     theme: 'flat',
   };
   const options = {
@@ -26,9 +26,8 @@ export default function pay({ clientSecret }) {
     <div className="pay">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          {/* <CheckoutForm />
-           */}
-<CheckoutForm/>
+          
+          <CheckoutForm />
         </Elements>
       )}
     </div>

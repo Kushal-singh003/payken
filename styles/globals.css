@@ -46,10 +46,14 @@ a#href-set {
 /* ******************************************************* */
 #Success-inner {
   height: 84.5vh;
-  background-color: #206308;
+  /* background-color: #206308; */
   color: white;
   /* font-family: Bookman Old Style; */
   overflow-y: auto;
+}
+
+ol, ul {
+  padding: 0 !important;
 }
 
 #Success-inner .successPage {
@@ -73,6 +77,46 @@ a#href-set {
   /* padding: 0 30px; */
 }
 
+
+#Success-inner .successPage .successPage-heading--div .successPage-heading,
+#Success-inner .successPage .successPage-heading--div .successPage-heading---content
+{
+  font-size: 20px;
+  font-family: sans-serif;
+  color: #000;
+
+}
+#Success-inner .successPage .nft-img{
+  box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
+
+  height: 280px;
+  width: 290px;
+  border-radius: 10px;
+}
+
+
+
+#Success-inner .successPage .successPage-head{
+  margin-bottom: 2rem;
+  color: #555555;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+
+#Success-inner .successPage .successPage-heading--div{
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #555555;
+  /* margin-bottom: 20px; */
+}
+
+#Success-inner .successPage .nft-details{
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #888888;
+}
+
 .mt-2 {
   margin-top: -2rem !important;
 }
@@ -83,6 +127,31 @@ a#href-set {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  background-color: black !important;
+  border: 0;
+  opacity: 0.25;
+}
+
+#Success-inner .successPage .listItems .list-li{
+  display: flex;
+  gap: 2rem;
+  font-size: 14px;
+  color: #000;
+  font-weight:500;
+}
+
+#Success-inner .successPage .listItems .list-li .span-li{
+  color: #0000006c;
+  font-weight: 400;
+  width: 100%;
+}
+
+#Success-inner .successPage .listItems .list-li .span1-li{
+  width: 100px;
 }
 
 .hover-icon-set{float: left; width: 100%; display: flex; justify-content: flex-end; height: 30px;}
@@ -2760,9 +2829,3 @@ form {
   }
 }
 
-/* @media only screen and (max-width: 600px) {
-  #payment-form {
-    width: 80vw;
-    min-width: initial;
-  }
-} */

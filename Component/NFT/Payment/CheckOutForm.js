@@ -58,11 +58,10 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url: "http://localhost:3000/nftPages/successPage",
       },
     });
-console.log(error)
+console.log(error,'payment error')
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -80,6 +79,7 @@ console.log(error)
  const paymentElementOptions = {
    layout: "tabs",
  };
+ 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
@@ -93,3 +93,6 @@ console.log(error)
     </form>
   );
 }
+
+
+

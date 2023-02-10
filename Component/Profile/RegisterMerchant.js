@@ -6,11 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
 
-export default function Signup() {
+export default function RegisterMerchant() {
   const [loading, setIsLoading] = useState(false);
   const [email, setEmail] = useState();
   const [check, setCheck] = useState();
-  const router = useRouter();
 
   async function signInWithGoogle(e) {
     e.preventDefault();
@@ -60,11 +59,6 @@ export default function Signup() {
       setIsLoading(false);
     }
   };
-
-  async function nextFn(e){
-    e.preventDefault();
-    router.push('/registerMerchant')
-  }
 
   return (
     <div id="home-inner">
@@ -132,8 +126,7 @@ export default function Signup() {
 
                   {/* <span>OR</span>
                   <button
-                    // onClick={(e) => handleLogin(e)}
-                    onClick={(e)=> nextFn(e)}
+                    onClick={(e) => handleLogin(e)}
                     disabled={loading}
                     type="button"
                     className="btn "

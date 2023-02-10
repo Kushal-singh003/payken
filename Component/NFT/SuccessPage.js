@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { useRef }from "react-bootstrap";
 import supabase from "../../utils/SupabaseClient";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const SuccessPage = () => {
   const router = useRouter();
@@ -13,6 +15,7 @@ const SuccessPage = () => {
   const [data, setData] =useState();
   const [email, setEmail] = useState();
   const [token, setToken] = useState();
+  const [open, setOpen] = React.useState(false);
 
   console.log(router.query,'query')
   async function getToken() {
@@ -27,43 +30,41 @@ const SuccessPage = () => {
     setId(session?.user?.id)
     setEmail(session?.user?.email)
     setToken(session?.access_token)
+    const access_token = session?.access_token
 
-    // getNftFinalData({ token: session?.access_token })
-    // formSubmitHandler({token:session?.access_token})
+    updateTransaction(access_token)
+    // getNftFinalData(access_token)
   }
 
   useEffect(() => {
-    getNftFinalData();
+    setOpen(true)
     getToken();
-    formSubmitHandler();
   }, [router.query]);
 
-  async function updateTransaction(data){
-    try{
-      let res = await axios.post("/api/updateTransaction", { token: token, data: data })
-      const response = res.data;
-      console.log(response,"update trasactiion")
-    }catch(err){
-      console.log(err)
-    }
-  }
-
-  async function formSubmitHandler(){
-    // event.preventDefault();
-
+  async function updateTransaction(access_token){
     const data = {
-      // userId:id,
       clientSecret:router.query.payment_intent,
     }
-
-    console.log(data,"hey query data")
-
-    updateTransaction(data);
+    try{
+      let res = await axios.post("/api/updateTransaction", { token: access_token, data: data })
+      const response = res.data;
+      console.log(response,"update trasactiion")
+      setData(response.data.data.data)
+      setOpen(false)
+    }catch(err){
+      console.log(err)
+      toast.error('Trasaction Failed !Please try again')
+      setOpen(false)
+      return
+    }
   }
 
-  async function getNftFinalData(){
+  
+ 
+
+  async function getNftFinalData(access_token){
     try {
-      let res = await axios.post("/api/getNftFinalData",{token:token})
+      let res = await axios.post("/api/getNftFinalData",{token:access_token})
       const response = res.data;
       console.log(response.data,"to get the final of Purchased Nft")
       setData(response.data)
@@ -75,17 +76,18 @@ const SuccessPage = () => {
 
   return (
     <div id="Success-inner">
+      <Backdrop  open={open}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    <ToastContainer/>
       {data?.map((item, idx) => {
         return (
           <div className="successPage">
             <div className="column1">
               <div>
                 <img
-                  style={{
-                    widht: "340px",
-                    height: "340px",
-                    borderRadius: "10px",
-                  }}
+                 
+                  className='nft-img'
                   src="/sadMonkey.png"
                 />
               </div>
@@ -97,20 +99,22 @@ const SuccessPage = () => {
               </div>
               <hr />
               <div>
-                <h4 className="successPage-heading--div">
+                <h4 className="successPage-head ">
                   SuperDope is a demo NFT project by NFTpay.xyz.
                 </h4>
+                <span className="nft-details">DETAILS</span>
               </div>
               <hr />
               <div>
-                <h4>DETAILS:-</h4>
+                
                 <ul className="listItems">
-                  <li>Email-Id:-cmaurya477@gmail.com </li>
-                  <li>Contract Name:-Chandra </li>
-                  <li>Contract Address:-fgshkkkkkkkkkkkkkshsgs3547 </li>
-                  <li>Contract-Id:-ncnnnnnnnnnnn,sjfjjdj </li>
-                  <li>Amount:-30998</li>
+                  <li className="list-li"><span className="span1-li">Token Id</span><span className="span-li">test@yopmail.com</span> </li>
+                  <li className="list-li"><span className="span1-li">BlockChain</span><span className="span-li">Ethereum Goerli</span> </li>
+                  <li className="list-li"><span className="span1-li">Metadata</span><span className="span-li"> View metadata </span> </li>
+                  <li className="list-li"><span className="span1-li">Tx hash</span><span className="span-li"> 0x48...7370 </span> </li>
+                  <li className="list-li"><span className="span1-li">Contract</span><span className="span-li"> 0x8DfBca683b15924116c8eAcc25A212e2eeDA6ef3 </span> </li>
                 </ul>
+                
               </div>
             </div>
           </div>

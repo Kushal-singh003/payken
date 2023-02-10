@@ -17,6 +17,7 @@ const NFTamt = () => {
   const [parameters, setParameters] = useState([]);
   const [errMsg, setErrMsg] = useState(false);
   const [formValues, setFormValues] = useState();
+  const [showValues,setShowValues] = useState(false);
 
 
   useEffect(() => {
@@ -26,9 +27,11 @@ const NFTamt = () => {
     let input = JSON.parse(selected.function);
     let selectedData;
 
-    if (input?.inputs == null) {
+    if (input?.inputs == null || input?.inputs.length == 0) {
       setData([{ name: 'required', type: 'no parameter' }]);
        selectedData = input?.type;
+       setShowValues(true)
+       localStorage.setItem('parameter',[])
     } else {
        console.log(input, "input parsed");
       setData(input.inputs);
@@ -44,51 +47,13 @@ const NFTamt = () => {
     if (!(selectedData == "uint256")) {
       setSelected1(true);
     }
-  }, []);
-
-  // async function value (data) {
-  //   try {
-  //     let res =
-
-  //   }catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  
+  }, []); 
  
   function parameterFn(e) {
     console.log(e)
   arr2.push(e)
     console.log(arr2, 'arr')
-    // const unique2 = arr2.filter((obj, index) => {
-    //   return (
-    //     index === arr2.findIndex((o) => obj.name === o.name && obj.type === o.type)
-    //   );
-    // });
-
-    // let uniqueArray = array.reduce((acc, current) => {
-    //   let isDuplicate = acc.find((item) => item.name == current.name && item.type == item.type);
-    //   if (!isDuplicate) {
-    //     acc.push(current);
-    //   }
-    //   return acc;
-    // }, []);
-    // let unique2 = arr2.filter(
-    //   (item, index) => arr2.indexOf(item) === index
-    // );
-
-    // let uniqueArray = arr2.reduce((acc, current) => {
-    //   // let index = acc.indexOf(current);
-    //   let index = acc.find(
-    //     (item) => item.name == current.name && item.type == item.type
-    //   );
-    //   if (index === -1) {
-    //     acc.push(current);
-    //   } else {
-    //     acc.splice(index, 1, current);
-    //   }
-    //   return acc;
-    // }, []);
+    
 
     let unique2 = arr2.reduce((acc, current) => {
       let index = acc.findIndex((item) => item.id === current.id);
@@ -113,12 +78,18 @@ const NFTamt = () => {
   function nextFn(e) {
     e.preventDefault()
     console.log(data?.length  , parameters.length)
+
+    if(showValues == true){
+      router.push("/nftPages/nftAmt");
+    }else{
+    
     if (data?.length == parameters?.length) {
       router.push("/nftPages/nftAmt");
     } else {
       toast.error('Please select all values');
       setErrMsg(true)
     }
+  }
     
 
 }
@@ -178,18 +149,7 @@ const NFTamt = () => {
                               </div>
                             </div>
 
-                            {/* <div className="threeb-ones">
-                          <h6>Parameter</h6>
-                          <select className="threeb-one">
-                            {data?.map((item, i) => {
-                              return (
-                                <option key={i}>
-                                  {item?.type} {item.name}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div> */}
+                         {showValues ? null :
                             <div className="threeb-two">
                               <h6>Value</h6>
                               <select
@@ -247,8 +207,10 @@ const NFTamt = () => {
                                 </option>
                               </select>
                             </div>
+                      }
                             <div className="threeb-two"></div>
                           </div>
+                              
                         );
                       })}
                       

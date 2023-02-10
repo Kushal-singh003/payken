@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
@@ -19,6 +20,12 @@ const PageOne = ({isLoading,emailInputRef,emailCheckHandler,setPage}) => {
     }
 
     setCheckEmail(email);
+    try {
+      const response = axios.post('/api/checkEmail',{data:email})
+      console.log(response,'check email');
+    } catch (error) {
+      console.log(error);
+    }
     setPage(2)
   }
   return (

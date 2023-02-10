@@ -68,7 +68,8 @@ const NFTamt = () => {
 
      
     const newParameter = localStorage.getItem('parameter')
-    console.log(JSON.parse(newParameter),'newParameter')
+    // console.log(JSON.parse(newParameter),'newParameter')
+    console.log(newParameter,'fkjdkfjkdjfkj');
     const nftPrice = nftPriceInputRef.current.value;
     console.log(nftPrice,"to see the value of nft price")
     const nftMinted = nftMintedInputRef.current.value;
@@ -97,7 +98,7 @@ const NFTamt = () => {
       parameter: JSON.parse(finalData?.function),
       contractName: finalData?.contractName,
       userId: id,
-      data1: JSON.parse(newParameter),
+      data1: newParameter == null || newParameter == 'undefined' || newParameter.length == 0 ? [] : JSON.parse(newParameter),
     };
 
     console.log(data,"to check the data on local storage")
@@ -120,6 +121,7 @@ catch(err){
 useEffect(()=>{
   getTokenUri()
 },[])
+
   
   return (
     <div id="NFTAmt-inner">

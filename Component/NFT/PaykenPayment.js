@@ -73,7 +73,7 @@ const Purchase = ({ props, price }) => {
       userId: session?.user.id,
       token: session?.access_token,
       contractIdentity: router.query.uid,
-       data:formValues,
+       data:Object.keys(formValues).length == 0 ? [] : formValues ,
     });
     // console.log(req.data.clientSecret)
     console.log(req,'clientsecret')

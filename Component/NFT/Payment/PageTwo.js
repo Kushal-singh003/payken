@@ -149,6 +149,8 @@ const PageTwo = ({
       {" "}
       Total Price {(price * upCount).toFixed(4)}
     </h6> */}
+    {data?.length == 0 ? null : 
+    <>
       <h3>Max Mint : {max} </h3>
 
       {data?.map((item, index) => (
@@ -201,6 +203,10 @@ const PageTwo = ({
           </div>
         </div>
       ))}
+      </>
+}
+
+      
 
       {/* <div className="form-check mt-3" id="form-checkers">
       <input
@@ -237,7 +243,7 @@ const PageTwo = ({
         >
           {/* {isLoading ? "Loading…" : "   Submit"}
            */}
-          Submit
+          {data?.length == 0 ? 'Continue' : "Submit"}
         </Button>
       </div>
       {/* </Link> */}

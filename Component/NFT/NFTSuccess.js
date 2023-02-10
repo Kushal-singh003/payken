@@ -5,8 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import SideBar from "../../Component/SideBar";
-
 import { local } from "web3modal";
+
+
 const NFTSuccess = () => {
   const [contractAbi, setContractAbi] = useState();
   const [contractName, setContractName] = useState(null);
