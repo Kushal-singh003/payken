@@ -1,8 +1,8 @@
 import React from "react";
 import RegistrationPage from "../Component/Profile/RegistrationPage";
 import { useEffect, useState } from "react";
-import supabase from "../utils/SupabaseClient";
 import Dashboard from "../Component/Dashboard";
+import supabase from "../utils/SupabaseClient";
 // import Navigation frbaseClient } from '@supabase/auth-helpers-react'
 
 const registrationPage = () => {
