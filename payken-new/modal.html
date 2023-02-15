@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payken</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <nav className="navbar navbar-dark bg-dark">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">Offcanvas dark navbar</a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar"
+          aria-controls="offcanvasDarkNavbar"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">
+              Dark offcanvas
+            </h5>
+            <button
+              type="button"
+              className="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#"
+                  >Home</a
+                >
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Link</a>
+              </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul className="dropdown-menu dropdown-menu-dark">
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#">Another action</a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#"
+                      >Something else here</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <form className="d-flex mt-3" role="search">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section className="signup">
+      <div className="container">
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" id="payken-dialog">
+            <div className="modal-content">
+              <div className="modal-body" id="payken-body">
+                <ul
+                  className="nav nav-pills mb-3"
+                  id="pills-tab"
+                  role="tablist"
+                >
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link active"
+                      id="circle"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-home"
+                      aria-selected="true"
+                    ></button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link"
+                      id="circle"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-profile"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-profile"
+                      aria-selected="false"
+                    ></button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link"
+                      id="circle"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-contact"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-contact"
+                      aria-selected="false"
+                    ></button>
+                  </li>
+                </ul>
+                <div className="tab-content" id="pills-tabContent">
+                  <div
+                    className="tab-pane fade show active"
+                    id="pills-home"
+                    role="tabpanel"
+                    aria-labelledby="pills-home-tab"
+                    tabindex="0"
+                  >
+                    <div className="debit-card">
+                      <h3>Payment-info</h3>
+                      <form>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control debit__input"
+                            placeholder="cardholder-name"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control debit__input"
+                            placeholder="email"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control debit__input"
+                            placeholder="card-number"
+                          />
+                        </div>
+                        <div className="credit-cvv">
+                          <div className="mb-3">
+                            <label for="">Expiry Date</label>
+                            <input
+                              type="email"
+                              className="form-control"
+                              placeholder="01"
+                            />
+                          </div>
+                          <div className="mb-3">
+                            <label for=""></label>
+                            <input
+                              type="email"
+                              className="form-control"
+                              placeholder="25"
+                            />
+                          </div>
+                          <div className="mb-3">
+                            <label for="">CVV</label>
+                            <input
+                              type="email"
+                              className="form-control"
+                              placeholder="154"
+                            />
+                          </div>
+                        </div>
+                        <button className="card-continue">Continue</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="pills-profile"
+                    role="tabpanel"
+                    aria-labelledby="pills-profile-tab"
+                    tabindex="0"
+                  >
+                    <div className="creditt-card">
+                      <h3>Your Address</h3>
+                      <form>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control creditt-input"
+                            placeholder="Your Address"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control  creditt-input"
+                            placeholder="Address line 2"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control  creditt-input"
+                            placeholder="City"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control  creditt-input"
+                            placeholder="State"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            className="form-control  creditt-input"
+                            placeholder="USA"
+                          />
+                        </div>
+
+                        <button className="card-continue">Continue</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="pills-contact"
+                    role="tabpanel"
+                    aria-labelledby="pills-contact-tab"
+                    tabindex="0"
+                  >
+                    <div className="purchase-nft">
+                      <h3>Purchase</h3>
+                      <h4>Purchase your NFT with Payken</h4>
+                      <h6>Choose quantity</h6>
+                      <div className="increment">
+                        <div className="increment-btn">
+                          <button className="btn2-btn">2</button>
+                        </div>
+                        <div className="increment-arrow">
+                          <img src="img/Polygon 1.png" alt="" />
+                          <img src="img/Polygon 3.png" alt="" />
+                        </div>
+                      </div>
+                      <p className="super-dope">SuperDope</p>
+                      <p className="max-6">Maximum 6</p>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="flexCheckDefault"
+                        />
+                        <label
+                          className="form-check-label"
+                          for="flexCheckDefault"
+                        >
+                          I accept and agree that all sales are final. NFTs are
+                          subject to a holding period and identity checks.
+                          Refunds are not available.
+                        </label>
+                      </div>
+                      <button className="card-continue">Pay $0.04</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-upper">
+          <div className="footer-row">
+            <img src="img/payken-logo.png" alt="" />
+            <span
+              >Neque Porro Quisquam Est Qui Dolorem Ipsum Quia Dolor Sit Amet,
+              Consectetur, Adipisci Velit.</span
+            >
+          </div>
+          <div className="footer-row1">
+            <ul>
+              <h5>Products</h5>
+              <li>Payment</li>
+              <li>Tokenomics</li>
+              <li>Enquiry</li>
+              <li>About</li>
+            </ul>
+          </div>
+          <div className="footer-row2">
+            <ul>
+              <h5>Learn</h5>
+              <li>Documentation</li>
+              <li>Medium</li>
+              <li>Download Whitepaper</li>
+            </ul>
+          </div>
+          <div className="footer-row3">
+            <ul>
+              <h5>Join the Community</h5>
+              <li>Join Discord</li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer-lower">
+          <div className="flower-left">
+            <img src="img/google.png" alt="" />
+            <img src="img/twitter.png" alt="" />
+            <img src="img/meta.png" alt="" />
+            <img src="img/telegram.png" alt="" />
+            <img src="img/whatsapp.png" alt="" />
+          </div>
+          <div className="flower-right">
+            <span>©2022 Payken. All rights reserved</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

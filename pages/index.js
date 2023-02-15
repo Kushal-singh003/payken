@@ -1,11 +1,12 @@
-import React from "react";
-import RegistrationPage from "../Component/Profile/RegistrationPage";
-import { useEffect, useState } from "react";
-import Dashboard from "../Component/Dashboard";
-import supabase from "../utils/SupabaseClient";
-// import Navigation frbaseClient } from '@supabase/auth-helpers-react'
+import { Inter } from '@next/font/google'
+import supabase from '@/components/Utils/SupabaseClient'
+import Index from '@/components/Index'
+import TransferFunds from '@/components/Wallet/TransferFunds'
+import { useState,useEffect } from 'react'
 
-const registrationPage = () => {
+const inter = Inter({ subsets: ['latin'] })
+
+export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [session, setSession] = useState(null);
 
@@ -38,10 +39,11 @@ const registrationPage = () => {
       subscription?.unsubscribe();
     };
   }, []);
-
   return (
-    <div>{!session ? <RegistrationPage /> : <Dashboard key={session} />}</div>
-  );
-};
-
-export default registrationPage;
+    <>
+    {session ? <TransferFunds/> : 
+      <Index/> }
+      
+    </>
+  )
+}

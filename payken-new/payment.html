@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payken</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <nav className="navbar navbar-dark bg-dark">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">Offcanvas dark navbar</a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar"
+          aria-controls="offcanvasDarkNavbar"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">
+              Dark offcanvas
+            </h5>
+            <button
+              type="button"
+              className="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#"
+                  >Home</a
+                >
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Link</a>
+              </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul className="dropdown-menu dropdown-menu-dark">
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#">Another action</a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#"
+                      >Something else here</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <form className="d-flex mt-3" role="search">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section className="payment">
+      <div className="container">
+        <h2><a href="">< </a> Payment</h2>
+        <div className="payment-content">
+          <div className="payment-box">
+            <h5>Connect Account</h5>
+            <div className="btn-group-vertical" role="group" id="payment-btn">
+              <input
+                type="radio"
+                className="btn-check"
+                name="vbtn-radio"
+                id="vbtn-radio1"
+                autocomplete="off"
+                checked
+              />
+              <label
+                className="btn btn-outline-danger label-btn"
+                for="vbtn-radio1"
+              >
+                <img src="img/paypal (1).png" alt="" />
+                Paypal
+              </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="vbtn-radio"
+                id="vbtn-radio2"
+                autocomplete="off"
+              />
+              <label
+                className="btn btn-outline-danger label-btn"
+                for="vbtn-radio2"
+              >
+                <div className="credit-card">
+                  <div className="credit-left">
+                    <img src="img/credit-card.png" alt="" />
+                    Credit Card
+                  </div>
+                  <div className="credit-right">
+                    <img src="img/credit-card (1).png" alt="" />
+                    <img src="img/credit-card.png" alt="" />
+                    <img src="img/visa.png" alt="" />
+                  </div>
+                </div>
+              </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="vbtn-radio"
+                id="vbtn-radio3"
+                autocomplete="off"
+              />
+              <label
+                className="btn btn-outline-danger label-btn"
+                for="vbtn-radio3"
+              >
+                <div className="credit-card">
+                  <div className="credit-left">
+                    <img src="img/credit-card.png" alt="" />
+                    Debit Card
+                  </div>
+                  <div className="credit-right">
+                    <img src="img/credit-card (1).png" alt="" />
+                    <img src="img/credit-card.png" alt="" />
+                    <img src="img/visa.png" alt="" />
+                  </div>
+                </div>
+              </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="vbtn-radio"
+                id="vbtn-radio4"
+                autocomplete="off"
+              />
+              <label
+                className="btn btn-outline-danger label-btn"
+                for="vbtn-radio4"
+              >
+                <img src="img/transfer.png" alt="" />
+                Bank Transfer</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-upper">
+          <div className="footer-row">
+            <img src="img/payken-logo.png" alt="" />
+            <span
+              >Neque Porro Quisquam Est Qui Dolorem Ipsum Quia Dolor Sit Amet,
+              Consectetur, Adipisci Velit.</span
+            >
+          </div>
+          <div className="footer-row1">
+            <ul>
+              <h5>Products</h5>
+              <li>Payment</li>
+              <li>Tokenomics</li>
+              <li>Enquiry</li>
+              <li>About</li>
+            </ul>
+          </div>
+          <div className="footer-row2">
+            <ul>
+              <h5>Learn</h5>
+              <li>Documentation</li>
+              <li>Medium</li>
+              <li>Download Whitepaper</li>
+            </ul>
+          </div>
+          <div className="footer-row3">
+            <ul>
+              <h5>Join the Community</h5>
+              <li>Join Discord</li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer-lower">
+          <div className="flower-left">
+            <img src="img/google.png" alt="" />
+            <img src="img/twitter.png" alt="" />
+            <img src="img/meta.png" alt="" />
+            <img src="img/telegram.png" alt="" />
+            <img src="img/whatsapp.png" alt="" />
+          </div>
+          <div className="flower-right">
+            <span>©2022 Payken. All rights reserved</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
