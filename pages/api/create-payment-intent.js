@@ -45,20 +45,21 @@ console.log(customer,'customer')
   console.log(paymentIntent, "payment intent"); 
   var config = {
     method: "post",
-    url: "http://52.9.60.249:4000/api/v1/member/token",
+    url: "http://52.9.60.249:4000/api/v1/auth/token",
     data: {
       userId: userId,
       tokenId: 1,
+      email:email,
       quantity,
       amount,
-      transactionCc: paymentIntent.clientSecret,
+      transactionCc: paymentIntent.client_secret,
       paymentIntentId: paymentIntent.id,
       contractIdentity,
       data,
     },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${token}`,
+    // },
   };
   axios(config);
   // userId,tokenId,quantity,amount,transactionCc,transactionStatus,status

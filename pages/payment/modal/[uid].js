@@ -1,18 +1,17 @@
-import Modal from '@/components/Payment/Modal/Index'
-import React from 'react'
+import Modal from "@/components/Payment/Modal/Index";
+import React from "react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import axios from 'axios';
-import Step5 from '@/components/Payment/Modal/step5';
+import axios from "axios";
+import Step5 from "@/components/Payment/Modal/step4";
 
 export default function id({ response, price }) {
   return (
     <div>
-        <Modal props={response} price={price}  />
-        {/* <Step5/> */}
+      <Modal props={response} price={price} />
+      {/* <Step5/> */}
     </div>
-  )
+  );
 }
-
 
 export async function getServerSideProps(context) {
   let { params } = await context;
@@ -22,25 +21,25 @@ export async function getServerSideProps(context) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  console.log(session,'sessiinon')
+  console.log(session, "sessiinon");
   const token = session?.access_token;
 
-    var config = {
-      method: "post",
-      url: "http://52.9.60.249:4000/api/v1/auth/getci",
+  var config = {
+    method: "post",
+    url: "http://52.9.60.249:4000/api/v1/auth/getci",
 
-      data: { contractIdentity: contractIdentity },
+    data: { contractIdentity: contractIdentity },
 
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
-    };
+    // headers: {
+    //   Authorization: `Bearer ${token}`,
+    // },
+  };
 
   const res = await axios(config);
-  console.log(res,'res')
+  console.log(res, "res");
   const response = res.data;
-  console.log(response,'response is here')
-  
+  console.log(response, "response is here");
+
   // console.log(response,"to get the response from api to get data by contract Identity")
   var config = {
     method: "get",

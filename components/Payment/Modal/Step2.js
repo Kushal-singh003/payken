@@ -50,6 +50,8 @@ export default function Step2({setShow2,setShow3,contractIdentity,setClientSecre
     }
   }
 
+  console.log(nftDetails,contractIdentity,formData,customer,'nft details');
+
   let handleChange = (idx, e) => {
     const updatedValues = [...formValues];
     updatedValues[idx] = e.target.value;
@@ -107,7 +109,7 @@ export default function Step2({setShow2,setShow3,contractIdentity,setClientSecre
       city:formData?.city,
       state:formData?.state,
       country:formData?.country,
-       data:Object.keys(formValues).length == 0 ? [] : formValues ,
+       data:formValues?.length == 0 ? [] : formValues ,
        customer:customer,
     });
     // console.log(req.data.clientSecret)

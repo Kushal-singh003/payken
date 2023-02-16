@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import Modal from 'react-bootstrap/Modal';
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
 import { useRouter } from "next/router";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { withToken } from "@/components/Utils/Functions";
+import { withAuth } from "@/components/Utils/Functions";
 import supabase from "@/components/Utils/SupabaseClient";
 
 const stripe = require("stripe")(
@@ -17,11 +14,11 @@ const stripe = require("stripe")(
 );
 
 
-export default function Step5() {
+export default function Step4() {
  const [show,setShow] = useState(false);
  const [email,setEmail] = useState();
  const [open,setOpen] = useState(false)
- const [data,setData] = useState();
+//  const [data,setData] = useState();
  const router = useRouter();
 
 
@@ -45,16 +42,16 @@ export default function Step5() {
    getSession();
  }, [router.query]);
 
- async function updateTransaction(token){
+ async function updateTransaction(){
    const data = {
      clientSecret:router.query.payment_intent,
+     email
    }
    try{
-     let res = await withToken({token:token,data:data,query:'updatetransaction'})
-     const response = res.data;
-     console.log(response,"update trasactiion")
-     setData(response.data.data.data)
-     setOpen(false)
+     let response = await withAuth({data:data,query:'updatetransaction'})
+     console.log(response,"zettaaaaaaaaaaaaaaaaaaa")
+    //  setData(response.data.data.data)
+    setOpen(false)
    }catch(err){
      console.log(err)
      toast.error('Trasaction Failed !Please try again')
@@ -62,6 +59,8 @@ export default function Step5() {
      return
    }
  }
+
+
 
  useEffect(()=>{  
   card()
@@ -88,9 +87,6 @@ console.log(paymentMethods)
         <div className="container">
       <Modal show={show} aria-labelledby="contained-modal-title-vcenter"
  centered >
-       
-      
-    
               <div className="modal-content">
                 <div className="modal-body" id="purchasenft-body">
                   <div className="purchasenft-head">

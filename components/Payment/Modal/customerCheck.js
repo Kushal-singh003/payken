@@ -26,8 +26,8 @@ const [email,setEmail] = useState();
    
 try {
   const response = await withAuth({data:{email:email},query:'registerwithemail'})
-  console.log(response,'response')
-  setCustomer(response?.data?.data?.check?.cId)
+  console.log(response.data.data.cId,'response')
+  setCustomer(response?.data?.data?.cId)
   localStorage.setItem('buyerEmail',email)
   setFormData({...formData,email:email})
   if(response.data?.data?.data?.user != null){

@@ -11,23 +11,18 @@ const stripe = require("stripe")(
 );
 
 
-export default function CheckoutForm({customer}) {
+export default function CheckoutForm({ customer }) {
   const stripe = useStripe();
   const elements = useElements();
 
 
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [paymentMethod,setPaymentMethod] = useState();
+  const [paymentMethod, setPaymentMethod] = useState();
 
   console.log(customer)
 
   React.useEffect(() => {
-
-
-
-
-
 
     if (!stripe) {
       return;
@@ -42,9 +37,9 @@ export default function CheckoutForm({customer}) {
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-        switch (paymentIntent.status) {
-            case "succeeded":
-            console.log(paymentIntent.status,"--------")
+      switch (paymentIntent.status) {
+        case "succeeded":
+          console.log(paymentIntent.status, "--------")
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -57,7 +52,7 @@ export default function CheckoutForm({customer}) {
           setMessage("Something went wrong.");
           break;
       }
-      
+
     });
   }, [stripe]);
 
@@ -75,10 +70,10 @@ export default function CheckoutForm({customer}) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/payment/step5",
+        return_url: "http://localhost:3000/payment/step4",
       },
     });
-console.log(error,'payment error')
+    console.log(error, 'payment error')
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -93,26 +88,26 @@ console.log(error,'payment error')
     setIsLoading(false);
   };
 
- const paymentElementOptions = {
-   layout: "tabs",
-  //  paymentMethod: "pm_1MbkAgJhZEv5n0fUUl60jgo1",
- };
+  const paymentElementOptions = {
+    layout: "tabs",
+    //  paymentMethod: "pm_1MbkAgJhZEv5n0fUUl60jgo1",
+  };
 
 
- async function card(){
-  const cid = localStorage.getItem('cid')
-   const paymentMethods = await stripe.paymentMethods.list({
-     customer: `${customer}`,
-     type: 'card',
-   });
- 
- console.log(paymentMethods)
-  }
+  //  async function card(){
+  //   const cid = localStorage.getItem('cid')
+  //    const paymentMethods = await stripe.paymentMethods.list({
+  //      customer: `${customer}`,
+  //      type: 'card',
+  //    });
 
-  useEffect(()=>{
-      card()
-  },[])
- 
+  //  console.log(paymentMethods)
+  //   }
+
+  //   useEffect(()=>{
+  //       card()
+  //   },[])
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
 

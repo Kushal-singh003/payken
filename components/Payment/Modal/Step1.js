@@ -23,7 +23,7 @@ export default function Step1({setShow1,setShow2,formData,setFormData,setCustome
     let createCid;
     localStorage.setItem('cardHolder',JSON.stringify(formData))
     console.log(customer,'cus');
-    if(customer == null || customer == 'undefined'){
+    if(customer == null || customer == 'undedined'){
       const cid = await stripe.customers.create({
         address: {
           city:formData?.city,
@@ -40,8 +40,10 @@ export default function Step1({setShow1,setShow2,formData,setFormData,setCustome
     }
 
   localStorage.setItem('cid',customer || createCid)
+
+  if(customer == null || customer == 'undedined'){
 try {
-  const response = await withAuth({data:{email:formData?.email,cId:customer || createCid},query:'updatecid'})
+  const response = await withAuth({data:{email:formData?.email,cId: createCid},query:'updatecid'})
   console.log(response,'response')
   setShow1(false)
 setShow2(true)
@@ -49,6 +51,10 @@ setShow2(true)
   console.log(error);
   toast.error('Something went wrong! Please try again')
 }
+  }else{
+    setShow1(false)
+    setShow2(true)
+  }
 
 
     
