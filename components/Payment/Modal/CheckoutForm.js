@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
   useStripe,
@@ -23,7 +23,7 @@ export default function CheckoutForm({customer}) {
   console.log(customer)
 
   React.useEffect(() => {
-  //  card()
+
 
 
 
@@ -75,7 +75,7 @@ export default function CheckoutForm({customer}) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://payken-demo.vercel.app/payment/step5",
+        return_url: "http://localhost:3000/payment/step5",
       },
     });
 console.log(error,'payment error')
@@ -99,15 +99,19 @@ console.log(error,'payment error')
  };
 
 
-//  async function card(){
-//   const cid = localStorage.getItem('cid')
-//    const paymentMethods = await stripe.paymentMethods.list({
-//      customer: `${customer}`,
-//      type: 'card',
-//    });
+ async function card(){
+  const cid = localStorage.getItem('cid')
+   const paymentMethods = await stripe.paymentMethods.list({
+     customer: `${customer}`,
+     type: 'card',
+   });
  
-//  console.log(paymentMethods)
-//   }
+ console.log(paymentMethods)
+  }
+
+  useEffect(()=>{
+      card()
+  },[])
  
   return (
     <form id="payment-form" onSubmit={handleSubmit}>

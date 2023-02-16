@@ -27,17 +27,19 @@ export async function getServerSideProps(context) {
 
     var config = {
       method: "post",
-      url: "http://52.9.60.249:4000/api/v1/member/getci",
+      url: "http://52.9.60.249:4000/api/v1/auth/getci",
 
       data: { contractIdentity: contractIdentity },
 
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
     };
 
   const res = await axios(config);
+  console.log(res,'res')
   const response = res.data;
+  console.log(response,'response is here')
   
   // console.log(response,"to get the response from api to get data by contract Identity")
   var config = {
