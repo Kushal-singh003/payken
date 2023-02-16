@@ -1,10 +1,10 @@
-import Step5 from "@/components/Payment/Modal/step4";
+import Step4 from "@/components/Payment/Modal/step4";
 import React from "react";
 
 export default function step4() {
   return (
     <div>
-      <Step5 />
+      <Step4 />
     </div>
   );
 }
