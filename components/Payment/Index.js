@@ -1,5 +1,5 @@
 import React from "react";
-import Step1 from "./Modal/Step1";
+import Step1 from "./Modal/Step2";
 import Link from "next/link";
 
 export default function Payment() {

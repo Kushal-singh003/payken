@@ -1,14 +1,12 @@
-import Modal from "@/components/Payment/Modal/Index";
 import React from "react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import axios from "axios";
-import Step5 from "@/components/Payment/Modal/step4";
+import Index from "@/components/Payment/Modal/Index";
 
 export default function id({ response, price }) {
   return (
     <div>
-      <Modal props={response} price={price} />
-      {/* <Step5/> */}
+      <Index props={response} price={price} />
     </div>
   );
 }

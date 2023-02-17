@@ -11,42 +11,39 @@ export default function Login() {
         password:'',
     })
     const router = useRouter();
+    const [loading,setLoading] = useState(false)
 
     async function signInWithGoogle(e) {
         e.preventDefault();
+        setLoading(true)
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: "google",
         });
     
         if (data) {
           console.log(data);
+          setLoading(false)
         } else {
           console.log(error);
+          setLoading(false)
          
         }
       }
 
     async function handleSubmit(e){
         e.preventDefault();
+        setLoading(true)
         console.log(formData);
 
       try {
-                  
-          // const { data, error } = await supabase.auth.signInWithPassword({
-          //   email: formData?.email,
-          //   password: formData?.password,
-          // })
-
           const { data,error } = await supabase.auth.signInWithOtp({ email:formData?.email });
           console.log(data,'data');
           toast.success("A Confirmation Link is sent to your email to continue");
-          // setTimeout(()=>{
-          //   router.push('/')
-
-          // },[1000])
+          setLoading(false)
           console.log(error,'error');
       } catch (error) {
         console.log(error);
+        setLoading(false)
       }
         
 
@@ -62,11 +59,11 @@ export default function Login() {
           <h4>Don't swap just Payken</h4>
           <div className="signin-box">
             <img src="/img/payken.png" alt="" />
-            <button onClick={(e)=> signInWithGoogle(e)} className="signin-google">
+            <button disabled={loading} onClick={(e)=> signInWithGoogle(e)} className="signin-google">
               <span>
                 <img src="/img/google (2).png" alt="" />
               </span>
-              <span>Sign In With Google</span>
+              <span> { loading ? 'Loading..' : 'Sign In With Google' }</span>
             </button>
             <Link href="" className="signin-apple">
               <span>
@@ -94,8 +91,8 @@ export default function Login() {
                   onChange={(e)=> setFormData({...formData, password:e.target.value})}
                 />
               </div> */}
-            <button type="submit"  className="signin-btn">
-              Login
+            <button disabled={loading} type="submit"  className="signin-btn">
+               {loading ? 'Loading...' : 'Login'}
             </button>
             </form>
             <div className="signin-checkbox">

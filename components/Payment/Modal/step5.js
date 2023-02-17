@@ -1,46 +1,35 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery";
 import Modal from 'react-bootstrap/Modal';
 import { useRouter } from "next/router";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { withAuth } from "@/components/Utils/Functions";
-import supabase from "@/components/Utils/SupabaseClient";
+
 
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
 
 
-export default function Step4() {
+export default function Step5() {
  const [show,setShow] = useState(false);
  const [email,setEmail] = useState();
  const [open,setOpen] = useState(false)
+ const [errMsg,setErrMsg] = useState(false);
 //  const [data,setData] = useState();
  const router = useRouter();
 
-
- async function getSession() {
-   const {
-     data: { session },
-   } = await supabase.auth.getSession();
-   console.log(
-     session,
-     "to get the session from supabase to upload the Avatar"
-   );
-
-   updateTransaction(session?.access_token)
-   
- }
 
  useEffect(() => {
    setOpen(true)
    setShow(true)
    setEmail(localStorage.getItem('buyerEmail'))
-   getSession();
+
+   updateTransaction()
+   card()
  }, [router.query]);
+
+
 
  async function updateTransaction(){
    const data = {
@@ -50,21 +39,18 @@ export default function Step4() {
    try{
      let response = await withAuth({data:data,query:'updatetransaction'})
      console.log(response,"zettaaaaaaaaaaaaaaaaaaa")
-    //  setData(response.data.data.data)
+
+     if(response?.Error){
+      setErrMsg(true)
+     }
     setOpen(false)
    }catch(err){
      console.log(err)
-     toast.error('Trasaction Failed !Please try again')
+     setErrMsg(true)
      setOpen(false)
      return
    }
  }
-
-
-
- useEffect(()=>{  
-  card()
- },[])
 
 
  async function card(){
@@ -79,15 +65,20 @@ console.log(paymentMethods)
  
   return (
     <div>
-      <Backdrop  open={open}>
+       <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <ToastContainer/>
+
 <section className="not-imp">
         <div className="container">
+      {open ? null :    
       <Modal show={show} aria-labelledby="contained-modal-title-vcenter"
  centered >
               <div className="modal-content">
+                {!errMsg ? 
                 <div className="modal-body" id="purchasenft-body">
                   <div className="purchasenft-head">
                     <img src="/img/Mask Group -1.png" alt="" />
@@ -100,13 +91,19 @@ console.log(paymentMethods)
                   </div>
                   <button className="view">View your NFT now</button>
                 </div>
+              :
+                <div className="modal-body" id="purchasenft-body">
+                <h2 style={{color:'red'}}>Transaction couldn't update! Please try again later</h2>
+
+                </div>
+              }
            
             </div>
              
       </Modal>
+      }
       </div>
       </section>
-
 
       
     </div>
