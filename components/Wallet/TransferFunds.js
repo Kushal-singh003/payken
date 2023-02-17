@@ -9,7 +9,7 @@ export default function TransferFunds() {
       <NavBar/>
         <section className="sent">
       <div className="container">
-        <h2><a href=""> </a> Send/Receive</h2>
+        <h2><a href=""> </a> Dashboard</h2>
         <div className="sent-box">
           <Link className='link' href='/nft'>
           <div className="sent-card">

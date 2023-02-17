@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
 
   var config = {
     method: "post",
-    url: "http://52.9.60.249:4000/api/v1/auth/getci",
+    url: "http://52.9.60.249:5000/api/v1/auth/getci",
 
     data: { contractIdentity: contractIdentity },
 

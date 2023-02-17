@@ -1,17 +1,17 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  console.log(req.query,'hello');
+  console.log(req.query, "hello");
   let query = req.query.id;
 
   if (req.method === "POST") {
     try {
       // const { token } = req.body;
-        const { data } = req.body;
+      const { data } = req.body;
 
       var config = {
         method: "post",
-        url: "http://52.9.60.249:4000/api/v1/auth/" + query,
+        url: "http://52.9.60.249:5000/api/v1/auth/" + query,
         // headers: {
         //   Authorization: `Bearer ${token}`,
         // },

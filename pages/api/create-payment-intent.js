@@ -12,14 +12,27 @@ const calculateOrderAmount = (items) => {
 export default async function handler(req, res) {
   console.log("---------------");
   //   const { items } = req.body;
-  let { amount, quantity, description, userId, contractIdentity, data,name,email,address,city,state,country,customer } =
-    req.body;
+  let {
+    amount,
+    quantity,
+    description,
+    userId,
+    contractIdentity,
+    data,
+    name,
+    email,
+    address,
+    city,
+    state,
+    country,
+    customer,
+  } = req.body;
   const dataNE = req.body;
   console.log(dataNE, "new Data");
 
   let { token } = req.body;
   console.log(token, "token is here");
-console.log(customer,'customer')
+  console.log(customer, "customer");
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: Math.ceil(100 * 1),
@@ -27,7 +40,7 @@ console.log(customer,'customer')
       name: name,
       address: {
         line1: address,
-        postal_code: '98140',
+        postal_code: "98140",
         city: city,
         state: state,
         country: country,
@@ -39,17 +52,17 @@ console.log(customer,'customer')
       enabled: true,
     },
 
-   customer: `${customer}`,
-   setup_future_usage: 'off_session',
+    customer: `${customer}`,
+    setup_future_usage: "off_session",
   });
-  console.log(paymentIntent, "payment intent"); 
+  console.log(paymentIntent, "payment intent");
   var config = {
     method: "post",
-    url: "http://52.9.60.249:4000/api/v1/auth/token",
+    url: "http://52.9.60.249:5000/api/v1/auth/token",
     data: {
       userId: userId,
       tokenId: 1,
-      email:email,
+      email: email,
       quantity,
       amount,
       transactionCc: paymentIntent.client_secret,
