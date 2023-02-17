@@ -125,6 +125,11 @@ useEffect(()=>{
   getTokenUri()
 },[])
 
+function backFn(e){
+  e.preventDefault();
+  router.push('/contract/functionValues')
+}
+
   
   return (
     <div id="NFTAmt-inner">
@@ -158,7 +163,7 @@ useEffect(()=>{
                         ref={nftPriceInputRef}
                           type="text"
                           className="form-control form-border"
-                          placeholder="0.01"
+                          // placeholder="0.01"
                           required
                         />
                       </div>
@@ -181,7 +186,7 @@ useEffect(()=>{
                           ref={nftMintedInputRef}
                           type="text"
                           className="form-control form-border"
-                          placeholder="10"
+                          // placeholder="10"
                           required
                         />
                       </div>
@@ -199,7 +204,7 @@ useEffect(()=>{
                           ref={webAddressInputRef}
                           type="text"
                           className="form-control form-border"
-                          placeholder="https://codepen.io/mr-beasy"
+                          // placeholder="https://codepen.io/mr-beasy"
                           required
                         />
                       </div>
@@ -217,7 +222,7 @@ useEffect(()=>{
                           ref={descriptionInputRef}
                           type="text"
                           className="form-control "
-                          placeholder="https://codepen.io/mr-beasy"
+                          // placeholder="https://codepen.io/mr-beasy"
                           id="textarea-nft"
                           required
                         />
@@ -262,7 +267,7 @@ useEffect(()=>{
 
                     <div className="nft-part pt-0">
                       <div className="nft-btnsec mt-0 pt-0">
-                        <button className="btn back-nftbtn" type="button">
+                        <button onClick={backFn} className="btn back-nftbtn" type="button">
                           Cancel
                         </button>
                         <button disabled={loading} className="btn next-nftbtn" type="submit">

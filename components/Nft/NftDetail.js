@@ -23,39 +23,39 @@ export default function NftDetail() {
       "to get the session from supabase to upload the Avatar"
     );
 
-    updateTransaction(session?.access_token)
+    // updateTransaction(session?.access_token)
     
   }
 
   useEffect(() => {
-    setOpen(true)
+    // setOpen(true)
     getSession();
   }, [router.query]);
 
-  async function updateTransaction(token){
-    const data = {
-      clientSecret:router.query.payment_intent,
-    }
-    try{
-      let res = await withToken({token:token,data:data,query:'updatetransaction'})
-      const response = res.data;
-      console.log(response,"update trasactiion")
-      setData(response.data.data.data)
-      setOpen(false)
-    }catch(err){
-      console.log(err)
-      toast.error('Trasaction Failed !Please try again')
-      setOpen(false)
-      return
-    }
-  }
+  // async function updateTransaction(token){
+  //   const data = {
+  //     clientSecret:router.query.payment_intent,
+  //   }
+  //   try{
+  //     let res = await withToken({token:token,data:data,query:'updatetransaction'})
+  //     const response = res.data;
+  //     console.log(response,"update trasactiion")
+  //     setData(response.data.data.data)
+  //     setOpen(false)
+  //   }catch(err){
+  //     console.log(err)
+  //     toast.error('Trasaction Failed !Please try again')
+  //     setOpen(false)
+  //     return
+  //   }
+  // }
 
   return (
     <div>
       <section className="nft-detail">
-      <Backdrop  open={open}>
+      {/* <Backdrop  open={open}>
         <CircularProgress color="inherit" />
-      </Backdrop>
+      </Backdrop> */}
       <ToastContainer/>
         <div className="container">
           <h2> NFT's Details</h2>

@@ -98,7 +98,8 @@ const UpdateProfile = () => {
   return (
     <div>
       {/* <SideBar /> */}
-      <div id="home-inner-profile" className="profile-sects pt-0">
+      <section className="nanu">
+      <div id="home-inner-profile" className="profile-sects pt-0 ">
         <div className="dark-overlay">
           <div className="container-fluid" >
             <div className="row">
@@ -248,7 +249,7 @@ const UpdateProfile = () => {
                         disabled={isLoading}
                         onClick={(e) => updateUserProfile(e)}
                       >
-                        {isLoading ? "Loading…" : "   Submit"}
+                        {isLoading ? "Loading…" : "Update Profile"}
                       </Button>
                       </div>
                     </form>
@@ -259,6 +260,7 @@ const UpdateProfile = () => {
           </div>
         </div>
       </div>
+    </section>
     </div>
   );
 };

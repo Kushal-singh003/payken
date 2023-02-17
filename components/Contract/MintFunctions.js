@@ -76,6 +76,11 @@ const MintFunctions = () => {
   //  const storage = localStorage.setItem('data',data);
   //  console.log(storage)
 
+  function backFn(e){
+    e.preventDefault();
+    router.push('/contract/addContract')
+  }
+
   return (
     <div id="NFTSuccess-inner">
       <div className="new-dashboard">
@@ -135,7 +140,7 @@ const MintFunctions = () => {
                         })}
                       </div>
                       <div className="nft-btnsec">
-                        <button className="btn back-nftbtn" type="button">
+                        <button onClick={backFn} className="btn back-nftbtn" type="button">
                           Cancel
                         </button>
                         {/* <Link href="/nftAmt"> */}

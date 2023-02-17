@@ -39,7 +39,8 @@ export default function Step1({ setShow1, setShow0, setFormData, setCustomer, fo
     <div>
       <div className="debit-card">
         <ToastContainer />
-        <h3>Payment-info</h3>
+        <h3>Email Verification</h3> 
+       
         <form onSubmit={submitHandler}>
           <div className="mb-3">
 

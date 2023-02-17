@@ -62,6 +62,12 @@ export default function Step5() {
 
 console.log(paymentMethods)
  }
+
+ function backFn(e){
+  e.preventDefault();
+  console.log('back');
+  router.back();
+ }
  
   return (
     <div>
@@ -78,6 +84,7 @@ console.log(paymentMethods)
       <Modal show={show} aria-labelledby="contained-modal-title-vcenter"
  centered >
               <div className="modal-content">
+              <i onClick={backFn} class="bi bi-x cross"></i>
                 {!errMsg ? 
                 <div className="modal-body" id="purchasenft-body">
                   <div className="purchasenft-head">

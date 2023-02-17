@@ -23,22 +23,25 @@ body {
   height: 100vh;
 }
 .login .login-box {
-  width: 40%;
-  background-color: #1a1a1a;
+  width: 42%;
+  background-color: #0e0e0e;
   border-radius: 20px;
-  box-shadow: -1px 3px 47px rgba(124, 233, 15, 0.42);
-  padding: 40px 10px 40px 10px;
+  box-shadow: -1px -2px 25px rgb(1 87 26 / 70%);
+  padding: 75px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .login .login-box h4 {
-  font-size: 30px;
+  font-size: 45px;
   font-weight: 600;
   color: white;
   text-align: center;
-  padding: 15px 60px 15px 60px;
+  padding: 15px 41px 15px 40px;
+}
+.login .login-box .login-btn:hover {
+  color: white !important;
 }
 .login .login-box .login-btn {
   background: linear-gradient(
@@ -47,12 +50,12 @@ body {
     rgba(8, 59, 16, 1) 100%
   );
   color: white;
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 600;
   text-decoration: none !important;
   width: 85%;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 11px 0 11px 0;
   border-radius: 10px;
   margin-top: 3rem;
 }
@@ -71,9 +74,10 @@ body {
   height: 100vh;
   flex-direction: column;
 }
+
 .signin .container h2 {
   color: white;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 600;
 }
 .signin .container h4 {
@@ -87,20 +91,21 @@ body {
   background: linear-gradient(
     180deg,
     rgba(16, 118, 32, 0.77) 0%,
-    rgba(8, 59, 16, 1) 100%
+    rgb(1 23 4) 100%
   );
   color: white;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none !important;
   width: 85%;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 13px 0px;
   border-radius: 10px;
   margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: unset;
   gap: 10px;
 }
 .signin-form {
@@ -117,9 +122,9 @@ body {
 }
 .signin .signin-box {
   width: 40%;
-  background-color: #1a1a1a;
+  background-color: #0e0e0e;
   border-radius: 20px;
-  box-shadow: -1px 3px 47px rgba(124, 233, 15, 0.42);
+  box-shadow: -1px -2px 25px rgb(1 87 26 / 70%);
   padding: 40px 10px 40px 10px;
   display: flex;
   flex-direction: column;
@@ -127,23 +132,27 @@ body {
   justify-content: center;
 }
 .signin .signin-box .signin-btn {
-  background: linear-gradient(
-    180deg,
-    rgba(16, 118, 32, 0.77) 0%,
-    rgba(8, 59, 16, 1) 100%
-  );
   color: white;
   font-size: 17px;
   font-weight: 600;
   text-decoration: none !important;
   width: 100%;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 13px 0px;
   border-radius: 10px;
   margin-top: 1rem;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   border: none;
 }
 
+.signin .signin-google,
+.signin .signin-apple:hover {
+  color: white !important;
+}
 .signin .container .signin-checkbox {
   color: #fff;
   display: flex;
@@ -168,7 +177,6 @@ body {
   padding: 50px 0;
   margin-top: 5rem;
 }
-
 
 .Wallet h2 {
   font-size: 30px;
@@ -217,6 +225,22 @@ tr {
   padding: 50px 0;
   margin-top: 5rem;
 }
+
+.nftcard span {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.nftcard span img {
+  margin-right: 5px;
+}
+
+.nft-head .nfthead-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .nft h2 {
   color: white;
   font-size: 30px;
@@ -227,12 +251,26 @@ tr {
   display: flex;
   align-items: center;
   gap: 30px;
+  margin-bottom: 2rem;
 }
 .nfthead-left span {
   color: white;
   font-size: 15px;
   font-weight: 500;
 }
+.funds-sec .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  background: linear-gradient( 180deg, rgba(5, 26, 8, 1) 20%, rgba(4, 62, 13, 1) 100% );
+  color: #fff  !important;
+}
+/* .accordion-button:not(.collapsed)::after {
+  background-image: url(/img/down-arrow.png) !important;
+ 
+  transform: var(--bs-accordion-btn-icon-transform);
+}
+.accordion-button::after{
+  background-image: url(/img/down-arrow.png) !important;
+
+} */
 .nft-input {
   box-shadow: none !important;
   border-top-left-radius: 50px !important;
@@ -423,9 +461,6 @@ div#panelsStayOpen-collapseOne {
   margin-top: 2rem;
 }
 
-
-
-
 /*-------------------- nft detail section ends ---------------------*/
 
 /*-------------------- payment section starts ---------------------*/
@@ -499,6 +534,7 @@ div#panelsStayOpen-collapseOne {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .credit-card img {
   width: 20%;
@@ -616,9 +652,7 @@ div#panelsStayOpen-collapseOne {
   padding: 50px 0;
   margin-top: 6rem;
 }
-.sent .container {
-  padding: 0 100px;
-}
+
 .sent h2 {
   color: white;
   font-size: 30px;
@@ -633,25 +667,49 @@ div#panelsStayOpen-collapseOne {
   flex-direction: column;
 
   align-items: center;
-  width: 80%;
-  margin: 2%;
+  margin: 4%;
 }
 .sent-box {
   width: 100%;
   float: left;
   margin-top: 2rem;
+  position: relative;
+
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .sent-card img {
   width: 100%;
   height: 250px;
   object-fit: contain;
-  background: #1a1a1a;
-  padding: 30px 0 30px 0;
+  background: #0a0a0a;
+  padding: 50px 0 50px 0;
   border-radius: 20px;
-  box-shadow: -1px 3px 47px rgba(124, 233, 15, 0.42);
+  box-shadow: 3px 3px 2px rgb(74 147 0 / 72%);
+}
+
+.cross {
+  height: 30px;
+  position: absolute;
+  right: 1%;
+  top: -2%;
+  font-size: 40px;
+  color: gray;
+  cursor: pointer;
+  z-index: 2;
+}
+
+ul#pills-tab {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 0rem;
+}
+
+.nft .nft-head .input-group {
+  position: relative;
+  z-index: -1;
 }
 .sent-box span {
   color: #7ce90f;
@@ -661,7 +719,7 @@ div#panelsStayOpen-collapseOne {
 }
 
 .sent .container .sent-box .link {
-  width: 50%;
+  width: 33%;
   text-decoration: none;
 }
 
@@ -886,6 +944,16 @@ div#panelsStayOpen-collapseOne {
 }
 #payken-body {
   padding: 20px 30px 20px 30px;
+  position: relative;
+  margin: 1rem;
+}
+
+input.form-control.debit__input:focus {
+  box-shadow: unset !important;
+}
+
+button.card-continue {
+  padding: 13px 10px;
 }
 .purchase-nft {
   width: 100%;
@@ -967,10 +1035,14 @@ div#panelsStayOpen-collapseOne {
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 .purchasenft-head img {
   border: 2px dashed rgba(63, 209, 85, 0.5);
-  border-radius: 10px;
+  border-radius: 17px;
+  width: 87%;
+  height: 259px;
+  object-fit: cover;
 }
 /* Modal 1 section ends */
 
@@ -1040,7 +1112,8 @@ div#panelsStayOpen-collapseOne {
   border-top: 1px solid rgb(0 51 16);
   opacity: 1;
 }
-#profile-login .dropdown-item:focus, .dropdown-item:hover{
+#profile-login .dropdown-item:focus,
+.dropdown-item:hover {
   color: white !important;
   background-color: unset !important;
 }
@@ -1049,10 +1122,12 @@ div#panelsStayOpen-collapseOne {
   margin: top;
   margin-top: 7rem;
   float: left;
+  height: 100vh;
   width: 100%;
 }
-
-
+#payken-navbar .dropdown-item:hover {
+  color: black !important;
+}
 .qr-code {
   display: flex;
   justify-content: center;
@@ -1061,19 +1136,68 @@ div#panelsStayOpen-collapseOne {
   background: white;
 }
 
-.qr-code .qr-container{
+.qr-code .qr-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.qr-code .qr-text{
-  text-align: center  ;
+.qr-code .qr-text {
+  text-align: center;
   color: black;
   font-weight: 600;
-  margin-top: 2rem
+  margin-top: 2rem;
 }
+
+.nanu {
+  /* padding: 58px 0px !important; */
+  /* height: 94.5vh; */
+  background-color: black !important;
+  min-height: 86.7vh !important;
+  /* font-family: Bookman Old Style; */
+  margin-top: 0px;
+  /* height: 79vh; */
+  /* overflow-y: scroll; */
+  padding: 100px 0px !important;
+}
+
+section.nanu {
+  float: left;
+  width: 100%;
+}
+
+section.nanu #home-inner-profile {
+  overflow: unset !important;
+  background-color: black !important;
+  margin-top: 0px;
+}
+
+section.nanu #home-inner-profile .card-body {
+  min-height: 400px;
+  margin-top: 0px !important;
+  color: #fff !important;
+  padding: 35px 30px;
+  width: 39% !important;
+  background-color: #0e0e0e;
+  border-radius: 20px;
+  box-shadow: -1px -2px 25px rgb(1 87 26 / 70%);
+}
+
+section.nanu .card-body h3 {
+  margin-bottom: 0px !important;
+  font-size: 32px;
+  margin-bottom: 10px !important;
+}
+
+section.nanu .card-body p{
+  margin-bottom: 2rem !important;
+}
+
+/* .sent .container .sent-box .link {
+  width: 33%;
+  text-decoration: none;
+} */
 /*-----------------------------Dropdown section ends -------------------------*/
 
 /*-------------------- Navigation bar section ends ---------------------*/
@@ -1281,8 +1405,21 @@ hr {
   min-height: 86.7vh !important;
   margin-top: 0px;
   height: 100vh;
-  overflow: scroll;
+  white-space: nowrap;
+  overflow-y: scroll;
 }
+
+#payken-navbar {
+  background: linear-gradient(
+    180deg,
+    rgba(5, 26, 8, 1) 20%,
+    rgba(4, 62, 13, 1) 100%
+  );
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+
 #home-inner-profile {
   padding: 58px 0px !important;
   /* height: 94.5vh; */
@@ -1731,9 +1868,11 @@ hr {
 #nft-section {
   float: left;
   width: 100%;
-  background-color: white;
+  color: white;
+  background-color: #1a1a1a;
   border-radius: 4px !important;
   margin-top: 15px;
+  padding: 2rem 1rem;
 }
 .nft-part {
   float: left;
@@ -1741,13 +1880,45 @@ hr {
   padding: 30px 20px;
 }
 .nft-heading {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 600;
+}
+
+button.btn.back-nftbtn {
+  color: white;
+  border: 1px solid;
+}
+
+#NFTPage-inner input.form-control.form-border {
+  padding: 13px 10px;
+}
+
+#NFTPage-inner input.form-control.form-border:hover {
+  box-shadow: unset !important;
+}
+
+#NFTPage-inner .form-select.form-border:focus {
+  box-shadow: unset !important;
+}
+
+#NFTPage-inner .form-select.form-border {
+  padding: 13px 10px;
+}
+
+button.btn.next-nftbtn {
+  color: white;
+  border: none;
+  padding: 16px 70px !important;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
 }
 .nft-para {
   font-size: 16px;
   font-weight: 500;
-  color: #787878;
+  color: #d8d7d7;
 }
 .nft-btnsec {
   float: left;
@@ -1775,18 +1946,24 @@ hr {
   float: left;
   width: 100%;
   border-radius: 4px;
-  background-color: #d2effb;
   padding: 10px;
   margin-top: 20px;
 }
 #mint-text {
   font-size: 18px !important;
-  color: #2f7eae !important;
+  color: white !important;
   padding-left: 5px !important;
 }
+
 #alert-message {
-  padding: 20px !important;
+  padding: 0;
   margin-bottom: 30px !important;
+  border: unset;
+  background: #1a1a1a00;
+  color: #ffffff;
+  font-size: 30px;
+  opacity: 1;
+  font-weight: 600;
 }
 #flex-btn {
   display: flex !important;
@@ -1843,15 +2020,17 @@ hr {
 }
 .threeb-one {
   float: left;
-  width: 100%;
+  width: 67%;
   font-size: 12px;
   padding: 15px;
   background-color: #e9f4f8;
+  border-radius: 6px;
 }
 .threeb-one h4 {
   margin: 0px;
   font-size: 16px;
   text-align: left;
+  color: #342d2d;
 }
 .threeb-one h6 {
   font-weight: 600;
@@ -1869,7 +2048,9 @@ hr {
   color: gray;
 }
 .threeb-two select {
-  padding: 15px 10px;
+  padding: 13px 10px;
+  font-size: 18px;
+  border-radius: 6px;
 }
 .threeb-three {
   float: left;
@@ -1884,10 +2065,23 @@ hr {
 .grey-section {
   float: left;
   width: 100%;
-  background-color: #f2f2f2;
+  background-color: #0e0e0e;
   margin-top: 20px;
   border-radius: 4px;
-  border: 0.5px solid #e4e4e4;
+  padding: 20px;
+}
+
+.nft-part .fix-div {
+  display: flex;
+  float: left;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 5px;
+}
+
+.fix-div h6 {
+  width: 30%;
+  margin: 0;
 }
 .grey-parts {
   float: left;
@@ -2312,12 +2506,12 @@ h3.nftHeading {
 } */
 
 button#uncontrolled-tab-example-tab-YOUR\ SALES {
-  color: black;
-  font-weight: 500;
+  color: white !important;
+  font-weight: 600;
 }
 button#uncontrolled-tab-example-tab-TECH\ SUPPORT {
-  color: black;
-  font-weight: 500;
+  color: white !important;
+  font-weight: 600;
 }
 .nav-tabs {
   margin-top: 10px !important;
@@ -2334,8 +2528,31 @@ button#uncontrolled-tab-example-tab-TECH\ SUPPORT {
   width: 100%;
 }
 #dashboardtab-buttons {
-  background-color: #206308 !important;
+  background-color: unset !important;
   color: white !important;
+}
+
+#NFTDashboard-inner .new-dashboard .mb-3 {
+  border-bottom: 1px solid #202020 !important;
+  margin-bottom: 1rem!important;
+}
+
+#NFTDashboard-inner .new-dashboard #dashboardtab-buttons:hover{
+  background-color: #1a370c !important;
+  border: 1px solid #1a370c;
+
+}
+
+#NFTDashboard-inner .new-dashboard h2
+{
+  color: white !important;
+}
+
+#NFTDashboard-inner .new-dashboard .standard,
+#NFTDashboard-inner .new-dashboard #warn_contract_includes_dynamic_parms,
+#NFTDashboard-inner .new-dashboard .contract_subhead,
+#NFTDashboard-inner .new-dashboard div{
+  color: rgb(255 249 249 / 72%);
 }
 .nftDashboard-tabhead .description {
   font-size: 14px;
@@ -2352,6 +2569,7 @@ button#uncontrolled-tab-example-tab-TECH\ SUPPORT {
 }
 .description .property {
   padding: 0px 0px 5px 0px;
+  color: white;
 }
 .description .prompt {
   display: inline-block;
@@ -2371,9 +2589,24 @@ button#uncontrolled-tab-example-tab-TECH\ SUPPORT {
   border-radius: 8px;
   font-size: 14px;
   font-weight: 300;
-  color: #555;
+  color: #555 !important;
   padding: 10px;
 }
+
+/* #alert-light h6::before {
+  height: 30px;
+  position: absolute;
+  content: "";
+  background: url;
+  width: 30px;
+  left: -3%;
+  border-radius: 100px;
+  margin-top: -7px;
+}
+#alert-light h6 {
+  position: relative;
+  margin-left: 22px;
+} */
 button.compact.pad {
   padding: 5px 50px;
   text-align: center;
@@ -2466,7 +2699,7 @@ h3.nft-text {
   border-color: #dee2e6 #dee2e6 #fff;
 }
 button#uncontrolled-tab-example-tab-HOW\ TO\ USE\ NFTPAY {
-  color: black !important;
+  color: white !important;
   font-weight: 600;
 }
 
@@ -2560,6 +2793,7 @@ p.card-body--heading {
   float: left;
   left: 0%;
   bottom: 3%;
+  z-index: 1;
   stroke: white;
 }
 
@@ -3735,8 +3969,13 @@ div#qrScanner {
 .text h2 {
   color: #fff !important;
 }
-.form-check-label {
-  color: black !important;
+
+#NFTAmt-inner input.form-control.form-border:focus {
+  box-shadow: unset !important;
+}
+
+#NFTAmt-inner textarea#textarea-nft:focus {
+  box-shadow: unset !important;
 }
 #create-btn {
   background-color: #103703 !important;
@@ -3758,7 +3997,27 @@ div#qrScanner {
   color: white !important;
   margin-top: 2rem !important;
   margin-bottom: 0.5rem !important;
+  padding: 13px 10px;
   border: none;
+}
+
+.payment .credit-left {
+  display: flex;
+  gap: 10px;
+}
+
+.payment label.btn.btn-outline-danger.label-btn{
+  display: flex;
+  gap: 10px;
+}
+
+.profile-icon{
+  padding: 5px;
+  font-size: 19px;
+}
+.wallet-table th {
+  width: 17%;
+  padding: .5rem 1.5rem !important;
 }
 #form-checker {
   float: left;

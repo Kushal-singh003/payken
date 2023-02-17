@@ -6,6 +6,7 @@ import Step4 from "./Step4";
 import Modal from "react-bootstrap/Modal";
 import NavBar from "@/components/ui/NavBar";
 import Footer from "@/components/ui/Footer";
+import { useRouter } from "next/router";
 
 export default function Index({ props, price }) {
   const [show, setShow] = useState(false);
@@ -15,6 +16,7 @@ export default function Index({ props, price }) {
   const [show3, setShow3] = useState(false);
   const [clientSecret, setClientSecret] = useState();
   const [customer, setCustomer] = useState();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,6 +34,12 @@ export default function Index({ props, price }) {
   
   console.log(customer, "customer");
 
+  function backFn(e){
+    e.preventDefault();
+    console.log('back');
+    router.back();
+   }
+
   return (
     <div>
       <NavBar/>
@@ -44,6 +52,7 @@ export default function Index({ props, price }) {
           >
             <div className="modal-content">
               <div className="modal-body" id="payken-body">
+              <i onClick={backFn} class="bi bi-x cross"></i>
                 <ul
                   className="nav nav-pills mb-3"
                   id="pills-tab"

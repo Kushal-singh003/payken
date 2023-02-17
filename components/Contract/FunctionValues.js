@@ -107,6 +107,11 @@ const FunctionValues = () => {
 
      setFormValues(list);
   };
+
+  function backFn(e){
+    e.preventDefault()
+    router.push('/contract/mintFunctions')
+  }
   
   console.log(formValues)
 
@@ -132,15 +137,22 @@ const FunctionValues = () => {
                         What values should we pass to your function?
                       </h4>
 
+                       <div className="fix-div">
+                              <h6>Parameter</h6>
+                              <h6>Value</h6>
+
+                            </div>
+                      
+
                       {data?.map((item, index) => {
                         return (
                           <div
                             className="input-group  flex-nowrap mt-3 "
                             id="three-input"
                           >
-                            <div>
+                            {/* <div>
                               <h6>Parameter</h6>
-                            </div>
+                            </div> */}
                             <div className="threeb-ones">
                               <div className="threeb-one">
                                 <h4 key={index}>
@@ -151,7 +163,7 @@ const FunctionValues = () => {
 
                          {showValues ? null :
                             <div className="threeb-two">
-                              <h6>Value</h6>
+                              {/* <h6>Value</h6> */}
                               <select
                                 onChange={(e) =>
                                   parameterFn({
@@ -269,7 +281,7 @@ const FunctionValues = () => {
 
                     <div className="nft-part pt-0 ">
                       <div className="nft-btnsec mt-0 pb-2 pt-0">
-                        <button className="btn back-nftbtn" type="button">
+                        <button onClick={backFn} className="btn back-nftbtn" type="button">
                           Cancel
                         </button>
                         {/* <Link href="/nftPages/nftAmt"> */}

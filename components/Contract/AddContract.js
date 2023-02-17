@@ -173,7 +173,7 @@ const AddContract = () => {
                       <div className="nft-btnsec">
                       {error && <Alert variant="danger">{error}</Alert>}
 
-                      <Link href={"/nftPages/nftStart"}>
+                      <Link href={"/contract/collection"}>
                         <button className="btn back-nftbtn" type="button">
                           Back to collection
                         </button>

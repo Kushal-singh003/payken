@@ -63,7 +63,7 @@ const [loading,setLoading] = useState(false)
     <div>
       <div className="debit-card">
         <ToastContainer />
-        <h3>Payment-info</h3>
+        <h3>Address Details</h3>
         <form onSubmit={submitHandler}>
           <div className="mb-3">
             <input

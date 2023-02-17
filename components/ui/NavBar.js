@@ -57,7 +57,7 @@ export default function NavBar() {
                 <Link className="nav-link" href="/payment">Payment</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="settings/kyc/submitKyc">KYC</Link>
+                <Link className="nav-link" href="/settings/kyc/submitKyc">KYC</Link>
               </li>
               {/* <li className="nav-item">
                 <Link href='' className="nav-link" onClick={logoutFn}>Logout</Link>
@@ -77,7 +77,8 @@ export default function NavBar() {
               </ul>
           </li> */}
 
-              <NavDropdown title={userData?.name} id="basic-nav-dropdown">
+              <NavDropdown title={userData?.name ? <> {userData?.name} </> :  <i class="bi bi-person-circle profile-icon"></i> } id="basic-nav-dropdown">
+
                 <NavDropdown.Item href="/settings/updateProfile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/settings/changeEmail">
                   Settings
