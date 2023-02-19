@@ -57,6 +57,22 @@ const [loading,setLoading] = useState(false)
 
   }
 
+  useEffect(()=>{
+    if(customer){
+     getCustomer()
+    }
+
+    async function getCustomer(){
+      const cus = await stripe.customers.retrieve(
+        customer
+      );
+
+      
+      console.log(cus,'customer dtls');
+      setFormData({...formData,address:cus?.address?.line1,city:cus?.address?.city,state:cus?.address?.state,country:cus?.address?.country,name:cus?.name})
+    }
+  },[])
+
 
 
   return (

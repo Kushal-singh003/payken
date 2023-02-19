@@ -268,7 +268,7 @@ function backFn(e){
                     <div className="nft-part pt-0">
                       <div className="nft-btnsec mt-0 pt-0">
                         <button onClick={backFn} className="btn back-nftbtn" type="button">
-                          Cancel
+                          Back
                         </button>
                         <button disabled={loading} className="btn next-nftbtn" type="submit">
                            {loading ? "Loading..." : "Add Collection"}

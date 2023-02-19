@@ -1,8 +1,46 @@
 import React from "react";
 import Step1 from "./Modal/Step2";
 import Link from "next/link";
+import { useState,useEffect } from "react";
+import { withAuth } from "../Utils/Functions";
+import supabase from "../Utils/SupabaseClient";
+
+const stripe = require("stripe")(
+  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+);
+
 
 export default function Payment() {
+
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(
+      session,
+      'session'
+    );
+
+    const email = session?.user?.email
+
+    const response = await withAuth({ data: { email: email }, query: 'registerwithemail' })
+    console.log(response,'response');
+    const cid = response?.data?.data?.cId;
+
+    const paymentMethods = await stripe.paymentMethods.list({
+      customer: `${cid}`,
+      type: 'card',
+    });
+
+    console.log(paymentMethods,'paymentMEthods');
+   
+  }
+
+  useEffect(() => {
+    getSession();
+  }, [])
+
+
   return (
     <div>
       <section className="payment">

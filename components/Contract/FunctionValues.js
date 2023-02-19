@@ -282,7 +282,7 @@ const FunctionValues = () => {
                     <div className="nft-part pt-0 ">
                       <div className="nft-btnsec mt-0 pb-2 pt-0">
                         <button onClick={backFn} className="btn back-nftbtn" type="button">
-                          Cancel
+                          Back
                         </button>
                         {/* <Link href="/nftPages/nftAmt"> */}
                           <button onClick={(e)=> nextFn(e)} className="btn next-nftbtn" type="button">

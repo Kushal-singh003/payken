@@ -6,6 +6,7 @@ import {
   CardElement
 } from "@stripe/react-stripe-js";
 import axios from "axios";
+// import {PaymentRequestButtonElement} from '@stripe/react-stripe-js';
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
@@ -19,6 +20,7 @@ export default function CheckoutForm({ customer }) {
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [paymentMethod, setPaymentMethod] = useState();
+  const [paymentRequest, setPaymentRequest] = useState();
 
   console.log(customer)
 
@@ -70,7 +72,7 @@ export default function CheckoutForm({ customer }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://payken-demo.vercel.app/payment/step5",
+        return_url: "http://localhost:3000/payment/step5",
       },
     });
     console.log(error, 'payment error')
@@ -94,6 +96,30 @@ export default function CheckoutForm({ customer }) {
   };
 
 
+  // useEffect(() => {
+  //   if (stripe) {
+  //     const pr = stripe.paymentRequest({
+  //       country: 'US',
+  //       currency: 'usd',
+  //       total: {
+  //         label: 'Demo total',
+  //         amount: 1099,
+  //       },
+  //       requestPayerName: true,
+  //       requestPayerEmail: true,
+  //     });
+
+  //     // Check the availability of the Payment Request API.
+  //     pr.canMakePayment().then(result => {
+  //       if (result) {
+  //         setPaymentRequest(pr);
+  //         console.log(pr,'pr')
+  //       }
+  //     });
+  //   }
+  // }, [stripe]);
+
+
   //  async function card(){
   //   const cid = localStorage.getItem('cid')
   //    const paymentMethods = await stripe.paymentMethods.list({
@@ -111,6 +137,7 @@ export default function CheckoutForm({ customer }) {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
 
+      {/* <PaymentRequestButtonElement options={{paymentRequest}} /> */}
 
       <PaymentElement id="payment-element" options={paymentElementOptions} />
 

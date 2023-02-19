@@ -141,7 +141,7 @@ const MintFunctions = () => {
                       </div>
                       <div className="nft-btnsec">
                         <button onClick={backFn} className="btn back-nftbtn" type="button">
-                          Cancel
+                          Back
                         </button>
                         {/* <Link href="/nftAmt"> */}
                         <button

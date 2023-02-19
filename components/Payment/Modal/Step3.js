@@ -11,6 +11,7 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
   const [count, setCount] = useState(1);
   const [formValues, setFormValues] = useState([]);
   const [nftDetails,setNftDetails] = useState({token:'',userId:'',nftPrice:'',description:''});
+  const [newValue,setNewValue] = useState([]);
 
 
   useEffect(() => {
@@ -53,16 +54,29 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
 
 
 
-  console.log(formValues);
+  console.log(formValues,'formvalues  ');
 
   function incrementFn(e, idx) {
     e.preventDefault();
     const updatedValues = [...formValues];
+    const newd = [...newValue]
 
-    if (count == maxMint) return;
+    if(newValue[idx]){
+      if (newValue[idx]?.value == maxMint) return;
+    }else{
+      if (count == maxMint) return;
+    }
 
-    const total = count + 1;
-    console.log(total);
+    let total;
+
+    if(newValue[idx]){
+      total = newValue[idx]?.value + 1
+    }else{
+     total = count + 1;}
+
+    newd[idx] = {id:idx,value:total};
+    setNewValue(newd)
+    console.log(total,'total');
 
     updatedValues[idx] = total;
     setFormValues(updatedValues)
@@ -72,18 +86,30 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
   function decrementFn(e, idx) {
     e.preventDefault();
     const updatedValues = [...formValues];
-
-    if (count == 1) return; handleChange
-
-    const total = count - 1;
+    const newd = [...newValue]
 
 
+    if(newValue[idx]){
+      if (newValue[idx]?.value == 1) return;
+    }else{
+      if (count == 1) return;
+    }
+
+    let total;
+    if(newValue[idx]){
+      total = newValue[idx]?.value - 1
+    }else{
+     total = count - 1;}
+
+    newd[idx] = {id:idx,value:total};
+    setNewValue(newd)
     updatedValues[idx] = total;
     setFormValues(updatedValues)
 
     setCount(total)
   }
 
+  console.log(newValue,'newValue')
 
   async function createPaymentIntent() {
     setLoading(true)
@@ -128,7 +154,11 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
                   <div className="increment">
 
                     <div className="increment-btn">
-                      <input value={count} onChange={(e) => handleChange(idx, e)} className="btn2-btn" />
+                        
+                            <input value= { newValue[idx]?.value || 1 } disabled  className="btn2-btn values-field" />
+                       
+                        
+                    
                     </div>
                     <div className="increment-arrow">
                       <img onClick={(e) => incrementFn(e, idx)} src="/img/Polygon 1.png" alt="" />
@@ -145,7 +175,7 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
                   <div className="increment">
 
                     <div className="increment-btn">
-                      <input placeholder='wallet address' onChange={(e) => handleChange(idx, e)} className="btn2-btn" />
+                      <input placeholder='wallet address' onChange={(e) => handleChange(idx, e)} className="btn2-btn address-field" />
                     </div>
                     {/* <div className="increment-arrow">
                          <img onClick={(e)=>incrementFn(e,idx)} src="/img/Polygon 1.png" alt="" />
@@ -162,7 +192,7 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
                   <div className="increment">
 
                     <div className="increment-btn">
-                      <input placeholder='Dynamic value' onChange={(e) => handleChange(idx, e)} className="btn2-btn" />
+                      <input placeholder='value' onChange={(e) => handleChange(idx, e)} className="btn2-btn" />
                     </div>
                  
                   </div>
@@ -170,11 +200,12 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
                 </div>
                 : null}
 
-              <p className="max-6">Maximum {maxMint}</p>
+              
 
             </>
           )
         })}
+        <p  className="max-6">Maximum {maxMint}</p>
         {/* <div className="increment">
                             
                           <div className="increment-btn">

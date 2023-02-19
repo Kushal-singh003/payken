@@ -99,8 +99,9 @@ console.log(paymentMethods)
                   <button className="view">View your NFT now</button>
                 </div>
               :
-                <div className="modal-body" id="purchasenft-body">
-                <h2 style={{color:'red'}}>Transaction couldn't update! Please try again later</h2>
+                <div className="Failed-modal">
+                  <img className="failed-img" src="/img/Failed.png"/>
+                <h2>Transaction Failed! Please try again later</h2>
 
                 </div>
               }

@@ -26,13 +26,11 @@ export default function Index({ props, price }) {
     country: "",
   });
 
-  console.log(props?.data?.contractIdentity, "contract identity");
 
   useEffect(() => {
     setShow(true);
   }, []);
   
-  console.log(customer, "customer");
 
   function backFn(e){
     e.preventDefault();
