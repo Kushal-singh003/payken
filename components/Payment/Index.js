@@ -214,8 +214,8 @@ export default function Payment() {
                 </label>
 
 
-                <button onClick={(e)=> createPaymentIntent(e)}>Make a Payment</button>
-                <button onClick={(e)=> retrievePaymentIntent(e)}> retrieve a payment</button>
+                {/* <button onClick={(e)=> createPaymentIntent(e)}>Make a Payment</button>
+                <button onClick={(e)=> retrievePaymentIntent(e)}> retrieve a payment</button> */}
                 {/* <Elements options={options} stripe={stripePromise}>
 
                 <button onClick={(e)=> confirmPaymentIntent(e)}>COnfirm Payment</button>
