@@ -13,6 +13,7 @@ import {
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
@@ -27,6 +28,7 @@ export default function Payment() {
   const [cardId,setCardId] = useState();
   const [cId,setCId] = useState();
   const [paymentIntentId,setPaymentIntentId] = useState();
+  const [token,setToken] = useState();
   // const elements = useElements();
 
   async function getSession() {
@@ -37,6 +39,7 @@ export default function Payment() {
       session,
       'session'
     );
+    setToken(session?.access_token)
 
     const email = session?.user?.email
 
@@ -92,6 +95,59 @@ export default function Payment() {
   useEffect(() => {
     getSession();
   }, [])
+
+  async function createPaymentCashAppFn(e){
+    e.preventDefault();
+    var options = {
+      method: 'POST',
+      url: 'https://api.cash.app/customer-request/v1/requests',
+      headers: {'Content-Type': 'application/json', Authorization: ` EAAAEHejrLvgh2AkB8FkcJWDHKGj4mFJrPpwnWIDDKbIYx3RhoRFjwvIE5zrbsto`},
+      data: {
+        idempotency_key: 'e345c3fb-1caa-46fd-b0d3-aa6c7b00ab19',
+        request: {
+          actions: [
+            {
+              amount: 2500,
+              currency: 'USD',
+              scope_id: 'MMI_4vxs5egfk7hmta3qx2h6rp91x',
+              type: 'ONE_TIME_PAYMENT'
+            }
+          ],
+          channel: 'IN_PERSON',
+          redirect_url: 'https://example.com',
+          reference_id: 'string',
+          metadata: {},
+          customer_metadata: {reference_id: 'string'}
+        }
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
+
+  async function payWithCashApp(){
+
+    try {
+      const response = await client.paymentsApi.createPayment({
+        sourceId: 'EAAAEHejrLvgh2AkB8FkcJWDHKGj4mFJrPpwnWIDDKbIYx3RhoRFjwvIE5zrbsto',
+        idempotencyKey: 'ddf4b7c6-a640-420a-b53e-1a3254d0f417',
+        amountMoney: {
+          amount: 10000,
+          currency: 'USD'
+        }
+      });
+    
+      console.log(response.result);
+    } catch(error) {
+      console.log(error);
+    }
+
+  }
+ 
 
 
   // async function confirmPaymentIntent(){
@@ -213,6 +269,7 @@ export default function Payment() {
                   Bank Transfer
                 </label>
 
+                {/* <button onClick={(e)=> createPaymentCashAppFn(e)}>cash app</button> */}
 
                 {/* <button onClick={(e)=> createPaymentIntent(e)}>Make a Payment</button>
                 <button onClick={(e)=> retrievePaymentIntent(e)}> retrieve a payment</button> */}

@@ -40,6 +40,8 @@ export default function SendReceive() {
         
     },[])
 
+   
+
     // const qrCodeValue = `bitcoin:${address}`;
     
 
