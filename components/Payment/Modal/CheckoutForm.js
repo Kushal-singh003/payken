@@ -56,6 +56,8 @@ export default function CheckoutForm({ customer }) {
       }
 
     });
+
+    
   }, [stripe]);
 
   const handleSubmit = async (e) => {
@@ -72,7 +74,7 @@ export default function CheckoutForm({ customer }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://payken-demo.vercel.app/payment/step5",
+        return_url: "http://localhost:3000/payment/step5",
       },
     });
     console.log(error, 'payment error')
@@ -133,6 +135,24 @@ export default function CheckoutForm({ customer }) {
   //   useEffect(()=>{
   //       card()
   //   },[])
+
+
+  // useEffect(()=>{
+  //     getCusListFn()
+  // },[customer])
+
+
+//   async function getCusListFn(){
+//     const cid = localStorage.getItem('cid')
+//     console.log(cid);
+//   const paymentMethods = await stripe.paymentMethods.list({
+//     customer: `${cid}`,
+//     type: 'card',
+//   });
+
+//   console.log(paymentMethods,'payment METhods');
+// }
+
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>

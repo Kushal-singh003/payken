@@ -16,13 +16,14 @@ export default function Step1({ setShow1, setShow0, setFormData, setCustomer, fo
   async function submitHandler(e) {
     e.preventDefault();
     setLoading(true)
-    console.log(email, 'email')
+
 
     try {
       const response = await withAuth({ data: { email: email }, query: 'registerwithemail' })
       const cusId = response?.data?.data?.cId;
-      console.log(cusId, 'cusId')
+      
       setCustomer(cusId)
+      console.log(email,'email is here')
       setFormData({ ...formData, email: email })
 
       if(cusId){
@@ -31,17 +32,18 @@ export default function Step1({ setShow1, setShow0, setFormData, setCustomer, fo
         );
 
 
-      console.log(cus,'customer dtls');
-      setFormData({...formData,address:cus?.address?.line1,city:cus?.address?.city,state:cus?.address?.state,country:cus?.address?.country,name:cus?.name})
+      
+      setFormData({...formData,address:cus?.address?.line1,city:cus?.address?.city,state:cus?.address?.state,country:cus?.address?.country,name:cus?.name,email:cus?.email})
       }
 
 
       localStorage.setItem('buyerEmail', email)
+
       setLoading(false)
       setShow0(false)
       setShow1(true)
     } catch (error) {
-      console.log(error);
+      
       setLoading(false)
       toast.error('Something went wrong! Please try again')
     }
@@ -51,10 +53,8 @@ export default function Step1({ setShow1, setShow0, setFormData, setCustomer, fo
     const {
       data: { session },
     } = await supabase.auth.getSession();
-    console.log(
-      session,
-      'session'
-    );
+    
+     
 
     setEmail(session?.user?.email)
   }

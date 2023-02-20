@@ -12,7 +12,7 @@ const stripePromise = loadStripe("pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU
 
 export default function Step4({ clientSecret,customer }) {
   //   const [clientSecret, setClientSecret] = React.useState("");
-  console.log(clientSecret, 'clientsecret3')
+  
 
 
   const appearance = {

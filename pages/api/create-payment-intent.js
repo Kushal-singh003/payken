@@ -53,9 +53,10 @@ export default async function handler(req, res) {
     },
 
     customer: `${customer}`,
-    // setup_future_usage: "off_session",
+    setup_future_usage: "off_session",
   });
   console.log(paymentIntent, "payment intent");
+
   var config = {
     method: "post",
     url: "http://52.9.60.249:5000/api/v1/auth/token",
@@ -74,7 +75,8 @@ export default async function handler(req, res) {
     //   Authorization: `Bearer ${token}`,
     // },
   };
-  axios(config);
+  const response = await axios(config);
+  console.log(response,'response is here')
   // userId,tokenId,quantity,amount,transactionCc,transactionStatus,status
 
   res.send({

@@ -38,14 +38,14 @@ export default function Step5() {
    }
    try{
      let response = await withAuth({data:data,query:'updatetransaction'})
-     console.log(response,"zettaaaaaaaaaaaaaaaaaaa")
+     
 
      if(response?.Error){
       setErrMsg(true)
      }
     setOpen(false)
    }catch(err){
-     console.log(err)
+     
      setErrMsg(true)
      setOpen(false)
      return
@@ -60,12 +60,12 @@ export default function Step5() {
     type: 'card',
   });
 
-console.log(paymentMethods)
+
  }
 
  function backFn(e){
   e.preventDefault();
-  console.log('back');
+  
   router.back();
  }
  

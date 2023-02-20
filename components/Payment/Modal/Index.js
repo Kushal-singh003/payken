@@ -34,7 +34,7 @@ export default function Index({ props, price }) {
 
   function backFn(e){
     e.preventDefault();
-    console.log('back');
+    
     router.back();
    }
 

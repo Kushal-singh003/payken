@@ -16,10 +16,10 @@ const [loading,setLoading] = useState(false)
   async function submitHandler(e) {
     e.preventDefault();
     setLoading(true)
-    console.log(formData);
+    
     let createCid;
     localStorage.setItem('cardHolder', JSON.stringify(formData))
-    console.log(customer, 'cus');
+      
     if (customer == null || customer == 'undedined') {
       const cid = await stripe.customers.create({
         address: {
@@ -31,22 +31,24 @@ const [loading,setLoading] = useState(false)
         email: formData?.email,
         name: formData?.name,
       });
-      console.log(cid);
+      
       createCid = cid?.id
       setCustomer(createCid)
     }
+
+    console.log(formData,'formdata step2')
 
     localStorage.setItem('cid', customer || createCid)
 
     if (customer == null || customer == 'undedined') {
       try {
         const response = await withAuth({ data: { email: formData?.email, cId: createCid }, query: 'updatecid' })
-        console.log(response, 'response')
+        
         setLoading(false)
         setShow1(false)
         setShow2(true)
       } catch (error) {
-        console.log(error);
+        
         toast.error('Something went wrong! Please try again')
       }
     } else {
@@ -57,21 +59,22 @@ const [loading,setLoading] = useState(false)
 
   }
 
-  useEffect(()=>{
-    if(customer){
-     getCustomer()
-    }
+  // useEffect(()=>{
+  //   if(customer){
+  //    getCustomer()
+  //   }
 
-    async function getCustomer(){
-      const cus = await stripe.customers.retrieve(
-        customer
-      );
+  //   async function getCustomer(){
+  //     const cus = await stripe.customers.retrieve(
+  //       customer
+  //     );
 
       
-      console.log(cus,'customer dtls');
-      setFormData({...formData,address:cus?.address?.line1,city:cus?.address?.city,state:cus?.address?.state,country:cus?.address?.country,name:cus?.name})
-    }
-  },[])
+  //     
+  //     setFormData({...formData,address:cus?.address?.line1,city:cus?.address?.city,state:cus?.address?.state,country:cus?.address?.country,name:cus?.name})
+  //   }
+
+  // },[])
 
 
 

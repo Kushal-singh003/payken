@@ -18,33 +18,34 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
     getSession();
   }, [nftDetails?.token]);
 
+
+  console.log(formData,'formdata step3')
   async function getSession() {
     const {
       data: { session },
     } = await supabase.auth.getSession();
-    console.log(
-      session,
-      "to get the session from supabase to upload the Avatar"
-    );
+    
+   
   
     setNftDetails({...nftDetails,token:session?.access_token,userId:session?.user?.id})
     getParameters(session?.access_token)
   }
 
   async function getParameters(token) {
-    console.log(token);
+    
     try {
       const response = await withToken({ data: { contractIdentity: contractIdentity }, token: token, query: 'getdata' })
-      console.log(response, "parameters");
+      
       setData(JSON.parse(response.data.data.data));
       setMaxMint(response.data.data.maxPerMint)
      setNftDetails({...nftDetails,description:response.data.data.description,nftPrice:response.data.data.nftPrice})
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
-  console.log(nftDetails,contractIdentity,formData,customer,'nft details');
+  
+  
 
   let handleChange = (idx, e) => {
     const updatedValues = [...formValues];
@@ -54,7 +55,7 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
 
 
 
-  console.log(formValues,'formvalues  ');
+  
 
   function incrementFn(e, idx) {
     e.preventDefault();
@@ -76,7 +77,7 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
 
     newd[idx] = {id:idx,value:total};
     setNewValue(newd)
-    console.log(total,'total');
+    
 
     updatedValues[idx] = total;
     setFormValues(updatedValues)
@@ -109,11 +110,11 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
     setCount(total)
   }
 
-  console.log(newValue,'newValue')
+  
 
   async function createPaymentIntent() {
     setLoading(true)
-    console.log(formValues,'formValues45')
+    
     let req = await axios.post("/api/create-payment-intent", {
       amount: nftDetails?.nftPrice * count,
       description: nftDetails?.description,
@@ -130,14 +131,16 @@ export default function Step3({setShow2,setShow3,contractIdentity,setClientSecre
        data:formValues?.length == 0 ? [] : formValues ,
        customer:customer,
     });
-    // console.log(req.data.clientSecret)
-    console.log(req.data.clientSecret,'clientsecret')
+    // 
+    
     setClientSecret(req.data.clientSecret);
     setLoading(false)
     setShow3(true)
     setShow2(false)
     setShow1(false)
   }
+
+  
 
 
   return (
