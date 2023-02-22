@@ -14,7 +14,6 @@ import supabase from "@/components/Utils/SupabaseClient";
 import Modal from "@/components/Payment/Modal/Index";
 import { withToken } from "@/components/Utils/Functions";
 
-
 const BuyNft = (id) => {
   const [data, setData] = useState();
   const [value, setValue] = useState(1);
@@ -22,57 +21,90 @@ const BuyNft = (id) => {
   const contractAddressRef = useRef();
   const router = useRouter();
   const [error, setError] = useState(null);
-  const [loading,setLoading] = useState(false);
-// console.log(id,'to see user id hererejdkjfkdj')
-  
-  
-    async function getAvatar() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      console.log(
-        session,
-        "to get the session from supabase to upload the Avatar"
-      );
-      // setEmail(session?.user?.email)
-      getFinalDataById(session?.access_token);
-    }
+  const [loading, setLoading] = useState(false);
+  const [dynamicValues, setDynamicValues] = useState();
+  const [newValues, setNewValues] = useState([]);
+  const [dynamicPrice, setDynamicPrice] = useState();
+
+  // console.log(id,'to see user id hererejdkjfkdj')
+
+  async function getAvatar() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(
+      session,
+      "to get the session from supabase to upload the Avatar"
+    );
+    // setEmail(session?.user?.email)
+    getFinalDataById(session?.access_token);
+  }
 
   async function getFinalDataById(token) {
-    console.log(token)
-    try{
-    //   let res = await axios.post ("/api/getFinalDataById", {token:token,id:id.userId})
-    let res = await withToken({token:token,data:{id:id?.userId},query:'getpgbyid'})
+    console.log(token);
+    try {
+      //   let res = await axios.post ("/api/getFinalDataById", {token:token,id:id.userId})
+      let res = await withToken({
+        token: token,
+        data: { id: id?.userId },
+        query: "getpgbyid",
+      });
       const response = res.data.data;
-      console.log(response, 'contract identity response ')
+      console.log(response.data, "contract identity response ");
       localStorage.setItem("contractIdentity", response?.contractIdentity);
-      setData(response)
-      
-    }catch(err){
-      console.log(err)
+      setData(response);
+      const d = JSON.parse(response?.data);
+      console.log(d,'d')
+      const filterData = d?.filter((item,idx)=>{
+        if(item.value == 3){
+          return item
+        }
+      })
+
+      setDynamicValues(filterData);
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  useEffect(()=>{
-    console.log(id.userId,'htttt');
-    getAvatar();
-  },[])
+   console.log(dynamicValues,'dynamic values');
 
-  async function contractIdentity(e){
+  useEffect(() => {
+    console.log(id.userId, "htttt");
+    getAvatar();
+  }, []);
+
+  async function contractIdentity(e) {
     e.preventDefault();
-    setLoading(true)
-    console.log(e.target.value,'id');
+    setLoading(true);
+    console.log(e.target.value, "id");
+    console.log(data?.dynamicValue);
     const contract = e.target.value;
     router.push({
-      pathname: "/payment/modal/" + contract ,
+      pathname: "/payment/modal/" + contract,
+
+      query: { parameters: `${JSON.stringify(newValues)}`, price:dynamicPrice },
     });
-   
   }
 
+  async function setValueFn({ e, item }) {
+    // e.preventDefault();
+    console.log(e, "eeeeeeeeeeee");
+    const updateValues = [...newValues];
+
+    updateValues[item.id] = { item, value: e.target.value };
+
+    setNewValues(updateValues);
+  }
+
+  console.log(newValues);
   return (
     <div id="NFTDashboard-inner">
       <div className="new-dashboard">
-        <section className="profile-sec profile-sects" id="nftDashboard-profile-sec">
+        <section
+          className="profile-sec profile-sects"
+          id="nftDashboard-profile-sec"
+        >
           <div className="container-fluid">
             <div className="row">
               {/* <SideBar/> */}
@@ -80,17 +112,24 @@ const BuyNft = (id) => {
                 <ToastContainer />
 
                 <div className="col-head p-0" id="col-head">
-                    <Link href="/contract/collection">
-                  <div className="nft-btnsec pb-5 " id="nftDashboard-btnSec">
-                    <button style={{background:"white", color:"black"}}className="btn back-nftbtn " type="button">
-                      Back to collection
-                    </button>{" "}
-                  </div>
-                    </Link>
+                  <Link href="/contract/collection">
+                    <div className="nft-btnsec pb-5 " id="nftDashboard-btnSec">
+                      <button
+                        style={{ background: "white", color: "black" }}
+                        className="btn back-nftbtn "
+                        type="button"
+                      >
+                        Back to collection
+                      </button>{" "}
+                    </div>
+                  </Link>
                   <h3 className="nft-text">Your Collection</h3>
                   <div class="alert alert-light" id="alert-light" role="alert">
-                    <h6 style={{color:"black"}}> Your NFTpay integration is in review.</h6>
-                    <p className="mb-0" style={{color:"black"}} >
+                    <h6 style={{ color: "black" }}>
+                      {" "}
+                      Your NFTpay integration is in review.
+                    </h6>
+                    <p className="mb-0" style={{ color: "black" }}>
                       We are reviewing your contract and will email you with an
                       update within 24 hours.
                     </p>
@@ -103,42 +142,58 @@ const BuyNft = (id) => {
                   >
                     <Tab
                       eventKey="HOW TO USE NFTPAY"
-                    className="btn-ajayaar nav-link active"
+                      className="btn-ajayaar nav-link active"
                       title="HOW TO USE NFTPAY"
                       style={{ height: "50px" }}
                     >
                       {/* <TokenPage/> */}
                       <div className="nftDashboard-tabhead">
                         <div className="nftDashboard-tab pt-0">
-                          <h4>{data?.contractName || "Undefined"}  contract</h4>
-                          {/* <div className="nft-btnsec pt-0 pb-4 mt-2"> */}
-                            {/* <button
-                              className="btn btn-primary back-nftbtn"
-                              id="dashboardtab-buttons"
-                            //   value={data?.contractIdentity}
-                            //   onClick={(e)=>contractIdentity(e)}
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"                            >
-                              Load The NFTpay form
-                            </button>
-                            </div> */}
-                           
+                          <h4>{data?.contractName || "Undefined"} contract</h4>
+
+                          {dynamicValues?.map((item, idx) => {
+                            // if(item.value == 3){
+                            return (
+                              <>
+                                <div key={idx} className="dynamic--div">
+                                  <span>{item.name}</span>
+                                  <input
+                                    type="text"
+                                    onChange={(e) =>
+                                      setValueFn({item,e})
+                                    }
+                                    placeholder="set Dynamic Value"
+                                  />
+                                </div>
+                              </>
+                            );
+                            // }
+                          })}
+
+                          {!data?.nftPrice ? (
+                            <div className="dynamic--div">
+                              <span>Price</span>
+                              <input
+                                type="text"
+                                onChange={(e) =>
+                                  setDynamicPrice(e.target.value)
+                                }
+                                placeholder="set Dynamic Value"
+                              />
+                            </div>
+                          ) : null}
 
                           <div className="nft-btnsec pt-0 pb-4 mt-2">
                             <button
                               className="btn back-nftbtn"
                               id="dashboardtab-buttons"
                               value={data?.contractIdentity}
-                              onClick={(e)=>contractIdentity(e)}
+                              onClick={(e) => contractIdentity(e)}
                               type="button"
                             >
-                             {loading ? 'Loading...' : 'Load The NFTpay form'} 
+                              {loading ? "Loading..." : "Load The NFTpay form"}
                             </button>
-
-                            </div>
-
-                            
+                          </div>
                         </div>
 
                         <div class="description">
@@ -166,15 +221,11 @@ const BuyNft = (id) => {
                           </div>
                           <div class="property">
                             <div class="prompt">Address</div>
-                            <div class="value">
-                              {data?.smartContract}
-                            </div>
+                            <div class="value">{data?.smartContract}</div>
                           </div>
                           <div class="property">
                             <div class="prompt">Contract identifier</div>
-                            <div class="value">
-                              {data?.contractIdentity}
-                            </div>
+                            <div class="value">{data?.contractIdentity}</div>
                           </div>
                           <div class="property">
                             <div class="prompt">Explorer</div>
@@ -259,7 +310,7 @@ const BuyNft = (id) => {
                             id="copy_to_clipboard_script_button"
                             onclick="copy_to_clipboard(this, 'embedded_code_textarea')"
                             class="tertiary compact pad"
-                            style={{backgroundColor:"white", color:"black"}}
+                            style={{ backgroundColor: "white", color: "black" }}
                           >
                             Copy
                           </button>
@@ -301,7 +352,7 @@ const BuyNft = (id) => {
                             id="copy_to_clipboard_iframe_button"
                             onclick="copy_to_clipboard(this, 'embedded_iframe_textarea')"
                             class="tertiary compact pad"
-                            style={{backgroundColor:"white", color:"black"}}
+                            style={{ backgroundColor: "white", color: "black" }}
                           >
                             Copy
                           </button>
@@ -463,18 +514,17 @@ const BuyNft = (id) => {
                           Load The NFTpay form
                         </button>
                       </div> */}
-                        <div className="nft-btnsec pt-0 pb-4 mt-2">
-                            <button
-                              className="btn back-nftbtn"
-                              id="dashboardtab-buttons"
-                              value={data?.contractIdentity}
-                              onClick={(e)=>contractIdentity(e)}
-                              type="button"
-                            >
-                              Load The NFTpay form
-                            </button>
-                        </div>
-
+                      <div className="nft-btnsec pt-0 pb-4 mt-2">
+                        <button
+                          className="btn back-nftbtn"
+                          id="dashboardtab-buttons"
+                          value={data?.contractIdentity}
+                          onClick={(e) => contractIdentity(e)}
+                          type="button"
+                        >
+                          Load The NFTpay form
+                        </button>
+                      </div>
                     </Tab>
                   </Tabs>
                 </div>
@@ -531,5 +581,3 @@ const BuyNft = (id) => {
 };
 
 export default BuyNft;
-
-

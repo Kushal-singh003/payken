@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 let arr2 = [];
 let list = [];
+let list3 = [];
  
 const FunctionValues = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const FunctionValues = () => {
   const [errMsg, setErrMsg] = useState(false);
   const [formValues, setFormValues] = useState();
   const [showValues,setShowValues] = useState(false);
+  const [dynamicArray,setDynamicArray] = useState([]);
 
 
   useEffect(() => {
@@ -67,6 +69,16 @@ const FunctionValues = () => {
 
 
     console.log(unique2, 'unique arr')
+
+    // unique2?.filter((item)=>{
+    //   const itemValue  = item?.value;
+      
+    //   if(itemValue == 3 ){
+    //     setDynamicArray(item)
+    //   }
+      
+    // })
+   
     
     localStorage.setItem('parameter',JSON.stringify(unique2))
     setParameters(unique2)
@@ -74,10 +86,26 @@ const FunctionValues = () => {
 
   }
 
+  // console.log(dynamicArray,'dynamic array');
+
   
   function nextFn(e) {
     e.preventDefault()
     console.log(data?.length  , parameters.length)
+
+     
+  //  const filteredValues = parameters?.filter((item)=>{
+  //     const itemValue  = item?.value;
+      
+  //     if(itemValue == 3 ){
+  //       return item
+  //     }
+      
+  //   })
+
+
+  //   localStorage.setItem('dynamicValues',JSON.stringify(filteredValues))
+    
 
     if(showValues == true){
       router.push("/contract/nftPrice");

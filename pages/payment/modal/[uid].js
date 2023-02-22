@@ -13,6 +13,7 @@ export default function id({ response, price }) {
 
 export async function getServerSideProps(context) {
   let { params } = await context;
+  console.log(params,'params');
   let contractIdentity = await params.uid;
   const supabase = createServerSupabaseClient(context);
   // Check if we have a session

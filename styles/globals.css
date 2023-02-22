@@ -369,7 +369,7 @@ tr {
 .detail-row2 {
   display: flex;
   width: 100%;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 20px;
   margin-top: 20px;
 }
@@ -503,7 +503,7 @@ div#panelsStayOpen-collapseOne {
 }
 .credit-right {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 7px;
 }
 #payment-btn {
@@ -743,7 +743,7 @@ ul#pills-tab {
 .footer-row {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   width: 55%;
 }
 .footer-row span {
@@ -1086,7 +1086,7 @@ button.card-continue {
 }
 #payken-navbar div#navbarSupportedContent {
   width: 100%;
-  justify-content: end;
+  justify-content: flex-end;
 }
 #payken-navbar .nav-link {
   color: white !important;
@@ -1144,6 +1144,36 @@ button.card-continue {
 .dropdown-item:hover {
   color: white !important;
   background-color: unset !important;
+}
+
+.price-dynamic{
+  display: flex;
+  margin-top: 1rem;
+  gap: 1rem;
+  align-items: center;
+  height: 40px;
+}
+
+.dynamic--div{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.dynamic--div input{
+  padding-left: 10px;
+}
+
+.dynamic--div span{
+  width: 12%;
+}
+
+
+.price-dynamic input{
+  height: 25px;
+  width: 10%;
 }
 
 .submitkyc {

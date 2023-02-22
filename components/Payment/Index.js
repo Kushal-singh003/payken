@@ -25,128 +25,128 @@ const stripePromise = loadStripe("pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU
 
 export default function Payment() {
 
-  const [cardId,setCardId] = useState();
-  const [cId,setCId] = useState();
-  const [paymentIntentId,setPaymentIntentId] = useState();
-  const [token,setToken] = useState();
+  // const [cardId,setCardId] = useState();
+  // const [cId,setCId] = useState();
+  // const [paymentIntentId,setPaymentIntentId] = useState();
+  // const [token,setToken] = useState();
   // const elements = useElements();
 
-  async function getSession() {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    console.log(
-      session,
-      'session'
-    );
-    setToken(session?.access_token)
+  // async function getSession() {
+  //   const {
+  //     data: { session },
+  //   } = await supabase.auth.getSession();
+  //   console.log(
+  //     session,
+  //     'session'
+  //   );
+  //   setToken(session?.access_token)
 
-    const email = session?.user?.email
+  //   const email = session?.user?.email
 
-    const response = await withAuth({ data: { email: email }, query: 'registerwithemail' })
-    console.log(response,'response');
-    const cid = response?.data?.data?.cId;
-    setCId(cid)
-    const paymentMethods = await stripe.paymentMethods.list({
-      customer: `${cid}`,
-      type: 'card',
-    });
+  //   const response = await withAuth({ data: { email: email }, query: 'registerwithemail' })
+  //   console.log(response,'response');
+  //   const cid = response?.data?.data?.cId;
+  //   setCId(cid)
+  //   const paymentMethods = await stripe.paymentMethods.list({
+  //     customer: `${cid}`,
+  //     type: 'card',
+  //   });
 
-    console.log(paymentMethods,'paymentMEthods');
-    setCardId(paymentMethods?.data[0]?.id)
+  //   console.log(paymentMethods,'paymentMEthods');
+  //   setCardId(paymentMethods?.data[0]?.id)
 
 
 
    
 
-    // const card = stripe.Customer.create_source(
-    //   cid,
-    //   source='visa'
-    // )
+  //   // const card = stripe.Customer.create_source(
+  //   //   cid,
+  //   //   source='visa'
+  //   // )
 
-    // console.log(card);
+  //   // console.log(card);
 
-    // const charge = await stripe.charges.create({
-    //   amount: 2000,
-    //   currency: 'usd',
-    //   source: "visa",
-    //   description: 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
-    // });
+  //   // const charge = await stripe.charges.create({
+  //   //   amount: 2000,
+  //   //   currency: 'usd',
+  //   //   source: "visa",
+  //   //   description: 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
+  //   // });
 
-    // console.log(charge,'charge')
+  //   // console.log(charge,'charge')
    
-  }
+  // }
 
 
-  async function createPaymentIntent(e){
-    e.preventDefault();
+  // async function createPaymentIntent(e){
+  //   e.preventDefault();
     
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 2000,
-      currency: 'usd',
-      customer: cId,
-      payment_method: cardId,
-    });
+  //   const paymentIntent = await stripe.paymentIntents.create({
+  //     amount: 2000,
+  //     currency: 'usd',
+  //     customer: cId,
+  //     payment_method: cardId,
+  //   });
 
-    console.log(paymentIntent);
-    setPaymentIntentId(paymentIntent?.id)
-  }
+  //   console.log(paymentIntent);
+  //   setPaymentIntentId(paymentIntent?.id)
+  // }
 
-  useEffect(() => {
-    getSession();
-  }, [])
+  // useEffect(() => {
+  //   getSession();
+  // }, [])
 
-  async function createPaymentCashAppFn(e){
-    e.preventDefault();
-    var options = {
-      method: 'POST',
-      url: 'https://api.cash.app/customer-request/v1/requests',
-      headers: {'Content-Type': 'application/json', Authorization: ` EAAAEHejrLvgh2AkB8FkcJWDHKGj4mFJrPpwnWIDDKbIYx3RhoRFjwvIE5zrbsto`},
-      data: {
-        idempotency_key: 'e345c3fb-1caa-46fd-b0d3-aa6c7b00ab19',
-        request: {
-          actions: [
-            {
-              amount: 2500,
-              currency: 'USD',
-              scope_id: 'MMI_4vxs5egfk7hmta3qx2h6rp91x',
-              type: 'ONE_TIME_PAYMENT'
-            }
-          ],
-          channel: 'IN_PERSON',
-          redirect_url: 'https://example.com',
-          reference_id: 'string',
-          metadata: {},
-          customer_metadata: {reference_id: 'string'}
-        }
-      }
-    };
+  // async function createPaymentCashAppFn(e){
+  //   e.preventDefault();
+  //   var options = {
+  //     method: 'POST',
+  //     url: 'https://api.cash.app/customer-request/v1/requests',
+  //     headers: {'Content-Type': 'application/json', Authorization: ` EAAAEHejrLvgh2AkB8FkcJWDHKGj4mFJrPpwnWIDDKbIYx3RhoRFjwvIE5zrbsto`},
+  //     data: {
+  //       idempotency_key: 'e345c3fb-1caa-46fd-b0d3-aa6c7b00ab19',
+  //       request: {
+  //         actions: [
+  //           {
+  //             amount: 2500,
+  //             currency: 'USD',
+  //             scope_id: 'MMI_4vxs5egfk7hmta3qx2h6rp91x',
+  //             type: 'ONE_TIME_PAYMENT'
+  //           }
+  //         ],
+  //         channel: 'IN_PERSON',
+  //         redirect_url: 'https://example.com',
+  //         reference_id: 'string',
+  //         metadata: {},
+  //         customer_metadata: {reference_id: 'string'}
+  //       }
+  //     }
+  //   };
     
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
-  }
+  //   axios.request(options).then(function (response) {
+  //     console.log(response.data);
+  //   }).catch(function (error) {
+  //     console.error(error);
+  //   });
+  // }
 
-  async function payWithCashApp(){
+  // async function payWithCashApp(){
 
-    try {
-      const response = await client.paymentsApi.createPayment({
-        sourceId: 'EAAAEHejrLvgh2AkB8FkcJWDHKGj4mFJrPpwnWIDDKbIYx3RhoRFjwvIE5zrbsto',
-        idempotencyKey: 'ddf4b7c6-a640-420a-b53e-1a3254d0f417',
-        amountMoney: {
-          amount: 10000,
-          currency: 'USD'
-        }
-      });
+  //   try {
+  //     const response = await client.paymentsApi.createPayment({
+  //       sourceId: 'EAAAEHejrLvgh2AkB8FkcJWDHKGj4mFJrPpwnWIDDKbIYx3RhoRFjwvIE5zrbsto',
+  //       idempotencyKey: 'ddf4b7c6-a640-420a-b53e-1a3254d0f417',
+  //       amountMoney: {
+  //         amount: 10000,
+  //         currency: 'USD'
+  //       }
+  //     });
     
-      console.log(response.result);
-    } catch(error) {
-      console.log(error);
-    }
+  //     console.log(response.result);
+  //   } catch(error) {
+  //     console.log(error);
+  //   }
 
-  }
+  // }
  
 
 
@@ -166,14 +166,14 @@ export default function Payment() {
   //   }
   // }
 
-  async function retrievePaymentIntent(e){
-    e.preventDefault();
-    const paymentIntent = await stripe.paymentIntents.retrieve(
-      paymentIntentId
-    );
+  // async function retrievePaymentIntent(e){
+  //   e.preventDefault();
+  //   const paymentIntent = await stripe.paymentIntents.retrieve(
+  //     paymentIntentId
+  //   );
 
-    console.log(paymentIntent,'paymentIntent retrieved');
-  }
+  //   console.log(paymentIntent,'paymentIntent retrieved');
+  // }
 
   // const options = {
   //   clientSecret,

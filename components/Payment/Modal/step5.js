@@ -6,9 +6,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { withAuth } from "@/components/Utils/Functions";
 
 
-const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
-);
+// const stripe = require("stripe")(
+//   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+// );
 
 
 export default function Step5() {
@@ -16,7 +16,6 @@ export default function Step5() {
  const [email,setEmail] = useState();
  const [open,setOpen] = useState(false)
  const [errMsg,setErrMsg] = useState(false);
-//  const [data,setData] = useState();
  const router = useRouter();
 
 
@@ -26,9 +25,8 @@ export default function Step5() {
    setEmail(localStorage.getItem('buyerEmail'))
 
    updateTransaction()
-   card()
+  //  card()
  }, [router.query]);
-
 
 
  async function updateTransaction(){
@@ -45,7 +43,7 @@ export default function Step5() {
      }
     setOpen(false)
    }catch(err){
-     
+     console.log(err,'error')
      setErrMsg(true)
      setOpen(false)
      return
@@ -53,15 +51,16 @@ export default function Step5() {
  }
 
 
- async function card(){
- const cid = localStorage.getItem('cid')
-  const paymentMethods = await stripe.paymentMethods.list({
-    customer: `${cid}`,
-    type: 'card',
-  });
+//  async function card(){
+//  const cid = localStorage.getItem('cid')
+//   const paymentMethods = await stripe.paymentMethods.list({
+//     customer: `${cid}`,
+//     type: 'card',
+//   });
 
 
- }
+//  }
+
 
  function backFn(e){
   e.preventDefault();

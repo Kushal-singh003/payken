@@ -11,6 +11,9 @@ import Router, { useRouter } from "next/router";
 import supabase from "../Utils/SupabaseClient";
 import { withToken } from "../Utils/Functions";
 
+
+// let dynamicValue = []
+
 const NftPrice = () => {
   const nftPriceInputRef = useRef();
   const nftMintedInputRef = useRef();
@@ -22,6 +25,8 @@ const NftPrice = () => {
   const [token, setToken] = useState();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [dynamicCheck,setDynamicCheck] = useState(null);
+  const [hideInput,setHideInput] = useState(false);
 
   async function getToken() {
     const {
@@ -54,6 +59,7 @@ const NftPrice = () => {
       const response = res.data;
       setLoading(false)
       console.log(response,"to get the response from api to post final data")
+      localStorage.removeItem("dynamicValues")
       router.push("/contract/collection")
 
     }catch(err){
@@ -73,7 +79,7 @@ const NftPrice = () => {
     const newParameter = localStorage.getItem('parameter')
     // console.log(JSON.parse(newParameter),'newParameter')
     console.log(newParameter,'fkjdkfjkdjfkj');
-    const nftPrice = nftPriceInputRef.current.value;
+    const nftPrice = nftPriceInputRef?.current?.value;
     console.log(nftPrice,"to see the value of nft price")
     const nftMinted = nftMintedInputRef.current.value;
     console.log(nftMinted,"to see the value of nft minted")
@@ -86,13 +92,23 @@ const NftPrice = () => {
     console.log(description, "to see the description");
 
     console.log(JSON.parse(finalData?.function)?.name, 'fucntion name')
+
+   
+  //  let  dynamicValue =[ localStorage.getItem('dynamicValues')]
+
+    // console.log(JSON.parse(dynamicValue),'fkj');
+
+    // if(dynamicCheck){
+    //   // dynamicValue.push({price:dynamicCheck})
+
+    // }
     
-    
+    // console.log(dynamicValue,'dynamic vlaue');
 
     const data = {
       network: finalData?.value,
       smartContract: finalData?.contractAddress,
-      nftPrice: nftPrice,
+      nftPrice: nftPrice || null,
       maxPerMint: nftMinted,
       webAddress: webAddress,
       uri: uri,
@@ -102,6 +118,7 @@ const NftPrice = () => {
       contractName: finalData?.contractName,
       userId: id,
       data1: newParameter == null || newParameter == 'undefined' || newParameter.length == 0 ? [] : JSON.parse(newParameter),
+      dynamicValue: `price = ${dynamicCheck}`  || null
     };
 
     console.log(data,"to check the data on local storage")
@@ -129,6 +146,22 @@ function backFn(e){
   e.preventDefault();
   router.push('/contract/functionValues')
 }
+
+
+function dynamicCheckFn(e){
+  console.log(e.target.checked,'cehked');
+  const Check = e.target.checked;
+
+  if(Check == true){
+    setDynamicCheck(nftPriceInputRef.current.value)
+    setHideInput(true)
+  }else{
+   setDynamicCheck(null)
+   setHideInput(false)
+  }
+}
+
+console.log(dynamicCheck);
 
   
   return (
@@ -159,6 +192,8 @@ function backFn(e){
                         class="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
+
+                        {hideInput ? null :
                         <input
                         ref={nftPriceInputRef}
                           type="text"
@@ -166,8 +201,18 @@ function backFn(e){
                           // placeholder="0.01"
                           required
                         />
+                        }
+                        
                       </div>
+
+                      <div className="price-dynamic">
+                        <span>Send price as dynamic value:</span>
+                        <input onChange={(e)=> dynamicCheckFn(e)} type='checkbox' /> 
+                      </div>
+                      
                     </div>
+                   
+
 
                     <div className="nft-part pt-0">
                       <h4 className="nft-heading">
