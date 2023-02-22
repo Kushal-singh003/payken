@@ -4,12 +4,14 @@ import Script from 'next/script';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useState } from 'react';
+import {SSRProvider} from '@react-aria/ssr'; 
 
 
 export default function App({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient())
   return (
     <>
+    <SSRProvider>
       <SessionContextProvider
         supabaseClient={supabaseClient}
         initialSession={pageProps.initialSession} >
@@ -27,6 +29,7 @@ export default function App({ Component, pageProps }) {
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
         crossorigin="anonymous"></Script>
       </SessionContextProvider>
+      </SSRProvider>
     </>
   )
 }
