@@ -32,29 +32,29 @@ export default function Step5() {
       email,
     };
     // try {
-      let response = await withAuth({ data: data, query: "updatetransaction" });
+      // let response = await withAuth({ data: data, query: "updatetransaction" });
 
-      console.log(response, "res is here");
-      const id = response?.data?.data[0]?.tokenId;
-      const uri = response?.data?.data[0]?.uri;
-      const d = uri?.split("$");
+      // console.log(response, "res is here");
+      // const id = response?.data?.data[0]?.tokenId;
+      // const uri = response?.data?.data[0]?.uri;
+      // const d = uri?.split("$");
 
-      console.log(id, uri, d, "uri");
+      // console.log(id, uri, d, "uri");
 
-      if (!response?.data?.error) {
-        setHash(response?.data.data[0]?.transactionHash);
-        const response2 = await axios.post("/api/nftData", {
-          data: { id: id, uri: d[0] },
-        });
-        console.log(response2, "response2");
-        setNftImg(response2?.data?.data?.image);
-        setOpen(false);
-      }
-      if (response?.data?.error) {
-        setHash(response?.data?.error?.transactionHash);
-        setErrMsg(true);
-        setOpen(false);
-      }
+      // if (!response?.data?.error) {
+      //   setHash(response?.data.data[0]?.transactionHash);
+      //   const response2 = await axios.post("/api/nftData", {
+      //     data: { id: id, uri: d[0] },
+      //   });
+      //   console.log(response2, "response2");
+      //   setNftImg(response2?.data?.data?.image);
+      //   setOpen(false);
+      // }
+      // if (response?.data?.error) {
+      //   setHash(response?.data?.error?.transactionHash);
+      //   setErrMsg(true);
+      //   setOpen(false);
+      // }
     // } 
     // catch (err) {
     //   console.log(err, "error");
@@ -62,6 +62,30 @@ export default function Step5() {
     //   setOpen(false);
     //   return;
     // }
+
+    try {
+      const response = await axios.post('/api/updateTransaction',{data:data})
+      console.log(response,'responsse')
+
+      const id = response?.data?.data?.data[0]?.tokenId;
+      const uri = response?.data?.data?.data[0]?.uri;
+      const d = uri?.split("$");
+
+      setHash(response?.data?.data?.data[0]?.transactionHash);
+      const response2 = await axios.post("/api/nftData", {
+        data: { id: id, uri: d[0] },
+      });
+      console.log(response2, "response2");
+      setNftImg(response2?.data?.data?.image);
+      setOpen(false);
+
+      console.log(id, uri, d, "uri");
+    } catch (error) {
+      console.log(error);
+      // setHash(response?.data?.error?.transactionHash);
+      setErrMsg(true);
+      setOpen(false);
+    }
   }
 
 
