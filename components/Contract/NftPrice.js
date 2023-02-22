@@ -11,7 +11,6 @@ import Router, { useRouter } from "next/router";
 import supabase from "../Utils/SupabaseClient";
 import { withToken } from "../Utils/Functions";
 
-
 // let dynamicValue = []
 
 const NftPrice = () => {
@@ -25,8 +24,8 @@ const NftPrice = () => {
   const [token, setToken] = useState();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [dynamicCheck,setDynamicCheck] = useState(null);
-  const [hideInput,setHideInput] = useState(false);
+  const [dynamicCheck, setDynamicCheck] = useState(null);
+  const [hideInput, setHideInput] = useState(false);
 
   async function getToken() {
     const {
@@ -36,8 +35,8 @@ const NftPrice = () => {
       session,
       "to get the session from supabase to upload the Avatar"
     );
-    console.log(session?.user?.id, "to get the id from session")
-    setId(session?.user?.id)
+    console.log(session?.user?.id, "to get the id from session");
+    setId(session?.user?.id);
     setToken(session?.access_token);
   }
 
@@ -45,56 +44,56 @@ const NftPrice = () => {
     getToken();
   }, []);
 
-  useEffect (()=>{
-    const data = localStorage.getItem("function")
-    console.log(JSON.parse(data),"final data")
-    setFinalData(JSON.parse(data))
-  },[])
+  useEffect(() => {
+    const data = localStorage.getItem("function");
+    console.log(JSON.parse(data), "final data");
+    setFinalData(JSON.parse(data));
+  }, []);
 
- async function postFinalData(data) {
-    try{
-    //   let res = await axios.post ("/api/postFinalData",{token:token,data})
-    let res = await withToken({token:token,data:data,query:'createpg'})
-    console.log(res,'with token res');
+  async function postFinalData(data) {
+    try {
+      //   let res = await axios.post ("/api/postFinalData",{token:token,data})
+      let res = await withToken({
+        token: token,
+        data: data,
+        query: "createpg",
+      });
+      console.log(res, "with token res");
       const response = res.data;
-      setLoading(false)
-      console.log(response,"to get the response from api to post final data")
-      localStorage.removeItem("dynamicValues")
-      router.push("/contract/collection")
-
-    }catch(err){
-      console.log(err)
-      setLoading(false)
+      setLoading(false);
+      console.log(response, "to get the response from api to post final data");
+      localStorage.removeItem("dynamicValues");
+      router.push("/contract/collection");
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
   }
 
+  async function formSubmitHandler(event) {
+    event.preventDefault();
+    setLoading(true);
 
-  async function formSubmitHandler(event){
-    event.preventDefault()
-    setLoading(true)
+    console.log(finalData, "to see the data to send to api");
 
-    console.log(finalData,"to see the data to send to api")
-
-     
-    const newParameter = localStorage.getItem('parameter')
+    const newParameter = localStorage.getItem("parameter");
     // console.log(JSON.parse(newParameter),'newParameter')
-    console.log(newParameter,'fkjdkfjkdjfkj');
+    console.log(newParameter, "fkjdkfjkdjfkj");
     const nftPrice = nftPriceInputRef?.current?.value;
-    console.log(nftPrice,"to see the value of nft price")
+    console.log(nftPrice, "to see the value of nft price");
     const nftMinted = nftMintedInputRef.current.value;
-    console.log(nftMinted,"to see the value of nft minted")
+    console.log(nftMinted, "to see the value of nft minted");
     const webAddress = webAddressInputRef.current.value;
-    console.log(webAddress, "to see the description")
+    console.log(webAddress, "to see the description");
     const uri = tokenUriInputRef.current.value;
-    console.log(tokenUriInputRef, "to see the description")
-    
-    const description = descriptionInputRef.current.value
+    console.log(tokenUriInputRef, "to see the description");
+
+    const description = descriptionInputRef.current.value;
     console.log(description, "to see the description");
 
-    console.log(JSON.parse(finalData?.function)?.name, 'fucntion name')
+    console.log(JSON.parse(finalData?.function)?.name, "fucntion name");
 
-   
-  //  let  dynamicValue =[ localStorage.getItem('dynamicValues')]
+    //  let  dynamicValue =[ localStorage.getItem('dynamicValues')]
 
     // console.log(JSON.parse(dynamicValue),'fkj');
 
@@ -102,7 +101,7 @@ const NftPrice = () => {
     //   // dynamicValue.push({price:dynamicCheck})
 
     // }
-    
+
     // console.log(dynamicValue,'dynamic vlaue');
 
     const data = {
@@ -117,53 +116,54 @@ const NftPrice = () => {
       parameter: JSON.parse(finalData?.function),
       contractName: finalData?.contractName,
       userId: id,
-      data1: newParameter == null || newParameter == 'undefined' || newParameter.length == 0 ? [] : JSON.parse(newParameter),
-      dynamicValue: `price = ${dynamicCheck}`  || null
+      data1:
+        newParameter == null ||
+        newParameter == "undefined" ||
+        newParameter.length == 0
+          ? []
+          : JSON.parse(newParameter),
+      dynamicValue: `price = ${dynamicCheck}` || null,
     };
 
-    console.log(data,"to check the data on local storage")
+    console.log(data, "to check the data on local storage");
     postFinalData(data);
     // window.location="/nftPages/nftStart"
+  }
+
+  async function getTokenUri() {
+    try {
+      const res = await axios.post("/api/getTokenUri");
+      const response = res.data;
+      console.log(response, "token uri api data");
+    } catch (err) {
+      console.log(err);
     }
-
-async function getTokenUri(){
-  try{
-       const res = await axios.post("/api/getTokenUri")
-    const response=res.data
-    console.log(response,"token uri api data")
   }
-catch(err){
-  console.log(err)
-}
 
-}
+  useEffect(() => {
+    getTokenUri();
+  }, []);
 
-useEffect(()=>{
-  getTokenUri()
-},[])
-
-function backFn(e){
-  e.preventDefault();
-  router.push('/contract/functionValues')
-}
-
-
-function dynamicCheckFn(e){
-  console.log(e.target.checked,'cehked');
-  const Check = e.target.checked;
-
-  if(Check == true){
-    setDynamicCheck(nftPriceInputRef.current.value)
-    setHideInput(true)
-  }else{
-   setDynamicCheck(null)
-   setHideInput(false)
+  function backFn(e) {
+    e.preventDefault();
+    router.push("/contract/functionValues");
   }
-}
 
-console.log(dynamicCheck);
+  function dynamicCheckFn(e) {
+    console.log(e.target.checked, "cehked");
+    const Check = e.target.checked;
 
-  
+    if (Check == true) {
+      setDynamicCheck(nftPriceInputRef.current.value);
+      setHideInput(true);
+    } else {
+      setDynamicCheck(null);
+      setHideInput(false);
+    }
+  }
+
+  console.log(dynamicCheck);
+
   return (
     <div id="NFTAmt-inner">
       <div className="new-dashboard">
@@ -192,27 +192,25 @@ console.log(dynamicCheck);
                         class="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
-
-                        {hideInput ? null :
-                        <input
-                        ref={nftPriceInputRef}
-                          type="text"
-                          className="form-control form-border"
-                          // placeholder="0.01"
-                          required
-                        />
-                        }
-                        
+                        {hideInput ? null : (
+                          <input
+                            ref={nftPriceInputRef}
+                            type="text"
+                            className="form-control form-border"
+                            // placeholder="0.01"
+                            required
+                          />
+                        )}
                       </div>
 
                       <div className="price-dynamic">
                         <span>Send price as dynamic value:</span>
-                        <input onChange={(e)=> dynamicCheckFn(e)} type='checkbox' /> 
+                        <input
+                          onChange={(e) => dynamicCheckFn(e)}
+                          type="checkbox"
+                        />
                       </div>
-                      
                     </div>
-                   
-
 
                     <div className="nft-part pt-0">
                       <h4 className="nft-heading">
@@ -275,9 +273,7 @@ console.log(dynamicCheck);
                     </div>
 
                     <div className="nft-part pt-0">
-                      <h4 className="nft-heading">
-                        Token URI
-                      </h4>
+                      <h4 className="nft-heading">Token URI</h4>
                       <div
                         class="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
@@ -290,6 +286,11 @@ console.log(dynamicCheck);
                           required
                         />
                       </div>
+                      <p style={{ marginTop: "1rem" }}>
+                        {
+                          "Token URI must be of https://example.com/api/v1/nft/metadata/${id}. Here id is replaceable with nft token id, 'example.com' is the base URL for the API that serves the NFT metadata and  '/api/v1/nft/metadata' is the endpoint where NFT metadata is served"
+                        }
+                      </p>
                     </div>
                     <div className="nft-part pt-0">
                       <div class="form-check" id="check-froms">
@@ -312,11 +313,19 @@ console.log(dynamicCheck);
 
                     <div className="nft-part pt-0">
                       <div className="nft-btnsec mt-0 pt-0">
-                        <button onClick={backFn} className="btn back-nftbtn" type="button">
+                        <button
+                          onClick={backFn}
+                          className="btn back-nftbtn"
+                          type="button"
+                        >
                           Back
                         </button>
-                        <button disabled={loading} className="btn next-nftbtn" type="submit">
-                           {loading ? "Loading..." : "Add Collection"}
+                        <button
+                          disabled={loading}
+                          className="btn next-nftbtn"
+                          type="submit"
+                        >
+                          {loading ? "Loading..." : "Add Collection"}
                         </button>
                       </div>
                     </div>

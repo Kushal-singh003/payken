@@ -73,9 +73,9 @@ export default function Step3({
 
       v?.map((item,idx)=>{
         for (let i = 0; i < a.length ; i++) {
-          if(item?.name === a[i]?.item?.name ){
+          if(item?.name === a[i]?.name ){
             const updatedValues = [...formValues];
-            updatedValues[idx] = a[i]?.item?.value;
+            updatedValues[idx] = a[i]?.value;
             setFormValues(updatedValues);
           }
   

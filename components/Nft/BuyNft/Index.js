@@ -92,7 +92,7 @@ const BuyNft = (id) => {
     console.log(e, "eeeeeeeeeeee");
     const updateValues = [...newValues];
 
-    updateValues[item.id] = { item, value: e.target.value };
+    updateValues[item.id] = { name:item.name, value: e.target.value };
 
     setNewValues(updateValues);
   }

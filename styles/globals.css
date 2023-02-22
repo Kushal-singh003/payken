@@ -258,9 +258,14 @@ tr {
   font-size: 15px;
   font-weight: 500;
 }
-.funds-sec .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-  background: linear-gradient( 180deg, rgba(5, 26, 8, 1) 20%, rgba(4, 62, 13, 1) 100% );
-  color: #fff  !important;
+.funds-sec .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  background: linear-gradient(
+    180deg,
+    rgba(5, 26, 8, 1) 20%,
+    rgba(4, 62, 13, 1) 100%
+  );
+  color: #fff !important;
 }
 /* .accordion-button:not(.collapsed)::after {
   background-image: url(/img/down-arrow.png) !important;
@@ -917,7 +922,7 @@ ul#pills-tab {
   margin-top: 1rem;
 }
 
-.Failed-modal{
+.Failed-modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -925,14 +930,29 @@ ul#pills-tab {
   padding: 4rem 2rem;
   text-align: center;
 }
+.purchasenft-head .nftImg {
+  height: 200px;
+  width: 90%;
+  object-fit: cover;
+}
 
-.Failed-modal .failed-img{
+#purchasenft-body .some-text span {
+  word-break: break-all;
+  font-size: 16px;
+  font-family: sans-serif;
+  /* text-decoration: underline; */
+}
+
+.Failed-modal .failed-img {
   height: 100px;
   width: 100px;
   margin-bottom: 1rem;
 }
+.Failed-modal span {
+  word-break: break-all;
+}
 
-.Failed-modal h2{
+.Failed-modal h2 {
   color: red;
   font-size: 22px;
 }
@@ -942,8 +962,7 @@ input.btn2-btn.values-field {
   width: 25%;
 }
 
-.Failed-modal
-.creditt-card {
+.Failed-modal .creditt-card {
   width: 100%;
   float: left;
   margin-top: 1rem;
@@ -1146,7 +1165,7 @@ button.card-continue {
   background-color: unset !important;
 }
 
-.price-dynamic{
+.price-dynamic {
   display: flex;
   margin-top: 1rem;
   gap: 1rem;
@@ -1154,7 +1173,7 @@ button.card-continue {
   height: 40px;
 }
 
-.dynamic--div{
+.dynamic--div {
   display: flex;
   /* justify-content: center; */
   align-items: center;
@@ -1162,16 +1181,15 @@ button.card-continue {
   gap: 1rem;
 }
 
-.dynamic--div input{
+.dynamic--div input {
   padding-left: 10px;
 }
 
-.dynamic--div span{
+.dynamic--div span {
   width: 12%;
 }
 
-
-.price-dynamic input{
+.price-dynamic input {
   height: 25px;
   width: 10%;
 }
@@ -1248,7 +1266,7 @@ section.nanu .card-body h3 {
   margin-bottom: 10px !important;
 }
 
-section.nanu .card-body p{
+section.nanu .card-body p {
   margin-bottom: 2rem !important;
 }
 
@@ -2592,24 +2610,22 @@ button#uncontrolled-tab-example-tab-TECH\ SUPPORT {
 
 #NFTDashboard-inner .new-dashboard .mb-3 {
   border-bottom: 1px solid #202020 !important;
-  margin-bottom: 1rem!important;
+  margin-bottom: 1rem !important;
 }
 
-#NFTDashboard-inner .new-dashboard #dashboardtab-buttons:hover{
+#NFTDashboard-inner .new-dashboard #dashboardtab-buttons:hover {
   background-color: #1a370c !important;
   border: 1px solid #1a370c;
-
 }
 
-#NFTDashboard-inner .new-dashboard h2
-{
+#NFTDashboard-inner .new-dashboard h2 {
   color: white !important;
 }
 
 #NFTDashboard-inner .new-dashboard .standard,
 #NFTDashboard-inner .new-dashboard #warn_contract_includes_dynamic_parms,
 #NFTDashboard-inner .new-dashboard .contract_subhead,
-#NFTDashboard-inner .new-dashboard div{
+#NFTDashboard-inner .new-dashboard div {
   color: rgb(255 249 249 / 72%);
 }
 .nftDashboard-tabhead .description {
@@ -4060,7 +4076,7 @@ div#qrScanner {
   border: none;
 }
 
-.submitkyc iframe{
+.submitkyc iframe {
   margin-top: 8rem !important;
 }
 .payment .credit-left {
@@ -4068,18 +4084,18 @@ div#qrScanner {
   gap: 10px;
 }
 
-.payment label.btn.btn-outline-danger.label-btn{
+.payment label.btn.btn-outline-danger.label-btn {
   display: flex;
   gap: 10px;
 }
 
-.profile-icon{
+.profile-icon {
   padding: 5px;
   font-size: 19px;
 }
 .wallet-table th {
   width: 17%;
-  padding: .5rem 1.5rem !important;
+  padding: 0.5rem 1.5rem !important;
 }
 #form-checker {
   float: left;
