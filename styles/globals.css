@@ -3922,9 +3922,9 @@ div#qrScanner {
     transform: rotate(180deg);
     /* / transition: all 0.6; / */
   }
-  .collapse:not(.show) {
+  /* .collapse:not(.show) {
     display: block !important;
-  }
+  } */
   .navbar-collapse {
     flex-basis: unset !important;
     flex-grow: unset !important;
@@ -4479,7 +4479,7 @@ form {
     text-decoration: none;
     outline: 0;
     box-shadow: none !important;
-    padding: 0 !important;
+    /* padding: 0 !important; */
   }
   /*------------------ nav bar ends ---------------------------*/
   /*----------------------- login starts ----------------*/
@@ -4785,7 +4785,7 @@ form {
       text-decoration: none;
       outline: 0;
       box-shadow: none !important;
-      padding: 0 !important;
+      /* padding: 0 !important; */
   }
 
   /*------------------ nav bar ends ---------------------------*/

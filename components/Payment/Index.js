@@ -28,54 +28,54 @@ export default function Payment() {
   // const [cardId,setCardId] = useState();
   // const [cId,setCId] = useState();
   // const [paymentIntentId,setPaymentIntentId] = useState();
-  // const [token,setToken] = useState();
+  const [token,setToken] = useState();
   // const elements = useElements();
 
-  // async function getSession() {
-  //   const {
-  //     data: { session },
-  //   } = await supabase.auth.getSession();
-  //   console.log(
-  //     session,
-  //     'session'
-  //   );
-  //   setToken(session?.access_token)
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(
+      session,
+      'session'
+    );
+    setToken(session?.access_token)
 
-  //   const email = session?.user?.email
+    // const email = session?.user?.email
 
-  //   const response = await withAuth({ data: { email: email }, query: 'registerwithemail' })
-  //   console.log(response,'response');
-  //   const cid = response?.data?.data?.cId;
-  //   setCId(cid)
-  //   const paymentMethods = await stripe.paymentMethods.list({
-  //     customer: `${cid}`,
-  //     type: 'card',
-  //   });
+    // const response = await withAuth({ data: { email: email }, query: 'registerwithemail' })
+    // console.log(response,'response');
+    // const cid = response?.data?.data?.cId;
+    // setCId(cid)
+    // const paymentMethods = await stripe.paymentMethods.list({
+    //   customer: `${cid}`,
+    //   type: 'card',
+    // });
 
-  //   console.log(paymentMethods,'paymentMEthods');
-  //   setCardId(paymentMethods?.data[0]?.id)
+    // console.log(paymentMethods,'paymentMEthods');
+    // setCardId(paymentMethods?.data[0]?.id)
 
 
 
    
 
-  //   // const card = stripe.Customer.create_source(
-  //   //   cid,
-  //   //   source='visa'
-  //   // )
+    // const card = stripe.Customer.create_source(
+    //   cid,
+    //   source='visa'
+    // )
 
-  //   // console.log(card);
+    // console.log(card);
 
-  //   // const charge = await stripe.charges.create({
-  //   //   amount: 2000,
-  //   //   currency: 'usd',
-  //   //   source: "visa",
-  //   //   description: 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
-  //   // });
+    // const charge = await stripe.charges.create({
+    //   amount: 2000,
+    //   currency: 'usd',
+    //   source: "visa",
+    //   description: 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
+    // });
 
-  //   // console.log(charge,'charge')
+    // console.log(charge,'charge')
    
-  // }
+  }
 
 
   // async function createPaymentIntent(e){
@@ -92,9 +92,9 @@ export default function Payment() {
   //   setPaymentIntentId(paymentIntent?.id)
   // }
 
-  // useEffect(() => {
-  //   getSession();
-  // }, [])
+  useEffect(() => {
+    getSession();
+  }, [])
 
   // async function createPaymentCashAppFn(e){
   //   e.preventDefault();
@@ -179,6 +179,37 @@ export default function Payment() {
   //   clientSecret,
   //   appearance,
   // };
+
+
+
+
+
+
+  async function applePaySessionFn(e){
+  
+    const response = await axios.post('/api/create-stripe-session');
+    console.log(response,'response');
+  }
+
+  // const sessionData =  response.json();
+    // const session =  stripe.applePay.buildSession(sessionData);
+
+    // const button = document.getElementById('apple-pay-button');
+
+
+
+
+  // useEffect(() => {
+  //   const applePayButton = document[0].getElementById('apple-pay-button');
+  //   applePayButton.addEventListener('click', startApplePaySession);
+  
+  //   return () => {
+  //     applePayButton.removeEventListener('click', startApplePaySession);
+  //   };
+  // }, []);
+
+
+  
 
 
   return (
@@ -277,6 +308,7 @@ export default function Payment() {
 
                 <button onClick={(e)=> confirmPaymentIntent(e)}>COnfirm Payment</button>
                 </Elements> */}
+                <button id="apple-pay-button" onClick={(e)=> applePaySessionFn(e)}>apple pay</button>
               </div>
             </div>
           </div>
@@ -292,3 +324,87 @@ export default function Payment() {
     </div>
   );
 }
+
+
+
+
+
+
+// import axios from 'axios';
+// import { useState } from 'react';
+// import Stripe from 'stripe';
+// const stripe = new Stripe('<your_stripe_api_key>');
+
+// const ApplePayButton = () => {
+//   const [sessionData, setSessionData] = useState(null);
+//   const [paymentStatus, setPaymentStatus] = useState(null);
+
+//   const startApplePaySession = async () => {
+//     try {
+//       // const response = await fetch('/api/create-stripe-session', {
+//       //   method: 'POST',
+//       //   // headers: {
+//       //   //   'Content-Type': 'application/json'
+//       //   // },
+//       //   body: JSON.stringify({
+//       //     amount: 100, // replace with the amount you want to charge in cents
+//       //     currency: 'usd' // replace with the currency you want to charge in
+//       //   })
+//       // });
+
+//       const response = await axios.post('/api/create-stripe-session',{
+//         method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify({
+//             amount: 100, // replace with the amount you want to charge in cents
+//             currency: 'usd' // replace with the currency you want to charge in
+//           })
+
+//       })
+
+//       const sessionData = await response.json();
+//       setSessionData(sessionData);
+
+//       const session = await stripe.applePay.buildSession(sessionData);
+
+//       const button = document.getElementById('apple-pay-button');
+//       const result = await stripe.applePay.checkAvailability();
+//       if (result) {
+//         await stripe.applePay.createButton(button, {
+//           onClick: () => {
+//             session.begin();
+//           }
+//         });
+
+//         session.on('paymentauthorized', async (event) => {
+//           const result = await stripe.applePay.completePayment(event.payment);
+//           if (result.error) {
+//             setPaymentStatus('Error');
+//           } else {
+//             setPaymentStatus('Success');
+//           }
+//         });
+
+//         session.on('cancel', () => {
+//           setPaymentStatus('Cancelled');
+//         });
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <button style={{height:'100vh'}} id="apple-pay-button" onClick={startApplePaySession}></button>
+//       {paymentStatus === 'Success' && <p>Payment successful!</p>}
+//       {paymentStatus === 'Error' && <p>Payment error. Please try again.</p>}
+//       {paymentStatus === 'Cancelled' && <p>Payment cancelled.</p>}
+//     </div>
+//   );
+// };
+
+
+// export default ApplePayButton;
