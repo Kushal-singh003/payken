@@ -670,9 +670,47 @@ div#panelsStayOpen-collapseOne {
 .sent-card {
   display: flex;
   flex-direction: column;
-
+  position: relative;
   align-items: center;
   margin: 4%;
+}
+
+span.beMerchant {
+  position: absolute;
+  background: #000000e6;
+  width: 100%;
+  color: #ffffffb0 !important;
+  padding: 97px 50px;
+  border-radius: 20px;
+}
+
+.merchant-pop{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.merchant-pop p{
+  text-align: center;
+    font-size: 20px;
+    color: #504a4a;
+    font-family:sans-serif;
+    margin-bottom: 2rem;
+}
+
+.merchant-pop .merchant-btn{
+  display: flex;
+  gap: 1rem;
+}
+
+.merchant-pop .merchant-btn button{
+  color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px !important;
+    background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
+    /* height: 45px; */
 }
 .sent-box {
   width: 100%;
@@ -943,6 +981,58 @@ ul#pills-tab {
   /* text-decoration: underline; */
 }
 
+.qr-code .copy-address {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  position: relative;
+}
+.send-recieve {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+}
+
+.qr-code .copy-address span {
+  border-bottom: 1px solid gray;
+  height: 100%;
+}
+.qr-code .copy-address p {
+position: absolute;
+top: 115%;
+}
+
+.Wallet .container {
+  height: 65vh;
+}
+.qr-code .copy-address .copy-icon{
+
+  height: 25px;
+  width: 25px;
+
+}
+
+.send-recieve .wallet-table{
+  margin: 0px 100px;
+}
+
+.qr-code .copy-address button {
+  color: white;
+  border: none;
+  padding: 0px 50px !important;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+  border-radius: 50px;
+  height: 51px;
+}
+
 .Failed-modal .failed-img {
   height: 100px;
   width: 100px;
@@ -1051,6 +1141,7 @@ button.card-continue {
   margin-top: 1rem;
   border: unset;
 }
+
 #purchasenft-body h2 {
   font-size: 30px;
   font-weight: 600;
@@ -1195,12 +1286,19 @@ button.card-continue {
 }
 
 .submitkyc {
-  margin: top;
+  /* margin: top; */
   /* margin-top: 7rem; */
   float: left;
-  height: 100vh;
+  /* height: 100vh; */
+  
   width: 100%;
 }
+
+.link-btn{
+  border: none;
+    background: none;
+}
+.loader-overlay{bottom: 3% !important;}
 #payken-navbar .dropdown-item:hover {
   color: black !important;
 }
@@ -1208,8 +1306,13 @@ button.card-continue {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 65vh;
   background: white;
+}
+
+.transaction-img{
+  height: 30px;
+  width: 30px;
 }
 
 .qr-code .qr-container {
@@ -1223,7 +1326,7 @@ button.card-continue {
   text-align: center;
   color: black;
   font-weight: 600;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .nanu {
@@ -4078,7 +4181,9 @@ div#qrScanner {
 
 .submitkyc iframe {
   margin-top: 8rem !important;
+  margin-bottom: 8rem !important;
 }
+
 .payment .credit-left {
   display: flex;
   gap: 10px;
@@ -4089,6 +4194,50 @@ div#qrScanner {
   gap: 10px;
 }
 
+.Merchant-container{
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.Merchant-container .Merchant-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ margin-bottom: 3rem;
+  font-size: 22px;
+}
+.Merchant-container .Merchant-div input{
+width: 70px;
+    height: 25px;
+}
+
+.settings-tab{
+  width: 100%;
+    background: black;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    padding: 8px;
+}
+
+.changeEmail-tab{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.changeEmail-tab h3{
+  font-size: 24px;
+}
+
+.Merchant-container button{
+color: white;
+border: none;
+border-radius: 10px;
+padding: 10px 70px !important;
+background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
+height: 45px;
+}
 .profile-icon {
   padding: 5px;
   font-size: 19px;
@@ -4390,5 +4539,730 @@ form {
   /*----------------------- login starts ----------------*/
   /*---------------------- login ends -----------------*/
   /*----------------------- footer starts ----------------*/
+  /*---------------------- footer ends -----------------*/
+}
+
+
+
+@media (max-width: 1566px) {
+
+  /*---------------- Footer starts ------------------------*/
+  .footer .footer-upper {
+      margin-bottom: 2rem;
+  }
+  .footer::after {
+      top: 79%;
+  }
+  /*---------------- Footer starts ------------------------*/
+
+  /*---------------- signin starts ------------------------*/
+  .signin .container {
+      margin-top: 6rem;
+  }
+
+  /*------------------ signin ends ---------------------------*/
+
+  /*---------------- sigup starts ------------------------*/
+  .signup .container {
+      margin-top: 8rem;
+      margin-bottom: 3rem;
+  }
+
+  /*------------------ signup ends ---------------------------*/
+
+  /*---------------- nav bar starts ------------------------*/
+  #payken-navbar ul.navbar-nav {
+      justify-content: space-between;
+      width: 50%;
+  }
+
+  /*------------------ nav bar ends ---------------------------*/
+}
+
+@media (max-width: 1366px) {
+
+  /*---------------- nav bar starts ------------------------*/
+  #payken-navbar ul.navbar-nav {
+      justify-content: space-between;
+      width: 55%;
+  }
+
+  #payken-navbar .nav-link {
+      font-size: 16px !important;
+  }
+
+  /*------------------ nav bar ends ---------------------------*/
+
+  /*----------------------- footer starts ----------------*/
+  .footer-row1,
+  .footer-row2,
+  .footer-row3 {
+      width: 20%;
+  }
+
+  /*---------------------- footer ends -----------------*/
+}
+
+@media (max-width: 1199px) {
+
+  /*---------------- wallet starts ------------------------*/
+  .Wallet .table>:not(caption)>*>* {
+      padding: 10px 10px 10px 10px !important;
+  }
+
+  .Wallet .wallethead-stripped {
+      font-size: 20px;
+  }
+
+  .Wallet .wallet-data span {
+      font-size: 14px;
+  }
+
+  .Wallet .wallet-data span strong {
+      font-size: 16px;
+  }
+
+  .Wallet h2 {
+      font-size: 28px;
+  }
+
+  .wallet-back {
+      width: 2.7%;
+  }
+
+  /*---------------- wallet starts ------------------------*/
+
+  /*---------------- sigup starts ------------------------*/
+  .signup .container {
+      margin-top: 8rem;
+      margin-bottom: 3rem;
+  }
+
+  .signup .signup-box {
+      width: 60%;
+  }
+
+  /*------------------ signup ends ---------------------------*/
+
+  /*---------------- signin starts ------------------------*/
+  .signin .signin-box {
+      width: 60%;
+  }
+
+  /*------------------ signin ends ---------------------------*/
+  /*---------------- sent starts ------------------------*/
+  .sent h2 {
+      font-size: 28px;
+  }
+
+  /*---------------- sent ends ------------------------*/
+
+  /*---------------- NFT starts ------------------------*/
+  .nft h2 {
+      font-size: 28px;
+  }
+
+  /*---------------- NFT ends ------------------------*/
+
+  /*---------------- nav bar starts ------------------------*/
+  #payken-navbar .nav-link {
+      font-size: 16px !important;
+  }
+
+  #payken-navbar ul.navbar-nav {
+      width: 70%;
+  }
+
+  /*------------------ nav bar ends ---------------------------*/
+  /*----------------------- footer starts ----------------*/
+  .footer-row1,
+  .footer-row2,
+  .footer-row3 {
+      width: 25%;
+  }
+  .footer .footer-upper {
+      margin-bottom: 5rem;
+  }
+  /*---------------------- footer ends -----------------*/
+  /*----------------------- login starts ----------------*/
+  .login .login-box {
+      width: 60%;
+  }
+
+  /*---------------------- login ends -----------------*/
+}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 991px) {
+
+  /*---------------- wallet starts ------------------------*/
+  .Wallet .container{
+      max-width: 900px;
+  }
+  /*---------------- wallet starts ------------------------*/
+
+  /*---------------- signup starts ------------------------*/
+  .signup .signup-box {
+      width: 70%;
+  }
+
+  .signup .container h2 {
+      font-size: 28px;
+  }
+
+  /*------------------ signup ends ---------------------------*/
+  /*---------------- signin starts ------------------------*/
+  .signin .signin-box {
+      width: 80%;
+  }
+
+  .signin .container h2 {
+      font-size: 27px;
+  }
+
+  .signin .container h4 {
+      font-size: 22px;
+      margin-bottom: 2rem;
+  }
+
+  .signin .signin-google,
+  .signin .signin-apple {
+      font-size: 16px;
+  }
+
+  .signin .signin-box .signin-btn {
+      font-size: 16px;
+  }
+
+  .signin-pp {
+      width: 35%;
+  }
+
+  /*------------------ signin ends ---------------------------*/
+  /*---------------- sent starts ------------------------*/
+  .sent-box span {
+      font-size: 23px;
+  }
+
+  .sent .container {
+      padding: 0 0px;
+  }
+
+  /*---------------- sent ends ------------------------*/
+  /*---------------- Payment starts ------------------------*/
+  .payment-box {
+      width: 80%;
+  }
+
+  .label-btn {
+      font-size: 18px !important;
+  }
+
+  .payment h2 {
+      font-size: 28px;
+  }
+
+  /*---------------- Payment ends ------------------------*/
+
+  /*---------------- NFT starts ------------------------*/
+  .nft .container {
+      max-width: 900px;
+  }
+
+  /*---------------- NFT ends ------------------------*/
+  /*---------------- nav bar starts ------------------------*/
+  #payken-navbar .container-fluid {
+      padding: 0 40px !important;
+  }
+
+  #payken-navbar button.navbar-toggler.collapsed {
+      box-shadow: none !important;
+      padding: 0;
+  }
+
+  #payken-navbar .navbar-toggler:focus {
+      text-decoration: none;
+      outline: 0;
+      box-shadow: none !important;
+      padding: 0 !important;
+  }
+
+  /*------------------ nav bar ends ---------------------------*/
+  /*----------------------- login starts ----------------*/
+  .login .login-box {
+      width: 70%;
+  }
+
+  /*---------------------- login ends -----------------*/
+
+  /*----------------------- NFT detail  starts ----------------*/
+  .nft-detail .nftdetail-mainheading {
+      font-size: 25px;
+  }
+
+  .back {
+      width: 3.5%;
+  }
+
+  .nft-detail .container {
+      max-width: 900px;
+  }
+
+  .detail-row h6 {
+      font-size: 20px;
+  }
+
+  .super-dope {
+      font-size: 15px;
+  }
+
+  .detail-row span {
+      font-size: 13px;
+  }
+
+  .detail-row3 {
+      gap: 16px;
+  }
+
+  .detail-row4 p {
+      color: white;
+      font-size: 14px;
+  }
+
+  .transfer-detail {
+      padding: 15px;
+      font-size: 14px;
+  }
+
+  /*----------------------- NFT detail ends ----------------*/
+
+  /*----------------------- footer starts ----------------*/
+  .footer {
+      background: url(/img/footer-bg.png)no-repeat;
+      background-size: cover;
+      padding: 50px 0;
+      width: 100%;
+      float: left;
+  }
+
+  .footer .container {
+      max-width: 930px;
+  }
+
+  .footer-row span {
+      font-size: 14px;
+      margin-top: 16px;
+  }
+
+  .footer-row1 h5,
+  .footer-row2 h5,
+  .footer-row3 h5 {
+      font-size: 15px;
+  }
+
+  .footer-row1 li,
+  .footer-row2 li,
+  .footer-row3 li {
+      font-size: 13px;
+      line-height: 27.5px;
+  }
+
+  /*---------------------- footer ends -----------------*/
+}
+
+@media (max-width: 767px) {
+  /*---------------- wallet starts ------------------------*/
+  .Wallet .container{
+      max-width: 900px;
+  }
+  .wallet-table {
+      width: 100%;
+      overflow: auto;
+      white-space: nowrap;
+  }
+  .wallet-back {
+      width: 3.5%;
+  }
+  /*---------------- wallet starts ------------------------*/
+
+  /*---------------- signup starts ------------------------*/
+  .signup .signup-box {
+      width: 90%;
+  }
+
+  .signup .container h2 {
+      font-size: 28px;
+  }
+
+  /*------------------ signup ends ---------------------------*/
+  /*---------------- Payment starts ------------------------*/
+  .payment-box {
+      width: 90%;
+  }
+
+  .label-btn {
+      font-size: 16px !important;
+  }
+
+  .payment h2 {
+      font-size: 25px;
+  }
+
+  .payment-box h5 {
+      font-size: 23px;
+  }
+
+  #payment-btn {
+      margin-top: 1rem;
+  }
+
+  /*---------------- Payment ends ------------------------*/
+  /*---------------- NFT starts ------------------------*/
+  .nftcard {
+      width: 31%;
+  }
+
+  /*---------------- NFT ends ------------------------*/
+  /*----------------------- NFT detail  starts ----------------*/
+  .nft-detail .detail-box {
+      flex-wrap: wrap;
+  }
+
+  .nft-detail .detail-box .detail-right {
+      width: 90%;
+  }
+
+  .nft-detail .detail-box .detail-left {
+      width: 50%;
+      float: left;
+  }
+
+  /*----------------------- NFT detail ends ----------------*/
+  /*----------------------- login starts ----------------*/
+  .login .login-box {
+      width: 90%;
+  }
+
+  .login .login-box h4 {
+      font-size: 25px;
+  }
+
+  .login .login-box .login-pp {
+      width: 25%;
+  }
+
+  .login .login-box .login-arrow {
+      width: 10%;
+  }
+
+  /*---------------------- login ends -----------------*/
+  /*----------------------- footer starts ----------------*/
+  .footer .footer-upper {
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+  }
+
+  .footer-row {
+      width: 100%;
+      margin-bottom: 2rem;
+  }
+
+  .footer-row span {
+      font-size: 13px;
+      width: 90%;
+  }
+
+  .footer-row1,
+  .footer-row2,
+  .footer-row3 {
+      width: 30%;
+  }
+
+  /*---------------------- footer ends -----------------*/
+}
+
+@media (max-width: 567px) {
+  /*---------------- wallet starts ------------------------*/
+  .Wallet h2 {
+      font-size: 25px;
+  }
+  .wallet-back {
+      width: 5.5%;
+  }
+  .Wallet .wallethead-stripped {
+      font-size: 18px;
+  }
+  /*---------------- wallet starts ------------------------*/
+  /*---------------- sigup starts ------------------------*/
+  .signup .signup-box {
+      width: 95%;
+  }
+
+  .signup .container h2 {
+      font-size: 25px;
+  }
+
+  .signup-pp {
+      width: 35%;
+  }
+
+  .signup .signup-google,
+  .signup .signup-apple {
+      font-size: 13px;
+      margin-top: 1rem;
+  }
+
+  .signup .signup-box .or {
+      font-size: 16px;
+      margin: 1rem 0;
+  }
+
+  .signup .container {
+      margin-top: 5rem;
+      margin-bottom: 0rem;
+  }
+
+  .signup-form #signup-email {
+      padding: 10px;
+      font-size: 13px;
+  }
+
+  .signup .signup-box .signup-btn {
+      font-size: 15px;
+  }
+
+  /*------------------ signup ends ---------------------------*/
+  /*---------------- signin starts ------------------------*/
+  .signin .signin-box {
+      width: 90%;
+  }
+
+  .signin .container {
+      margin-top: 3rem;
+  }
+
+  .signin .container h2 {
+      font-size: 25px;
+  }
+
+  .signin .container h4 {
+      font-size: 19px;
+      margin-bottom: 1.8rem;
+  }
+
+  .signin-pp {
+      width: 38%;
+  }
+
+  .signin .signin-google,
+  .signin .signin-apple {
+      font-size: 13px;
+      margin-top: 1rem;
+  }
+
+  .signin .signin-box .or {
+      font-size: 16px;
+      margin: 1rem 0;
+  }
+
+  .signin-form #signin-email {
+      font-size: 13px;
+  }
+
+  .signin .signin-box .signin-btn {
+      font-size: 14px;
+      margin-top: 0px;
+  }
+
+  /*------------------ signin ends ---------------------------*/
+  /*---------------- sent starts ------------------------*/
+  .sent-card {
+      width: 70%;
+      margin: 3%;
+  }
+
+  .sent-box {
+      justify-content: center;
+  }
+
+  .sent .container {
+      padding: 0 10px;
+  }
+
+  .sent h2 {
+      font-size: 25px;
+  }
+
+  /*---------------- sent starts ------------------------*/
+  /*---------------- Payment starts ------------------------*/
+  .payment-box {
+      width: 100%;
+  }
+
+  .label-btn {
+      font-size: 15px !important;
+  }
+
+  .payment h2 {
+      font-size: 25px;
+  }
+
+  .payment-box h5 {
+      font-size: 23px;
+  }
+
+  #payment-btn {
+      margin-top: 1rem;
+      width: 100%;
+  }
+
+  /*---------------- Payment ends ------------------------*/
+  /*---------------- NFT starts ------------------------*/
+  .nftcard {
+      width: 48%;
+  }
+
+  .nft .nft-head {
+      gap: 10px;
+      flex-wrap: wrap;
+  }
+
+  .nft h2 {
+      font-size: 25px;
+  }
+
+  .nftcard-lower p {
+      font-size: 15px;
+  }
+
+  .nftcard-lower .price {
+      margin-bottom: unset !important;
+      font-size: 12px;
+  }
+
+  .nftcard-lower span {
+      font-size: 14px;
+  }
+
+  /*---------------- NFT ends ------------------------*/
+  /*----------------------- NFT detail  starts ----------------*/
+  .nft-detail .nftdetail-mainheading {
+      font-size: 20px;
+      margin-bottom: 1rem;
+  }
+
+  .back {
+      width: 5%;
+  }
+
+  .nft-detail .detail-box {
+      flex-wrap: wrap;
+  }
+
+  .nft-detail .detail-box .detail-right {
+      width: 100%;
+  }
+
+  .nft-detail .detail-box .detail-left {
+      width: 75%;
+      float: left;
+  }
+
+  .detail-row2 {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0px;
+  }
+
+  .detail-row3 .address ul {
+      font-size: 13px;
+      margin-left: 6rem;
+  }
+
+  .detail-row3 {
+      white-space: nowrap;
+      overflow: auto;
+  }
+
+  .detail-row2 p {
+      font-size: 13px;
+  }
+
+  .nft-detail .detail-box .detail-right {
+      width: 100%;
+  }
+
+  .detail-row h6 {
+      font-size: 16px;
+      margin-bottom: 0px;
+  }
+
+  .detail-row {
+      padding-bottom: 10px;
+  }
+
+  .super-dope {
+      font-size: 13px;
+  }
+
+  .detail-row4 p {
+      color: white;
+      font-size: 13px;
+  }
+
+  .nft-detail .detail-box .detail-left img {
+      height: 200px;
+  }
+
+  /*----------------------- NFT detail ends ----------------*/
+  /*---------------- nav bar starts ------------------------*/
+  #payken-navbar .container-fluid {
+      padding: 0 15px !important;
+  }
+
+  #payken-navbar .nav-link {
+      font-size: 14px !important;
+  }
+
+  /*------------------ nav bar ends ---------------------------*/
+  /*----------------------- login starts ----------------*/
+  .login .login-box h4 {
+      padding: 15px 30px 15px 30px;
+  }
+
+  .login .login-box .login-pp {
+      width: 30%;
+  }
+
+  .login .login-box .login-btn {
+      font-size: 15px;
+      width: 85%;
+      margin-top: 2rem;
+  }
+
+  /*---------------------- login ends -----------------*/
+  /*----------------------- footer starts ----------------*/
+  .footer-row1,
+  .footer-row2,
+  .footer-row3 {
+      width: 100%;
+  }
+  .footer::after {
+      top: 82%;
+  }
+  .footer-lower {
+      flex-wrap: wrap;
+  }
+
+  .footer-lower .flower-left {
+      margin-bottom: 16px;
+      width: 100%;
+  }
+
+  .footer-lower .flower-right {
+      font-size: 13px;
+  }
+
   /*---------------------- footer ends -----------------*/
 }

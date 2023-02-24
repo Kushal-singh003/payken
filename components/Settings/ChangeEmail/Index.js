@@ -8,14 +8,18 @@ import Button from "react-bootstrap/Button";
 // import { fas } from "@fortawesome/free-solid-svg-icons";
 // import SideBar from "../../Component/SideBar";
 import supabase from "@/components/Utils/SupabaseClient";
+import { withToken } from "@/components/Utils/Functions";
 
 const ChangeEmail = () => {
   const [email, setEmail] = useState();
   const [newEmail, setNewEmail] = useState();
   const [verify, setVerify] = useState();
-
+  const [merchant,setMerchant] = useState();
+  const [token,setToken] = useState();
   const [showNewEmail, setShowNewEmail] = useState();
+  const [vMerchant,setVMerchant] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [loading,setLoading] = useState(false);
   const router = useRouter();
 
   async function getSession() {
@@ -25,6 +29,9 @@ const ChangeEmail = () => {
     console.log(session, "to get the session from supabase");
     setEmail(session?.user?.email);
     setShowNewEmail(session?.user?.new_email);
+    setToken(session?.access_token)
+    const d = session?.access_token
+    getMerchant(d)
   }
   useEffect(() => {
     getSession();
@@ -63,6 +70,26 @@ const ChangeEmail = () => {
     }
   }
 
+  async function beMerchantFn(){
+    setLoading(true)
+    if(!merchant || merchant == false){
+      toast.error('Please Click on Checkbox first')
+      return;
+    }
+      
+    
+   const response = await withToken({data:{status: merchant},token:token,query:'marchant'})
+   console.log(response,'response');
+   setLoading(false)
+  }
+
+  async function getMerchant(d){
+   const response = await withToken({token:d,query:'getmarchant'})
+   console.log(response,'response get merchant');
+   setVMerchant(response?.data?.data[0].isMarchent)
+   
+  }
+
   return (
     <div id="home-inner" class="profile-sects pt-0 ">
       <div className="dark-overlay">
@@ -71,12 +98,26 @@ const ChangeEmail = () => {
             <ToastContainer />
             <div className="col">
               <div className="card text-center card-form">
+               
                 <div className="card-body" id="emial-modify-inner">
+                  <h2 className="settings-tab">Settings</h2>
+                <div className="Merchant-container">
+                  <div className="Merchant-div">
+
+                  <span>{vMerchant == 1 ? 'Merchant Account' :'Become a Merchant' }</span>
+                  {vMerchant == 1 ? null :
+                  <input onChange={(e)=> setMerchant(e.target.checked)} type='checkbox' />}
+                  </div>
+                  {vMerchant == 1 ? <button disabled >Activated</button> : 
+                  <button onClick={beMerchantFn}>{loading ? 'Loading...' : 'Save'}</button>}
+                </div>
+                <div className="changeEmail-tab"> 
                   <h3>Change Your Email</h3>
-                  <p>
+                  {/* <p>
                     Please provide valid credentails to change your registered
                     email
-                  </p>
+                  </p> */}
+                </div>
                   <form>
                     <div className="form-group mb-4">
                       <input

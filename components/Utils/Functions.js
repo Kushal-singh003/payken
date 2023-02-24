@@ -2,12 +2,11 @@ import axios from "axios";
 import { ToastContainer, toast, Icons } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+export const withAuth = async ({ data, query }) => {
+  console.log(data, query, "data is here");
 
-export const withAuth = async({data,query}) => {
-  console.log(data, query, 'data is here')
-  
   try {
-    const response = await axios.post("/api/auth1/"+query, {
+    const response = await axios.post("/api/auth1/" + query, {
       data: data,
     });
     console.log(response, "response");
@@ -20,12 +19,12 @@ export const withAuth = async({data,query}) => {
 
 // with token
 
-
-export const withToken = async ({data,query,token}) => {
-console.log(data,token,query,'data');
-    try {
+export const withToken = async ({ data, query, token }) => {
+  console.log(data, token, query, "data");
+  try {
     const response = await axios.post("/api/auth2/" + query, {
-      data: data,token:token
+      data: data,
+      token: token,
     });
     console.log(response, "response");
     return response.data;
@@ -34,5 +33,3 @@ console.log(data,token,query,'data');
     return error.response.data;
   }
 };
-
-

@@ -3,6 +3,9 @@ import supabase from '@/components/Utils/SupabaseClient'
 import Index from '@/components/Index'
 import TransferFunds from '@/components/Wallet/TransferFunds'
 import { useState,useEffect } from 'react'
+import axios from 'axios'
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,9 +44,39 @@ export default function Home() {
   }, []);
   return (
     <>
-    {session ? <TransferFunds/> : 
-      <Index/> }
+    {session ?  <TransferFunds />:
+      <Index/>  }
       
     </>
   )
 }
+
+
+// export async function getServerSideProps(context) {
+//   const supabase = createServerSupabaseClient(context);
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession();
+//   console.log(session,'sessiinon')
+
+//   var config = {
+//     method: "post",
+//     url: "http://52.9.60.249:5000/api/v1/member/getmarchant",
+//     headers: {
+//       Authorization: `Bearer ${session?.access_token}`,
+//     },
+//   };
+  
+//   const response = await axios(config);
+//   console.log(response,'response');
+ 
+
+  
+
+//   return {
+//     props: {
+//       user:session,
+//       response:response.data
+//     },
+//   };
+// }

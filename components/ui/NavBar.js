@@ -50,9 +50,9 @@ export default function NavBar() {
               <li className="nav-item">
                 <Link className="nav-link" href="/nft">NFT</Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" href="/contract/collection">Collection</Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link" href="/payment">Payment</Link>
               </li>

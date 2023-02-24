@@ -35,14 +35,15 @@ export default function Step5() {
       let response = await withAuth({ data: data, query: "updatetransaction" });
 
       console.log(response, "res is here");
+      console.log(response?.data?.data?.error?.transactionHash,'transaction hash ')
       const id = response?.data?.data[0]?.tokenId;
       const uri = response?.data?.data[0]?.uri;
       const d = uri?.split("$");
 
       console.log(id, uri, d, "uri");
 
-      if (!response?.data?.error) {
-        setHash(response?.data.data[0]?.transactionHash);
+      if (!response?.data?.data?.error) {
+        setHash(response?.data?.data[0]?.transactionHash);
         const response2 = await axios.post("/api/nftData", {
           data: { id: id, uri: d[0] },
         });
@@ -50,8 +51,9 @@ export default function Step5() {
         setNftImg(response2?.data?.data?.image);
         setOpen(false);
       }
-      if (response?.data?.error) {
-        setHash(response?.data?.error?.transactionHash);
+
+      if (response?.data?.data?.error) {
+        setHash(response?.data?.data?.error?.transactionHash);
         setErrMsg(true);
         setOpen(false);
       }
@@ -63,29 +65,7 @@ export default function Step5() {
       return;
     }
 
-    // try {
-    //   const response = await axios.post('/api/updateTransaction',{data:data})
-    //   console.log(response,'responsse')
-
-    //   const id = response?.data?.data?.data[0]?.tokenId;
-    //   const uri = response?.data?.data?.data[0]?.uri;
-    //   const d = uri?.split("$");
-
-    //   setHash(response?.data?.data?.data[0]?.transactionHash);
-    //   const response2 = await axios.post("/api/nftData", {
-    //     data: { id: id, uri: d[0] },
-    //   });
-    //   console.log(response2, "response2");
-    //   setNftImg(response2?.data?.data?.image);
-    //   setOpen(false);
-
-    //   console.log(id, uri, d, "uri");
-    // } catch (error) {
-    //   console.log(error);
-    //   // setHash(response?.data?.error?.transactionHash);
-    //   setErrMsg(true);
-    //   setOpen(false);
-    // }
+    
   }
 
 

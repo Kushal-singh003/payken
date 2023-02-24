@@ -40,7 +40,10 @@ export default function Registration() {
 
     console.log(formData);
     try {
-      const { data, error } = await supabase.auth.signInWithOtp({ email: formData?.email });
+      const { data, error } = await supabase.auth.signInWithOtp({ email: formData?.email,
+        options: {
+         name: formData?.name
+        } });
       console.log(data, 'data');
 
       console.log(error, 'error');
@@ -81,6 +84,7 @@ export default function Registration() {
                   className="form-control"
                   id="signup-email"
                   placeholder="Name"
+                  required
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
@@ -89,6 +93,7 @@ export default function Registration() {
                   type="email"
                   className="form-control"
                   id="signup-email"
+                  required
                   placeholder="Email"
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />

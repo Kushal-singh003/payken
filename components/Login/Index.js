@@ -79,6 +79,7 @@ export default function Login() {
                   className="form-control"
                   id="signin-email"
                   placeholder="Email"
+                  required
                   onChange={(e)=> setFormData({...formData,email:e.target.value})}
                 />
               </div>

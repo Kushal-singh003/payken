@@ -54,12 +54,12 @@ const BuyNft = (id) => {
       localStorage.setItem("contractIdentity", response?.contractIdentity);
       setData(response);
       const d = JSON.parse(response?.data);
-      console.log(d,'d')
-      const filterData = d?.filter((item,idx)=>{
-        if(item.value == 3){
-          return item
+      console.log(d, "d");
+      const filterData = d?.filter((item, idx) => {
+        if (item.value == 3) {
+          return item;
         }
-      })
+      });
 
       setDynamicValues(filterData);
     } catch (err) {
@@ -67,7 +67,7 @@ const BuyNft = (id) => {
     }
   }
 
-   console.log(dynamicValues,'dynamic values');
+  console.log(dynamicValues, "dynamic values");
 
   useEffect(() => {
     console.log(id.userId, "htttt");
@@ -84,6 +84,8 @@ const BuyNft = (id) => {
       pathname: "/payment/modal/" + contract,
 
       query: { parameters: `${JSON.stringify(newValues)}`, price:dynamicPrice },
+      
+    
     });
   }
 
@@ -92,7 +94,7 @@ const BuyNft = (id) => {
     console.log(e, "eeeeeeeeeeee");
     const updateValues = [...newValues];
 
-    updateValues[item.id] = { name:item.name, value: e.target.value };
+    updateValues[item.id] = { name: item.name, value: e.target.value };
 
     setNewValues(updateValues);
   }
@@ -159,9 +161,7 @@ const BuyNft = (id) => {
                                   <span>{item.name}</span>
                                   <input
                                     type="text"
-                                    onChange={(e) =>
-                                      setValueFn({item,e})
-                                    }
+                                    onChange={(e) => setValueFn({ item, e })}
                                     placeholder="set Dynamic Value"
                                   />
                                 </div>
