@@ -105,9 +105,6 @@ export default function Step3({
     setRouterQuery(a);
   }, [router.query]);
 
-  
-
-
 
   let handleChange = (idx, e) => {
     const updatedValues = [...formValues];

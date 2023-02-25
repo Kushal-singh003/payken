@@ -191,6 +191,53 @@ export default function Payment() {
     console.log(response,'response');
   }
 
+
+ async function onApplePayButtonClicked() {
+    const merchantIdentifier = 'your-merchant-identifier';
+    const paymentRequest = {
+      countryCode: 'US',
+      currencyCode: 'USD',
+      supportedNetworks: ['visa', 'masterCard', 'amex'],
+      merchantCapabilities: ['supports3DS'],
+      total: {
+        label: 'Total',
+        amount: '1.00'
+      }
+    };
+
+    const session = new window.ApplePaySession(1, paymentRequest);
+
+    session.onvalidatemerchant = (event) => {
+      // Call your server to get the Apple Pay merchant session
+      const merchantSession = 'your-merchant-session';
+      session.completeMerchantValidation(JSON.parse(merchantSession));
+    };
+
+    session.onpaymentauthorized = (event) => {
+      const payment = event.payment;
+      // Call your server to process the payment
+      const paymentToken = 'your-payment-token';
+      const paymentData = {
+        token: paymentToken,
+        amount: payment.total.amount
+      };
+      // Complete the payment
+      session.completePayment(window.ApplePaySession.STATUS_SUCCESS);
+    };
+
+    session.onpaymentmethodselected = (event) => {
+      const paymentMethod = event.paymentMethod;
+      // Update the payment summary to reflect the selected payment method
+      const updatedTotal = {
+        label: 'Total',
+        amount: '1.00'
+      };
+      session.completePaymentMethodSelection(updatedTotal);
+    };
+
+    session.begin();
+  }
+
   // const sessionData =  response.json();
     // const session =  stripe.applePay.buildSession(sessionData);
 
@@ -309,6 +356,9 @@ export default function Payment() {
                 <button onClick={(e)=> confirmPaymentIntent(e)}>COnfirm Payment</button>
                 </Elements> */}
                 <button id="apple-pay-button" onClick={(e)=> applePaySessionFn(e)}>apple pay</button>
+                <button onClick={onApplePayButtonClicked}>
+        <img src="apple-pay-button.png" alt="Apple Pay" />
+      </button>
               </div>
             </div>
           </div>
@@ -408,3 +458,8 @@ export default function Payment() {
 
 
 // export default ApplePayButton;
+
+
+
+
+

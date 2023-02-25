@@ -68,7 +68,7 @@ export default function Nft() {
                   return(
                     <>
                      <div className="nftcard">
-              <img src="img/Mask Group -1.png" alt="" />
+              <img className="nftCardImg" src="img/Mask Group -1.png" alt="" />
               <div className="nftcard-lower">
                 <p>Cool NFT #1234</p>
                 <p className="price">Price</p>
@@ -83,7 +83,8 @@ export default function Nft() {
           
            
               })}
-            <div className="nftcard">
+              
+            {/* <div className="nftcard">
               <img src="img/Mask Group -2.png" alt="" />
               <div className="nftcard-lower">
                 <p>Cool NFT #1234</p>
@@ -159,7 +160,7 @@ export default function Nft() {
                   2.8349 ETH
                 </span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

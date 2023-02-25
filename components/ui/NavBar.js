@@ -3,11 +3,14 @@ import Link from "next/link";
 import supabase from "../Utils/SupabaseClient";
 import { useRouter } from "next/router";
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Collapse } from "react-bootstrap";
 
 export default function NavBar() {
-  const router = useRouter();
+  const router = useRouter(false);
   const [userData, setUserData] = useState();
+  const [open, setOpen] = useState(false)
 
+  console.log(open,"open data here")
   async function getAvatar() {
     const {
       data: { session },
@@ -36,10 +39,12 @@ export default function NavBar() {
           <Link className="navbar-brand" href="/">
             <img src="/img/payken-logo.png" alt="" />
           </Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button onClick={()=>setOpen(!open)} 
+          className="navbar-toggler"  type="button" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"    aria-expanded={open}
+ aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <Collapse className="navbar-collapse"  in={open}>
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" href="/">Home</Link>
@@ -83,14 +88,14 @@ export default function NavBar() {
                 <NavDropdown.Item href="/settings/changeEmail">
                   Settings
                 </NavDropdown.Item>
-                {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
                 <NavDropdown.Divider />
                 <NavDropdown.Item  onClick={(e)=> logoutFn(e)}>
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
             </ul>
-          </div>
+          {/* {/ </div> /} */}
+          </Collapse>
         </div>
       </nav>
     </div>

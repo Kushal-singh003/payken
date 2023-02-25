@@ -6,10 +6,11 @@ import {
   CardElement
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import {PaymentRequestButtonElement} from '@stripe/react-stripe-js';
+import { PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
+import GooglePayButton from '@google-pay/button-react'
 
 
 export default function CheckoutForm({ customer }) {
@@ -39,6 +40,7 @@ export default function CheckoutForm({ customer }) {
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      console.log(paymentIntent, 'payment Intent ')
       switch (paymentIntent.status) {
         case "succeeded":
           console.log(paymentIntent.status, "--------")
@@ -57,7 +59,7 @@ export default function CheckoutForm({ customer }) {
 
     });
 
-    
+
   }, [stripe]);
 
   const handleSubmit = async (e) => {
@@ -117,6 +119,37 @@ export default function CheckoutForm({ customer }) {
           setPaymentRequest(pr);
         }
       });
+
+      pr.on('paymentmethod',async (e)=> {
+
+        const {clientSecret} = await fetch('/create-payment-intent',{
+          method:'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            paymentMethodType: 'card',
+            currency: 'usd',
+          }),
+        }).then(r => r.json());
+
+    const  {error,paymentIntent} = await  stripe.confirmCardPayment(
+          clientSecret,{
+            payment_method:e.payerEmail.id,
+          },{
+            handleActions: false,
+          }
+        )
+        if(error){
+          e.complete('fail');
+          return;
+        }
+
+        e.complete('success')
+        if(paymentIntent.status == 'requires_action'){
+          stripe.confirmCardPayment(clientSecret);
+        }
+      })
     }
   }, [stripe]);
 
@@ -141,24 +174,70 @@ export default function CheckoutForm({ customer }) {
   // },[customer])
 
 
-//   async function getCusListFn(){
-//     const cid = localStorage.getItem('cid')
-//     console.log(cid);
-//   const paymentMethods = await stripe.paymentMethods.list({
-//     customer: `${cid}`,
-//     type: 'card',
-//   });
+  //   async function getCusListFn(){
+  //     const cid = localStorage.getItem('cid')
+  //     console.log(cid);
+  //   const paymentMethods = await stripe.paymentMethods.list({
+  //     customer: `${cid}`,
+  //     type: 'card',
+  //   });
 
-//   console.log(paymentMethods,'payment METhods');
-// }
+  //   console.log(paymentMethods,'payment METhods');
+  // }
 
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+  <>
+   <div className="googlePay-btn">
+        <GooglePayButton
+          environment="TEST"
+          paymentRequest={{
+            apiVersion: 2,
+            apiVersionMinor: 0,
+            allowedPaymentMethods: [
+              {
+                type: 'CARD',
+                parameters: {
+                  allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                  allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                },
+                tokenizationSpecification: {
+                  type: 'PAYMENT_GATEWAY',
+                  parameters: {
+                    gateway: 'example',
+                    gatewayMerchantId: 'exampleGatewayMerchantId',
+                  },
+                },
+              },
+            ],
+            merchantInfo: {
+              merchantId: '12345678901234567890',
+              merchantName: 'Demo Merchant',
+            },
+            transactionInfo: {
+              totalPriceStatus: 'FINAL',
+              totalPriceLabel: 'Total',
+              totalPrice: '100.00',
+              currencyCode: 'USD',
+              countryCode: 'US',
+            },
+          }}
+          onLoadPaymentData={paymentRequest => {
+            console.log('load payment data', paymentRequest);
+          }}
+        />
+      </div>
+
+      <div className="link-pay">
       {
-        paymentRequest ? 
-      
-      <PaymentRequestButtonElement options={{paymentRequest}} /> : null }
+
+        paymentRequest ?
+
+          <PaymentRequestButtonElement options={{ paymentRequest }} /> : null}
+          </div>
+  
+    <form id="payment-form" onSubmit={handleSubmit}>
+     
 
       <PaymentElement id="payment-element" options={paymentElementOptions} />
 
@@ -170,6 +249,12 @@ export default function CheckoutForm({ customer }) {
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
+
+   
+
+         
+</>
+    
   );
 }
 
