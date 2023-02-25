@@ -245,7 +245,7 @@ export default function CheckoutForm({ customer }) {
 
         paymentRequest ?
 
-          <PaymentRequestButtonElement ooptions={{
+          <PaymentRequestButtonElement options={{
             googlePay: true,
             applePay: true,
             style: {
@@ -253,6 +253,7 @@ export default function CheckoutForm({ customer }) {
                 theme: 'light',
               },
             },
+            paymentRequest
           }} /> : null}
           </div>
   
