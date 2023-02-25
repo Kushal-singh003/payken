@@ -11,6 +11,9 @@ const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
 import GooglePayButton from '@google-pay/button-react'
+// import GooglePayButton from "../Buttons/GooglePay";
+// import ApplePayButton from "../Buttons/ApplePay";
+
 
 
 export default function CheckoutForm({ customer }) {
@@ -228,12 +231,29 @@ export default function CheckoutForm({ customer }) {
         />
       </div>
 
+      {/* // <div className="googlePay-btn">
+      //   <GooglePayButton/>
+
+      // </div> */}
+
+       {/* <div className="googlePay-btn">
+        <ApplePayButton />
+      </div>  */}
+
       <div className="link-pay">
       {
 
         paymentRequest ?
 
-          <PaymentRequestButtonElement options={{ paymentRequest }} /> : null}
+          <PaymentRequestButtonElement ooptions={{
+            googlePay: true,
+            applePay: true,
+            style: {
+              paymentRequestButton: {
+                theme: 'light',
+              },
+            },
+          }} /> : null}
           </div>
   
     <form id="payment-form" onSubmit={handleSubmit}>
