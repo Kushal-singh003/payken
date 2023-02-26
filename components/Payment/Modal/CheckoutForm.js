@@ -202,7 +202,7 @@ export default function CheckoutForm({ customer }) {
                 theme: 'light',
               },
             },
-            handleSubmit
+            paymentRequest
           }} /> : null}
           </div>
   
