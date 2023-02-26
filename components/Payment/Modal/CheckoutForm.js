@@ -43,7 +43,6 @@ export default function CheckoutForm({ customer }) {
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      console.log(paymentIntent, 'payment Intent ')
       switch (paymentIntent.status) {
         case "succeeded":
           console.log(paymentIntent.status, "--------")
@@ -103,58 +102,58 @@ export default function CheckoutForm({ customer }) {
   };
 
 
-  useEffect(() => {
-    if (stripe) {
-      const pr = stripe.paymentRequest({
-        country: 'US',
-        currency: 'usd',
-        total: {
-          label: 'Demo total',
-          amount: 1099,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
+  // useEffect(() => {
+  //   if (stripe) {
+  //     const pr = stripe.paymentRequest({
+  //       country: 'US',
+  //       currency: 'usd',
+  //       total: {
+  //         label: 'Demo total',
+  //         amount: 1099,
+  //       },
+  //       requestPayerName: true,
+  //       requestPayerEmail: true,
+  //     });
 
-      // Check the availability of the Payment Request API.
-      pr.canMakePayment().then(result => {
-        if (result) {
-          setPaymentRequest(pr);
-        }
-      });
+  //     // Check the availability of the Payment Request API.
+  //     pr.canMakePayment().then(result => {
+  //       if (result) {
+  //         setPaymentRequest(pr);
+  //       }
+  //     });
 
-      pr.on('paymentmethod',async (e)=> {
+  //     pr.on('paymentmethod',async (e)=> {
 
-        const {clientSecret} = await fetch('/create-payment-intent',{
-          method:'POST',
-          headers:{
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            paymentMethodType: 'card',
-            currency: 'usd',
-          }),
-        }).then(r => r.json());
+  //       const {clientSecret} = await fetch('/create-payment-intent',{
+  //         method:'POST',
+  //         headers:{
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           paymentMethodType: 'card',
+  //           currency: 'usd',
+  //         }),
+  //       }).then(r => r.json());
 
-    const  {error,paymentIntent} = await  stripe.confirmCardPayment(
-          clientSecret,{
-            payment_method:e.payerEmail.id,
-          },{
-            handleActions: false,
-          }
-        )
-        if(error){
-          e.complete('fail');
-          return;
-        }
+  //   const  {error,paymentIntent} = await  stripe.confirmCardPayment(
+  //         clientSecret,{
+  //           payment_method:e.payerEmail.id,
+  //         },{
+  //           handleActions: false,
+  //         }
+  //       )
+  //       if(error){
+  //         e.complete('fail');
+  //         return;
+  //       }
 
-        e.complete('success')
-        if(paymentIntent.status == 'requires_action'){
-          stripe.confirmCardPayment(clientSecret);
-        }
-      })
-    }
-  }, [stripe]);
+  //       e.complete('success')
+  //       if(paymentIntent.status == 'requires_action'){
+  //         stripe.confirmCardPayment(clientSecret);
+  //       }
+  //     })
+  //   }
+  // }, [stripe]);
 
 
   //  async function card(){
@@ -188,58 +187,11 @@ export default function CheckoutForm({ customer }) {
   //   console.log(paymentMethods,'payment METhods');
   // }
 
+ 
+
 
   return (
   <>
-   <div className="googlePay-btn">
-        <GooglePayButton
-          environment="TEST"
-          paymentRequest={{
-            apiVersion: 2,
-            apiVersionMinor: 0,
-            allowedPaymentMethods: [
-              {
-                type: 'CARD',
-                parameters: {
-                  allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-                  allowedCardNetworks: ['MASTERCARD', 'VISA'],
-                },
-                tokenizationSpecification: {
-                  type: 'PAYMENT_GATEWAY',
-                  parameters: {
-                    gateway: 'example',
-                    gatewayMerchantId: 'exampleGatewayMerchantId',
-                  },
-                },
-              },
-            ],
-            merchantInfo: {
-              merchantId: '12345678901234567890',
-              merchantName: 'Demo Merchant',
-            },
-            transactionInfo: {
-              totalPriceStatus: 'FINAL',
-              totalPriceLabel: 'Total',
-              totalPrice: '100.00',
-              currencyCode: 'USD',
-              countryCode: 'US',
-            },
-          }}
-          onLoadPaymentData={paymentRequest => {
-            console.log('load payment data', paymentRequest);
-          }}
-        />
-      </div>
-
-      {/* // <div className="googlePay-btn">
-      //   <GooglePayButton/>
-
-      // </div> */}
-
-       {/* <div className="googlePay-btn">
-        <ApplePayButton />
-      </div>  */}
-
       <div className="link-pay">
       {
 
@@ -248,12 +200,13 @@ export default function CheckoutForm({ customer }) {
           <PaymentRequestButtonElement options={{
             googlePay: true,
             applePay: true,
+            link:false,
             style: {
               paymentRequestButton: {
                 theme: 'light',
               },
             },
-            paymentRequest
+            handleSubmit
           }} /> : null}
           </div>
   
