@@ -230,6 +230,11 @@ export default function CheckoutForm({ customer }) {
   //   return cashAppPay;
   // }
 
+  async function ClickFn(e){
+    e.preventDefault();
+    console.log(e,'do something...')
+  }
+
 
 
   return (
@@ -247,11 +252,11 @@ export default function CheckoutForm({ customer }) {
                 style: 'dark',
                 height: '64px',
                 label: 'Pay Now',
-                icon: 'apple',
-                logo: 'apple',
+                icon: 'auto',
+                logo: 'auto',
               },
-              onClick: () => {
-                // Do something custom
+              onClick: (e) => {
+                ClickFn(e)
               },
               paymentRequest
             }}
