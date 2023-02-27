@@ -242,15 +242,17 @@ export default function CheckoutForm({ customer }) {
         {paymentRequest ? (
           <PaymentRequestButtonElement
             options={{
-              // googlePay: true,
-              // applePay: true,
-              type:"applePay",
-              style: {
-                paymentRequestButton: {
-                  theme: "light",
-                },
+              type: 'applePay',
+              theme: {
+                style: 'dark',
+                height: '64px',
+                label: 'Pay Now',
+                icon: 'apple',
+                logo: 'apple',
               },
-              paymentRequest,
+              onClick: () => {
+                // Do something custom
+              },
             }}
           />
         ) : null}
