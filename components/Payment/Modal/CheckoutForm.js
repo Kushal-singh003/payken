@@ -237,9 +237,8 @@ export default function CheckoutForm({ customer }) {
         {paymentRequest ? (
           <PaymentRequestButtonElement
             options={{
-              googlePay: false,
+              googlePay: true,
               applePay: true,
-              link:false,
               style: {
                 paymentRequestButton: {
                   theme: "light",
