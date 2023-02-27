@@ -3,30 +3,28 @@ import {
   PaymentElement,
   useStripe,
   useElements,
-  CardElement
+  CardElement,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { PaymentRequestButtonElement } from '@stripe/react-stripe-js';
+import { PaymentRequestButtonElement } from "@stripe/react-stripe-js";
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
-
-
+// import { Square, CashApp, Payments } from "@square/web-sdk";
+// import { Payments } from "@square/web-sdk";
 
 export default function CheckoutForm({ customer }) {
   const stripe = useStripe();
   const elements = useElements();
-
 
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [paymentMethod, setPaymentMethod] = useState();
   const [paymentRequest, setPaymentRequest] = useState();
 
-  console.log(customer)
+  console.log(customer);
 
   React.useEffect(() => {
-
     if (!stripe) {
       return;
     }
@@ -42,7 +40,7 @@ export default function CheckoutForm({ customer }) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          console.log(paymentIntent.status, "--------")
+          console.log(paymentIntent.status, "--------");
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -55,10 +53,7 @@ export default function CheckoutForm({ customer }) {
           setMessage("Something went wrong.");
           break;
       }
-
     });
-
-
   }, [stripe]);
 
   const handleSubmit = async (e) => {
@@ -78,7 +73,7 @@ export default function CheckoutForm({ customer }) {
         return_url: "http://payken-demo.vercel.app/payment/step5",
       },
     });
-    console.log(error, 'payment error')
+    console.log(error, "payment error");
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -98,14 +93,13 @@ export default function CheckoutForm({ customer }) {
     //  paymentMethod: "pm_1MbkAgJhZEv5n0fUUl60jgo1",
   };
 
-
   useEffect(() => {
     if (stripe) {
       const pr = stripe.paymentRequest({
-        country: 'US',
-        currency: 'usd',
+        country: "US",
+        currency: "usd",
         total: {
-          label: 'Demo total',
+          label: "Demo total",
           amount: 1099,
         },
         requestPayerName: true,
@@ -113,45 +107,45 @@ export default function CheckoutForm({ customer }) {
       });
 
       // Check the availability of the Payment Request API.
-      pr.canMakePayment().then(result => {
+      pr.canMakePayment().then((result) => {
         if (result) {
           setPaymentRequest(pr);
         }
       });
 
-      pr.on('paymentmethod',async (e)=> {
-
-        const {clientSecret} = await fetch('/create-payment-intent',{
-          method:'POST',
-          headers:{
-            'Content-Type': 'application/json',
+      pr.on("paymentmethod", async (e) => {
+        const { clientSecret } = await fetch("/create-payment-intent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            paymentMethodType: 'card',
-            currency: 'usd',
+            paymentMethodType: "card",
+            currency: "usd",
           }),
-        }).then(r => r.json());
+        }).then((r) => r.json());
 
-    const  {error,paymentIntent} = await  stripe.confirmCardPayment(
-          clientSecret,{
-            payment_method:e.payerEmail.id,
-          },{
+        const { error, paymentIntent } = await stripe.confirmCardPayment(
+          clientSecret,
+          {
+            payment_method: e.payerEmail.id,
+          },
+          {
             handleActions: false,
           }
-        )
-        if(error){
-          e.complete('fail');
+        );
+        if (error) {
+          e.complete("fail");
           return;
         }
 
-        e.complete('success')
-        if(paymentIntent.status == 'requires_action'){
+        e.complete("success");
+        if (paymentIntent.status == "requires_action") {
           stripe.confirmCardPayment(clientSecret);
         }
-      })
+      });
     }
   }, [stripe]);
-
 
   //  async function card(){
   //   const cid = localStorage.getItem('cid')
@@ -167,11 +161,9 @@ export default function CheckoutForm({ customer }) {
   //       card()
   //   },[])
 
-
   // useEffect(()=>{
   //     getCusListFn()
   // },[customer])
-
 
   //   async function getCusListFn(){
   //     const cid = localStorage.getItem('cid')
@@ -184,49 +176,95 @@ export default function CheckoutForm({ customer }) {
   //   console.log(paymentMethods,'payment METhods');
   // }
 
- 
+  // const payments = Square.payments(
+  //   "sandbox-sq0idb-w-eEbWJIaNm40jrqUq48qw",
+  //   "LY4S4C5K49ZPT"
+  // );
 
+  // const paymentRequest = payments.paymentRequest({
+  //   countryCode: 'US',
+  //   currencyCode: 'USD',
+  //   requestBillingContact: true,
+  //   requestShippingContact: true,
+  //   lineItems: [
+  //      { amount: '2.00', label: 'Item Cost' },
+  //      { amount: '0.00', label: 'Shipping' },
+  //      { amount: '0.00', label: 'Tax' },
+  //   ],
+  //   shippingOptions: [
+  //      {
+  //        amount: '0.00',
+  //        id: 'shipping-option-1',
+  //        label: 'Free',
+  //      },
+  //   ],
+  //   total: {
+  //     amount: '1.00',
+  //     label: 'Total',
+  //   }
+  // });
+
+  // const applePay = await payments.applePay(paymentRequest);
+  // const googlePay = await payments.googlePay(paymentRequest);
+
+  // function buildPaymentRequest() {
+  //   const paymentRequest = payments.paymentRequest({
+  //     countryCode: "US",
+  //     currencyCode: "USD",
+  //     total: {
+  //       amount: "1.00",
+  //       label: "Total",
+  //     },
+  //   });
+  //   return paymentRequest;
+  // }
+
+  // async function initializeCashApp() {
+  //   const paymentRequest = buildPaymentRequest(payments);
+  //   const cashAppPay = await payments.cashAppPay(paymentRequest, {
+  //     redirectURL: "https://my.website/checkout",
+  //     referenceId: "my-website-00000001",
+  //   });
+  //   await cashAppPay.attach("#cash-app-pay");
+  //   return cashAppPay;
+  // }
 
   return (
-  <>
-      <div className="link-pay">
-      {
-
-        paymentRequest ?
-
-          <PaymentRequestButtonElement options={{
-            googlePay: true,
-            applePay: true,
-            style: {
-              paymentRequestButton: {
-                theme: 'light',
-              },
-            },
-            paymentRequest
-          }} /> : null}
-          </div>
-  
-    <form id="payment-form" onSubmit={handleSubmit}>
-     
-
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
-
-   
-
-         
-</>
+    <>
     
+
+      <div className="link-pay">
+        {paymentRequest ? (
+          <PaymentRequestButtonElement
+            options={{
+              googlePay: true,
+              applePay: true,
+              style: {
+                paymentRequestButton: {
+                  theme: "light",
+                },
+              },
+              paymentRequest,
+            }}
+          />
+        ) : null}
+      </div>
+
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
+
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {/* Show any error or success messages */}
+        {message && <div id="payment-message">{message}</div>}
+      </form>
+    </>
   );
 }
-
-
-

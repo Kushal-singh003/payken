@@ -14,6 +14,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
+// import {SquarePaymentsForm, CreditCardInput} from 'react-square-web-payments-sdk'
 
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
@@ -185,58 +186,58 @@ export default function Payment() {
 
 
 
-  async function applePaySessionFn(e){
+//   async function applePaySessionFn(e){
   
-    const response = await axios.post('/api/create-stripe-session');
-    console.log(response,'response');
-  }
+//     const response = await axios.post('/api/create-stripe-session');
+//     console.log(response,'response');
+//   }
 
 
- async function onApplePayButtonClicked() {
-    const merchantIdentifier = 'your-merchant-identifier';
-    const paymentRequest = {
-      countryCode: 'US',
-      currencyCode: 'USD',
-      supportedNetworks: ['visa', 'masterCard', 'amex'],
-      merchantCapabilities: ['supports3DS'],
-      total: {
-        label: 'Total',
-        amount: '1.00'
-      }
-    };
+//  async function onApplePayButtonClicked() {
+//     const merchantIdentifier = 'your-merchant-identifier';
+//     const paymentRequest = {
+//       countryCode: 'US',
+//       currencyCode: 'USD',
+//       supportedNetworks: ['visa', 'masterCard', 'amex'],
+//       merchantCapabilities: ['supports3DS'],
+//       total: {
+//         label: 'Total',
+//         amount: '1.00'
+//       }
+//     };
 
-    const session = new window.ApplePaySession(1, paymentRequest);
+//     const session = new window.ApplePaySession(1, paymentRequest);
 
-    session.onvalidatemerchant = (event) => {
-      // Call your server to get the Apple Pay merchant session
-      const merchantSession = 'your-merchant-session';
-      session.completeMerchantValidation(JSON.parse(merchantSession));
-    };
+//     session.onvalidatemerchant = (event) => {
+//       // Call your server to get the Apple Pay merchant session
+//       const merchantSession = 'your-merchant-session';
+//       session.completeMerchantValidation(JSON.parse(merchantSession));
+//     };
 
-    session.onpaymentauthorized = (event) => {
-      const payment = event.payment;
-      // Call your server to process the payment
-      const paymentToken = 'your-payment-token';
-      const paymentData = {
-        token: paymentToken,
-        amount: payment.total.amount
-      };
-      // Complete the payment
-      session.completePayment(window.ApplePaySession.STATUS_SUCCESS);
-    };
+//     session.onpaymentauthorized = (event) => {
+//       const payment = event.payment;
+//       // Call your server to process the payment
+//       const paymentToken = 'your-payment-token';
+//       const paymentData = {
+//         token: paymentToken,
+//         amount: payment.total.amount
+//       };
+//       // Complete the payment
+//       session.completePayment(window.ApplePaySession.STATUS_SUCCESS);
+//     };
 
-    session.onpaymentmethodselected = (event) => {
-      const paymentMethod = event.paymentMethod;
-      // Update the payment summary to reflect the selected payment method
-      const updatedTotal = {
-        label: 'Total',
-        amount: '1.00'
-      };
-      session.completePaymentMethodSelection(updatedTotal);
-    };
+//     session.onpaymentmethodselected = (event) => {
+//       const paymentMethod = event.paymentMethod;
+//       // Update the payment summary to reflect the selected payment method
+//       const updatedTotal = {
+//         label: 'Total',
+//         amount: '1.00'
+//       };
+//       session.completePaymentMethodSelection(updatedTotal);
+//     };
 
-    session.begin();
-  }
+//     session.begin();
+//   }
 
   // const sessionData =  response.json();
     // const session =  stripe.applePay.buildSession(sessionData);
@@ -255,6 +256,26 @@ export default function Payment() {
   //   };
   // }, []);
 
+  const paymentLink = async (amount, description) => {
+    const data =   {
+      amount: amount,
+      currency: 'USD',
+      note: description,
+    };
+    const token = "sandbox-sq0idb-w-eEbWJIaNm40jrqUq48qw";
+    const response = await axios.post(
+      '/api/cashApp',{data:data,token:token}
+    );
+    console.log(response)
+  };
+
+
+  const [paymentUrl, setPaymentUrl] = useState('');
+
+  const handlePayment = async () => {
+    const url = await paymentLink(10, 'Payment for goods');
+    setPaymentUrl(url);
+  };
 
   
 
@@ -263,6 +284,8 @@ export default function Payment() {
     <div>
       <section className="payment">
         <div className="container">
+
+     
           <h2>
             {" "}
             <Link href=""> </Link> Payment
@@ -356,9 +379,9 @@ export default function Payment() {
                 <button onClick={(e)=> confirmPaymentIntent(e)}>COnfirm Payment</button>
                 </Elements> */}
                 <button id="apple-pay-button" onClick={(e)=> applePaySessionFn(e)}>apple pay</button>
-                <button onClick={onApplePayButtonClicked}>
+                {/* <button onClick={onApplePayButtonClicked}>
         <img src="apple-pay-button.png" alt="Apple Pay" />
-      </button>
+      </button> */}
               </div>
             </div>
           </div>
