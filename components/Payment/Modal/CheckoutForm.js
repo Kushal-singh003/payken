@@ -253,6 +253,7 @@ export default function CheckoutForm({ customer }) {
               onClick: () => {
                 // Do something custom
               },
+              paymentRequest
             }}
           />
         ) : null}
