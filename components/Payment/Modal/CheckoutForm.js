@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { PaymentRequestButtonElement } from "@stripe/react-stripe-js";
+import { ApplePay } from "react-square-web-payments-sdk";
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
@@ -229,16 +230,21 @@ export default function CheckoutForm({ customer }) {
   //   return cashAppPay;
   // }
 
+
+
   return (
     <>
+
+      
     
 
       <div className="link-pay">
         {paymentRequest ? (
           <PaymentRequestButtonElement
             options={{
-              googlePay: true,
-              applePay: true,
+              // googlePay: true,
+              // applePay: true,
+              type:"applePay",
               style: {
                 paymentRequestButton: {
                   theme: "light",

@@ -1,4 +1,6 @@
 import React from "react";
+import  { useCallback } from "react";
+// import { ApplePayButton } from "react-apple-pay-button";/
 import Step1 from "./Modal/Step2";
 import Link from "next/link";
 import { useState,useEffect } from "react";
@@ -277,6 +279,8 @@ export default function Payment() {
     setPaymentUrl(url);
   };
 
+
+  const onRequestApplePay = useCallback(() => console.log('done'), []);
   
 
 
@@ -378,10 +382,13 @@ export default function Payment() {
 
                 <button onClick={(e)=> confirmPaymentIntent(e)}>COnfirm Payment</button>
                 </Elements> */}
-                <button id="apple-pay-button" onClick={(e)=> applePaySessionFn(e)}>apple pay</button>
+                {/* <button id="apple-pay-button" onClick={(e)=> applePaySessionFn(e)}>apple pay</button> */}
                 {/* <button onClick={onApplePayButtonClicked}>
         <img src="apple-pay-button.png" alt="Apple Pay" />
       </button> */}
+
+
+
               </div>
             </div>
           </div>
