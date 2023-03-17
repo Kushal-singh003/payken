@@ -9,7 +9,7 @@ import Router, { useRouter } from "next/router";
 // import SideBar from "../SideBar";
 // import { idText } from "typescript";
 import supabase from "../Utils/SupabaseClient";
-import { withToken } from "../Utils/Functions";
+import { MerchantApi } from "../Utils/Functions";
 
 // let dynamicValue = []
 
@@ -42,18 +42,21 @@ const NftPrice = () => {
 
   useEffect(() => {
     getToken();
-  }, []);
-
-  useEffect(() => {
     const data = localStorage.getItem("function");
     console.log(JSON.parse(data), "final data");
     setFinalData(JSON.parse(data));
   }, []);
 
+  // useEffect(() => {
+  //   const data = localStorage.getItem("function");
+  //   console.log(JSON.parse(data), "final data");
+  //   setFinalData(JSON.parse(data));
+  // }, []);
+
   async function postFinalData(data) {
     try {
       //   let res = await axios.post ("/api/postFinalData",{token:token,data})
-      let res = await withToken({
+      let res = await MerchantApi({
         token: token,
         data: data,
         query: "createpg",
@@ -63,7 +66,17 @@ const NftPrice = () => {
       setLoading(false);
       console.log(response, "to get the response from api to post final data");
       localStorage.removeItem("dynamicValues");
-      router.push("/contract/collection");
+      if (!res.Error) {
+        toast.success("Contract deployed successfully");
+        setTimeout(() => {
+          router.push("/contract/collection");
+        }, [1000]);
+      }
+
+      if (res.Error) {
+        console.log("error");
+        toast.error("Failed to deploy your contract! Please try again");
+      }
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -189,7 +202,7 @@ const NftPrice = () => {
                         ETH.
                       </p>
                       <div
-                        class="input-group height-set flex-nowrap mt-0 "
+                        className="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
                         {hideInput ? null : (
@@ -222,7 +235,7 @@ const NftPrice = () => {
                         NFTs.
                       </p>
                       <div
-                        class="input-group height-set flex-nowrap mt-0 "
+                        className="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
                         <input
@@ -240,7 +253,7 @@ const NftPrice = () => {
                         What's your website address?
                       </h4>
                       <div
-                        class="input-group height-set flex-nowrap mt-0 "
+                        className="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
                         <input
@@ -258,7 +271,7 @@ const NftPrice = () => {
                         Add a description of your project
                       </h4>
                       <div
-                        class="input-group height-set flex-nowrap mt-0 "
+                        className="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
                         <textarea
@@ -275,7 +288,7 @@ const NftPrice = () => {
                     <div className="nft-part pt-0">
                       <h4 className="nft-heading">Token URI</h4>
                       <div
-                        class="input-group height-set flex-nowrap mt-0 "
+                        className="input-group height-set flex-nowrap mt-0 "
                         id="mb-set"
                       >
                         <input
@@ -293,15 +306,18 @@ const NftPrice = () => {
                       </p>
                     </div>
                     <div className="nft-part pt-0">
-                      <div class="form-check" id="check-froms">
+                      <div className="form-check" id="check-froms">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           value=""
                           id="flexCheckChecked"
                           checked
                         />
-                        <label class="form-check-label" for="flexCheckChecked">
+                        <label
+                          className="form-check-label"
+                          for="flexCheckChecked"
+                        >
                           I accept the NFTpay{" "}
                           <span className="terms-text">
                             terms and conditions

@@ -33,3 +33,18 @@ export const withToken = async ({ data, query, token }) => {
     return error.response.data;
   }
 };
+
+export const MerchantApi = async ({ data, query, token }) => {
+  console.log(data, token, query, "data");
+  try {
+    const response = await axios.post("/api/auth4/" + query, {
+      data: data,
+      token: token,
+    });
+    console.log(response, "response");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.response.data;
+  }
+};

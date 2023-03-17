@@ -17,6 +17,10 @@ body {
   float: left;
 }
 
+.accordion-button::after {
+  display: none;
+}
+
 .login .container {
   width: 100%;
   display: flex;
@@ -50,9 +54,11 @@ body {
 }
 
 .login .login-box .login-btn {
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgba(8, 59, 16, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgba(8, 59, 16, 1) 100%
+  );
   color: white;
   font-size: 22px;
   font-weight: 600;
@@ -96,9 +102,11 @@ body {
 
 .signin .signin-google,
 .signin .signin-apple {
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgb(1 23 4) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   color: white;
   font-size: 17px;
   font-weight: 600;
@@ -152,9 +160,11 @@ body {
   padding: 13px 0px;
   border-radius: 10px;
   margin-top: 1rem;
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgb(1 23 4) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   border: none;
 }
 
@@ -171,6 +181,8 @@ body {
   margin-top: 20px;
   gap: 5px;
   font-size: 16px;
+  padding: 0 2px;
+  text-align: center;
   font-family: sans-serif;
 }
 
@@ -213,8 +225,8 @@ body {
 }
 
 .Wallet .wallet-data span strong {
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   font-style: italic;
   color: white;
 }
@@ -283,9 +295,11 @@ tr {
 
 .funds-sec .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-  background: linear-gradient(180deg,
-      rgba(5, 26, 8, 1) 20%,
-      rgba(4, 62, 13, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(5, 26, 8, 1) 20%,
+    rgba(4, 62, 13, 1) 100%
+  );
   color: #fff !important;
 }
 
@@ -374,7 +388,6 @@ tr {
   height: 300px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: -1px 3px 47px rgba(124, 233, 15, 0.42);
 }
 
 .nft-detail .detail-box .detail-right {
@@ -598,7 +611,7 @@ div#panelsStayOpen-collapseOne {
   width: 7%;
 }
 
-.btn-group-vertical>.btn-check:checked+.btn {
+.btn-group-vertical > .btn-check:checked + .btn {
   background-color: #168b29 !important;
   color: white !important;
   text-align: start !important;
@@ -648,9 +661,11 @@ div#panelsStayOpen-collapseOne {
 
 .signup .signup-google,
 .signup .signup-apple {
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgba(8, 59, 16, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgba(8, 59, 16, 1) 100%
+  );
   color: white;
   font-size: 17px;
   font-weight: 500;
@@ -664,6 +679,7 @@ div#panelsStayOpen-collapseOne {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  border: unset;
 }
 
 .signup-form {
@@ -694,9 +710,11 @@ div#panelsStayOpen-collapseOne {
 }
 
 .signup .signup-box .signup-btn {
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgba(8, 59, 16, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgba(8, 59, 16, 1) 100%
+  );
   color: white;
   font-size: 17px;
   font-weight: 600;
@@ -717,6 +735,8 @@ div#panelsStayOpen-collapseOne {
   margin-top: 20px;
   gap: 5px;
   font-size: 16px;
+  padding: 0 2px;
+  text-align: center;
   font-family: sans-serif;
 }
 
@@ -759,7 +779,7 @@ span.beMerchant {
   background: #000000e6;
   width: 100%;
   color: #ffffffb0 !important;
-  padding: 97px 50px;
+  padding: 107px 50px;
   border-radius: 20px;
 }
 
@@ -788,7 +808,11 @@ span.beMerchant {
   border: none;
   border-radius: 10px;
   padding: 10px 20px !important;
-  background: linear-gradient(180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   /* height: 45px; */
 }
 
@@ -833,7 +857,7 @@ ul#pills-tab {
 
 .nft .nft-head .input-group {
   position: relative;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .sent-box span {
@@ -1046,9 +1070,11 @@ ul#pills-tab {
   display: flex;
 } */
 .card-continue {
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgba(8, 59, 16, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgba(8, 59, 16, 1) 100%
+  );
   color: white;
   font-size: 17px;
   font-weight: 600;
@@ -1102,13 +1128,16 @@ ul#pills-tab {
 .send-recieve {
   display: flex;
   flex-direction: column;
-  background: white;
+  align-items: center;
+  background: #000;
   padding: 20px;
+  padding-top: 5rem;
 }
 
 .qr-code .copy-address span {
   border-bottom: 1px solid gray;
   height: 100%;
+  word-break: break-all;
 }
 
 .qr-code .copy-address p {
@@ -1121,23 +1150,25 @@ ul#pills-tab {
 }
 
 .qr-code .copy-address .copy-icon {
-
   height: 25px;
   width: 25px;
-
 }
 
 .send-recieve .wallet-table {
   margin: 0px 100px;
+  width: 90%;
+  overflow: auto;
 }
 
 .qr-code .copy-address button {
   color: white;
   border: none;
   padding: 0px 50px !important;
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgb(1 23 4) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   border-radius: 50px;
   height: 51px;
 }
@@ -1246,9 +1277,11 @@ button.card-continue {
 }
 
 .view {
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgba(8, 59, 16, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgba(8, 59, 16, 1) 100%
+  );
   color: white;
   font-size: 17px;
   font-weight: 600;
@@ -1276,6 +1309,30 @@ button.card-continue {
   padding: 0 100px;
   text-align: center;
   margin-bottom: 1.5rem;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 20px;
+  background: #0a0a0a;
+  font-weight: 500;
+}
+
+.loading-div{
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+   
+  
 }
 
 .some-text {
@@ -1307,13 +1364,20 @@ button.card-continue {
   object-fit: cover;
 }
 
+.table-striped-columns > :not(caption) > tr > :nth-child(even) {
+  --bs-table-accent-bg: var(--bs-table-striped-bg);
+  color: #00cd3f !important;
+}
+
 /* Modal 1 section ends */
 
 /*-------------------- Navigation bar section starts ---------------------*/
 #payken-navbar {
-  background: linear-gradient(180deg,
-      rgba(5, 26, 8, 1) 20%,
-      rgba(4, 62, 13, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(5, 26, 8, 1) 20%,
+    rgba(4, 62, 13, 1) 100%
+  );
   position: fixed;
   width: 100%;
 }
@@ -1418,13 +1482,23 @@ button.card-continue {
 }
 
 .google-pay-button-container,
-.google-pay-button-container button.gpay-card-info-container.black.long.new_style.en{
+.google-pay-button-container
+  button.gpay-card-info-container.black.long.new_style.en {
   width: 100% !important;
 }
 
-
 .dynamic--div input {
-  padding-left: 10px;
+  /* padding-left: 10px; */
+  padding: 10px;
+  border: none;
+  background: #1c1c1c;
+  border-radius: 8px;
+  color: white;
+}
+
+.dynamic--div input:hover {
+  outline: none !important;
+  color: white;
 }
 
 .dynamic--div span {
@@ -1463,26 +1537,56 @@ button.card-continue {
   justify-content: center;
   align-items: center;
   height: 65vh;
-  background: white;
+  background: #000;
 }
 
 .transaction-img {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+}
+
+section.Wallet .wallet-table tr.wallet-stripped td {
+  padding: 0.5rem 1.5rem;
 }
 
 .qr-code .qr-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #0a0a0a;
   justify-content: center;
+  padding: 33px;
+  border: 1px solid #ffff001c;
+  border-radius: 7px;
+}
+
+.send-recieve .wallet-table .table th {
+  border: 1px solid #222222a6;
+  color: #00e23a;
+}
+
+.send-recieve .wallet-table .table td {
+  border: 1px solid #222222a6;
 }
 
 .qr-code .qr-text {
   text-align: center;
-  color: black;
+  color: white;
   font-weight: 600;
   /* margin-top: 2rem; */
+}
+
+.send-recieve .wallet-table .table .wallet-stripped:nth-child(even) {
+  background-color: #131313 !important;
+}
+
+.send-recieve .wallet-table .table {
+  box-shadow: 0px 2px 0px rgb(59 59 59 / 89%);
+}
+
+.send-recieve .wallet-table .table span {
+  color: #b4b4b4;
 }
 
 .nanu {
@@ -1513,7 +1617,7 @@ section.nanu #home-inner-profile .card-body {
   margin-top: 0px !important;
   color: #fff !important;
   padding: 35px 30px;
-  width: 39% !important;
+  width: 50% !important;
   background-color: #0e0e0e;
   border-radius: 20px;
   box-shadow: -1px -2px 25px rgb(1 87 26 / 70%);
@@ -1529,10 +1633,288 @@ section.nanu .card-body p {
   margin-bottom: 2rem !important;
 }
 
-/* .sent .container .sent-box .link {
-  width: 33%;
+.merchant-pop.pop2 h3 {
+  background: black;
+  color: white;
+  width: 100%;
+  padding: 5px 17px;
+  text-transform: uppercase;
+  font-size: 22px;
+  margin-top: 1rem;
+}
+
+.merchant-pop.pop2 p {
+  font-size: 19px;
+  margin-top: 10px;
+}
+
+.merchant-pop.pop2 button {
+  margin-bottom: 1rem;
+}
+
+.wallet-data button {
+  background: #18330b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #cdc4c4;
+  border-radius: 10px;
+}
+
+.wallet-data button:hover,
+.wallet-data button:active {
+  background: rgb(230 221 221);
+  color: #18330b;
+  border: none;
+  padding: 5px 10px;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1px solid #18330b;
+  border-radius: 10px;
+}
+
+section.Wallet .wallet-table th {
+  text-transform: uppercase;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+span.spanD {
+  padding: 1rem;
+}
+
+.Wallet .purchase-h2 {
+  margin-bottom: 2rem;
+}
+
+.percentage-div {
+  display: flex;
+  width: 30%;
+}
+
+.commission-per {
+  width: 80%;
+}
+
+.wallet-address-sec {
+  margin-left: 0 !important;
+  width: 70%;
+}
+
+.make-payment .generate-QR {
+  color: green;
+  background: white;
+  border: 1px solid green;
+  /* border: none; */
+  padding: 10px 70px !important;
+  border-radius: 50px;
+}
+
+.upoadproduct-image .upload-img {
+  width: 100px;
+  height: 100px;
+}
+
+.productUploadHead .card-img {
+  cursor: pointer;
+}
+
+.nft .nft-cards .nftCardImg {
+  cursor: pointer;
+  width: 256px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+section.nft .nft-head button#dropdown-basic {
+  background: none;
+  border: none;
+}
+
+section.nft .nft-head .dropdown-item:hover {
+  color: black !important;
+}
+
+section.nft .nft-head .sort-img {
+  height: 18px;
+  width: 18px;
+}
+
+section.nft .nft-head .sort-span {
+  color: black;
+  margin-left: 20px;
+}
+
+.inputSection .left-setting .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Track */
+.col-lg-12.pl-3.pt-3::-webkit-scrollbar-track {
+  background-color: #121111 !important;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+.col-lg-12.pl-3.pt-3 {
+  height: 62vh;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+  padding-top: 0!important;
+}
+
+.cart-section .cart-div .cart-input{
+  background: #252525;
+  color: honeydew;
+  
+}
+
+nav#payken-navbar .nav-item {
+  margin-right: 18px;
+}
+
+nav#payken-navbar .nav-item .bi.bi-cart4 {
+  font-size: 26px;
+}
+
+nav#payken-navbar .profile-update{
   text-decoration: none;
-} */
+  color: #000;
+}
+
+
+/* Handle */
+.col-lg-12.pl-3.pt-3::-webkit-scrollbar-thumb {
+  
+  background: #252525;
+}
+
+.inputSection .left-setting input#flexSwitchCheckChecked {
+  height: 25px;
+  width: 50px;
+}
+
+.error-msg--div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+}
+
+#cart .Product-img img {
+  width: 60px;
+  height: 50px;
+  border-radius: 5px;
+}
+#cart .main-section {
+  font-family: "Roboto Condensed", sans-serif;
+  margin-top: 100px;
+}
+
+.paymentBtn-sec.add-cart {
+  justify-content: space-between;
+}
+
+.paymentBtn-sec .btn.addToCart.cart-btn {
+  padding: 7px 30px !important;
+}
+
+#payken-navbar .cart {
+  height: 30px;
+  width: 30px;
+}
+
+section.cart-section {
+  float: left;
+  width: 100%;
+  margin-top: 8rem;
+}
+div#cart {
+  height: 70vh;
+  color: white;
+}
+
+.cart-section #cart table.table.border.bg-white {
+  background-color: #121111 !important;
+  color: white !important;
+}
+
+.cart-section #cart table.table.border.bg-white thead {
+  color: #00e23a;
+}
+
+.cart-section #cart table.table.border.bg-white thead tr th {
+  padding: 1rem 1.5rem;
+}
+
+.cart-section #cart table.table.border.bg-white tbody td {
+  padding: 1rem 1.5rem;
+  padding-top: 30px;
+}
+.cart-section #cart table.table.border.bg-white tbody td:nth-child(1) {
+  padding-top: 1rem !important
+  ;
+}
+.cart-section #cart table.table.border.bg-white tbody td:nth-child(3) {
+  padding-top: 25px !important;
+}
+.cart-section #cart table.table.border.bg-white tbody td:nth-child(5) {
+  padding-top: 25px !important;
+}
+
+.cart-main-div {
+  display: flex;
+  align-items: center;
+}
+#tfoot-tr td {
+  padding: 1rem 1.5rem !important;
+  white-space: nowrap;
+}
+.cart-div {
+  /* text-align: center; */
+  justify-content: space-between !important;}
+.cartCheckout {
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+.cartCancel{    color: green !important;
+  background: white !important;
+  border: 1px solid green !important;
+  /* border: none; */
+  /* padding: 10px 70px !important; */
+  /* border-radius: 50px !important; */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+.section-product button#copy_to_clipboard_script_button {
+  background-color: #252424;
+  color: #dcd3d3;
+  border: 1px solid #6a6565;
+}
+
+
+
+
+
 /*-----------------------------Dropdown section ends -------------------------*/
 
 /*-------------------- Navigation bar section ends ---------------------*/
@@ -1622,7 +2004,10 @@ ul {
 }
 
 #Success-inner .successPage .successPage-heading--div .successPage-heading,
-#Success-inner .successPage .successPage-heading--div .successPage-heading---content {
+#Success-inner
+  .successPage
+  .successPage-heading--div
+  .successPage-heading---content {
   font-size: 20px;
   font-family: sans-serif;
   color: #000;
@@ -1752,9 +2137,11 @@ hr {
 }
 
 #payken-navbar {
-  background: linear-gradient(180deg,
-      rgba(5, 26, 8, 1) 20%,
-      rgba(4, 62, 13, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(5, 26, 8, 1) 20%,
+    rgba(4, 62, 13, 1) 100%
+  );
   position: fixed;
   width: 100%;
   z-index: 999;
@@ -1789,7 +2176,7 @@ hr {
 
 #home-inner-profile .card {
   background-color: black;
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 #body-set {
@@ -1828,7 +2215,7 @@ hr {
   background-color: #0e0e0e;
   min-height: 400px;
   color: #fff !important;
-  padding-top: 25px;
+  /* padding-top: 25px; */
   width: 50% !important;
 }
 
@@ -2199,7 +2586,7 @@ hr {
 
 #nft-card-body-text {
   margin-bottom: 0px !important;
-  background-color: #8b41de !important;
+  background-color: #101010 !important;
   color: white !important;
 }
 
@@ -2267,9 +2654,11 @@ button.btn.next-nftbtn {
   color: white;
   border: none;
   padding: 16px 70px !important;
-  background: linear-gradient(180deg,
-      rgba(16, 118, 32, 0.77) 0%,
-      rgb(1 23 4) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
 }
 
 .nft-para {
@@ -2347,7 +2736,7 @@ button.btn.next-nftbtn {
   float: left;
   width: 60%;
   display: flex !important;
-  gap: 5% !important;
+  gap: 2% !important;
 }
 
 /* .......my style................ */
@@ -2377,7 +2766,7 @@ button.btn.next-nftbtn {
 /* ...........btn-secondary */
 .threeb-ones {
   float: left;
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
@@ -2389,7 +2778,7 @@ button.btn.next-nftbtn {
 
 .threeb-one {
   float: left;
-  width: 67%;
+  width: 100%;
   font-size: 12px;
   padding: 15px;
   background-color: #e9f4f8;
@@ -2410,7 +2799,7 @@ button.btn.next-nftbtn {
 
 .threeb-two {
   float: left;
-  width: 100%;
+  width: 50%;
   font-size: 12px;
   flex-direction: column;
 }
@@ -2454,7 +2843,7 @@ button.btn.next-nftbtn {
 }
 
 .fix-div h6 {
-  width: 30%;
+  width: 50%;
   margin: 0;
 }
 
@@ -2462,6 +2851,10 @@ button.btn.next-nftbtn {
   float: left;
   width: 100%;
   padding: 10px;
+}
+
+h6.fix-div--2 {
+  margin-left: 2rem;
 }
 
 /*NFT End*/
@@ -2769,7 +3162,9 @@ h3.nftHeading {
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
+  grid-gap: 2rem;
   gap: 2rem;
+  margin-top: 4rem;
 }
 
 #NFTStart-inner .card-body {
@@ -2805,7 +3200,7 @@ h3.nftHeading {
 
 .card-body-div {
   height: 90%;
-  background-color: #8b41de;
+  background-color: #101010;
   border-radius: 10px;
   /* position: relative; */
 }
@@ -2815,7 +3210,7 @@ h3.nftHeading {
 }
 
 .card-body-text {
-  background-color: #572e86;
+  background-color: #212121;
   padding: 10px;
   color: white;
   font-size: 20px;
@@ -2970,13 +3365,19 @@ button#uncontrolled-tab-example-tab-TECH\ SUPPORT {
 .embedded_code {
   margin-top: 10px;
   text-align: left;
-  border: solid 1px #eedaff;
-  background-color: #f8f0ff;
+  border: solid 1px #303030;
+  background-color: #1c1c1c;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 300;
-  color: #555 !important;
+  color: #747474 !important;
   padding: 10px;
+}
+
+button#copy_to_clipboard_script_button {
+  background-color: #1c1c1c;
+  border: none;
+  color: #c6bcbc;
 }
 
 /* #alert-light h6::before {
@@ -3182,6 +3583,13 @@ p.card-body--heading {
 #home-inner #nftstart-body {
   background-color: unset;
   width: 100% !important;
+  border: 1px solid #2c2929;
+  border-radius: 10px;
+}
+
+#home-inner button.inner-btn.mb-3 {
+  color: green;
+  border: 1px solid green;
 }
 
 .delete-span {
@@ -3258,6 +3666,137 @@ p.card-body--heading {
   color: #bab9b9;
 }
 
+#img {
+  display: none;
+}
+
+.productUploadHead .upoadproduct-image .productImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.left-setting .commission-per {
+  margin: 0 1rem !important;
+}
+
+.left-setting .commission-per input {
+  height: 52px;
+}
+
+.left-setting {
+  color: white;
+}
+
+.commission-div {
+  margin-bottom: 1rem;
+}
+
+#add-btn-sec {
+  margin-top: 26px;
+  display: grid;
+  gap: 10px;
+}
+
+.products-heading {
+  display: flex;
+  color: white;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  align-items: center;
+}
+
+.css-13cymwt-control {
+  border: unset !important;
+}
+
+.addProduct--div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  background: #0e0d0d;
+  padding: 3rem;
+  border-radius: 10px;
+  margin: 2rem;
+}
+
+.css-t3ipsp-control:hover,
+.css-t3ipsp-control:active,
+.css-t3ipsp-control:focus {
+  border-color: unset !important;
+  border: unset !important;
+  box-shadow: unset !important;
+  outline: unset !important;
+}
+
+.productUploadDiv label {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.generate-QR {
+  color: white;
+  border: none;
+  padding: 15px 70px !important;
+  border-radius: 50px;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+  margin-left: 2rem;
+}
+
+.productUploadHead a.dropdown-item:hover {
+  color: black !important;
+}
+
+.products-heading button {
+  color: white;
+  border: none;
+  padding: 16px 100px !important;
+  border-radius: 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+}
+
+.make-payment button {
+  color: white;
+  border: none;
+  padding: 10px 70px !important;
+  border-radius: 50px;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+}
+
+.downloadQR {
+  color: white;
+  border: none;
+  padding: 10px 70px !important;
+  border-radius: 50px;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+  margin: 2rem;
+}
+
 .number-count h3 {
   margin-bottom: 0 !important;
   color: #206308;
@@ -3301,6 +3840,7 @@ p.card-body--heading {
 
 #padding-left-nftPage {
   padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 .container2 {
@@ -3312,12 +3852,403 @@ p.card-body--heading {
   gap: 1rem;
 }
 
-@media (max-width: 1199px) {
-  /* .sidebar {
-    left: -300px;
-    position: fixed !important;
-  } */
+/* //...........Priduct Upload Style..........................//
+//.....................................// */
+.productUploadHead {
+  float: left;
+  width: 100%;
+  margin-top: 6rem;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.productUploadDiv {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upoadproduct-image {
+  position: relative;
+  float: left;
+  width: 90%;
+  height: 260px;
+  border-radius: 8px;
+  border: 2px solid #313030;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #626262;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  align-items: center;
+}
+
+.img-loader.MuiBox-root.css-k008qs {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}
+
+.filter-img {
+  filter: blur(5px);
+}
+
+.productDetail-form {
+  width: 100%;
+}
+
+.productDetail-div {
+  float: left;
+  width: 100%;
+}
+
+.productDetail-div {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  margin-top: 2rem;
+}
+
+.firstDetail {
+  float: left;
+  width: 100%;
+  display: flex;
+  gap: 30px;
+}
+
+.section-product .detail-row span {
+  font-size: 32px;
+}
+
+.detailInput {
+  float: left;
+  width: 100%;
+  border-radius: 6px;
+  height: 40px;
+  padding-left: 10px;
+}
+
+.secondDetail {
+  float: left;
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.inputSection {
+  float: left;
+  width: 100%;
+}
+
+.input-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.inpu-desc {
+  font-size: 12px;
+  font-weight: 500;
+
+  color: honeydew;
+}
+
+.detailInput {
+  float: left;
+  width: 100%;
+  border-radius: 6px;
+  height: 40px;
+  padding-left: 10px;
+}
+
+button#copy_to_clipboard_script_button {
+  background-color: #1c1c1c;
+  color: #dcd3d3;
+}
+
+textarea#embedded_iframe_textarea {
+  background-color: #1c1c1c;
+  color: #dcd3d3;
+  border: none;
+  margin-top: 1rem;
+}
+
+button#copy_to_clipboard_iframe_button {
+  background-color: #1c1c1c;
+  color: #dcd3d3;
+  border: none;
+}
+
+.productButton-div {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5rem;
+}
+
+.productButton-div .submit-button i.bi.bi-plus {
+  font-size: 30px;
+}
+
+.productButton-div .submit-button span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-button {
+  color: white !important;
+  border: none !important;
+  width: 68%;
+
+  height: 50px;
+  font-weight: 600 !important;
+  border-radius: 30px !important;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+}
+
+/* //...........Product Payment Style..........................// */
+.cards-head {
+  float: left;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.productUploadHead .container-fluid {
+  padding-inline: 100px;
+}
+
+.cards-head {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cards-head .card {
+  float: left;
+  width: 22%;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  /* padding: 20px; */
+  background: #101010;
+  color: white !important;
+  margin: 1%;
+  border: 1px solid rgb(144 156 126 / 26%);
+}
+
+.card .dropdown {
+  position: absolute;
+  top: 4%;
+  right: 5.5%;
+}
+
+.card .dropdown-toggle::after {
+  display: none !important;
+}
+
+.card .dropDown-color {
+  background-color: #656262f7;
+  border: none !important;
+  border-radius: unset;
+}
+
+.paymentBtn-sec .btn.addToCart {
+  background: #383838;
+  border: 1px solid #ffffff14 !important;
+  font-size: 15px;
+  box-shadow: inset 0 1px 0 rgb(0 33 9 / 0%), 0 7px 5px rgb(0 0 0 / 17%);
+  font-weight: 600;
+  font-style: revert;
+  text-transform: capitalize;
+  color: #cacaca !important;
+  padding: 7px 70px !important;
+}
+
+.cards-head .card-bodys {
+  padding: 20px;
+  background-color: #212121;
+}
+
+.cards-head .card img {
+  float: left;
+  width: 100%;
+  padding: 20px;
+  height: 375px;
+  object-fit: cover;
+}
+
+.cardFooter-sec {
+  float: left;
+  width: 100%;
+  display: flex;
+  gap: 10%;
+  justify-content: space-between;
+}
+
+.paymentBtn-sec {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.addToCart {
+  float: left;
+  padding: 5px 20px !important;
+  border: 1px solid white !important;
+  color: white !important;
+}
+
+#contactText {
+  width: 100%;
+}
+
+/* //////////////Login Modal///////////////////// */
+
+.LoginModal .modal-dialog {
+  max-width: 1050px !important;
+}
+
+.LoginModal .modal-content {
+  border-radius: unset !important;
+}
+
+.LoginModal .modal-header {
+  border-bottom: none !important;
+  border-radius: unset !important;
+}
+
+.LoginModal .modal-body {
+  display: flex !important;
+  padding: 0px !important;
+  gap: 20px;
+  height: 600px;
+}
+
+#signin-box {
+  width: 100%;
+  background: unset !important;
+  border-radius: unset !important;
+  padding: unset !important;
+  box-shadow: unset !important;
+}
+
+.leftImgSide {
+  float: left;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #101010 !important;
+}
+
+.rightImgSide {
+  float: left;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  color: black !important;
+}
+
+.closeImgSec {
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.closeImgSec img {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+#signin-checkbox a {
+  padding-left: 5px;
+  color: black !important;
+  font-weight: 600;
+}
+
+#signin-form #signin-email {
+  border: 1px solid grey !important;
+}
+
+#signin-box .or {
+  color: black;
+}
+
+.loginModalBtn {
+  color: white !important;
+  border: none !important;
+  padding: 16px 100px !important;
+  border-radius: 30px !important;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  ) !important;
+  outline: none !important;
+  box-sizing: unset !important;
+  margin-bottom: 10px;
+}
+
+.HeadingText {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  padding-left: 30px;
+}
+
+.rightImgSide p {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 30px;
+}
+
+/* #cartTable {
+  background-color: #1a1919 !important;
+  color: white !important;
+}
+#cartTable th {
+  color: #00cd3f !important ;
+  width: 17%;
+  padding: 0.5rem 1.5rem !important;
+}
+#cartTable td {
+  padding: 0.5rem 1.5rem !important;
+  text-align: left !important;
+}
+
+#cartTable td img {
+  width: 70px !important;
+}
+
+#cartTable td h4 {
+  font-size: 22px !important;
+}
+
+.Product-img{display: flex; justify-content:flex-start; gap: 20px; align-items: center;} */
 
 .sidebar::-webkit-scrollbar {
   width: 5px;
@@ -4136,7 +5067,7 @@ div#qrScanner {
     background-color: unset !important;
   }
 
-  .btn-check:focus+.btn,
+  .btn-check:focus + .btn,
   .btn:focus {
     outline: 0;
     box-shadow: none !important;
@@ -4206,6 +5137,12 @@ div#qrScanner {
   }
 }
 
+@media (max-width: 991px) {
+  .productDetail-form {
+    width: 100%;
+  }
+}
+
 @media (max-width: 580px) {
   #toggle-setting {
     float: left;
@@ -4219,7 +5156,7 @@ div#qrScanner {
     flex-wrap: wrap !important;
     display: flex;
     overflow: unset !important;
-    padding: 50px 0;
+    /* padding: 50px 0; */
   }
 
   #home-inner {
@@ -4258,6 +5195,10 @@ div#qrScanner {
     align-items: center;
     /* font-family: Bookman Old Style; */
     min-height: 70vh !important;
+  }
+
+  .productDetail-form {
+    width: 100%;
   }
 }
 
@@ -4360,6 +5301,55 @@ div#qrScanner {
   .nftHeading {
     font-size: 30px !important;
   }
+
+  .firstDetail {
+    flex-direction: column;
+  }
+
+  .secondDetail {
+    flex-direction: column;
+  }
+
+  .productDetail-div {
+    margin-top: 1rem;
+  }
+
+  .productUploadDiv {
+    padding: 0 12px;
+  }
+
+  .HeadingText {
+    padding-left: 0px !important;
+  }
+
+  .rightImgSide p {
+    padding-left: 0px !important;
+  }
+
+  #signin .signin-google,
+  .signin .signin-apple {
+    width: 100%;
+  }
+
+  #signin button {
+    width: 100% !important;
+  }
+
+  #signin-box button {
+    width: 100% !important;
+  }
+
+  #signin-form {
+    width: 100%;
+  }
+
+  .closeImgSec {
+    margin-bottom: 0px !important;
+  }
+
+  .LoginModal .modal-body {
+    height: 480px;
+  }
 }
 
 /* @media (max-width: 375px) {
@@ -4411,7 +5401,7 @@ div#qrScanner {
 }
 
 .input-group {
-  width: 85% !important;
+  width: 100% !important;
 }
 
 .or-text {
@@ -4513,7 +5503,11 @@ div#qrScanner {
   border: none;
   border-radius: 10px;
   padding: 10px 70px !important;
-  background: linear-gradient(180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   height: 45px;
 }
 
@@ -4706,10 +5700,9 @@ form {
 /*-------------------- Responsive css ---------------------*/
 
 @media (max-width: 1566px) {
-
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar ul.navbar-nav {
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 50%;
   }
 
@@ -4717,7 +5710,6 @@ form {
 }
 
 @media (max-width: 1366px) {
-
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar ul.navbar-nav {
     justify-content: space-between;
@@ -4741,7 +5733,6 @@ form {
 }
 
 @media (max-width: 1199px) {
-
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar .nav-link {
     font-size: 16px !important;
@@ -4760,6 +5751,10 @@ form {
   }
 
   /*---------------------- footer ends -----------------*/
+
+  .LoginModal .modal-dialog {
+    max-width: 950px !important;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -4768,7 +5763,6 @@ form {
 }
 
 @media (max-width: 991px) {
-
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar .container-fluid {
     padding: 0 40px !important;
@@ -4835,16 +5829,25 @@ form {
     margin-top: 0px;
   }
 
+  .LoginModal .modal-dialog {
+    max-width: 780px !important;
+  }
 
+  .LoginModal .modal-body {
+    height: 580px;
+  }
 }
 
 @media (max-width: 767px) {
-
   /*---------------- nav bar starts ------------------------*/
   /*------------------ nav bar ends ---------------------------*/
   /*----------------------- login starts ----------------*/
   .login .login-box {
     width: 100%;
+  }
+
+  .not-found {
+    height: 300px;
   }
 
   .login .login-box h4 {
@@ -4858,13 +5861,28 @@ form {
     width: 47%;
     text-decoration: none;
   }
+
+  .leftImgSide {
+    display: none;
+  }
+
+  .rightImgSide {
+    width: 100% !important;
+  }
+
+  .LoginModal .modal-dialog {
+    max-width: 580px !important;
+  }
 }
 
 @media (max-width: 567px) {
-
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar .container-fluid {
     padding: 0 15px !important;
+  }
+
+  .not-found {
+    height: 200px;
   }
 
   /*------------------ nav bar ends ---------------------------*/
@@ -4874,13 +5892,14 @@ form {
   /*---------------------- footer ends -----------------*/
 }
 
-
-
 @media (max-width: 1566px) {
-
   /*---------------- Footer starts ------------------------*/
   .footer .footer-upper {
     margin-bottom: 2rem;
+  }
+
+  .cards-head .card {
+    width: 23%;
   }
 
   .footer::after {
@@ -4906,7 +5925,7 @@ form {
 
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar ul.navbar-nav {
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 50%;
   }
 
@@ -4914,11 +5933,26 @@ form {
 }
 
 @media (max-width: 1366px) {
-
   /*---------------- nav bar starts ------------------------*/
   #payken-navbar ul.navbar-nav {
     justify-content: flex-end !important;
     width: 55%;
+  }
+
+  .qr-code {
+    height: 55vh;
+  }
+
+  .firstDetail {
+    flex-direction: column;
+  }
+
+  .secondDetail {
+    flex-direction: column;
+  }
+
+  .cards-head .card {
+    width: 31%;
   }
 
   #payken-navbar .nav-link {
@@ -4934,14 +5968,35 @@ form {
     width: 20%;
   }
 
+  .addProduct--div {
+    width: 65%;
+  }
+
   /*---------------------- footer ends -----------------*/
 }
 
 @media (max-width: 1199px) {
-
   /*---------------- wallet starts ------------------------*/
-  .Wallet .table>:not(caption)>*>* {
+  .Wallet .table > :not(caption) > * > * {
     padding: 10px 10px 10px 10px !important;
+  }
+
+  .productUploadHead .container-fluid {
+    padding-inline: 50px;
+  }
+
+  section.nanu #home-inner-profile .card-body {
+    width: 65% !important;
+  }
+
+  .make-payment .generate-QR {
+    margin-left: 0;
+  }
+
+  .detail-row6.make-payment {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .Wallet .wallethead-stripped {
@@ -5028,13 +6083,61 @@ form {
   /*---------------------- login ends -----------------*/
 }
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+}
 
 @media (max-width: 991px) {
-
   /*---------------- wallet starts ------------------------*/
   .Wallet .container {
     max-width: 900px;
+  }
+
+  .threeb-one {
+    width: 100%;
+  }
+
+  .secondDetail {
+    margin-top: 20px;
+  }
+
+  #add-btn-sec {
+    margin-top: 44px;
+  }
+
+  .m-3.commission-per {
+    margin: 1rem 1rem 0 0 !important;
+  }
+
+  .wallet-address-sec {
+    width: 100%;
+  }
+
+  .input-form.d-flex.commission-div {
+    flex-direction: column;
+  }
+
+  .dynamic--div span {
+    width: 25%;
+  }
+
+  .percentage-div {
+    width: 50%;
+  }
+
+  .addProduct--div {
+    width: 80%;
+  }
+
+  .section-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards-head .card {
+    width: 48%;
+  }
+
+  .card .dropdown {
+    right: 5%;
   }
 
   /*---------------- wallet starts ------------------------*/
@@ -5176,7 +6279,7 @@ form {
 
   /*----------------------- footer starts ----------------*/
   .footer {
-    background: url(/img/footer-bg.png)no-repeat;
+    background: url(/img/footer-bg.png) no-repeat;
     background-size: cover;
     padding: 50px 0;
     width: 100%;
@@ -5209,10 +6312,68 @@ form {
 }
 
 @media (max-width: 767px) {
-
   /*---------------- wallet starts ------------------------*/
   .Wallet .container {
     max-width: 900px;
+  }
+
+  section.nanu #home-inner-profile .card-body {
+    width: 85% !important;
+  }
+
+  .productUploadHead .container-fluid {
+    padding-inline: 10px;
+  }
+
+  div#NFTSuccess-inner .nft-btnsec button.btn.next-nftbtn {
+    width: 100%;
+  }
+
+  div#NFTAmt-inner .new-dashboard .nft-btnsec button.btn.next-nftbtn {
+    width: 100%;
+  }
+
+  .addProduct--div {
+    width: 100%;
+  }
+
+  .nft-btnsec {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .nft-btnsec a {
+    width: 80%;
+  }
+
+  .nft-btnsec button.btn.back-nftbtn {
+    width: 100%;
+  }
+
+  .nft-btnsec button.btn.next-nftbtn {
+    margin-left: 0;
+    width: 80%;
+    margin-top: 2rem;
+  }
+
+  .productDetail-div {
+    padding: 0px;
+  }
+
+  div#home-inner div#res-top-set {
+    width: 96%;
+    max-width: unset !important;
+  }
+
+  .nft-main--heading {
+    font-size: 22px;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .nftHeadingDiv {
+    flex-direction: column;
   }
 
   .wallet-table {
@@ -5328,18 +6489,133 @@ form {
 }
 
 @media (max-width: 567px) {
-
   /*---------------- wallet starts ------------------------*/
   .Wallet h2 {
     font-size: 25px;
+  }
+
+  .threeb-ones {
+    width: 100% !important;
+    margin-bottom: 5px;
+  }
+
+  h6.fix-div--2 {
+    margin-left: 2rem;
+    display: none;
+  }
+
+  .threeb-two {
+    width: 100% !important;
+    margin-bottom: 5px;
+  }
+
+  #three-input {
+    flex-direction: column;
+  }
+
+  .fix-div h6 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #cdcdcd;
+  }
+
+  section.nanu #home-inner-profile .card-body {
+    width: 100% !important;
+  }
+
+  section.nanu #home-inner-profile .card-body {
+    padding: 0;
+    background-color: black;
+    box-shadow: none !important;
+  }
+
+  section.nanu .card-body h3 {
+    font-size: 26px;
+  }
+
+  #home-inner-profile {
+    padding: 10px 0 !important;
+  }
+
+  #nft-section {
+    padding: 0px;
+  }
+
+  .nft-part {
+    padding: 20px 0;
+  }
+
+  #nft-section {
+    background-color: black;
+  }
+
+  #nft-profile-sec {
+    background-color: unset !important;
+    margin-top: 1rem;
+  }
+
+  .nft-btnsec a {
+    width: 100%;
+  }
+
+  .nft-btnsec button.btn.next-nftbtn {
+    width: 100%;
+  }
+
+  .products-heading {
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .percentage-div {
+    width: 90%;
+  }
+
+  .dynamic--div span {
+    width: 36%;
+  }
+
+  .nft-detail .detail-box .detail-left {
+    width: 95%;
+  }
+
+  .addProduct--div {
+    background: black;
+    padding: 0rem;
+  }
+
+  .productUploadHead {
+    padding: 0px;
+    margin-bottom: 3rem;
+  }
+
+  .upoadproduct-image {
+    height: 200px;
+    width: 100%;
   }
 
   .wallet-back {
     width: 5.5%;
   }
 
+  .cards-head .card {
+    width: 100%;
+  }
+
   .Wallet .wallethead-stripped {
     font-size: 18px;
+  }
+
+  .qr-code .qr-container {
+    padding: 30px 10px;
+  }
+
+  .qr-code {
+    height: 50vh;
+  }
+
+  .qr-code .copy-address {
+    margin-top: 2rem;
   }
 
   /*---------------- wallet starts ------------------------*/
@@ -5415,6 +6691,21 @@ form {
     margin: 1rem 0;
   }
 
+  /* qr design */
+
+  .App.qr-code {
+    margin-top: 1rem !important;
+  }
+
+  .App input.qr-input {
+    padding: 8px 10px;
+  }
+
+  .App select.qr-select {
+    padding: 11px 10px;
+    margin-left: 1rem;
+  }
+
   .signin-form #signin-email {
     font-size: 13px;
   }
@@ -5430,7 +6721,6 @@ form {
       width: 70%;
       margin: 3%;
   } */
-
 
   .sent-box {
     justify-content: center;
@@ -5512,11 +6802,6 @@ form {
 
   .nft-detail .detail-box .detail-right {
     width: 100%;
-  }
-
-  .nft-detail .detail-box .detail-left {
-    width: 75%;
-    float: left;
   }
 
   .detail-row2 {
@@ -5622,6 +6907,47 @@ form {
     width: 100%;
     text-decoration: none;
   }
+}
 
+@media (max-width: 476px) {
+  .qr-code .copy-address {
+    flex-direction: column;
+  }
 
+  .qr-code {
+    height: 62vh;
+  }
+
+  div#NFTPage-inner .new-dashboard section#nft-profile-sec form.funds-sec {
+    padding: 0;
+    margin: 0;
+  }
+
+  .dynamic--div {
+    align-items: unset !important;
+    flex-direction: column;
+  }
+
+  .dynamic--div {
+    margin: 0rem;
+    margin-bottom: 2rem;
+  }
+
+  div#embedded_iframe_div {
+    word-break: break-all;
+  }
+
+  div#embedded_code_div {
+    word-break: break-all;
+  }
+
+  .send-recieve .wallet-table {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .qr-code {
+    height: 80vh;
+  }
 }

@@ -6,8 +6,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { withAuth } from "@/components/Utils/Functions";
 import axios from "axios";
 
-
-
 export default function Step5() {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
@@ -15,6 +13,7 @@ export default function Step5() {
   const [errMsg, setErrMsg] = useState(false);
   const [hash, setHash] = useState();
   const [nftImg, setNftImg] = useState();
+  const [contractId, setContractId] = useState();
   const router = useRouter();
 
   useEffect(() => {
@@ -35,7 +34,10 @@ export default function Step5() {
       let response = await withAuth({ data: data, query: "updatetransaction" });
 
       console.log(response, "res is here");
-      console.log(response?.data?.data?.error?.transactionHash,'transaction hash ')
+      console.log(
+        response?.data?.data?.error?.transactionHash,
+        "transaction hash "
+      );
       const id = response?.data?.data[0]?.tokenId;
       const uri = response?.data?.data[0]?.uri;
       const d = uri?.split("$");
@@ -44,6 +46,7 @@ export default function Step5() {
 
       if (!response?.data?.data?.error) {
         setHash(response?.data?.data[0]?.transactionHash);
+        setContractId(response?.data?.data[0]?.ID);
         const response2 = await axios.post("/api/nftData", {
           data: { id: id, uri: d[0] },
         });
@@ -57,18 +60,13 @@ export default function Step5() {
         setErrMsg(true);
         setOpen(false);
       }
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err, "error");
       setErrMsg(true);
       setOpen(false);
       return;
     }
-
-    
   }
-
-
 
   function backFn(e) {
     e.preventDefault();
@@ -76,10 +74,16 @@ export default function Step5() {
     router.back();
   }
 
+  function nextFn({ e, id }) {
+    e.preventDefault();
+
+    router.push("/nft/nftDetails/" + id);
+  }
+
   return (
     <div>
       <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
       >
         <CircularProgress color="inherit" />
@@ -94,7 +98,7 @@ export default function Step5() {
               centered
             >
               <div className="modal-content">
-                <i onClick={backFn} class="bi bi-x cross"></i>
+                <i onClick={backFn} className="bi bi-x cross"></i>
                 {!errMsg ? (
                   <div className="modal-body" id="purchasenft-body">
                     <div className="purchasenft-head">
@@ -113,7 +117,12 @@ export default function Step5() {
                         <a href={hash}>{hash}</a>
                       </span>
                     </div>
-                    <button className="view">View your NFT now</button>
+                    <button
+                      onClick={(e) => nextFn({ e, id: contractId })}
+                      className="view"
+                    >
+                      View your NFT now
+                    </button>
                   </div>
                 ) : (
                   <div className="Failed-modal">

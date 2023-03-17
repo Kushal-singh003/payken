@@ -71,7 +71,7 @@ export default function CheckoutForm({ customer }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://payken-demo.vercel.app/payment/step5",
+        return_url: `http://52.9.60.249:3000//payment/step5`,
       },
     });
     console.log(error, "payment error");
@@ -239,10 +239,6 @@ export default function CheckoutForm({ customer }) {
 
   return (
     <>
-
-      
-    
-
       <div className="link-pay">
         {paymentRequest ? (
           <PaymentRequestButtonElement

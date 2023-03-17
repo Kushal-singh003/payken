@@ -8,8 +8,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 export default function Wallet() {
   const [address, setAddress] = useState();
   const [coinsData, setCoinsData] = useState();
+  const [lengthOfData, setLengthOfData] = useState(null);
   const [open, setOpen] = useState(false);
-
 
   async function getAddress(token) {
     try {
@@ -22,11 +22,11 @@ export default function Wallet() {
       );
       console.log(response2, "response2");
       setCoinsData(response2?.data?.data?.items);
-      setOpen(false)
-
+      setLengthOfData(response2?.data?.data?.items?.length);
+      setOpen(false);
     } catch (error) {
       console.log(error);
-      setOpen(false)
+      setOpen(false);
     }
   }
 
@@ -41,18 +41,18 @@ export default function Wallet() {
   }
 
   useEffect(() => {
-    setOpen(true)
+    setOpen(true);
     getSession();
   }, []);
   return (
     <div>
       <section className="Wallet">
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+        <Backdrop
+          sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
         <div className="container">
           <h2>Wallet</h2>
           <div className="wallet-table">
@@ -91,9 +91,8 @@ export default function Wallet() {
                             <span>Amount</span>
                             <span>
                               <strong>
-                               
-                                {item.balance / Math.pow(10, item.contract_decimals)}
-                               
+                                {item.balance /
+                                  Math.pow(10, item.contract_decimals)}
                               </strong>
                             </span>
                           </div>
@@ -400,6 +399,12 @@ export default function Wallet() {
                 </tr> */}
               </tbody>
             </table>
+            {lengthOfData == null || lengthOfData == 0 ? (
+              <div className="not-found">
+                <span>Not Found</span>
+              </div>
+            ) : null}
+            <div></div>
           </div>
         </div>
       </section>

@@ -11,21 +11,22 @@ export default function Login() {
         password:'',
     })
     const router = useRouter();
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
 
     async function signInWithGoogle(e) {
         e.preventDefault();
-        setLoading(true)
+        setIsLoading(true)
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: "google",
         });
     
         if (data) {
           console.log(data);
-          setLoading(false)
+          setIsLoading(false)
         } else {
           console.log(error);
-          setLoading(false)
+          setIsLoading(false)
          
         }
       }
@@ -59,11 +60,11 @@ export default function Login() {
           <h4>Don't swap just Payken</h4>
           <div className="signin-box">
             <img src="/img/payken.png" alt="" />
-            <button disabled={loading} onClick={(e)=> signInWithGoogle(e)} className="signin-google">
+            <button disabled={isLoading} onClick={(e)=> signInWithGoogle(e)} className="signin-google">
               <span>
                 <img src="/img/google (2).png" alt="" />
               </span>
-              <span> { loading ? 'Loading..' : 'Sign In With Google' }</span>
+              <span> { isLoading ? 'Loading..' : 'Sign In With Google' }</span>
             </button>
             <Link href="" className="signin-apple">
               <span>

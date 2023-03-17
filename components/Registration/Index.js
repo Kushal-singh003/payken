@@ -8,7 +8,8 @@ import Link from "next/link";
 
 
 export default function Registration() {
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -36,21 +37,23 @@ export default function Registration() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
 
     console.log(formData);
     try {
       const { data, error } = await supabase.auth.signInWithOtp({ email: formData?.email,
         options: {
-         name: formData?.name
-        } });
+          data: {
+          name: formData?.name,
+        
+          } }});
       console.log(data, 'data');
 
       console.log(error, 'error');
       toast.success("A Confirmation Link is sent to your email to continue");
-      setIsLoading(false);
+      setLoading(false);
     } catch (error) {
-      setIsLoading(false)
+      setLoading(false)
       toast.error(error.error_description || error.message);
     }
   };
@@ -64,11 +67,11 @@ export default function Registration() {
           <h2>Member Sign up</h2>
           <div className="signup-box">
             <img src="/img/payken.png" alt="" />
-            <button disabled={loading} onClick={(e) => signInWithGoogle(e)} className="signup-google">
+            <button disabled={isLoading} onClick={(e) => signInWithGoogle(e)} className="signup-google">
               <span>
                 <img src="/img/google (2).png" alt="" />
               </span>
-              <span> {loading ? 'Loading...' : 'Sign In With Google'}</span>
+              <span> {isLoading ? 'Loading...' : 'Sign In With Google'}</span>
             </button>
             <Link href="" className="signup-apple">
               <span>

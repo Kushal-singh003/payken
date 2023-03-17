@@ -11,6 +11,7 @@ export default function SendReceive() {
   const [open, setOpen] = useState(false);
   const [showText, setShowText] = useState(false);
   const [transactionHistory, setTransactionHistory] = useState();
+  const [lengthOfData,setLengthOfData] = useState(null);
 
   async function getAddress(token) {
     try {
@@ -22,6 +23,7 @@ export default function SendReceive() {
         `https://api.covalenthq.com/v1/80001/address/${response?.data?.data[0]?.address}/transactions_v2/?key=ckey_1da37247acc240e6aaace13ffcc`
       );
       setTransactionHistory(response2?.data?.data?.items);
+      setLengthOfData(response2?.data?.data?.items?.length);
       console.log(response2, "response2");
       setOpen(false);
     } catch (error) {
@@ -61,15 +63,18 @@ export default function SendReceive() {
   return (
     <div className="send-recieve">
       <div className="qr-code">
-        <Backdrop open={open}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
+      <Backdrop
+        sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
         <div className="qr-container">
-          <QRCode size={250} value={address} />
+          <QRCode size={250} style={{border:'1px solid'}} value={address} />
           <div className="copy-address">
             <span className="qr-text"> {address}</span>
-            <img  className="copy-icon" onClick={copyTextFn} src="/img/copy-icon.png" />
-            {showText ? <p>Text Copied!</p> : null}
+            <img  className="copy-icon" onClick={copyTextFn} src="/img/copy.png" />
+            {showText ? <p style={{color:'green'}}>Text Copied!</p> : null}
           </div>
         </div>
       </div>
@@ -409,7 +414,14 @@ export default function SendReceive() {
             </td>
           </tr> */}
           </tbody>
+          
         </table>
+        {lengthOfData == null || lengthOfData == 0 ? 
+        <div className="not-found">
+          <span>Not Found</span>
+        </div>
+        :
+        null}
       </div>
     </div>
   );

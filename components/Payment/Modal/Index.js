@@ -7,10 +7,17 @@ import Modal from "react-bootstrap/Modal";
 import NavBar from "@/components/ui/NavBar";
 import Footer from "@/components/ui/Footer";
 import { useRouter } from "next/router";
+import supabase from "@/components/Utils/SupabaseClient";
+import { withAuth } from "@/components/Utils/Functions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const stripe = require("stripe")(
+  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+);
 
 export default function Index({ props, price }) {
   const [show, setShow] = useState(false);
-  const [show0, setShow0] = useState(true);
+  const [show0, setShow0] = useState(false);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
@@ -26,21 +33,102 @@ export default function Index({ props, price }) {
     country: "",
   });
 
-
   useEffect(() => {
     setShow(true);
+    getSession();
   }, []);
-  
 
-  function backFn(e){
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) {
+      setShow0(true);
+      return;
+    }
+
+    const email = session?.user?.email;
+    const name = session?.user?.user_metadata?.name;
+    const address = session?.user?.user_metadata?.address;
+    const city = session?.user?.user_metadata?.city;
+    const country = session?.user?.user_metadata?.country;
+    setFormData({
+      ...formData,
+      name: name,
+      address: address,
+      city: city,
+      country: country,
+      email: email,
+    });
+    localStorage.setItem("buyerEmail", email);
+    getCustomerFn(email);
+  }
+
+  async function getCustomerFn(email, name, address, city, country) {
+    // try {
+    const response = await withAuth({
+      data: { email: email },
+      query: "registerwithemail",
+    });
+    const cusId = response?.data?.data?.cId;
+    console.log(response, cusId, "cusId response");
+
+    if (cusId) {
+      setCustomer(cusId);
+      setShow0(false);
+      setShow1(false);
+      setShow2(true);
+      // setShow3(true)
+      return;
+    }
+
+    if (!cusId || cusId == "" || cusId == "undefined") {
+      const cid = await stripe.customers.create({
+        address: {
+          city: city,
+          country: country,
+          line1: address,
+        },
+        email: email,
+        name: name,
+      });
+
+      const createCid = cid?.id;
+      console.log(createCid, "cid");
+      setCustomer(createCid);
+      const response2 = await withAuth({
+        data: { email: formData?.email, cId: createCid },
+        query: "updatecid",
+      });
+      console.log(response2, "response2");
+
+      if (!response2?.Error) {
+        setShow0(false);
+        setShow1(false);
+        setShow2(true);
+        // setShow3(true)
+      }
+
+      if (response2?.Error) {
+        toast.error("Something went wrong! Please try again");
+      }
+    }
+
+    // } catch (error) {
+    //   toast.error('Something went wrong! Please try again')
+    // }
+  }
+
+  function backFn(e) {
     e.preventDefault();
-    
+
     router.back();
-   }
+  }
 
   return (
     <div>
-      <NavBar/>
+      <NavBar />
+      <ToastContainer />
       <section className="signup">
         <div className="container">
           <Modal
@@ -50,7 +138,7 @@ export default function Index({ props, price }) {
           >
             <div className="modal-content">
               <div className="modal-body" id="payken-body">
-              <i onClick={backFn} class="bi bi-x cross"></i>
+                <i onClick={backFn} className="bi bi-x cross"></i>
                 <ul
                   className="nav nav-pills mb-3"
                   id="pills-tab"
@@ -183,7 +271,7 @@ export default function Index({ props, price }) {
           </Modal>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

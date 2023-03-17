@@ -167,7 +167,8 @@ const FunctionValues = () => {
 
                        <div className="fix-div">
                               <h6>Parameter</h6>
-                              <h6>Value</h6>
+                              <h6 className="fix-div--2">Value</h6>
+
 
                             </div>
                       
@@ -191,7 +192,7 @@ const FunctionValues = () => {
 
                          {showValues ? null :
                             <div className="threeb-two">
-                              {/* <h6>Value</h6> */}
+                              
                               <select
                                 onChange={(e) =>
                                   parameterFn({
@@ -248,7 +249,6 @@ const FunctionValues = () => {
                               </select>
                             </div>
                       }
-                            <div className="threeb-two"></div>
                           </div>
                               
                         );

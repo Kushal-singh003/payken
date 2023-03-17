@@ -120,7 +120,7 @@ const AddContract = () => {
                         {" "}
                         What's your smart contract address?
                       </h4>
-                      <p className="nft-para">
+                      <p className="nft-para" id="contactText">
                         Your contract must implement at least one payable
                         function which mints NFTs, and which takes a quantity
                         parameter. Other parameters are permitted. <br />

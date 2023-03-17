@@ -5,9 +5,10 @@ import supabase from "@/components/Utils/SupabaseClient";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Cagliostro } from "@next/font/google";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-
-let list3 =[];
+let list3 = [];
 
 export default function Step3({
   setShow2,
@@ -31,7 +32,7 @@ export default function Step3({
   });
   const [newValue, setNewValue] = useState([]);
   const [routerQuery, setRouterQuery] = useState();
-  const [price,setPrice] = useState(null);
+  const [price, setPrice] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -68,22 +69,36 @@ export default function Step3({
         nftPrice: response.data.data.nftPrice,
       });
 
-      console.log(v,'vvvvvvvvvvvvvvvvvvvvvvvvvvv');
-      const a = JSON.parse(router?.query?.parameters)
+      console.log(v, "vvvvvvvvvvvvvvvvvvvvvvvvvvv");
+      const a = JSON.parse(router?.query?.parameters);
 
-      v?.map((item,idx)=>{
-        for (let i = 0; i < a.length ; i++) {
-          if(item?.name === a[i]?.name ){
-            const updatedValues = [...formValues];
-            updatedValues[idx] = a[i]?.value;
-            setFormValues(updatedValues);
+      v?.map((item, idx) => {
+        if(item?.value == '1'){
+        //  console.log(item.vlaue,'value of item')
+        //  const g = [...formValues];
+        //  g[idx] = 1;
+        //  console.log(g,'g')
+         list3[idx]= 1;
+        //  setFormValues(g);
+         return;
+       }
+
+   })
+
+      v?.map((item, idx) => {
+        for (let i = 0; i < a.length; i++) {
+          if (item?.name === a[i]?.name) {
+            // const updatedValues = [...formValues];
+            // updatedValues[idx] = a[i]?.value;
+            // list3.push(updatedValues)
+            list3[idx] = a[i]?.value;
+            // setFormValues(updatedValues);
           }
-  
         }
-        
-      })
+      });
 
-      
+      setFormValues(list3)
+      console.log(list3,'list3')
 
 
     } catch (error) {}
@@ -96,15 +111,14 @@ export default function Step3({
     );
 
     const a = JSON.parse(router?.query?.parameters);
-    const b = router?.query?.price
+    const b = router?.query?.price;
 
-    if(b){
-      setPrice(b)
+    if (b) {
+      setPrice(b);
     }
-    
+
     setRouterQuery(a);
   }, [router.query]);
-
 
   let handleChange = (idx, e) => {
     const updatedValues = [...formValues];
@@ -167,6 +181,18 @@ export default function Step3({
 
   async function createPaymentIntent() {
     setLoading(true);
+    console.log(formValues,'form')
+
+    for (let i = 0; i < data?.length; i++) {
+      if(!formValues[i]){
+        toast.error('Please provide all credentials!')
+        setLoading(false)
+        return;
+      }
+
+    }
+
+   
 
     let req = await axios.post("/api/create-payment-intent", {
       amount: price ? price * count : nftDetails?.nftPrice * count,
@@ -193,10 +219,11 @@ export default function Step3({
     setShow1(false);
   }
 
-  console.log(formValues,'fomrdjfkjk');
+  console.log(formValues, "fomrdjfkjk");
 
   return (
     <div>
+      <ToastContainer/>
       <div className="purchase-nft">
         <h3>Purchase</h3>
         <h4>Purchase your NFT with Payken</h4>
@@ -263,7 +290,6 @@ export default function Step3({
                   <p className="super-dope">{item.name}</p>
                 </div>
               ) : null} */}
-
             </>
           );
         })}
@@ -294,7 +320,9 @@ export default function Step3({
         </div>
         <button onClick={createPaymentIntent} className="card-continue">
           {" "}
-          {loading ? "Loading..." : `Pay ${price ? price * count : nftDetails?.nftPrice * count}`}
+          {loading
+            ? "Loading..."
+            : `Pay ${price ? price * count : nftDetails?.nftPrice * count}`}
         </button>
       </div>
     </div>

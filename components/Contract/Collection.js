@@ -6,10 +6,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import supabase from "../Utils/SupabaseClient";
 import { withToken } from "../Utils/Functions";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import { MerchantApi } from "../Utils/Functions";
+import { Modal } from "@nextui-org/react";
 
 const Collection = () => {
   const router = useRouter();
   const [collection, setCollection] = useState(null);
+  const [lengthOfData, setLengthOfData] = useState(null);
+  const [token, setToken] = useState();
+  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = React.useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [id, setId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(0);
 
   async function getAvatar() {
     const {
@@ -20,13 +32,14 @@ const Collection = () => {
       "to get the session from supabase to upload the Avatar"
     );
     // setEmail(session?.user?.email)
+    setToken(session?.access_token);
     getFinalData(session?.access_token);
   }
 
   useEffect(() => {
-    // console.log(session)
+    setOpen(true);
     getAvatar();
-  }, []);
+  }, [added]);
 
   async function formSubmitHandler(event) {
     event.preventDefault();
@@ -54,15 +67,70 @@ const Collection = () => {
       console.log(res, "to get the response 1");
       const response = res.data.result;
       setCollection(response);
+      setLengthOfData(response?.length);
       console.log(response, "to get the response from api to get Final Data");
+      setOpen(false);
     } catch (err) {
       console.log(err);
+      setOpen(false);
     }
+  }
+
+  async function deleteCollectionFn(e) {
+    e.preventDefault();
+    setLoading(true);
+    const response = await MerchantApi({
+      data: { id: id },
+      token: token,
+      query: "deletepg",
+    });
+    console.log(response, "deletePg");
+    setLoading(false);
+    if (!response?.Error) {
+      console.log("delete");
+      setVisible(false);
+      setAdded(added + 1);
+      toast.success("Deleted successfully!");
+    }
+
+    if (response?.Error) {
+      console.log("error");
+      toast.error("Failed to delete! Please try again");
+    }
+  }
+
+  const closeHandler = () => {
+    setVisible(false);
+    console.log("closed");
+  };
+
+  const closeHandler2 = () => {
+    setVisible2(false);
+    console.log("closed");
+  };
+
+  async function handleDeleteFn({ e, id }) {
+    e.preventDefault();
+    setId(id);
+    setVisible(true);
+  }
+
+  function modalFn2(e) {
+    e.preventDefault();
+
+    setVisible2(true);
   }
 
   return (
     <div id="home-inner" className="profile-sects">
       <div className="container" id="res-top-set">
+        <Backdrop
+          sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        <ToastContainer />
         {/* <SideBar /> */}
         <h1 className="nft-main--heading">NFT-PAY</h1>
         <div className="nftHeadingDiv">
@@ -109,12 +177,19 @@ const Collection = () => {
 
                   <button
                     value={item.id}
-                    onClick={(e) => onClickHandler(e)}
+                    onClick={
+                      item.adminApproved == 0
+                        ? (e) => modalFn2(e)
+                        : (e) => onClickHandler(e)
+                    }
                     className="inner-btn mb-3"
                   >
-                    In Review
+                    {item.adminApproved == 0 ? "In Review" : "Use Contract"}
                   </button>
-                  <span className="delete-span">
+                  <span
+                    onClick={(e) => handleDeleteFn({ e, id: item.id })}
+                    className="delete-span"
+                  >
                     <svg
                       id="delete-icon"
                       xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +197,7 @@ const Collection = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      class="w-6 h-6 mb-3"
+                      className="w-6 h-6 mb-3"
                     >
                       <path
                         strokeLinecap="round"
@@ -136,6 +211,54 @@ const Collection = () => {
             </div>
           ))}
         </div>
+
+        {lengthOfData == null || lengthOfData == 0 ? (
+          <div className="not-found">
+            <span>Not Found</span>
+          </div>
+        ) : null}
+
+        <Modal
+          closeButton
+          aria-labelledby="modal-title"
+          open={visible}
+          onClose={closeHandler}
+        >
+          <Modal.Body>
+            <div className="merchant-pop">
+              <p>Do you want to delete this Contract?</p>
+              <div className="merchant-btn">
+                <button onClick={(e) => deleteCollectionFn(e)}>
+                  {loading ? "Loading..." : "Delete"}
+                </button>
+                <button onClick={closeHandler}>Cancel</button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          closeButton
+          aria-labelledby="modal-title"
+          open={visible2}
+          onClose={closeHandler2}
+        >
+          <Modal.Body>
+            <div className="merchant-pop pop2">
+              <h3>Admin approval pending</h3>
+              <p>
+                {" "}
+                Your Contract is under verification process . After verification
+                you are able to access this contract.
+              </p>
+              <div className="merchant-btn">
+                <button type="button" onClick={closeHandler2}>
+                  Alright!
+                </button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

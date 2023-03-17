@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "react-bootstrap/Button";
 import { useRouter } from "next/router";
 // import SideBar from "../SideBar";
@@ -38,7 +39,7 @@ const UpdateProfile = () => {
     setToken(session?.access_token)
     setEmail(session?.user?.email);
     setNewEmail(session?.user?.new_email)
-    setFirstName(session?.user?.user_metadata?.full_name);
+    setFirstName(session?.user?.user_metadata?.name);
     setLastName(session?.user?.user_metadata?.last_name);
     setAddress(session?.user?.user_metadata?.address);
     setCity(session?.user?.user_metadata?.city);
@@ -68,11 +69,16 @@ const UpdateProfile = () => {
       },
     });
     if (data) {
-      console.log(data, "to check the data to change the user profile");
-      window.location="/dashboard";
+
+      setTimeout(()=>{
+        toast.success('Profile updated successfully!')
+        router.push('/')
+      },[1000])
+     
     }
     if (error) {
       console.log(error);
+      toast.error('Something went wrong! Please try again')
       setIsLoading(false);
     }
   }
@@ -249,7 +255,7 @@ const UpdateProfile = () => {
                         disabled={isLoading}
                         onClick={(e) => updateUserProfile(e)}
                       >
-                        {isLoading ? "Loading…" : "Update Profile"}
+                        {isLoading ? "Loading…" : "Update "}
                       </Button>
                       </div>
                     </form>

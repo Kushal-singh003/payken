@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import Link from "next/link";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -7,11 +7,15 @@ import supabase from "../Utils/SupabaseClient";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import axios from "axios";
 
-export default function NftDetail() {
+export default function NftDetail({props}) {
   const [open,setOpen] = useState(false)
   const [data,setData] = useState();
+  const dataFetchedRef = useRef(false);
   const router = useRouter();
+
+  console.log(props,'props')
 
 
   async function getSession() {
@@ -22,59 +26,86 @@ export default function NftDetail() {
       session,
       "to get the session from supabase to upload the Avatar"
     );
-
-    // updateTransaction(session?.access_token)
+    const token= session?.access_token;
+    getContractFn(token)
     
   }
 
   useEffect(() => {
-    // setOpen(true)
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    setOpen(true)
     getSession();
-  }, [router.query]);
+  }, []);
 
-  // async function updateTransaction(token){
-  //   const data = {
-  //     clientSecret:router.query.payment_intent,
-  //   }
-  //   try{
-  //     let res = await withToken({token:token,data:data,query:'updatetransaction'})
-  //     const response = res.data;
-  //     console.log(response,"update trasactiion")
-  //     setData(response.data.data.data)
-  //     setOpen(false)
-  //   }catch(err){
-  //     console.log(err)
-  //     toast.error('Trasaction Failed !Please try again')
-  //     setOpen(false)
-  //     return
-  //   }
-  // }
+  async function getContractFn(token){
+    const response = await withToken({token:token,query:'getusernftbyid',data:{id:props}})
+    console.log(response,'getpg')
+    const newResponse = response?.data?.data;
+
+    if(!response?.Error){
+      const id = newResponse[0].tokenId;
+          const uri = newResponse[0].uri;
+          const d = uri?.split("$");
+
+          const response2 = await axios.post("/api/nftData", {
+            data: { id: id, uri: d[0] },
+          });
+
+          console.log(response2?.data?.data,'resjjj')
+          let newValue = response2?.data?.data;
+          newValue.amount = newResponse[0].amount;
+          newValue.address = newResponse[0].address;
+          newValue.chain = newResponse[0].network;
+          newValue.tokenId = newResponse[0].tokenId;
+          newValue.quantity = newResponse[0].quantity;
+          newValue.transactionHash = newResponse[0].transactionHash;
+
+          setData(newValue)
+          setOpen(false)
+
+  }
+
+  if(response?.Error){
+    toast.error('Something went wrong! Please try again')
+    setOpen(false);
+  }
+
+    
+  }
+
+  console.log(data,'data  ')
+
+  
 
   return (
     <div>
       <section className="nft-detail">
-      {/* <Backdrop  open={open}>
+      <Backdrop
+        sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
         <CircularProgress color="inherit" />
-      </Backdrop> */}
+      </Backdrop>
       <ToastContainer/>
         <div className="container">
           <h2> NFT's Details</h2>
           <div className="detail-box">
             <div className="detail-left">
-              <img src="/img/Mask Group -1.png" alt="" />
+              <img src={data?.image || "/img/Mask Group -1.png"} alt="" />
             </div>
             <div className="detail-right">
               <div className="detail-row">
-                <h6>SuperDope #800</h6>
+                <h6>{data?.name}</h6>
                 <span>
-                  SuperDope <img src="/img/ethereum.png" alt="" />
+                {data?.amount} MATIC
                 </span>
               </div>
               <p className="super-dope">
-                SuperDope is a demo NFT project by Payken
+               {data?.descritpion}
               </p>
               <div className="accordion" id="accordionPanelsStayOpenExample">
-                <div className="accordion-item">
+                {/* <div className="accordion-item">
                   <h2
                     className="accordion-header"
                     id="panelsStayOpen-headingOne"
@@ -107,7 +138,7 @@ export default function NftDetail() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="accordion-item">
                   <h2
                     className="accordion-header"
@@ -127,7 +158,7 @@ export default function NftDetail() {
                   </h2>
                   <div
                     id="panelsStayOpen-collapseTwo"
-                    className="accordion-collapse collapse"
+                    className="accordion-collapse "
                     aria-labelledby="panelsStayOpen-headingTwo"
                   >
                     <div className="accordion-body">
@@ -135,19 +166,22 @@ export default function NftDetail() {
                         <div className="mint">
                           <ul>
                             <li>Mint Address</li>
+                            <li> Price</li>
                             <li>Token ID</li>
-                            <li>Token Standard</li>
                             <li>Blockchain</li>
-                            <li>Supply</li>
+                            <li>Quantity</li>
+                            <li> Status</li>
+                           
                           </ul>
                         </div>
                         <div className="address">
                           <ul>
-                            <li>F63f9C624AF0E1Dd25e790Be8Ed23ac</li>
-                            <li>1</li>
-                            <li>ERC-1155</li>
-                            <li>Polygon</li>
-                            <li>77</li>
+                            <li>{data?.address}</li>
+                            <li>{data?.amount}</li>
+                            <li>{data?.tokenId}</li>
+                            <li>{data?.chain}</li>
+                            <li>{data?.quantity}</li>
+                            <li style={{wordBreak:'break-all'}}>{data?.transactionHash}</li>
                           </ul>
                         </div>
                       </div>

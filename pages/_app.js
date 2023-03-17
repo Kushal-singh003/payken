@@ -5,7 +5,7 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useState } from 'react';
 import {SSRProvider} from '@react-aria/ssr'; 
-
+import ConfigProvider from '@/components/ui/UseContextHook';
 
 export default function App({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient())
@@ -15,7 +15,9 @@ export default function App({ Component, pageProps }) {
       <SessionContextProvider
         supabaseClient={supabaseClient}
         initialSession={pageProps.initialSession} >
+          <ConfigProvider>
         <Component {...pageProps} />
+        </ConfigProvider>
         <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
@@ -28,6 +30,9 @@ export default function App({ Component, pageProps }) {
     <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
         crossorigin="anonymous"></Script>
+
+{/* <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'/>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'/> */}
 
       </SessionContextProvider>
       </SSRProvider>
