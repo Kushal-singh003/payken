@@ -20,6 +20,7 @@ export default function Step2({ clientSecret }) {
 
   return (
     <div className="pay">
+      
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           

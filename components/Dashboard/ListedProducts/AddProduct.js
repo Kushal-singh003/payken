@@ -23,12 +23,16 @@ export default function AddProduct() {
     image: "",
     description: "",
     link: "",
+    dynamicPrice: false,
+    dynamicQuantity: false,
   });
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState();
   const router = useRouter();
   const [loader, setLoader] = useState(false);
+  const [priceType, setPriceType] = useState(false);
+  const [quantityType, setQuantityType] = useState(false)
   const [inputFields, setInputFields] = useState([
     { address: "", percentage: "" },
     { address: "", percentage: "" },
@@ -178,6 +182,8 @@ export default function AddProduct() {
       commision: commission ? commission : [],
       cAddress: cAddress ? cAddress : [],
       image: productInfo?.image,
+      dynamicPrice:productInfo?.dynamicPrice,
+      dynamicQuantity:productInfo?.dynamicQuantity,
     };
 
     console.log(data, "data");
@@ -202,6 +208,19 @@ export default function AddProduct() {
     }
   }
   console.log(productInfo, "productInfo");
+
+  function handleDynamicPriceFn(e){
+    setPriceType(e.target.checked)
+    setProductInfo({...productInfo,dynamicPrice:e.target.checked})
+    
+  }
+
+  function handleDynamicQuantityFn(e){
+    setQuantityType(e.target.checked)
+    setProductInfo({...productInfo,dynamicQuantity:e.target.checked})
+  }
+
+  
 
   return (
     <div className="productUploadHead">
@@ -265,10 +284,10 @@ export default function AddProduct() {
                 />
               </div>
               <div className="inputSection">
-                <h4 className="input-title">Link</h4>
+                <h4 className="input-title">Link<span className="inpu-desc">(optional)</span></h4>
                 <input
                   className="detailInput"
-                  required
+
                   defaultValue={products?.link}
                   onChange={(e) =>
                     setProductInfo({ ...productInfo, link: e.target.value })
@@ -279,37 +298,103 @@ export default function AddProduct() {
               </div>
             </div>
             <div className="secondDetail">
-              <div className="inputSection">
-                <h4 className="input-title">
-                  Price <span className="inpu-desc">(In USD)</span>
-                </h4>
 
-                <input
-                  className="detailInput"
-                  defaultValue={products?.price}
-                  onChange={(e) =>
-                    setProductInfo({ ...productInfo, price: e.target.value })
-                  }
-                  type="number"
-                  step={"0.001"}
-                  placeholder=" Price"
-                  required
-                />
+              <div className="dynamic-div">
+             
+             
+                <div className="inputSection dynamic-price">
+                  <h4 className="input-title">
+                    Price <span className="inpu-desc">(In USD)</span>
+                  </h4>
+
+                  <input
+                    className="detailInput"
+                    defaultValue={products?.price}
+                    disabled={ priceType == '1' ? true : false}
+                    onChange={(e) =>
+                      setProductInfo({ ...productInfo, price: e.target.value })
+                    }
+                    type="number"
+                    step={"0.001"}
+                    placeholder=" Price"
+                    required
+                  />
+                </div>
+               
+
+                 <div className="inputSection dynamic-toggle">
+                <h4 className="input-title">
+                  {/* Price <span className="inpu-desc">(In USD)</span> */}
+                  Dynamic Price
+                </h4>
+                {/* <select onChange={(e)=> setPriceType(e.target.value)} defaultValue='0' className="detailInput">
+                <option value='0' disabled>--select--</option>
+                  <option value='1'>Set a fix price</option>
+                  <option value='2'>Set a dynamic price</option>
+                </select> */}
+
+                <div className="form-check form-switch">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckChecked"
+                    onChange={(e) => handleDynamicPriceFn(e)}
+                  />
+
+                </div>
+
+
               </div>
-              <div className="inputSection">
-                <h4 className="input-title">Total Quantity</h4>
-                <input
-                  className="detailInput"
-                  type="number"
-                  required
-                  defaultValue={products?.description}
-                  onChange={(e) =>
-                    setProductInfo({ ...productInfo, quantity: e.target.value })
-                  }
-                  placeholder=" Quantity"
-                />
+
+
               </div>
+              </div>
+
+              <div className="secondDetail">
+                <div className="dynamic-div">
+                <div className="inputSection dynamic-price">
+                  <h4 className="input-title">Total Quantity</h4>
+                  <input
+                    className="detailInput"
+                    type="number"
+                    required
+                    disabled={ quantityType == '1' ? true : false}
+                    defaultValue={products?.description}
+                    onChange={(e) =>
+                      setProductInfo({ ...productInfo, quantity: e.target.value })
+                    }
+                    placeholder=" Quantity"
+                  />
+                </div>
+              
+                  <div className="inputSection dynamic-toggle">
+                <h4 className="input-title">
+                  Infinite Quantity
+                </h4>
+                {/* <select onChange={(e)=> setQuantityType(e.target.value)} defaultValue='0' className="detailInput">
+                <option value='0' disabled>--select--</option>
+                  <option value='1'>Set a fix Quantity</option>
+                  <option value='2'>Set a dynamic Quantity</option>
+                </select> */}
+
+                <div className="form-check form-switch">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckChecked"
+                    onChange={(e) => handleDynamicQuantityFn(e)}
+                  />
+
+                </div>
+
+                {/* <label className="form-check-label" for="flexSwitchCheckChecked">
+            Checked switch checkbox input
+          </label> */}
+              </div>
+              </div>
+
             </div>
+            
             <div className="secondDetail">
               <div className="inputSection">
                 <IncrementalAddressFields
@@ -329,12 +414,11 @@ export default function AddProduct() {
             </div>
             <div className="secondDetail">
               <div className="inputSection">
-                <h4 className="input-title">Description</h4>
+                <h4 className="input-title">Description<span className="inpu-desc">(optional)</span></h4>
                 <textarea
                   className="detailInput"
                   style={{ height: "100px" }}
                   rows="4"
-                  required
                   defaultValue={products?.price}
                   onChange={(e) =>
                     setProductInfo({

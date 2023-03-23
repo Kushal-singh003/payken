@@ -109,9 +109,6 @@ export default function Nft() {
     setLengthOfData(filteredData?.length)
   }
 
-
-
-
 async function sortFn(){
   if (order === "ASC") {
     const sorted = data?.sort((a, b) =>
@@ -145,9 +142,6 @@ async function sortDSCFn(e){
   sortFn()
 
 }
-
-
-
 
 function nextFn({e,id}){
   e.preventDefault();
@@ -228,8 +222,15 @@ function nextFn({e,id}){
 
             })}
 
-            {lengthOfData == null || lengthOfData == 0 ?
-              <div className="not-found"><span>Not Found</span></div> : null}
+            
+			  {lengthOfData == 0 ? <div className="not-found">
+				<span>Not found</span>
+			  </div>
+			  : null}
+
+			  {lengthOfData == null ? <div className="loading-div">
+				<span></span>
+			  </div>:null}
 
             {/* <div className="nftcard">
               <img src="img/Mask Group -2.png" alt="" />

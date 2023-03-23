@@ -7,6 +7,8 @@ import { withToken } from "../Utils/Functions";
 import supabase from "../Utils/SupabaseClient";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import BottomNav from "../ui/BottomNav";
+import MobileLogo from "../ui/MobileLogo";
 
 export default function Dashboard() {
   const [visible, setVisible] = React.useState(false);
@@ -89,6 +91,7 @@ export default function Dashboard() {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <MobileLogo />
       <section className="sent">
         <div className="container">
           <h2>
@@ -263,6 +266,8 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
+
+        <BottomNav/>
       <Footer />
     </div>
   );

@@ -11,6 +11,8 @@ import { MerchantApi } from "@/components/Utils/Functions";
 import QRCode from "qrcode.react";
 import { Modal } from "@nextui-org/react";
 import dynamic from "next/dynamic";
+import { withAuth } from "@/components/Utils/Functions";
+import LoginModal from "@/components/ui/LoginModal";
 
 const DynamicQRCode = dynamic(() => import("@/components/Utils/QR"), {
   ssr: false,
@@ -21,6 +23,8 @@ export default function NftDetail({ props }) {
   const [productData, setProductData] = useState();
   const [address, setAddress] = useState();
   const [visible, setVisible] = React.useState(false);
+  const [session,setSession] = useState(null)
+  const [showModal,setShowModal] = useState(false)
   const router = useRouter();
 
   console.log(props, "props");
@@ -33,6 +37,7 @@ export default function NftDetail({ props }) {
       session,
       "to get the session from supabase to upload the Avatar"
     );
+    setSession(session)
     const d = session?.access_token;
     getProductsFn(d);
   }
@@ -43,18 +48,12 @@ export default function NftDetail({ props }) {
   }, []);
 
   async function getProductsFn(d) {
-    const response = await MerchantApi({ token: d, query: "getsalebyuuid" });
-    console.log(response, "response");
+    const response = await withAuth({query:'getsalebyid',data:{id:props}});
+    console.log(response?.data?.data[0],'response')
 
-    const filteredData = response?.data?.data?.filter((item) => {
-      if (item.id == props) {
-        return item;
-      }
-    });
-    setProductData(filteredData[0]);
-    console.log(filteredData, "filtered data");
+    setProductData(response?.data?.data[0]);
     setAddress(
-      `http://52.9.60.249:3000/dashboard/allProducts/placeOrder?price=${filteredData[0]?.price}&id=${props}`
+      `http://52.9.60.249:3000/dashboard/allProducts/placeOrder?price=${response?.data?.data[0]?.price}&id=${props}`
     );
     setOpen(false);
   }
@@ -88,6 +87,10 @@ export default function NftDetail({ props }) {
   function modalFn(e) {
     e.preventDefault();
     setVisible(true);
+  }
+
+  function handleModalFn(){
+    setShowModal(true)
   }
 
   return (
@@ -187,7 +190,7 @@ export default function NftDetail({ props }) {
                           <ul>
                             <li>{productData?.productName}</li>
                             <li>{productData?.id}</li>
-                            <li>{productData?.link}</li>
+                            <li>{productData?.link }</li>
                             <li>{productData?.price}</li>
                             <li>{productData?.quantity}</li>
                           </ul>
@@ -197,7 +200,7 @@ export default function NftDetail({ props }) {
                         Add payment button to your website
                       </div>
                       <div id="embedded_code_div" className="embedded_code">
-                        {/* &lt;!-- VOXI on Polygon Test Mumbai --&gt; <br />
+                         {/* &lt;!-- VOXI on Polygon Test Mumbai --&gt; <br />
                             &lt;link rel="stylesheet" type="text/css"
                             href="https://sandbox.nftpay.xyz/css/iframe_inject.css"
                             /&gt;
@@ -207,7 +210,9 @@ export default function NftDetail({ props }) {
                             <br />
                             <br />
                             &lt;button onclick="&gt;Buy
-                            with card&lt; */}
+                            with card&lt; 
+                            {`<a href='/dashboard/allProducts/placeOrder?id={tokenId}'></a>`} */}
+                            &lt;a href="/dashboard/allProducts/placeOrder?id=tokenId"&gt; Pay with payken &lt;/a&gt;
                         {/* {`
 
                             function clickHandlerFn(e)={ `}
@@ -235,6 +240,7 @@ export default function NftDetail({ props }) {
                       >
                         Copy
                       </button>
+                     
                     </div>
                   </div>
                 </div>
@@ -251,10 +257,10 @@ export default function NftDetail({ props }) {
               <button onClick={handleDownloadQRCode}>Download QR code</button>
               </div> */}
               <div className="detail-row6 make-payment">
-                <button onClick={(e) => nextFn(e)} className="transfer-detail">
+                <button onClick={session ? (e) => nextFn(e) : handleModalFn} className="transfer-detail">
                   Make a Payment
                 </button>
-                <button className="generate-QR" onClick={modalFn}>
+                <button className="generate-QR" onClick={session ? modalFn : handleModalFn}>
                   Generate QR code
                 </button>
               </div>
@@ -279,6 +285,8 @@ export default function NftDetail({ props }) {
               </div>
             </Modal.Body>
           </Modal>
+
+          <LoginModal showModal={showModal} setShowModal={setShowModal} />
         </div>
       </section>
     </div>

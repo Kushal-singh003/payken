@@ -52,8 +52,8 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
         try {
             const data = {
                 amount: price * count,
-                // tokenId: router?.query?.id,
-                tokenId: tokenId,
+                tokenId: router?.query?.id,
+                // tokenId: tokenId,
                 quantity: count,
             }
             let req = await axios.post("/api/create-productPayment-intent",{data:data,token:token});

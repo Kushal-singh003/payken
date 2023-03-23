@@ -8,12 +8,14 @@ import Step2 from "./Step2";
 import { withToken } from "@/components/Utils/Functions";
 import { MerchantApi } from "@/components/Utils/Functions";
 import supabase from "@/components/Utils/SupabaseClient";
+import LoginModal from "@/components/ui/LoginModal";
 
 export default function Index() {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
+  const [showModal,setShowModal] = useState(false);
   const [clientSecret, setClientSecret] = useState();
   const [customer, setCustomer] = useState();
   const [price, setPrice] = useState();
@@ -39,6 +41,9 @@ export default function Index() {
       data: { session },
     } = await supabase.auth.getSession();
     console.log(session, "session");
+    if(session == null){
+      handleModalFn();
+    }
     const token = session?.access_token;
     getProductDataFn(token);
   }
@@ -53,6 +58,10 @@ export default function Index() {
     setMax(response?.data?.data[0]?.quantity);
     setPrice(response?.data?.data[0]?.price);
     setTokenId(response?.data?.data[0]?.tokenId);
+  }
+
+  function handleModalFn(){
+    setShowModal(true)
   }
 
   return (
@@ -197,6 +206,7 @@ export default function Index() {
           </Modal>
         </div>
       </section>
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
       <Footer />
     </div>
   );

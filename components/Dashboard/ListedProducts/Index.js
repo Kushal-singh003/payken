@@ -9,9 +9,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import LoginModal from "@/components/ui/LoginModal";
 import { Button } from "react-bootstrap";
 import { ConfigContext } from "@/components/ui/UseContextHook";
+import LoginModal from "@/components/ui/LoginModal";
 
 export default function ListedProducts() {
   const [products, setProducts] = useState();
@@ -23,8 +23,9 @@ export default function ListedProducts() {
   const [lengthOfData, setLengthOfData] = useState(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
   const { config, setConfig } = useContext(ConfigContext);
+  const [sessionData,setSessionData] = useState(null);
+  const [showModal,setShowModal] = useState(false);
 
   async function getProductsFn(token) {
     const response = await MerchantApi({
@@ -42,6 +43,7 @@ export default function ListedProducts() {
       data: { session },
     } = await supabase.auth.getSession();
     console.log(session, "session");
+    setSessionData(session)
     const token = session?.access_token;
 
     getProductsFn(token);
@@ -110,6 +112,10 @@ export default function ListedProducts() {
     router.push("/dashboard/allProducts/buyProduct/" + id);
   }
 
+  function handleModalFn(){
+    setModalShow(true)
+  }
+
   return (
     <div className="productUploadHead">
       <ToastContainer />
@@ -147,11 +153,11 @@ export default function ListedProducts() {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item
+                        {/* <Dropdown.Item
                           onClick={(e) => nextFn({ e, id: item.id })}
                         >
                           Edit
-                        </Dropdown.Item>
+                        </Dropdown.Item> */}
                         <Dropdown.Item
                           onClick={(e) => handleDeleteFn({ e, id: item.id })}
                         >
@@ -174,11 +180,11 @@ export default function ListedProducts() {
                           Add to Cart
                         </button> */}
                         <button
-                          onClick={(e) => nextFn2({ e, id: item.id })}
+                          onClick={sessionData ? (e) => nextFn2({ e, id: item.id }) : handleModalFn()}
                           type="button"
                           className="btn addToCart"
                         >
-                          BUY
+                          View
                         </button>
                       </div>
                     </div>
@@ -187,11 +193,15 @@ export default function ListedProducts() {
               );
             })}
 
-            {lengthOfData == null || lengthOfData == 0 ? (
-              <div className="not-found">
-                <span>Not Found</span>
-              </div>
-            ) : null}
+           
+			  {lengthOfData == 0 ? <div className="not-found">
+				<span>Not found</span>
+			  </div>
+			  : null}
+
+			  {lengthOfData == null ? <div className="loading-div">
+				<span></span>
+			  </div>:null}
             <Modal
               closeButton
               aria-labelledby="modal-title"
@@ -213,7 +223,7 @@ export default function ListedProducts() {
           </div>
         </div>
       </div>
-      <LoginModal show={modalShow} onHide={() => setModalShow(false)} />
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }

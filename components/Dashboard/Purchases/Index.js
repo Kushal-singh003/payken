@@ -418,11 +418,15 @@ export default function Purchases() {
                 </tr> */}
               </tbody>
             </table>
-            {lengthOfData == null || lengthOfData == 0 ? (
-              <div className="not-found">
-                <span>Not found</span>
-              </div>
-            ) : null}
+            
+			  {lengthOfData == 0 ? <div className="not-found">
+				<span>Not found</span>
+			  </div>
+			  : null}
+
+			  {lengthOfData == null ? <div className="loading-div">
+				<span></span>
+			  </div>:null}
           </div>
         </div>
       </section>

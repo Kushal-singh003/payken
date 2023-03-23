@@ -10,7 +10,6 @@ export default function NavBar() {
   const [userData, setUserData] = useState();
   const [open, setOpen] = useState(false);
 
-  console.log(open, "open data here");
   async function getAvatar() {
     const {
       data: { session },
@@ -61,8 +60,8 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/nft">
-                  NFT
+                <Link className="nav-link" href="/dashboard/directPay">
+                  Direct Pay
                 </Link>
               </li>
               {/* <li className="nav-item">

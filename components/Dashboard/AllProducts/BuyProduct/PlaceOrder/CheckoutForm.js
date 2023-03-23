@@ -66,7 +66,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         return_url:
-          `http://localhost:3000/dashboard/allProducts/placeOrder/step3/1`,
+          `http://52.9.60.249:3000/dashboard/allProducts/placeOrder/step3/1`,
       },
     });
     console.log(error, "payment error");

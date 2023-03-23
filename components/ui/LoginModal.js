@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-bootstrap/Modal";
 
 
-function LoginModal(props) {
+function LoginModal({showModal,setShowModal}) {
 
   const [formData,setFormData] = useState({
     email:'',
@@ -57,15 +57,19 @@ try {
     
 }
 
+async function onHide(){
+setShowModal(false)
+}
+
 
 
   return (
     <Modal
-      {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className="LoginModal"
+      show={showModal}
     >
       {/* <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
@@ -77,7 +81,7 @@ try {
         </div>
         <div className="rightImgSide">
           <div className="closeImgSec">
-            <img src="/img/close.svg" alt="" onClick={props.onHide} />
+            <img src="/img/close.svg" alt="" onClick={onHide} />
           </div>
 
             

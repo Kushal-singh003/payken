@@ -66,12 +66,12 @@ export default function Login() {
               </span>
               <span> { isLoading ? 'Loading..' : 'Sign In With Google' }</span>
             </button>
-            <Link href="" className="signin-apple">
+            <button className="signin-apple">
               <span>
                 <img src="/img/apple (2).png " alt="" />
               </span>
               <span>Sign In With Apple</span>
-            </Link>
+            </button>
             <span className="or">or</span>
             <form onSubmit={handleSubmit} className="signin-form">
               <div className="mb-3">

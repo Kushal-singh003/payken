@@ -6,7 +6,11 @@ import { Loading } from "@nextui-org/react";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
-
+import { MerchantApi } from "../Utils/Functions";
+import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export default function Cart() {
   const { config, setConfig } = React.useContext(ConfigContext);
@@ -16,10 +20,12 @@ export default function Cart() {
   const [added, setAdded] = useState(0);
   const [itemId, setItemId] = useState(null);
   const [loading1, setLoading1] = useState(false);
+  const [loading2,setLoading2] = useState(false);
   const [itemId2, setItemId2] = useState(null);
   const [open, setOpen] = useState(false);
-  const [lengthOfData,setLengthOfData] = useState(null);
-  const [total,setTotal] = useState();
+  const [lengthOfData, setLengthOfData] = useState(null);
+  const [total, setTotal] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     console.log(config, "config");
@@ -40,16 +46,16 @@ export default function Cart() {
   async function getCartDataFn(token) {
     const response = await withToken({ token: token, query: "getcart" });
     console.log(response, "response get cart data");
-	let sum=0;
+    let sum = 0;
     if (!response.Error) {
       console.log("success");
-	  setLengthOfData(response?.data?.data?.length)
-	  	  response?.data?.data?.forEach(value => {
-		sum += value?.price * value?.quantity;
-	  });
+      setLengthOfData(response?.data?.data?.length)
+      response?.data?.data?.forEach(value => {
+        sum += value?.price * value?.quantity;
+      });
 
-	  console.log(sum+1,'sum')
-	  setTotal(sum)
+      console.log(sum + 1, 'sum')
+      setTotal(sum)
       setCartData(response?.data?.data);
       setOpen(false);
     }
@@ -85,40 +91,71 @@ export default function Cart() {
     }
   }
 
-  async function changeQuantityFn({ e, id }) {
-    e.preventDefault();
+  async function changeQuantityFn({ e, id,title,totalQty }) {
+   
+    let d ;
+ 
+    const b = id;
+    let newItem = [];
+    let sum = 0;
+    console.log(title)
 
-    setQuantity(e.target.value);
-    setItemId2(id);
+    if(title == true){
+      if(e == totalQty) return;
+      d = e+1;
+    }
 
-	const a = e.target.value;
-	const b = id;
-	let newItem=[];
+    if(title === false){
+      if(e == 1) return;
+      d = e-1;
+    }
 
+    console.log(e,d,'d')
+    const updatedData = cartData?.map((item, idx) => {
+      if (item.id == b) {
+        newItem[idx] = { ...item, quantity: d }
+        console.log(newItem, 'newItem')
+      } else {
+        newItem[idx] = item;
+      }
 
-	const updatedData  = cartData?.map((item,idx)=>{
-		if(item.id == b){
-			 newItem[idx]= {...item,quantity:a}
-			console.log(newItem,'newItem')
-		}else{
-			newItem[idx]=item;
-		}
-		
-	})
+    })
 
-	var result = cartData.reduce(function(tot, arr) { 
-
-		return tot + (arr.price * arr.quantity);
-	  
-		
-	  },0);
-
-
-	  setTotal(result+1)
-	  console.log(result+1,'total')
-	setCartData(newItem);
+    newItem?.forEach(value => {
+      sum += value?.price * value?.quantity;
+    });
+    console.log(sum+1,'summmm')
+    setTotal(sum)
+    setCartData(newItem);
 
   }
+
+  async function cartCheckoutFn() {
+      setLoading2(true)
+        const data = {
+            amount: total,
+            cartId: 1,
+            cartData:cartData,
+            // tokenId: tokenId,
+            quantity: 1,
+        }
+        console.log(data,'data')
+        let req = await axios.post("/api/create-cartPayment-intent",{data:data,token:tokenData});
+        console.log(req,'res');
+       
+        setLoading2(false)
+        
+        if(req?.Error){
+          console.log('error')
+        }
+
+        if(!req?.Error){
+          console.log('success')
+          router.push('/dashboard/cartCheckout/completePayment/'+req?.data?.clientSecret)
+        }
+    
+}
+
 
   return (
     <div>
@@ -171,30 +208,37 @@ export default function Cart() {
                           </td>
                           <td>
                             {" "}
-                            <div className="cart-div">{item?.price}</div>{" "}
+                            <div className="cart-div">{item?.price} $</div>{" "}
                           </td>
                           <td data-th="Quantity">
-                            <div className="cart-div">
+                            <div  className="cart-div--2">
+                              <img onClick={(e) =>
+                                  changeQuantityFn({ e:item.quantity, id: item.id,totalQty:item.totalquantity,title:false })
+                                } className='cart-subIcon' src="/img/sub.png" />
                               <input
                                 type="number"
-                                onChange={(e) =>
-                                  changeQuantityFn({ e, id: item.id })
-                                }
+                                disabled
+                                // onChange={(e) =>
+                                //   changeQuantityFn({ e, id: item.id })
+                                // }
                                 className="form-control text-center cart-input"
                                 // defaultValue={
                                 //   quantity && itemId2 == item?.id
                                 //     ? quantity
                                 //     : item?.quantity
                                 // }
-								defaultValue={item?.quantity}
+                                value={item?.quantity}
                               />
+                               <img onClick={(e) =>
+                                  changeQuantityFn({ e:item.quantity,totalQty:item.totalquantity, id: item.id,title:true })
+                                } className="cart-addIcon" src="/img/add.png" />
                             </div>
                           </td>
                           <td>
                             <div className="cart-div">
                               {quantity && itemId2 == item?.id
                                 ? quantity * item?.price
-                                : item?.quantity * item?.price}
+                                : item?.quantity * item?.price} $
                             </div>
                           </td>
                           <td
@@ -223,41 +267,42 @@ export default function Cart() {
                     );
                   })}
                 </tbody>
-				{lengthOfData == 0 || lengthOfData == null ? null :
-                <tfoot>
-                  <tr className="tfoot-tr" id="tfoot-tr">
-                    <td>
-                      <a href="#" className="btn btn-info  cartCancel">
-                        <i className="fa fa-angle-left"></i> Continue Shopping
-                      </a>
-                    </td>
-                    <td colspan="2" className="hidden-xs"></td>
-                    <td
-                      className="hidden-xs text-center"
-                      style={{ width: "10%" }}
-                    >
-                      <strong>Total : {total}</strong>
-                    </td>
-                    <td>
-                      <a
-                        href="#"
-                        className="btn btn-success btn-block cartCheckout"
+                {lengthOfData == 0 || lengthOfData == null ? null :
+                  <tfoot>
+                    <tr className="tfoot-tr" id="tfoot-tr">
+                      <td>
+                        <Link href="/dashboard/allProducts" className="btn btn-info  cartCancel">
+                          <i className="fa fa-angle-left"></i> Continue Shopping
+                        </Link>
+                      </td>
+                      <td colspan="2" className="hidden-xs"></td>
+                      <td
+                        className="hidden-xs text-center"
+                        style={{ width: "10%" }}
                       >
-                        Checkout <i className="fa fa-angle-right"></i>
-                      </a>
-                    </td>
-                  </tr>
-                </tfoot>}
+                        <strong>Total : {total} $</strong>
+                      </td>
+                      <td>
+                        <button
+                          onClick={cartCheckoutFn}
+                          className="btn btn-success btn-block cartCheckout"
+                        >
+                          {loading2 ?    <Loading size="sm" color="white" /> : 
+                          <>Checkout <i class="bi bi-arrow-right-short"></i></>}
+                        </button>
+                      </td>
+                    </tr>
+                  </tfoot>}
               </table>
 
-			  {lengthOfData == 0 ? <div className="not-found">
-				<span>Not found</span>
-			  </div>
-			  : null}
+              {lengthOfData == 0 ? <div className="not-found">
+                <span>Not found</span>
+              </div>
+                : null}
 
-			  {lengthOfData == null ? <div className="loading-div">
-				<span></span>
-			  </div>:null}
+              {lengthOfData == null ? <div className="loading-div">
+                <span></span>
+              </div> : null}
             </div>
           </div>
         </div>

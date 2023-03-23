@@ -24,8 +24,8 @@ export default function Step3({ props, response }) {
     if (!response?.error) {
       setOpen(false);
       setHash(response?.data?.transactionHash);
-      setNftData(response?.data?.final[0]);
-      setNFtImage(response?.data?.final[0]?.image);
+      setNftData(response?.data?.cc);
+      setNFtImage(response?.data?.cc?.image);
       return;
     }
 
@@ -43,7 +43,7 @@ export default function Step3({ props, response }) {
     e.preventDefault();
 
     router.push(
-      "/dashboard/listedProducts/productDetails/" + response?.data?.final[0]?.id
+      "/dashboard/listedProducts/productDetails/" + response?.data?.cc?.id
     );
   }
 

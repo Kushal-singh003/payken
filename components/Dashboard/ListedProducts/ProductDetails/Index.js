@@ -46,7 +46,7 @@ export default function ProductDetails({ props }) {
     const response = await MerchantApi({
         data: { id: router?.query?.id },
         token: d,
-        query: "getsalebyid",
+        query: "getpurchasesbyid",
       });
       console.log(response,'res')
       setProductData(response?.data?.data[0])

@@ -111,7 +111,7 @@ body {
   font-size: 17px;
   font-weight: 600;
   text-decoration: none !important;
-  width: 85%;
+  width: 86%;
   text-align: center;
   padding: 13px 0px;
   border-radius: 10px;
@@ -727,6 +727,10 @@ div#panelsStayOpen-collapseOne {
   border: none;
 }
 
+.mobile-logo {
+  display: none;
+}
+
 .signup .container .signin-checkbox {
   color: #fff;
   display: flex;
@@ -774,13 +778,26 @@ div#panelsStayOpen-collapseOne {
   margin: 4%;
 }
 
-span.beMerchant {
+/* span.beMerchant {
   position: absolute;
   background: #000000e6;
   width: 100%;
   color: #ffffffb0 !important;
   padding: 107px 50px;
   border-radius: 20px;
+} */
+
+span.beMerchant {
+  position: absolute;
+  background: #000000e6;
+  width: 100%;
+  color: #ffffffb0 !important;
+
+  border-radius: 20px;
+  height: 83%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .merchant-pop {
@@ -864,7 +881,8 @@ ul#pills-tab {
   color: #7ce90f;
   font-size: 25px;
   font-weight: 600;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
+  padding-top: 10px;
 }
 
 .sent .container .sent-box .link {
@@ -1147,6 +1165,7 @@ ul#pills-tab {
 
 .Wallet .container {
   height: 65vh;
+  overflow: auto;
 }
 
 .qr-code .copy-address .copy-icon {
@@ -1324,15 +1343,12 @@ button.card-continue {
   font-weight: 500;
 }
 
-.loading-div{
- 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 400px;
-   
-  
+.loading-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
 }
 
 .some-text {
@@ -1652,6 +1668,20 @@ section.nanu .card-body p {
   margin-bottom: 1rem;
 }
 
+.cart-addIcon,
+.cart-subIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.cart-div--2 {
+  width: 100px;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+  justify-content: space-between !important;
+}
+
 .wallet-data button {
   background: #18330b;
   color: white;
@@ -1664,11 +1694,11 @@ section.nanu .card-body p {
 
 .wallet-data button:hover,
 .wallet-data button:active {
-  background: rgb(230 221 221);
-  color: #18330b;
+  background: white;
+  color: green;
   border: none;
   padding: 5px 10px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   border: 1px solid #18330b;
   border-radius: 10px;
@@ -1752,7 +1782,6 @@ section.nft .nft-head .sort-span {
   align-items: center;
 }
 
-
 /* Track */
 .col-lg-12.pl-3.pt-3::-webkit-scrollbar-track {
   background-color: #121111 !important;
@@ -1765,13 +1794,12 @@ section.nft .nft-head .sort-span {
   overflow: auto;
   padding: 0;
   margin: 0;
-  padding-top: 0!important;
+  padding-top: 0 !important;
 }
 
-.cart-section .cart-div .cart-input{
+.cart-section .cart-div .cart-input {
   background: #252525;
   color: honeydew;
-  
 }
 
 nav#payken-navbar .nav-item {
@@ -1782,15 +1810,13 @@ nav#payken-navbar .nav-item .bi.bi-cart4 {
   font-size: 26px;
 }
 
-nav#payken-navbar .profile-update{
+nav#payken-navbar .profile-update {
   text-decoration: none;
   color: #000;
 }
 
-
 /* Handle */
 .col-lg-12.pl-3.pt-3::-webkit-scrollbar-thumb {
-  
   background: #252525;
 }
 
@@ -1881,7 +1907,8 @@ div#cart {
 }
 .cart-div {
   /* text-align: center; */
-  justify-content: space-between !important;}
+  justify-content: space-between !important;
+}
 .cartCheckout {
   background: linear-gradient(
     180deg,
@@ -1893,8 +1920,8 @@ div#cart {
   box-shadow: none !important;
 }
 
-
-.cartCancel{    color: green !important;
+.cartCancel {
+  color: green !important;
   background: white !important;
   border: 1px solid green !important;
   /* border: none; */
@@ -1904,16 +1931,39 @@ div#cart {
   box-shadow: none !important;
 }
 
-
 .section-product button#copy_to_clipboard_script_button {
   background-color: #252424;
   color: #dcd3d3;
   border: 1px solid #6a6565;
 }
 
+section.bottom-nav {
+  display: none;
+}
 
+a.btn.btn-info.cartCancel:hover {
+  color: rgb(34, 92, 34) !important;
+}
 
+.addProduct--div .dynamic-div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 5%;
+}
 
+.addProduct--div .dynamic-div .dynamic-price {
+  width: 75%;
+}
+
+.addProduct--div .dynamic-div .dynamic-toggle {
+  width: 20%;
+}
+
+/* .addProduct--div .dynamic-div #flexSwitchCheckChecked{
+  width: 65%;
+  height: 25px
+} */
 
 /*-----------------------------Dropdown section ends -------------------------*/
 
@@ -3505,6 +3555,12 @@ button#uncontrolled-tab-example-tab-HOW\ TO\ USE\ NFTPAY {
   font-weight: 600;
 }
 
+button.btn.btn-success.btn-block.cartCheckout {
+  width: 112px;
+  height: 36px;
+}
+
+
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
@@ -3705,6 +3761,136 @@ p.card-body--heading {
   gap: 1rem;
   margin-bottom: 3rem;
   align-items: center;
+}
+
+section.direct-pay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+section.direct-pay .directPay-form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 48vh;
+}
+.directPay-form form {
+  display: flex;
+  flex-direction: column;
+  width: 725px;
+  background: url(/img/poison.png) no-repeat;
+  padding: 5% 29px;
+  gap: 1.5rem;
+  box-shadow: 8px -9px 24px #9c9c9c19 inset;
+  align-items: center;
+  border-radius: 20px;
+  position: relative;
+  background-size: cover;
+}
+
+.amtDiv{float: left; width: 100%; display: flex; justify-content: center; align-items: center; font-size: 22px; color: white !important;}
+.amtDiv h2{font-size: 58px !important;  margin: 0; margin-right: 10px; margin-left: 25%;}
+
+.directPay-form form input.amount {
+  height: 100px;
+  background: unset;
+  border: none;
+  border-radius: 20px;
+  cursor: white;
+  text-align: center;
+  font-size: 58px;
+  color: white;
+  z-index: 4;
+  width: 30%;
+  overflow: scroll;
+}
+
+.directPay-form form input.amount:focus-visible {
+  border: unset !important;
+}
+
+/* .directPay-form form input.amount:active,
+.directPay-form form input.amount:hover,
+.directPay-form form input.note:active,
+.directPay-form form input.note:hover{
+  border: unset  !important;
+} */
+
+.directPay-form form input.note {
+  background: #1d1c1c;
+  border: none;
+  border-radius: 20px;
+  /* height: 63px; */
+  width: 37%;
+  padding: 10px 10px;
+  text-align: center;
+  color: white;
+  z-index: 4;
+}
+
+.directPay-form form input.amount:focus {
+  border: none !important;
+  outline: none !important;
+}
+
+.directPay-form form button.pay {
+  color: white;
+  position: relative;
+  margin-top: 30px;
+  border: none;
+  padding: 16px 100px !important;
+  border-radius: 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
+  z-index: 3;
+}
+
+
+
+.cart-div--2 input.form-control.text-center.cart-input {
+  background-color: #30302d;
+  opacity: 1;
+  color: #a09494;
+}
+
+.purchasenft-head .directPayImg{
+
+  height: 200px;
+  width: 200px;
+ border: none;
+}
+
+.error-msg{
+  color: white;
+  font-size: 16px;
+}
+.directPay-form form::after {
+  position: absolute;
+  content: "";
+  background: #00000096;
+  left: 0;
+  top: 0;
+  height: 100%;
+  box-shadow: 8px -9px 24px #9c9c9c19 inset;
+  width: 100%;
+  border-radius: 10px 0px 0px 10px;
+  z-index: 1;
+}
+
+.directPay-form form input.note:focus {
+  border: unset !important;
+  outline: none !important;
+}
+
+.directPay-form form input.note::placeholder {
+  color: #7c7c7c !important;
+}
+.directPay-form form input {
+  width: 50%;
 }
 
 .css-13cymwt-control {
@@ -4131,6 +4317,7 @@ button#copy_to_clipboard_iframe_button {
 
 .LoginModal .modal-content {
   border-radius: unset !important;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .LoginModal .modal-header {
@@ -5003,6 +5190,14 @@ div#qrScanner {
   margin-bottom: 30px;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
 @media (max-width: 1200px) {
   #wallet-inputs {
     width: 100% !important;
@@ -5326,10 +5521,10 @@ div#qrScanner {
     padding-left: 0px !important;
   }
 
-  #signin .signin-google,
+  /* #signin .signin-google,
   .signin .signin-apple {
     width: 100%;
-  }
+  } */
 
   #signin button {
     width: 100% !important;
@@ -5881,6 +6076,149 @@ form {
     padding: 0 15px !important;
   }
 
+  .directPay-form form button.pay {
+    padding: 12px 50px !important;
+  
+}
+
+section.direct-pay {
+  height: 60vh;
+}
+
+.directPay-form form {
+  padding: 4% 29px;}
+
+section.direct-pay .directPay-form {
+
+  height: 36vh;
+}
+  section.bottom-nav {
+    display: block;
+  }
+  .addProduct--div .dynamic-div .dynamic-price {
+    width: 100%;
+  }
+  .addProduct--div .dynamic-div .dynamic-toggle {
+    width: 70%;
+  }
+
+  .addProduct--div .dynamic-div #flexSwitchCheckChecked {
+    width: 25% !important;
+    height: 22px !important;
+  }
+
+  .payment {
+    padding: 30px 0;
+    margin-top: 0rem;
+    margin-bottom: 30px;
+  }
+
+  .addProduct--div .dynamic-div {
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .bottomNav-icon {
+    background: none !important;
+    border: none !important;
+  }
+
+  .dropdown-toggle.bottomNav-icon::after {
+    display: none !important;
+  }
+
+  .bottom-Link {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .mobile-logo {
+    display: block;
+    width: 90%;
+    /* text-align: center; */
+    padding: 10px 0 0 10px;
+    border-bottom: 1px solid #837a7a;
+  }
+
+  .nft {
+    padding: 30px 0;
+    margin-top: 0rem;
+  }
+
+  .nft-detail {
+    padding: 30px 0;
+    margin-top: 0rem;
+  }
+
+  .Wallet {
+    padding: 30px 0;
+    margin-top: 0rem;
+  }
+
+  .send-recieve {
+    padding-top: 0rem;
+  }
+
+  #home-inner {
+    padding: 30px 0px !important;
+  }
+
+  .nanu {
+    padding: 10px 0px !important;
+  }
+
+  #nftDashboard-profile-sec {
+    margin-top: 0rem;
+  }
+
+  section.cart-section {
+    margin-top: 2rem;
+  }
+
+  .mobile-logo .mobile-logo--img {
+    width: 50%;
+  }
+
+  section.bottom-nav {
+    float: left;
+    border-top: 1px solid #ffc10757;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 17px 3px;
+    background: black;
+    box-shadow: 0px 0px 10px 2px rgb(119 119 119 / 20%);
+  }
+  .signup .container {
+    height: auto;
+  }
+
+  .signin .container {
+    height: auto;
+  }
+  nav#payken-navbar {
+    display: none;
+  }
+
+  .sent {
+    padding: 30px 0;
+    margin-top: 0rem;
+  }
+  img.bottomNav-icons {
+    width: 32%;
+  }
+  section.bottom-nav .main-bottomNav ul li {
+    text-align: center;
+  }
+
+  section.bottom-nav .main-bottomNav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
   .not-found {
     height: 200px;
   }
@@ -5909,15 +6247,15 @@ form {
   /*---------------- Footer starts ------------------------*/
 
   /*---------------- signin starts ------------------------*/
-  .signin .container {
+  /* .signin .container {
     margin-top: 6rem;
-  }
+  } */
 
   /*------------------ signin ends ---------------------------*/
 
   /*---------------- sigup starts ------------------------*/
   .signup .container {
-    margin-top: 8rem;
+    /* margin-top: 8rem; */
     margin-bottom: 3rem;
   }
 
@@ -6503,6 +6841,9 @@ form {
     margin-left: 2rem;
     display: none;
   }
+  .sent-card img {
+    height: 173px;
+  }
 
   .threeb-two {
     width: 100% !important;
@@ -6587,6 +6928,7 @@ form {
   .productUploadHead {
     padding: 0px;
     margin-bottom: 3rem;
+    margin-top: 0rem;
   }
 
   .upoadproduct-image {
@@ -6644,7 +6986,7 @@ form {
   }
 
   .signup .container {
-    margin-top: 5rem;
+    margin-top: 3rem;
     margin-bottom: 0rem;
   }
 
@@ -6904,7 +7246,7 @@ form {
   /*---------------------- footer ends -----------------*/
 
   .sent .container .sent-box .link {
-    width: 100%;
+    width: 50%;
     text-decoration: none;
   }
 }
@@ -6943,6 +7285,17 @@ form {
 
   .send-recieve .wallet-table {
     width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .signin-form {
+    width: 96%;
+  }
+
+  .signin .signin-google,
+  .signin .signin-apple {
+    width: 96% !important;
   }
 }
 

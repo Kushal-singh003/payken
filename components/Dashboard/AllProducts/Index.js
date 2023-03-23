@@ -7,6 +7,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ConfigContext } from "@/components/ui/UseContextHook";
 import { Loading } from "@nextui-org/react";
+import LoginModal from "@/components/ui/LoginModal";
+import Login from "@/components/Login/Index";
 
 let list = [];
 
@@ -21,6 +23,8 @@ export default function AllProducts() {
   const [showAdded, setShowAdded] = useState(false);
   const [showId, setShowId] = useState(null);
   const [loading1, setLoading1] = useState(false);
+  const [showModal,setShowModal] = useState(false);
+  const [session,setSession] = useState(null)
 
   async function getProductsFn(token) {
     const response = await withAuth({ query: "getsale" });
@@ -35,6 +39,7 @@ export default function AllProducts() {
       data: { session },
     } = await supabase.auth.getSession();
     console.log(session, "session");
+    setSession(session);
     const token = session?.access_token;
     setTokenData(session?.access_token);
 
@@ -89,6 +94,10 @@ export default function AllProducts() {
     }
   }
 
+  function handleModalFn(){
+    setShowModal(true);
+  }
+
   console.log(config, "congig");
 
   return (
@@ -140,7 +149,7 @@ export default function AllProducts() {
                         </button>
 
                         <button
-                          onClick={(e) => nextFn({ e, id: item.id })}
+                          onClick={session ? (e) => nextFn({ e, id: item.id }) : handleModalFn}
                           type="button"
                           className="btn addToCart cart-btn"
                         >
@@ -153,11 +162,17 @@ export default function AllProducts() {
               );
             })}
 
-            {lengthOfData == null || lengthOfData == 0 ? (
-              <div className="not-found">
-                <span>Not Found</span>
-              </div>
-            ) : null}
+            <LoginModal showModal={showModal} setShowModal={setShowModal} />
+
+            
+			  {lengthOfData == 0 ? <div className="not-found">
+				<span>Not found</span>
+			  </div>
+			  : null}
+
+			  {lengthOfData == null ? <div className="loading-div">
+				<span></span>
+			  </div>:null}
           </div>
         </div>
       </div>
