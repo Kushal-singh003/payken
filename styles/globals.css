@@ -2180,7 +2180,9 @@ font-size: 16px;
 font-weight: 500;
 text-transform: capitalize;}
 
-
+.input-null {
+  color: #1a1a1a;
+}
 
 
 /* .addProduct--div .dynamic-div #flexSwitchCheckChecked{

@@ -8,6 +8,7 @@ import Step2 from "./Step2";
 import { withToken } from "@/components/Utils/Functions";
 import { MerchantApi } from "@/components/Utils/Functions";
 import supabase from "@/components/Utils/SupabaseClient";
+import axios from "axios";
 
 
 export default function Index() {
@@ -20,11 +21,13 @@ export default function Index() {
   const [price, setPrice] = useState();
   const [max, setMax] = useState();
   const [tokenId, setTokenId] = useState();
+  const [maticPrice,setMaticPrice] = useState();
   const router = useRouter();
 
   useEffect(() => {
     setShow(true);
     getSession();
+    getMaticPriceFn();
   }, [router?.query]);
 
   console.log(clientSecret, "clientSecret");
@@ -55,6 +58,17 @@ export default function Index() {
     setMax(response?.data?.data[0]?.quantity);
     setPrice(response?.data?.data[0]?.price);
     setTokenId(response?.data?.data[0]?.tokenId);
+  }
+
+  async function getMaticPriceFn(){
+    try {
+      const response = await axios.get('https://api.polygonscan.com/api?module=stats&action=maticprice&apikey=3DP8EIJ53A49TPYD6WWUCVE919S7W7N2RU');
+      console.log(response,'matic price')
+      setMaticPrice(response?.data?.result?.maticusd)
+    } catch (error) {
+      console.log(error,'error')
+    }
+   
   }
 
   
@@ -128,6 +142,7 @@ export default function Index() {
                       setClientSecret={setClientSecret}
                       setShow1={setShow1}
                       setShow2={setShow2}
+                      maticPrice={maticPrice}
                       price={price}
                       max={max}
                       tokenId={tokenId}

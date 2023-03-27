@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import axios from "axios";
 
 let id = [];
 let percentage = [];
@@ -39,6 +40,7 @@ export default function AddProduct() {
   ]);
   const [show, setShow] = useState(false);
   const [errMsg, setErrMsg] = useState(false);
+  const [maticPrice,setMaticPrice] = useState();
 
   async function getSession() {
     const {
@@ -48,8 +50,20 @@ export default function AddProduct() {
     setToken(session?.access_token);
   }
 
+  async function getMaticPriceFn(){
+    try {
+      const response = await axios.get('https://api.polygonscan.com/api?module=stats&action=maticprice&apikey=3DP8EIJ53A49TPYD6WWUCVE919S7W7N2RU');
+      console.log(response,'matic price')
+      setMaticPrice(response?.data?.result?.maticusd)
+    } catch (error) {
+      console.log(error,'error')
+    }
+   
+  }
+
   useEffect(() => {
     getSession();
+    getMaticPriceFn();
   }, []);
 
   console.log(inputFields?.length, "inputfield length");
@@ -304,8 +318,9 @@ export default function AddProduct() {
              
                 <div className="inputSection dynamic-price">
                   <h4 className="input-title">
-                    Price <span className="inpu-desc">(In USD)</span>
+                    Price <span className="inpu-desc">(In MATIC)</span>
                   </h4>
+                  <h6 style={{color:'grey'}}>1 Matic = {maticPrice}USD</h6>
 
                   <input
                     className="detailInput"

@@ -208,7 +208,7 @@ export default function Cart() {
                           </td>
                           <td>
                             {" "}
-                            <div className="cart-div">{item?.price} $</div>{" "}
+                            <div className="cart-div">{item?.price} MATIC</div>{" "}
                           </td>
                           <td data-th="Quantity">
                             <div  className="cart-div--2">
@@ -237,8 +237,8 @@ export default function Cart() {
                           <td>
                             <div className="cart-div">
                               {quantity && itemId2 == item?.id
-                                ? quantity * item?.price
-                                : item?.quantity * item?.price} $
+                                ?  parseFloat(quantity * item?.price)?.toFixed(3)
+                                :  parseFloat(item?.quantity * item?.price)?.toFixed(3) } MATIC
                             </div>
                           </td>
                           <td
@@ -280,7 +280,7 @@ export default function Cart() {
                         className="hidden-xs text-center"
                         style={{ width: "10%" }}
                       >
-                        <strong>Total : {total} $</strong>
+                        <strong>Total : {parseFloat(total)?.toFixed(3)} MATIC</strong>
                       </td>
                       <td>
                         <button

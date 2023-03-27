@@ -89,7 +89,7 @@ export default function ProductDetails({ props }) {
             <div className="detail-right">
               <div className="detail-row">
                 <h6>{productData?.productName}</h6>
-                <span>{productData?.price}$</span>
+                <span>{productData?.price} MATIC</span>
               </div>
               <p className="super-dope">{productData?.description}</p>
               <div className="accordion" id="accordionPanelsStayOpenExample">
@@ -162,11 +162,11 @@ export default function ProductDetails({ props }) {
                         </div>
                         <div className="address">
                           <ul>
-                            <li>{productData?.productName}</li>
-                            <li>{productData?.id}</li>
-                            <li>{productData?.link}</li>
-                            <li>{productData?.price}</li>
-                            <li>{productData?.quantity}</li>
+                            <li>{productData?.productName || <span className="input-null">null</span>}</li>
+                            <li>{productData?.id || <span className="input-null">null</span>}</li>
+                            <li>{productData?.link || <span className="input-null">null</span>}</li>
+                            <li>{<>{productData?.price} MATIC </>|| <span className="input-null">null</span>} </li>
+                            <li>{productData?.quantity} || <span className="input-null">null</span></li>
                           </ul>
                         </div>
                       </div>

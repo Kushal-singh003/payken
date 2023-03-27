@@ -127,7 +127,7 @@ export default function AllProducts() {
                     <div className="card-bodys">
                       <div className="cardFooter-sec">
                         <h4 className="productName">{item.productName}</h4>
-                        <h4 className="productPrice">{item.price}$</h4>
+                        <h4 className="productPrice">{item.price}MATIC</h4>
                       </div>
 
                       <div className="paymentBtn-sec cart-div ">

@@ -53,7 +53,7 @@ export default function NftDetail({ props }) {
 
     setProductData(response?.data?.data[0]);
     setAddress(
-      `http://52.9.60.249:3000/dashboard/allProducts/placeOrder?price=${response?.data?.data[0]?.price}&id=${props}`
+      `https://payken-demo.vercel.app/dashboard/allProducts/placeOrder?price=${response?.data?.data[0]?.price}&id=${props}`
     );
     setOpen(false);
   }
@@ -115,7 +115,7 @@ export default function NftDetail({ props }) {
             <div className="detail-right">
               <div className="detail-row">
                 <h6>{productData?.productName}</h6>
-                <span>{productData?.price}$</span>
+                <span>{productData?.price} MATIC</span>
               </div>
               <p className="super-dope">{productData?.description}</p>
               <div className="accordion" id="accordionPanelsStayOpenExample">
@@ -191,7 +191,7 @@ export default function NftDetail({ props }) {
                             <li>{productData?.productName}</li>
                             <li>{productData?.id}</li>
                             <li>{productData?.link }</li>
-                            <li>{productData?.price}</li>
+                            <li>{productData?.price} MATIC</li>
                             <li>{productData?.quantity}</li>
                           </ul>
                         </div>

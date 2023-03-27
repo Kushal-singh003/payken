@@ -10,7 +10,7 @@ import LoginModal from "@/components/ui/LoginModal";
 
 let list3 = [];
 
-export default function Step1({setClientSecret,setShow1,setShow2,max,price,tokenId}) {
+export default function Step1({setClientSecret,setShow1,setShow2,max,price,tokenId,maticPrice}) {
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(1);
     const [token,setToken] = useState();
@@ -39,6 +39,8 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
       setToken(session?.access_token)
     }
 
+
+
     function incrementFn(e) {
         console.log(e.target.value,'e');
         if(count == max)return;
@@ -49,7 +51,7 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
 
     function decrementFn(e) {
         console.log(e,'e');
-       if(count === 0) return;
+       if(count ===1) return;
         setCount(count-1)
     }
 
@@ -59,8 +61,8 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
         try {
             const data = {
                 amount: price * count,
-                tokenId: router?.query?.id,
-                // tokenId: tokenId,
+                // tokenId: router?.query?.id,
+                tokenId: tokenId,
                 quantity: count,
             }
             let req = await axios.post("/api/create-productPayment-intent",{data:data,token:token});
@@ -134,7 +136,7 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
                 </div>
                 <button onClick={sessionData ? createPaymentIntent : ()=> setShowModal(true)} className="card-continue">
                     {" "}
-                    {loading ? "Loading..." : `Pay ${price * count}` }
+                    {loading ? "Loading..." : `Pay ${parseFloat(price * maticPrice * count).toFixed(3)} $` }
                 </button>
                 <LoginModal showModal={showModal} setShowModal={setShowModal} />
             </div>
