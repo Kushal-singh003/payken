@@ -133,7 +133,7 @@ export default function SuccessPage({ props, response }) {
                       <span>{hash}</span>
                     </div>
                     <button onClick={nextFn} className="view">
-                      View your NFT now
+                      View your NFT's now
                     </button>
                   </div>
                 ) : (

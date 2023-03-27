@@ -22,9 +22,10 @@ export default async function handler(req, res) {
     //   },
     // },
     currency: "usd",
-    automatic_payment_methods: {
-      enabled: true,
-    },
+    // automatic_payment_methods: {
+    //   enabled: true,
+    // },
+    payment_method_types: ['card', 'cashapp','us_bank_account'],
   });
   console.log(paymentIntent, "payment intent");
 

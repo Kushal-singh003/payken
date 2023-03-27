@@ -11,6 +11,8 @@ import {
 const stripe = require("stripe")(
   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
 );
+import LoginModal from "@/components/ui/LoginModal";
+import supabase from "@/components/Utils/SupabaseClient";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -20,8 +22,11 @@ export default function CheckoutForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [paymentMethod, setPaymentMethod] = useState();
   const [paymentRequest, setPaymentRequest] = useState();
+  const [sessionData,setSessionData] = useState(false);
+  const [showModal,setShowModal] = useState(false)
 
   React.useEffect(() => {
+    getSession();
     if (!stripe) {
       return;
     }
@@ -84,9 +89,26 @@ export default function CheckoutForm() {
     layout: "tabs",
   };
 
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(session, "session");
+    setSessionData(session)
+    if(session == null){
+      setShowModal(true);
+    }
+    const token = session?.access_token;
+    }
+
+    function handleModalFn(e){
+      e.preventDefault();
+      setShowModal(true)
+    }
+
   return (
     <>
-      <form id="payment-form" onSubmit={handleSubmit}>
+      <form id="payment-form" onSubmit={sessionData ? handleSubmit : handleModalFn}>
         <PaymentElement id="payment-element" options={paymentElementOptions} />
 
         <button disabled={isLoading || !stripe || !elements} id="submit">
@@ -101,6 +123,7 @@ export default function CheckoutForm() {
         {/* Show any error or success messages */}
         {message && <div id="payment-message">{message}</div>}
       </form>
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 }

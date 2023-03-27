@@ -48,9 +48,10 @@ export default async function handler(req, res) {
     },
     currency: "usd",
     description,
-    automatic_payment_methods: {
-      enabled: true,
-    },
+    // automatic_payment_methods: {
+    //   enabled: true,
+    // },
+    payment_method_types: ['card', 'cashapp','us_bank_account'],
 
     customer: `${customer}`,
     // setup_future_usage: "off_session",

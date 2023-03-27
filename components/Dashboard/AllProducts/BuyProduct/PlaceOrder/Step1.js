@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useRouter } from "next/router";
-
+import LoginModal from "@/components/ui/LoginModal";
 
 let list3 = [];
 
@@ -14,6 +14,8 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(1);
     const [token,setToken] = useState();
+    const [sessionData,setSessionData] = useState(null)
+    const [showModal,setShowModal] = useState(false);
    
    
     const router = useRouter();
@@ -29,6 +31,11 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
         } = await supabase.auth.getSession();
 
       console.log(session,'session');
+      setSessionData(session)
+
+      if(session == null){
+        setShowModal(true);
+      }
       setToken(session?.access_token)
     }
 
@@ -125,11 +132,13 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
                         holding period and identity checks. Refunds are not available.
                     </label>
                 </div>
-                <button onClick={createPaymentIntent} className="card-continue">
+                <button onClick={sessionData ? createPaymentIntent : ()=> setShowModal(true)} className="card-continue">
                     {" "}
-                    {loading ? "Loading..." : `Pay ${price * count}`}
+                    {loading ? "Loading..." : `Pay ${price * count}` }
                 </button>
+                <LoginModal showModal={showModal} setShowModal={setShowModal} />
             </div>
+
         </div>
     );
 }

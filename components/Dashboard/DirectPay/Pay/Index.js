@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/router";
 import CheckoutForm from "./CheckoutForm";
+import supabase from "@/components/Utils/SupabaseClient";
 
 const stripePromise = loadStripe("pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU5LoW1odTriiIm4vMZ7Vzk3aHf0YWOul4TFYpQU2JsR759vmsP0J00YDXzZqOm");
 
@@ -33,7 +34,17 @@ const router = useRouter();
   useEffect(()=>{
     setShow(true)
     setShow1(true)
+    getSession()
   },[])
+
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(session, "session");
+   
+    const token = session?.access_token;
+    }
 
   return (
     <>
@@ -117,6 +128,7 @@ const router = useRouter();
               </div>
             </div>
           </Modal>
+
         </div>
       </section>
 

@@ -48,8 +48,9 @@ export default function BottomNav() {
 
                   <Dropdown.Menu>
                     <Dropdown.Item ><Link className='bottom-Link' href='/settings/kyc/submitKyc'>Kyc</Link></Dropdown.Item>
-                    <Dropdown.Item ><Link className='bottom-Link' href='/payment'>Payment</Link></Dropdown.Item>
+                    {/* <Dropdown.Item ><Link className='bottom-Link' href='/payment'>Payment</Link></Dropdown.Item> */}
                     <Dropdown.Item ><Link className='bottom-Link' href='/wallet'>Wallet</Link></Dropdown.Item>
+                    <Dropdown.Item ><Link className='bottom-Link' href='/dashboard/directPay'>Direct Pay</Link></Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={(e) => logoutFn(e)}>
                       Logout

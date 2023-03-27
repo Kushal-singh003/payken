@@ -83,7 +83,7 @@ export default function SuccessPage({ props, response }) {
                         alt=""
                       />
                     </div>
-                    <h2>Payment Successful !</h2>
+                    <h2>Payment Successful</h2>
                     <h6></h6>
                     <div className="some-text">
                       {/* <p>Your receipt was sent to:</p> */}

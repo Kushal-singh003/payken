@@ -18,7 +18,7 @@ export default function Wallet() {
       setAddress(response.data.data[0].address);
 
       const response2 = await axios.get(
-        `https://api.covalenthq.com/v1/80001/address/${response?.data?.data[0]?.address}/balances_v2/?key=ckey_1da37247acc240e6aaace13ffcc`
+        `https://api.covalenthq.com/v1/80001/address/${response?.data?.data[0]?.address}/balances_v2/?key=ckey_85b75af419dc4631b51d2de859f`
       );
       console.log(response2, "response2");
       setCoinsData(response2?.data?.data?.items);

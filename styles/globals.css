@@ -11,6 +11,7 @@ body {
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+
 /*-------------------- Login section starts ---------------------*/
 .login {
   width: 100%;
@@ -661,25 +662,22 @@ div#panelsStayOpen-collapseOne {
 
 .signup .signup-google,
 .signup .signup-apple {
-  background: linear-gradient(
-    180deg,
-    rgba(16, 118, 32, 0.77) 0%,
-    rgba(8, 59, 16, 1) 100%
-  );
+
+  background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
   color: white;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none !important;
-  width: 85%;
+  width: 86%;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 13px 0px;
   border-radius: 10px;
   margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   border: unset;
+  gap: 10px;
 }
 
 .signup-form {
@@ -699,9 +697,9 @@ div#panelsStayOpen-collapseOne {
 
 .signup .signup-box {
   width: 40%;
-  background-color: #1a1a1a;
+  background-color: #0e0e0e;
   border-radius: 20px;
-  box-shadow: -1px 3px 47px rgba(124, 233, 15, 0.42);
+  box-shadow: -1px -2px 25px rgb(1 87 26 / 70%);
   padding: 40px 10px 40px 10px;
   display: flex;
   flex-direction: column;
@@ -710,20 +708,16 @@ div#panelsStayOpen-collapseOne {
 }
 
 .signup .signup-box .signup-btn {
-  background: linear-gradient(
-    180deg,
-    rgba(16, 118, 32, 0.77) 0%,
-    rgba(8, 59, 16, 1) 100%
-  );
   color: white;
   font-size: 17px;
   font-weight: 600;
   text-decoration: none !important;
   width: 100%;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 13px 0px;
   border-radius: 10px;
   margin-top: 1rem;
+  background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
   border: none;
 }
 
@@ -1959,6 +1953,235 @@ a.btn.btn-info.cartCancel:hover {
 .addProduct--div .dynamic-div .dynamic-toggle {
   width: 20%;
 }
+
+.pricing .row {
+  padding-top: 40px;
+}
+
+.pricing .box {
+  padding: 60px 40px;
+  box-shadow: 0 3px 20px -2px rgba(20, 45, 100, 0.1);
+  background: #0f0d0d;
+  height: 100%;
+  border-top: 4px solid #fff;
+  border-radius: 5px;
+}
+
+.pricing h3 {
+  font-weight: 500;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #386e38;
+}
+
+.pricing h4 {
+  font-size: 48px;
+  color: #386e38;
+  font-weight: 400;
+  font-family: "Jost", sans-serif;
+  margin-bottom: 25px;
+}
+
+.bottom-nav .dropdown .dropdown-item:hover {
+  color: black !important;
+  background-color: unset !important;
+}
+
+.pricing h4 sup {
+  font-size: 28px;
+}
+
+.pricing h4 span {
+  color: lime;
+  font-size: 18px;
+  display: block;
+}
+
+.pricing ul {
+  padding: 20px 0;
+  list-style: none;
+  color: #999;
+  text-align: left;
+  line-height: 20px;
+}
+
+.pricing ul li {
+  padding: 10px 0 10px 30px;
+  position: relative;
+}
+
+.pricing ul i {
+  color: #28a745;
+  font-size: 24px;
+  position: absolute;
+  left: 0;
+  top: 6px;
+}
+
+.pricing ul .na {
+  color: #ccc;
+}
+
+.pricing ul .na i {
+  color: #ccc;
+}
+
+.pricing ul .na span {
+  text-decoration: line-through;
+}
+
+.pricing .buy-btn {
+  display: inline-block;
+  padding: 12px 35px;
+  border-radius: 50px;
+  color: lime;
+  transition: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Jost", sans-serif;
+  transition: 0.3s;
+  border: 1px solid lime;
+}
+
+.pricing .buy-btn:hover {
+  background: lime;
+  color: black !important;
+}
+
+.pricing .featured {
+  border-top-color: lime;
+}
+
+.pricing .featured .buy-btn {
+  background: lime;
+  color: #000
+}
+
+.pricing .featured .buy-btn:hover {
+  background: lime;
+  color: white !important;
+}
+
+section#pricing{
+  float: left;
+  width: 100%;
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+}
+
+section#pricing .section-title {
+  color: white;
+  font-family: sans-serif;
+}
+
+#cart-section .cartMain-div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 50px;
+  background: #0c0c0c;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+#cart-section .cart-div {
+  display: flex;
+  align-items: center;
+ 
+  height: 60vh;
+  background: black;
+}
+
+#cart-section .cart-div .cart-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* width: 100px;
+align-items: center;
+gap: 4px;
+display: flex;
+justify-content: space-between !important; */
+
+/* background-color: #30302d;
+    opacity: 1;
+    color: #a09494; */
+
+    #cart-section .cart-div .cart-quantity{
+
+      width: 100px;
+      align-items: center;
+      gap: 4px;
+      display: flex;
+      justify-content: space-between !important;
+    }
+
+    #cart-section .cart-div .cart-quantity input{
+      background-color: #30302d;
+    opacity: 1;
+    color: #a09494;
+    width: 70px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    }
+/* 
+    #cart-section .cart-div .cart-delete {
+      width: 100%;
+      text-align: center;
+      padding-left: 2.5rem;
+  } */
+
+  #cart-section .cart-div .cart-delete i.bi.bi-trash3{
+    color: white;
+    font-size: 18px;
+    background: red;
+    padding: 6px 8px;
+    border-radius: 5px;
+  }
+
+  section#cart-section{
+    color: white;
+  }
+
+#cart-section .cart-div .cart-img img {
+  width: 130px;
+  height: 130px;
+  border: 1px dashed #222c22;
+  border-radius: 20px;
+  padding: 4px;
+}
+#cart-section .cart-div .cart-action {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 4rem;
+  padding-right: 2rem;
+}
+
+#cart-section .cart-div .cart-quantity img {
+  width: 30px;
+  height: 30px;
+}
+
+#cart-section .cart-div .cart-img h2{
+font-size: 24px;
+text-transform: capitalize;
+}
+
+#cart-section .cart-div .cart-img span{
+font-size: 16px;
+font-weight: 500;
+text-transform: capitalize;}
+
+
+
 
 /* .addProduct--div .dynamic-div #flexSwitchCheckChecked{
   width: 65%;
@@ -6076,10 +6299,23 @@ form {
     padding: 0 15px !important;
   }
 
+  section#pricing {
+    margin-top: 2rem;
+    
+}
+
   .directPay-form form button.pay {
     padding: 12px 50px !important;
   
 }
+
+#purchasenft-body h2 {
+  font-size: 22px;
+  padding: 0;
+}
+
+
+
 
 section.direct-pay {
   height: 60vh;
@@ -6090,7 +6326,7 @@ section.direct-pay {
 
 section.direct-pay .directPay-form {
 
-  height: 36vh;
+  height: 40vh;
 }
   section.bottom-nav {
     display: block;
@@ -6189,6 +6425,7 @@ section.direct-pay .directPay-form {
     padding: 17px 3px;
     background: black;
     box-shadow: 0px 0px 10px 2px rgb(119 119 119 / 20%);
+    z-index: 999;
   }
   .signup .container {
     height: auto;
@@ -6429,6 +6666,10 @@ section.direct-pay .directPay-form {
   .Wallet .container {
     max-width: 900px;
   }
+  .pricing .box {
+    max-width: 60%;
+    margin: 0 auto 30px auto;
+  }
 
   .threeb-one {
     width: 100%;
@@ -6653,6 +6894,11 @@ section.direct-pay .directPay-form {
   /*---------------- wallet starts ------------------------*/
   .Wallet .container {
     max-width: 900px;
+  }
+
+  .pricing .box {
+    max-width: 80%;
+    margin: 0 auto 30px auto;
   }
 
   section.nanu #home-inner-profile .card-body {
@@ -7254,6 +7500,11 @@ section.direct-pay .directPay-form {
 @media (max-width: 476px) {
   .qr-code .copy-address {
     flex-direction: column;
+  }
+
+  .pricing .box {
+    max-width: 100%;
+    margin: 0 auto 30px auto;
   }
 
   .qr-code {
