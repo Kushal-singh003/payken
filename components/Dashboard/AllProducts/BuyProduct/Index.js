@@ -97,7 +97,7 @@ export default function NftDetail({ props }) {
 
   function copyTextFn(e) {
     e.preventDefault();
-    navigator.clipboard.writeText(address);
+    navigator.clipboard.writeText(buttonContent);
 
     setShowText(true);
 

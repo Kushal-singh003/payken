@@ -85,12 +85,16 @@ export default function Dashboard() {
   return (
     <div>
       <NavBar />
+
       <Backdrop
         sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
       >
+        
         <CircularProgress color="inherit" />
+
       </Backdrop>
+
       <MobileLogo />
       <section className="sent">
         <div className="container">
@@ -176,6 +180,12 @@ export default function Dashboard() {
                 <span>Purcahses</span>
               </div>
             </Link>
+            <Link className="link" href="/dashboard/allProducts">
+                  <div className="sent-card">
+                    <img src="img/shopping-bag.png" alt="" />
+                    <span>Products</span>
+                  </div>
+                </Link>
 
             {vMerchant == 2 ? (
               <>
@@ -185,12 +195,12 @@ export default function Dashboard() {
                     <span>Collection</span>
                   </div>
                 </Link>
-                <Link className="link" href="/dashboard/allProducts">
+                {/* <Link className="link" href="/dashboard/allProducts">
                   <div className="sent-card">
                     <img src="img/shopping-bag.png" alt="" />
                     <span>Products</span>
                   </div>
-                </Link>
+                </Link> */}
 
                 <Link className="link" href="/dashboard/listedProducts">
                   <div className="sent-card">

@@ -60,7 +60,7 @@ const UpdateProfile = () => {
 
     const { data, error } = await supabase.auth.updateUser({
       data: {
-        full_name: firstName,
+        name: firstName,
         last_name: lastName,
         address: address,
         city: city,
