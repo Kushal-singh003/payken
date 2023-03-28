@@ -89,7 +89,7 @@ export default function ProductDetails({ props }) {
             <div className="detail-right">
               <div className="detail-row">
                 <h6>{productData?.productName}</h6>
-                <span>{productData?.price} MATIC</span>
+                <span>{productData?.price == 999999999 ? 0 : productData?.price} MATIC </span>
               </div>
               <p className="super-dope">{productData?.description}</p>
               <div className="accordion" id="accordionPanelsStayOpenExample">
@@ -165,8 +165,8 @@ export default function ProductDetails({ props }) {
                             <li>{productData?.productName || <span className="input-null">null</span>}</li>
                             <li>{productData?.id || <span className="input-null">null</span>}</li>
                             <li>{productData?.link || <span className="input-null">null</span>}</li>
-                            <li>{<>{productData?.price} MATIC </>|| <span className="input-null">null</span>} </li>
-                            <li>{productData?.quantity} || <span className="input-null">null</span></li>
+                            <li>{productData?.price == 999999999 ? <> 0 MATIC </>: productData?.price ? <> {productData?.price} MATIC </> : <span className="input-null">null</span>}</li>
+                            <li> {productData?.quantity == 999999999 ? <> 0  </>: productData?.quantity ? <> {productData?.quantity}  </> : <span className="input-null">null</span>}</li>
                           </ul>
                         </div>
                       </div>

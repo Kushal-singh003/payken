@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/router";
-import Backdrop from "@mui/material/Backdrop";
+// import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import supabase from "@/components/Utils/SupabaseClient";
@@ -23,7 +23,7 @@ export default function Step3({ props, response }) {
 
     if (!response?.error) {
       setOpen(false);
-      setHash(response?.data?.transactionHash);
+      setHash(response?.data?.cc?.hash);
       setNftData(response?.data?.cc);
       setNFtImage(response?.data?.cc?.image);
       return;
@@ -100,12 +100,12 @@ export default function Step3({ props, response }) {
 
   return (
     <div>
-      <Backdrop
+      {/* <Backdrop
         sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
       >
         <CircularProgress color="inherit" />
-      </Backdrop>
+      </Backdrop> */}
 
       <section className="not-imp">
         <div className="container">
@@ -131,7 +131,7 @@ export default function Step3({ props, response }) {
                     <div className="some-text">
                       {/* <p>Your receipt was sent to:</p> */}
                       <p>{nftData?.name}</p>
-                      <span>{hash}</span>
+                      <span style={{textAlign:'center'}}>{hash}</span>
                     </div>
                     <button onClick={nextFn} className="view">
                       View your NFT now

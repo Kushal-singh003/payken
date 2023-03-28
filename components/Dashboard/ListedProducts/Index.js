@@ -171,7 +171,8 @@ export default function ListedProducts() {
                         <h4 className="productName">{item.productName}</h4>
                         <h4 className="productPrice">
                           {" "}
-                          <span>{item.price} </span> <span>MATIC</span>
+                          <span>{item.price == 999999999  ? 0 : item.price} </span> <span>MATIC</span>
+                          
                         </h4>
                       </div>
 

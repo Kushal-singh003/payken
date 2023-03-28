@@ -61,6 +61,7 @@ export default function Step1({setClientSecret,setShow1,setShow2,max,price,token
         try {
             const data = {
                 amount: price * count,
+                maticPrice:maticPrice,
                 // tokenId: router?.query?.id,
                 tokenId: tokenId,
                 quantity: count,

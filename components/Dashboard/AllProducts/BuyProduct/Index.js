@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, use } from "react";
 import Link from "next/link";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -25,7 +25,9 @@ export default function NftDetail({ props }) {
   const [visible, setVisible] = React.useState(false);
   const [session,setSession] = useState(null)
   const [showModal,setShowModal] = useState(false)
+  const [buttonContent,setButtonContent] = useState('<a href="/dashboard/allProducts/placeOrder?id=tokenId> Pay with payken </a>');
   const router = useRouter();
+  const [showText,setShowText] = useState(false)
 
   console.log(props, "props");
 
@@ -53,7 +55,7 @@ export default function NftDetail({ props }) {
 
     setProductData(response?.data?.data[0]);
     setAddress(
-      `https://payken-demo.vercel.app/dashboard/allProducts/placeOrder?price=${response?.data?.data[0]?.price}&id=${props}`
+      `http://52.9.60.249:3000/dashboard/allProducts/placeOrder?price=${response?.data?.data[0]?.price}&id=${props}`
     );
     setOpen(false);
   }
@@ -93,6 +95,17 @@ export default function NftDetail({ props }) {
     setShowModal(true)
   }
 
+  function copyTextFn(e) {
+    e.preventDefault();
+    navigator.clipboard.writeText(address);
+
+    setShowText(true);
+
+    setTimeout(() => {
+      setShowText(false);
+    }, [1000]);
+  }
+
   return (
     <div>
       <section className="nft-detail section-product">
@@ -115,7 +128,7 @@ export default function NftDetail({ props }) {
             <div className="detail-right">
               <div className="detail-row">
                 <h6>{productData?.productName}</h6>
-                <span>{productData?.price} MATIC</span>
+                <span>{productData?.price == 999999999 ? 0 : productData?.price} MATIC </span>
               </div>
               <p className="super-dope">{productData?.description}</p>
               <div className="accordion" id="accordionPanelsStayOpenExample">
@@ -188,11 +201,17 @@ export default function NftDetail({ props }) {
                         </div>
                         <div className="address">
                           <ul>
-                            <li>{productData?.productName}</li>
-                            <li>{productData?.id}</li>
-                            <li>{productData?.link }</li>
-                            <li>{productData?.price} MATIC</li>
-                            <li>{productData?.quantity}</li>
+                          <li>{productData?.productName || <span className="input-null">null</span>}</li>
+                            <li>{productData?.id || <span className="input-null">null</span>}</li>
+                            <li>{productData?.link || <span className="input-null">null</span>}</li>
+                            <li>
+                              {/* {!productData?.price == 999999999 || productData?.price   ? <>{productData?.price} MATIC </> : <span className="input-null">null</span>}  */}
+                            {productData?.price == 999999999 ? <> 0 MATIC </>: productData?.price ? <> {productData?.price} MATIC </> : <span className="input-null">null</span>}
+                            </li>
+                            <li>
+                              {/* {!productData?.quantity == 999999999 || productData?.quantity  ? <>{productData?.quantity} MATIC </> : <span className="input-null">null</span>} */}
+                              {productData?.quantity == 999999999 ? <> 0  </>: productData?.quantity ? <> {productData?.quantity}  </> : <span className="input-null">null</span>}
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -212,7 +231,8 @@ export default function NftDetail({ props }) {
                             &lt;button onclick="&gt;Buy
                             with card&lt; 
                             {`<a href='/dashboard/allProducts/placeOrder?id={tokenId}'></a>`} */}
-                            &lt;a href="/dashboard/allProducts/placeOrder?id=tokenId"&gt; Pay with payken &lt;/a&gt;
+                            {/* &lt;a href="/dashboard/allProducts/placeOrder?id=tokenId"&gt; Pay with payken &lt;/a&gt; */}
+                            {buttonContent}
                         {/* {`
 
                             function clickHandlerFn(e)={ `}
@@ -237,8 +257,9 @@ export default function NftDetail({ props }) {
                         id="copy_to_clipboard_script_button"
                         onclick="copy_to_clipboard(this, 'embedded_code_textarea')"
                         className="tertiary compact pad"
+                        onClick={copyTextFn}
                       >
-                        Copy
+                        {showText ? 'Copied!' : 'Copy'}
                       </button>
                      
                     </div>
