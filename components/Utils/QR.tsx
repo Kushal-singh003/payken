@@ -24,6 +24,7 @@ export default function QRCode({props}) {
   const [url, setUrl] = useState(props);
   const [fileExt, setFileExt] = useState("png");
   const ref = useRef(null);
+  const [showText,setShowText] = useState(false);
 
   useEffect(() => {
     qrCode.append(ref.current);
@@ -50,6 +51,19 @@ export default function QRCode({props}) {
     });
   };
 
+  function copyTextFn(e) {
+    e.preventDefault();
+    console.log(props,'prsp')
+    navigator.clipboard.writeText(props);
+
+
+    setShowText(true);
+
+    setTimeout(() => {
+      setShowText(false);
+    }, [1000]);
+  }
+
   return (
     <>
       <Head>
@@ -62,13 +76,22 @@ export default function QRCode({props}) {
       <div ref={ref} />
       <div style={{marginTop:'1rem'}} className="App qr-app">
       {/* <div style={styles.inputWrapper}> */}
-        <input style={{padding:'8px 10px'}} className='qr-input' value={url} onChange={onUrlChange}  />
-        <select style={{padding:'11px 10px',marginLeft:'1rem'}}  className='qr-select' onChange={onExtensionChange} value={fileExt}>
+        <div className='qrDIv'>
+
+        <input style={{padding:'8px 10px',width:'60% '}} className='qr-input' value={url} onChange={onUrlChange}  />
+        <select style={{padding:'11px 10px',marginLeft:'1rem',width:'20% '}}  className='qr-select' onChange={onExtensionChange} value={fileExt}>
           <option value="png">PNG</option>
           <option value="jpeg">JPEG</option>
           <option value="webp">WEBP</option>
         </select>
+        </div>
+
+        <div className='copyDiv'>
+
+        <button className='downloadQR' onClick={copyTextFn}>{showText ? 'Copied' : 'Copy'}</button>
+
         <button className='downloadQR' onClick={onDownloadClick}>Download</button>
+        </div>
       </div>
     {/* </div> */}
     </>

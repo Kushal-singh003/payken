@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   console.log(token, data, "token is here");
   const paymentIntent = await stripe.paymentIntents.create({
-    amount:Math.ceil(100 * 1),
+    amount:Math.ceil(100 * data?.amount),
     // shipping: {
     //   name: "test",
     //   address: {

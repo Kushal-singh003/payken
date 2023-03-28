@@ -25,7 +25,7 @@ export default function NftDetail({ props }) {
   const [visible, setVisible] = React.useState(false);
   const [session,setSession] = useState(null)
   const [showModal,setShowModal] = useState(false)
-  const [buttonContent,setButtonContent] = useState('<a href="/dashboard/allProducts/placeOrder?id=tokenId> Pay with payken </a>');
+  const [buttonContent,setButtonContent] = useState();
   const router = useRouter();
   const [showText,setShowText] = useState(false)
 
@@ -57,6 +57,7 @@ export default function NftDetail({ props }) {
     setAddress(
       `http://52.9.60.249:3000/dashboard/allProducts/placeOrder?price=${response?.data?.data[0]?.price}&id=${props}`
     );
+    setButtonContent(`<a href="http://52.9.60.249:3000/dashboard/allProducts/placeOrder?id=${response?.data?.data[0]?.id}>Pay with payken </a>`)
     setOpen(false);
   }
 
@@ -179,7 +180,7 @@ export default function NftDetail({ props }) {
                       aria-expanded="false"
                       aria-controls="panelsStayOpen-collapseTwo"
                     >
-                      <img src="/img/down-arrow.png" alt="" />
+                      {/* <img src="/img/down-arrow.png" alt="" /> */}
                       Details
                     </button>
                   </h2>

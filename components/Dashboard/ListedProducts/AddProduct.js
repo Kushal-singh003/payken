@@ -41,6 +41,7 @@ export default function AddProduct() {
   const [show, setShow] = useState(false);
   const [errMsg, setErrMsg] = useState(false);
   const [maticPrice,setMaticPrice] = useState();
+  const [minPrice,setMinPrice] = useState();
 
   async function getSession() {
     const {
@@ -54,7 +55,9 @@ export default function AddProduct() {
     try {
       const response = await axios.get('https://api.polygonscan.com/api?module=stats&action=maticprice&apikey=3DP8EIJ53A49TPYD6WWUCVE919S7W7N2RU');
       console.log(response,'matic price')
-      setMaticPrice(response?.data?.result?.maticusd)
+      const a = response?.data?.result?.maticusd;
+      setMaticPrice(a)
+     
     } catch (error) {
       console.log(error,'error')
     }
@@ -105,6 +108,12 @@ export default function AddProduct() {
 
     if (!productInfo?.image) {
       toast.error("Please select a product image");
+      setLoading(false);
+      return;
+    }
+
+    if(productInfo?.price < (0.5 / maticPrice) ){
+      toast.error(`Min price must be ${parseFloat(0.5 / maticPrice).toFixed(3)}`)
       setLoading(false);
       return;
     }
@@ -318,7 +327,7 @@ export default function AddProduct() {
              
                 <div className="inputSection dynamic-price">
                   <h4 className="input-title">
-                    Price <span className="inpu-desc">(In MATIC)</span>
+                    Price <span className="inpu-desc">(In MATIC & min price {parseFloat(0.5 / maticPrice).toFixed(3)} MATIC)</span>
                   </h4>
                   <h6 style={{color:'grey'}}>1 Matic = {maticPrice}USD</h6>
 

@@ -140,7 +140,7 @@ export default function ProductDetails({ props }) {
                       aria-expanded="false"
                       aria-controls="panelsStayOpen-collapseTwo"
                     >
-                      <img src="/img/down-arrow.png" alt="" />
+                      {/* <img src="/img/down-arrow.png" alt="" /> */}
                       Details
                     </button>
                   </h2>

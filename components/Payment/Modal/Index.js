@@ -61,7 +61,7 @@ export default function Index({ props, price }) {
       email: email,
     });
     localStorage.setItem("buyerEmail", email);
-    getCustomerFn(email);
+    getCustomerFn(email,name,address,city,country);
   }
 
   async function getCustomerFn(email, name, address, city, country) {
@@ -97,7 +97,7 @@ export default function Index({ props, price }) {
       console.log(createCid, "cid");
       setCustomer(createCid);
       const response2 = await withAuth({
-        data: { email: formData?.email, cId: createCid },
+        data: { email: email, cId: createCid },
         query: "updatecid",
       });
       console.log(response2, "response2");

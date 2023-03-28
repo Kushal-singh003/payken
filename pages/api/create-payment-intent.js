@@ -37,7 +37,7 @@ export default async function handler(req, res) {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: Math.ceil(100 * 1),
     shipping: {
-      name: name,
+      name: name || 'test',
       address: {
         line1: address,
         postal_code: "98140",

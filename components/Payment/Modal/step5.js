@@ -5,6 +5,7 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { withAuth } from "@/components/Utils/Functions";
 import axios from "axios";
+import supabase from "@/components/Utils/SupabaseClient";
 
 export default function Step5() {
   const [show, setShow] = useState(false);
@@ -19,16 +20,28 @@ export default function Step5() {
   useEffect(() => {
     setOpen(true);
     setShow(true);
-    setEmail(localStorage.getItem("buyerEmail"));
+    getSession()
 
-    updateTransaction();
+    
     //  card()
   }, [router.query]);
 
-  async function updateTransaction() {
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(session, "session inn contract update");
+    const a = session?.user?.email;
+    setEmail(a)
+    console.log(a,'email session')
+
+    updateTransaction(a);
+  }
+
+  async function updateTransaction(a) {
     const data = {
       clientSecret: router.query.payment_intent,
-      email,
+      email:a,
     };
     try {
       let response = await withAuth({ data: data, query: "updatetransaction" });
