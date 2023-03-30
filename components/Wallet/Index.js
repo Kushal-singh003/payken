@@ -4,12 +4,25 @@ import supabase from "../Utils/SupabaseClient";
 import { withToken } from "../Utils/Functions";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Modal } from "@nextui-org/react";
+import { MerchantApi } from "../Utils/Functions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export default function Wallet() {
   const [address, setAddress] = useState();
   const [coinsData, setCoinsData] = useState();
   const [lengthOfData, setLengthOfData] = useState(null);
   const [open, setOpen] = useState(false);
+  const [visible,setVisible] = useState(false);
+  const [price,setPrice] = useState();
+  const [wallet,setWallet] = useState();
+  const [tokenData,setTokenData] = useState();
+  const [loading,setLoading] = useState();
+  const [errMsg,setErrMsg] = useState(false);
+  const [errMsg2,setErrMsg2] = useState(null);
+  const [successMsg,setSuccessMsg] = useState(null);
 
   async function getAddress(token) {
     try {
@@ -36,7 +49,7 @@ export default function Wallet() {
     } = await supabase.auth.getSession();
 
     console.log(session, "session");
-
+    setTokenData(session?.access_token)
     getAddress(session?.access_token);
   }
 
@@ -44,9 +57,56 @@ export default function Wallet() {
     setOpen(true);
     getSession();
   }, []);
+
+  const closeHandler = () => {
+    setVisible(false);
+    console.log("closed");
+  };
+
+  function handleModalFn(e){
+    setVisible(true)
+
+  }
+
+  async function withdrawFn(e){
+    e.preventDefault();
+    setLoading(true)
+    setErrMsg2(null)
+    setSuccessMsg(null)
+
+    if(!price || !wallet){
+      setErrMsg(true)
+      setLoading(false)
+      return
+    }
+
+    const data = {
+      address:wallet,
+      price:price,
+    }
+    const response = await MerchantApi({data:data,token:tokenData,query:'sendmatic'});
+    setLoading(false)
+
+    if(response.Error){
+      setErrMsg2(response?.Error?.error?.message?.reason)
+    }
+
+    if(!response.Error){
+      setSuccessMsg(response?.data?.message)
+
+      setTimeout(()=>{
+        setSuccessMsg(null)
+        setVisible(false)
+      },[1000])
+    }
+
+    console.log(response,'withdraw response')
+  }
+
   return (
     <div>
       <section className="Wallet">
+        <ToastContainer/>
         <Backdrop
           sx={{ color: "green", zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={open}
@@ -64,6 +124,8 @@ export default function Wallet() {
                   <th scope="col"></th>
                   {/* <th scope="col"></th> */}
                   <th scope="col"></th>
+                  <th scope="col"></th>
+
                 </tr>
               </thead>
               <tbody>
@@ -91,8 +153,8 @@ export default function Wallet() {
                             <span>Amount</span>
                             <span>
                               <strong>
-                                {item.balance /
-                                  Math.pow(10, item.contract_decimals)}
+                                {parseFloat(item.balance /
+                                  Math.pow(10, item.contract_decimals)).toFixed(3)}
                               </strong>
                             </span>
                           </div>
@@ -113,292 +175,47 @@ export default function Wallet() {
                             </span>
                           </div>
                         </td>
+
+                        <td>
+                          <div className="wallet-data">
+                            <span>
+                              <button onClick={(e)=>handleModalFn(e)} >Withdraw</button>
+                            </span>
+                          </div>
+                        </td>
+
                       </tr>
                     </>
                   );
                 })}
-                {/* <tr className="wallet-stripped">
-                  <th>
-                    <img src="/img/crypto.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <img src="/img/bitcoin.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="wallet-stripped">
-                  <th>
-                    <img src="/img/tron.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <img src="/img/crypto.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="wallet-stripped">
-                  <th>
-                    <img src="/img/bitcoin.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <img src="/img/tron.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="wallet-stripped">
-                  <th>
-                    <img src="/img/bitcoin.png" alt="" />
-                  </th>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Token</span>
-                      <span>
-                        <strong>0.00</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td className="mnbvfrr">
-                    <div className="wallet-data">
-                      <span>Price</span>
-                      <span>
-                        <strong>
-                          <img src="/img/ethereum.png" alt="" />
-                          0.00
-                        </strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>Referral Link</span>
-                      <span>
-                        <strong>--</strong>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="wallet-data">
-                      <span>contract address</span>
-                      <span>
-                        <strong>0x784578458542514784</strong>
-                      </span>
-                    </div>
-                  </td>
-                </tr> */}
               </tbody>
             </table>
+
+            <Modal
+            closeButton
+            aria-labelledby="modal-title"
+            open={visible}
+            onClose={closeHandler}
+          >
+            <Modal.Body>
+              <div className="withdraw-pop">
+                <form className="withdraw-form" onSubmit={withdrawFn}  >
+                  <h2 className="withdraw-text">Withdraw</h2>
+                  <div className="inputFields">
+                <input className="withdraw-input" placeholder="Wallet address" onChange={(e)=> setWallet(e.target.value)}  />
+                <input className="withdraw-amount" step={"0.001"} type='number' placeholder="Amount" onChange={(e)=> setPrice(e.target.value)} />
+                {errMsg && <span style={{color:'red',textAlign:'center'}}>*Please provide all credential</span>}
+                {errMsg2 && <span style={{color:'red',textAlign:'center'}}>{errMsg2}</span>}
+                {successMsg && <span style={{color:'green',textAlign:'center'}}>{successMsg}</span>}
+
+                </div>
+                <button type="submit" disabled={loading} className="withdraw-btn">{loading ? 'Loading...' : 'Withdraw' }</button>
+                </form>
+
+               
+              </div>
+            </Modal.Body>
+          </Modal>
             
 			  {lengthOfData == 0 ? <div className="not-found">
 				<span>Not found</span>
@@ -408,7 +225,6 @@ export default function Wallet() {
 			  {lengthOfData == null ? <div className="loading-div">
 				<span></span>
 			  </div>:null}
-            {/* <div></div> */}
           </div>
         </div>
       </section>

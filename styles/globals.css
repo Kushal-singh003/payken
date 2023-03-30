@@ -11,7 +11,6 @@ body {
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
 /*-------------------- Login section starts ---------------------*/
 .login {
   width: 100%;
@@ -662,8 +661,11 @@ div#panelsStayOpen-collapseOne {
 
 .signup .signup-google,
 .signup .signup-apple {
-
-  background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   color: white;
   font-size: 17px;
   font-weight: 600;
@@ -717,7 +719,11 @@ div#panelsStayOpen-collapseOne {
   padding: 13px 0px;
   border-radius: 10px;
   margin-top: 1rem;
-  background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
+  background: linear-gradient(
+    180deg,
+    rgba(16, 118, 32, 0.77) 0%,
+    rgb(1 23 4) 100%
+  );
   border: none;
 }
 
@@ -1781,9 +1787,11 @@ section.nft .nft-head .sort-span {
 .col-lg-12.pl-3.pt-3::-webkit-scrollbar-track {
   background-color: #121111 !important;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 .col-lg-12.pl-3.pt-3 {
   height: 62vh;
   overflow: auto;
@@ -1808,6 +1816,7 @@ nav#payken-navbar .nav-item .bi.bi-cart4 {
 nav#payken-navbar .profile-update {
   text-decoration: none;
   color: #000;
+  padding: 0 80px 0px 18px;
 }
 
 /* Handle */
@@ -1836,6 +1845,7 @@ nav#payken-navbar .profile-update {
   height: 50px;
   border-radius: 5px;
 }
+
 #cart .main-section {
   font-family: "Roboto Condensed", sans-serif;
   margin-top: 100px;
@@ -1859,6 +1869,7 @@ section.cart-section {
   width: 100%;
   margin-top: 8rem;
 }
+
 div#cart {
   height: 70vh;
   color: white;
@@ -1881,13 +1892,15 @@ div#cart {
   padding: 1rem 1.5rem;
   padding-top: 30px;
 }
+
 .cart-section #cart table.table.border.bg-white tbody td:nth-child(1) {
-  padding-top: 1rem !important
-  ;
+  padding-top: 1rem !important;
 }
+
 .cart-section #cart table.table.border.bg-white tbody td:nth-child(3) {
   padding-top: 25px !important;
 }
+
 .cart-section #cart table.table.border.bg-white tbody td:nth-child(5) {
   padding-top: 25px !important;
 }
@@ -1896,14 +1909,17 @@ div#cart {
   display: flex;
   align-items: center;
 }
+
 #tfoot-tr td {
   padding: 1rem 1.5rem !important;
   white-space: nowrap;
 }
+
 .cart-div {
   /* text-align: center; */
   justify-content: space-between !important;
 }
+
 .cartCheckout {
   background: linear-gradient(
     180deg,
@@ -2055,7 +2071,7 @@ a.btn.btn-info.cartCancel:hover {
 
 .pricing .featured .buy-btn {
   background: lime;
-  color: #000
+  color: #000;
 }
 
 .pricing .featured .buy-btn:hover {
@@ -2063,7 +2079,7 @@ a.btn.btn-info.cartCancel:hover {
   color: white !important;
 }
 
-section#pricing{
+section#pricing {
   float: left;
   width: 100%;
   margin-top: 8rem;
@@ -2084,13 +2100,13 @@ section#pricing .section-title {
   background: #0c0c0c;
   padding: 10px 20px;
   border-radius: 10px;
-  font-family: 'Poppins', sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
 #cart-section .cart-div {
   display: flex;
   align-items: center;
- 
+
   height: 60vh;
   background: black;
 }
@@ -2112,25 +2128,25 @@ justify-content: space-between !important; */
     opacity: 1;
     color: #a09494; */
 
-    #cart-section .cart-div .cart-quantity{
+#cart-section .cart-div .cart-quantity {
+  width: 100px;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+  justify-content: space-between !important;
+}
 
-      width: 100px;
-      align-items: center;
-      gap: 4px;
-      display: flex;
-      justify-content: space-between !important;
-    }
+#cart-section .cart-div .cart-quantity input {
+  background-color: #30302d;
+  opacity: 1;
+  color: #a09494;
+  width: 70px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
 
-    #cart-section .cart-div .cart-quantity input{
-      background-color: #30302d;
-    opacity: 1;
-    color: #a09494;
-    width: 70px;
-    height: 50px;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
-    }
 /* 
     #cart-section .cart-div .cart-delete {
       width: 100%;
@@ -2138,17 +2154,17 @@ justify-content: space-between !important; */
       padding-left: 2.5rem;
   } */
 
-  #cart-section .cart-div .cart-delete i.bi.bi-trash3{
-    color: white;
-    font-size: 18px;
-    background: red;
-    padding: 6px 8px;
-    border-radius: 5px;
-  }
+#cart-section .cart-div .cart-delete i.bi.bi-trash3 {
+  color: white;
+  font-size: 18px;
+  background: red;
+  padding: 6px 8px;
+  border-radius: 5px;
+}
 
-  section#cart-section{
-    color: white;
-  }
+section#cart-section {
+  color: white;
+}
 
 #cart-section .cart-div .cart-img img {
   width: 130px;
@@ -2157,6 +2173,7 @@ justify-content: space-between !important; */
   border-radius: 20px;
   padding: 4px;
 }
+
 #cart-section .cart-div .cart-action {
   width: 30%;
   display: flex;
@@ -2171,15 +2188,16 @@ justify-content: space-between !important; */
   height: 30px;
 }
 
-#cart-section .cart-div .cart-img h2{
-font-size: 24px;
-text-transform: capitalize;
+#cart-section .cart-div .cart-img h2 {
+  font-size: 24px;
+  text-transform: capitalize;
 }
 
-#cart-section .cart-div .cart-img span{
-font-size: 16px;
-font-weight: 500;
-text-transform: capitalize;}
+#cart-section .cart-div .cart-img span {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
 
 .input-null {
   color: #1a1a1a !important;
@@ -2192,6 +2210,18 @@ text-transform: capitalize;}
   margin: 1rem 0;
 }
 
+.direct-pay .directPay-history {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+section.Wallet.Recent-QR {
+  margin-top: -3rem;
+}
+
+section.Wallet.Transaction-History {
+  margin-top: -3rem;
+}
 
 /* .addProduct--div .dynamic-div #flexSwitchCheckChecked{
   width: 65%;
@@ -3793,7 +3823,6 @@ button.btn.btn-success.btn-block.cartCheckout {
   height: 36px;
 }
 
-
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
@@ -4002,12 +4031,38 @@ section.direct-pay {
   align-items: center;
   height: 100vh;
 }
+
 section.direct-pay .directPay-form {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 48vh;
+  flex-direction: column;
+  align-items: center;
 }
+
+.recent-card {
+  float: left;
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.grey-button {
+  background: #1d1c1c;
+  border: none;
+  border-radius: 20px;
+  /* height: 63px; */
+  width: 100%;
+  padding: 10px 80px;
+  text-align: center;
+  color: white;
+  z-index: 4;
+}
+
 .directPay-form form {
   display: flex;
   flex-direction: column;
@@ -4022,8 +4077,22 @@ section.direct-pay .directPay-form {
   background-size: cover;
 }
 
-.amtDiv{float: left; width: 100%; display: flex; justify-content: center; align-items: center; font-size: 22px; color: white !important;}
-.amtDiv h2{font-size: 58px !important;  margin: 0; margin-right: 10px; margin-left: 25%;}
+.amtDiv {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: white !important;
+}
+
+.amtDiv h2 {
+  font-size: 58px !important;
+  margin: 0;
+  margin-right: 10px;
+  margin-left: 25%;
+}
 
 .directPay-form form input.amount {
   height: 100px;
@@ -4082,25 +4151,23 @@ section.direct-pay .directPay-form {
   z-index: 3;
 }
 
-
-
 .cart-div--2 input.form-control.text-center.cart-input {
   background-color: #30302d;
   opacity: 1;
   color: #a09494;
 }
 
-.purchasenft-head .directPayImg{
-
+.purchasenft-head .directPayImg {
   height: 200px;
   width: 200px;
- border: none;
+  border: none;
 }
 
-.error-msg{
+.error-msg {
   color: white;
   font-size: 16px;
 }
+
 .directPay-form form::after {
   position: absolute;
   content: "";
@@ -4122,6 +4189,7 @@ section.direct-pay .directPay-form {
 .directPay-form form input.note::placeholder {
   color: #7c7c7c !important;
 }
+
 .directPay-form form input {
   width: 50%;
 }
@@ -5431,6 +5499,65 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+#trasactionTab {
+  float: left;
+  height: unset !important;
+}
+
+#walletTable {
+  float: left;
+  height: 36vh;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+#transactionHistory {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+.directPay-history .nav-link {
+  color: white !important;
+}
+
+#directPay {
+  margin-top: 10rem;
+  float: left;
+  width: 100%;
+}
+
+.directPay-form .nav-fill {
+  border-bottom: 1px solid grey !important;
+}
+
+.inputFields {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  gap: 10px;
+  flex-direction: column;
+}
+.withdraw-form{float: left; width: 100%; padding: 20px 10px; padding-top: 0px ;}
+.inputFields input {
+  height: 40px;
+  padding-left: 10px;
+}
+.withdraw-text{text-align: center;}
+
+
+.withdraw-btn {
+  float: left;
+  width: 100%;
+  background: linear-gradient( 180deg, rgba(16, 118, 32, 0.77) 0%, rgb(1 23 4) 100% );
+  padding: 10px 0px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  border: none;
+}
+
 @media (max-width: 1200px) {
   #wallet-inputs {
     width: 100% !important;
@@ -6264,6 +6391,14 @@ form {
   .LoginModal .modal-body {
     height: 580px;
   }
+
+  .grey-button {
+    padding: 10px 70px;
+  }
+
+  .directPay-form form {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 767px) {
@@ -6301,6 +6436,10 @@ form {
   .LoginModal .modal-dialog {
     max-width: 580px !important;
   }
+
+  .grey-button {
+    padding: 10px 35px;
+  }
 }
 
 @media (max-width: 567px) {
@@ -6311,43 +6450,43 @@ form {
 
   section#pricing {
     margin-top: 2rem;
-    
-}
+  }
 
-.directPay-form form input.amount {
-  font-size: 46px;}
+  .directPay-form form input.amount {
+    font-size: 46px;
+  }
 
   .directPay-form form button.pay {
     padding: 12px 50px !important;
     width: 86%;
-  
-}
+    margin-bottom: 1.5rem;
+  }
 
-#purchasenft-body h2 {
-  font-size: 22px;
-  padding: 0;
-}
+  #purchasenft-body h2 {
+    font-size: 22px;
+    padding: 0;
+  }
 
+  /* section.direct-pay {
+    height: 70vh;
+  } */
 
+  .directPay-form form {
+    padding: 4% 29px;
+  }
 
+  section.direct-pay .directPay-form {
+    height: 40vh;
+  }
 
-section.direct-pay {
-  height: 60vh;
-}
-
-.directPay-form form {
-  padding: 4% 29px;}
-
-section.direct-pay .directPay-form {
-
-  height: 40vh;
-}
   section.bottom-nav {
     display: block;
   }
+
   .addProduct--div .dynamic-div .dynamic-price {
     width: 100%;
   }
+
   .addProduct--div .dynamic-div .dynamic-toggle {
     width: 70%;
   }
@@ -6441,6 +6580,7 @@ section.direct-pay .directPay-form {
     box-shadow: 0px 0px 10px 2px rgb(119 119 119 / 20%);
     z-index: 999;
   }
+
   .signup .container {
     height: auto;
   }
@@ -6448,6 +6588,7 @@ section.direct-pay .directPay-form {
   .signin .container {
     height: auto;
   }
+
   nav#payken-navbar {
     display: none;
   }
@@ -6456,9 +6597,11 @@ section.direct-pay .directPay-form {
     padding: 30px 0;
     margin-top: 0rem;
   }
+
   img.bottomNav-icons {
     width: 32%;
   }
+
   section.bottom-nav .main-bottomNav ul li {
     text-align: center;
   }
@@ -6470,6 +6613,7 @@ section.direct-pay .directPay-form {
     display: flex;
     justify-content: space-between;
   }
+
   .not-found {
     height: 200px;
   }
@@ -6479,6 +6623,17 @@ section.direct-pay .directPay-form {
   /*---------------------- login ends -----------------*/
   /*----------------------- footer starts ----------------*/
   /*---------------------- footer ends -----------------*/
+
+  #directPay {
+    margin-top: 2rem;
+    float: left;
+    width: 100%;
+  }
+
+  .direct-pay .directPay-history {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 1566px) {
@@ -6680,6 +6835,7 @@ section.direct-pay .directPay-form {
   .Wallet .container {
     max-width: 900px;
   }
+
   .pricing .box {
     max-width: 60%;
     margin: 0 auto 30px auto;
@@ -7094,7 +7250,7 @@ section.direct-pay .directPay-form {
 
   .sent-box span {
     font-size: 20px;
-}
+  }
 
   .threeb-ones {
     width: 100% !important;
@@ -7105,6 +7261,7 @@ section.direct-pay .directPay-form {
     margin-left: 2rem;
     display: none;
   }
+
   .sent-card img {
     height: 173px;
   }
@@ -7521,8 +7678,8 @@ section.direct-pay .directPay-form {
   }
 
   .directPay-form form input.note {
-   
-    width: 52%;}
+    width: 52%;
+  }
 
   .pricing .box {
     max-width: 100%;
@@ -7559,19 +7716,25 @@ section.direct-pay .directPay-form {
   .send-recieve .wallet-table {
     width: 100%;
   }
+
+  /* .grey-button {
+    padding: 10px 19px;
+  } */
 }
 
 @media (max-width: 400px) {
   .signin-form {
     width: 96%;
   }
+
   .directPay-form form button.pay {
     width: 100%;
-}
+  }
 
-.directPay-form form input.note {
-  width: 66%;
-}
+  .directPay-form form input.note {
+    width: 66%;
+  }
+
   .signin .signin-google,
   .signin .signin-apple {
     width: 96% !important;
@@ -7579,17 +7742,23 @@ section.direct-pay .directPay-form {
 
   .sent-box span {
     font-size: 18px;
-}
+  }
 }
 
 @media (max-width: 380px) {
   .qr-code {
     height: 80vh;
   }
+
   .merchant-pop .merchant-btn button {
-    
-    padding: 10px 12px !important;}
+    padding: 10px 12px !important;
+  }
 
   .merchant-pop p {
-    font-size: 18px;}
+    font-size: 18px;
+  }
+
+  .grey-button {
+    padding: 10px 22px;
+  }
 }

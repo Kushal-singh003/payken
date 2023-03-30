@@ -98,7 +98,19 @@ export default function NftDetail({ props }) {
 
   function copyTextFn(e) {
     e.preventDefault();
-    navigator.clipboard.writeText(buttonContent);
+    // navigator.clipboard.writeText(buttonContent);
+
+    const textArea = document.createElement("textarea");
+    textArea.value = buttonContent;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Unable to copy to clipboard', err);
+    }
+    document.body.removeChild(textArea);
 
     setShowText(true);
 
@@ -175,7 +187,7 @@ export default function NftDetail({ props }) {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
+                      // data-bs-toggle="collapse"
                       data-bs-target="#panelsStayOpen-collapseTwo"
                       aria-expanded="false"
                       aria-controls="panelsStayOpen-collapseTwo"

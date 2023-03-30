@@ -147,12 +147,12 @@ export default function NftDetail({props}) {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
+                      // data-bs-toggle="collapse"
                       data-bs-target="#panelsStayOpen-collapseTwo"
                       aria-expanded="false"
                       aria-controls="panelsStayOpen-collapseTwo"
                     >
-                      <img src="/img/down-arrow.png" alt="" />
+                      {/* <img src="/img/down-arrow.png" alt="" /> */}
                       Details
                     </button>
                   </h2>

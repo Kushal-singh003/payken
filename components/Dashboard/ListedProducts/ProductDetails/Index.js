@@ -135,7 +135,7 @@ export default function ProductDetails({ props }) {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
+                      // data-bs-toggle="collapse"
                       data-bs-target="#panelsStayOpen-collapseTwo"
                       aria-expanded="false"
                       aria-controls="panelsStayOpen-collapseTwo"

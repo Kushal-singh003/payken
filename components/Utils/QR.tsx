@@ -51,10 +51,21 @@ export default function QRCode({props}) {
     });
   };
 
-  function copyTextFn(e) {
-    e.preventDefault();
-    console.log(props,'prsp')
-    navigator.clipboard.writeText(props);
+  function copyTextFn() {
+    // console.log(props,'prsp')
+    // navigator.clipboard.writeText(props);
+
+    const textArea = document.createElement("textarea");
+    textArea.value = props;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Unable to copy to clipboard', err);
+    }
+    document.body.removeChild(textArea);
 
 
     setShowText(true);

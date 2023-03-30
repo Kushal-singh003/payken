@@ -110,15 +110,16 @@ export default function NavBar() {
                 }
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item>
+                {/* <NavDropdown.Item> */}
                   {" "}
                   <Link
                     className="profile-update"
                     href="/settings/updateProfile"
+                    style={{width:'100%'}}
                   >
                     Profile
                   </Link>
-                </NavDropdown.Item>
+                {/* </NavDropdown.Item> */}
                 {/* <NavDropdown.Item ><Link href="/dashboard/cart">Cart</Link></NavDropdown.Item> */}
 
                 {/* <NavDropdown.Item href="/settings/changeEmail">

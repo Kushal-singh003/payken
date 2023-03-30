@@ -49,7 +49,19 @@ export default function SendReceive() {
 
   function copyTextFn(e) {
     e.preventDefault();
-    navigator.clipboard.writeText(address);
+    // navigator.clipboard.writeText(address);
+
+    const textArea = document.createElement("textarea");
+    textArea.value = address;
+    document.body.appendChild(textArea);
+    // textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Unable to copy to clipboard', err);
+    }
+    document.body.removeChild(textArea);
 
     setShowText(true);
 

@@ -5,6 +5,10 @@ import CurrencyInput from 'react-currency-input-field';
 import { toast, ToastContainer } from 'react-toastify';
 import supabase from '@/components/Utils/SupabaseClient';
 import axios from 'axios';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import RecentQR from './RecentQR';
+import TransactionHistory from './TransactionHistory';
 
 
 export const DirectPay = () => {
@@ -15,6 +19,7 @@ export const DirectPay = () => {
   const [note,setNote] = useState();
   const [loading,setLoading] = useState(false)
   const [errMsg,setErrMsg] = useState(false);
+  const [instantAmount,setInstantAmount] = useState(10);
   const inputRef = useRef(null)
 
   const DynamicQRCode = dynamic(() => import("@/components/Utils/DirectPayQr"), {
@@ -74,6 +79,13 @@ export const DirectPay = () => {
    
   }
 
+  async function instantPaymentFn(e){
+      e.preventDefault();
+
+    console.log(e.target.value,'hello')
+    setAmount(e.target.value)
+  }
+
 
   useEffect(() => {
     inputRef.current.focus()
@@ -82,9 +94,7 @@ export const DirectPay = () => {
 
   console.log(amount,note,'amount')
 
-  return (
-    <div>
-      <section className='direct-pay'>
+  return (      <section className='direct-pay' id='directPay'>
         <ToastContainer/>
         <div className='container'>
           <div className='directPay-form'>
@@ -101,6 +111,7 @@ export const DirectPay = () => {
                 ref={inputRef}
                 prefix="$"
                 decimalsLimit={2}
+                value={amount}
                 required
                 onValueChange={(value)=> setAmount(value)}
               />
@@ -112,7 +123,38 @@ export const DirectPay = () => {
               <button className='pay' type='submit' onClick={(e) => requestFn(e)}>{loading ? 'Loading...' : 'Generate Payment' }</button>
               {/* <DynamicQRCode props={'url'} /> */}
             </form>
+            <div className='recent-payouts'>
+            <div className='recent-card'>
+              <button type='button' value={10} onClick={instantPaymentFn} className='grey-button' >10$</button> 
+              <button type='button' value={100} onClick={instantPaymentFn} className='grey-button' >100$</button> 
+              <button type='button' value={1000} onClick={instantPaymentFn} className='grey-button' >1000$</button> 
+
+            </div>
+
+            
+
           </div>
+          <div className='directPay-history'>
+
+            <Tabs
+      defaultActiveKey="profile"
+      id="fill-tab-example"
+      className="mb-3"
+      fill
+    >
+      <Tab eventKey="home" title="Generated Payments">
+        <RecentQR/>
+      </Tab>
+      <Tab eventKey="profile" title="Transaction History">
+        <TransactionHistory/>
+      </Tab>
+ 
+    </Tabs>
+
+            </div>
+          </div>
+
+        
 
           <Modal
             closeButton
@@ -135,6 +177,5 @@ export const DirectPay = () => {
           </Modal>
         </div>
       </section>
-    </div>
   )
 }
