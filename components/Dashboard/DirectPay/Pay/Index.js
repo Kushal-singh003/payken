@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 import CheckoutForm from "./CheckoutForm";
 import supabase from "@/components/Utils/SupabaseClient";
 
-// const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+// const stripePromise = loadStripe(`${process.env.STRIPE_SECRET_KEY}`);
 
-const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+const stripePromise = loadStripe(`${process.env.STRIPE_SECRET_KEY}`);
 
 export default function CartCheckout({ clientSecret }) {
   const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ export default function CartCheckout({ clientSecret }) {
     getSession();
   }, []);
 
-  console.log(process.env.STRIPE_PRIVATE_KEY, "private key");
+  console.log(hell, "private key");
 
   async function getSession() {
     const {

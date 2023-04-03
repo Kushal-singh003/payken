@@ -6,9 +6,9 @@ import CheckoutForm from "./CheckoutForm";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/router";
 
-// const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+// const stripePromise = loadStripe(`${process.env.STRIPE_SECRET_KEY}`);
 
-const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+const stripePromise = loadStripe(`${process.env.STRIPE_SECRET_KEY}`);
 
 export default function CartCheckout({ clientSecret }) {
   const [show, setShow] = useState(false);

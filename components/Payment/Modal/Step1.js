@@ -3,7 +3,7 @@ import { withAuth } from "@/components/Utils/Functions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import supabase from "@/components/Utils/SupabaseClient";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
 export default function Step1({
   setShow1,
