@@ -3,10 +3,10 @@ import { useState } from "react";
 import Logo from "./Logo";
 
 // const stripe = require("stripe")(
-//   process.env.STRIPE_SECRET_KEY
+//   `${process.env.STRIPE_SECRET_KEY}`
 // );
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 import { useRouter } from "next/router";
 
 const YOUR_DOMAIN = "http://localhost:3000";

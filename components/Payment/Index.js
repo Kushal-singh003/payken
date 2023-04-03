@@ -19,14 +19,14 @@ import axios from "axios";
 // import {SquarePaymentsForm, CreditCardInput} from 'react-square-web-payments-sdk'
 
 // const stripe = require("stripe")(
-//   process.env.STRIPE_SECRET_KEY
+//   `${process.env.STRIPE_SECRET_KEY}`
 // );
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
-// const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+// const stripePromise = loadStripe(`${process.env.STRIPE_PRIVATE_KEY}`);
 
-const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
+const stripePromise = loadStripe(`${process.env.STRIPE_PRIVATE_KEY}`);
 
 export default function Payment() {
   // const [cardId,setCardId] = useState();
