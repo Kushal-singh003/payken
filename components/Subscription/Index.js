@@ -2,10 +2,10 @@ import React from "react";
 import { useRouter } from "next/router";
 
 // const stripe = require("stripe")(
-//   `${process.env.STRIPE_SECRET_KEY}`
+//   process.env.STRIPE_SECRET_KEY
 // );
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const YOUR_DOMAIN = "http://localhost:3000";
 

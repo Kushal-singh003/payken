@@ -4,10 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // const stripe = require("stripe")(
-//   `${process.env.STRIPE_SECRET_KEY}`
+//   process.env.STRIPE_SECRET_KEY
 // );
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default function Step2({
   setShow1,

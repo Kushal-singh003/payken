@@ -9,10 +9,10 @@ import axios from "axios";
 import { PaymentRequestButtonElement } from "@stripe/react-stripe-js";
 import { ApplePay } from "react-square-web-payments-sdk";
 // const stripe = require("stripe")(
-//   `${process.env.STRIPE_SECRET_KEY}`
+//   process.env.STRIPE_SECRET_KEY
 // );
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 // import { Square, CashApp, Payments } from "@square/web-sdk";
 // import { Payments } from "@square/web-sdk";
 

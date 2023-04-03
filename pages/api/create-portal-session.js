@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const YOUR_DOMAIN = "http://localhost:3000";
 
