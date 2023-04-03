@@ -112,11 +112,14 @@ export default function AddProduct() {
       return;
     }
 
-    if(productInfo?.price < (0.5 / maticPrice) ){
-      toast.error(`Min price must be ${parseFloat(0.5 / maticPrice).toFixed(3)}`)
-      setLoading(false);
-      return;
+    if(productInfo?.price == 'false'){
+      if(productInfo?.price < (0.54 / maticPrice) ){
+        toast.error(`Min price must be ${parseFloat(0.54 / maticPrice).toFixed(3)}`)
+        setLoading(false);
+        return;
+      }
     }
+   
 
     if (show) {
       if (inputFields?.length == 1) {
@@ -327,7 +330,7 @@ export default function AddProduct() {
              
                 <div className="inputSection dynamic-price">
                   <h4 className="input-title">
-                    Price <span className="inpu-desc">(In MATIC & min price {parseFloat(0.5 / maticPrice).toFixed(3)} MATIC)</span>
+                    Price <span className="inpu-desc">(In MATIC & min price {parseFloat(0.54 / maticPrice).toFixed(3)} MATIC)</span>
                   </h4>
                   <h6 style={{color:'grey'}}>1 Matic = {maticPrice}USD</h6>
 

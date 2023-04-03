@@ -2,7 +2,7 @@ import axios from "axios";
 
 // This is your test secret API key.
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 
 const calculateOrderAmount = (items) => {
@@ -26,6 +26,7 @@ export default async function handler(req, res) {
     state,
     country,
     customer,
+    maticPrice,
   } = req.body;
   const dataNE = req.body;
   console.log(dataNE, "new Data");
@@ -33,11 +34,11 @@ export default async function handler(req, res) {
   let { token } = req.body;
   console.log(token, "token is here");
   console.log(customer, "customer");
-  // Create a PaymentIntent with the order amount and currency
+
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: Math.ceil(100 * 1),
+    amount: Math.ceil(100 * maticPrice),
     shipping: {
-      name: name || 'test',
+      name: name || "test",
       address: {
         line1: address,
         postal_code: "98140",
@@ -48,10 +49,7 @@ export default async function handler(req, res) {
     },
     currency: "usd",
     description,
-    // automatic_payment_methods: {
-    //   enabled: true,
-    // },
-    payment_method_types: ['card', 'cashapp','us_bank_account'],
+    payment_method_types: ["card", "cashapp", "us_bank_account"],
 
     customer: `${customer}`,
     // setup_future_usage: "off_session",
@@ -77,7 +75,7 @@ export default async function handler(req, res) {
     // },
   };
   const response = await axios(config);
-  console.log(response,'response is here')
+  console.log(response, "response is here");
   // userId,tokenId,quantity,amount,transactionCc,transactionStatus,status
 
   res.send({

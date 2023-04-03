@@ -479,6 +479,7 @@ tr {
   background-color: #168b29;
   border-radius: 50px;
   padding: 20px;
+  border: none;
 }
 
 .detail-row5 {
@@ -1553,7 +1554,7 @@ button.card-continue {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 65vh;
+  height: 550px;
   background: #000;
 }
 
@@ -1574,6 +1575,7 @@ section.Wallet .wallet-table tr.wallet-stripped td {
   background: #0a0a0a;
   justify-content: center;
   padding: 33px;
+  /* width: 500px; */
   border: 1px solid #ffff001c;
   border-radius: 7px;
 }
@@ -2221,6 +2223,15 @@ section.Wallet.Recent-QR {
 
 section.Wallet.Transaction-History {
   margin-top: -3rem;
+}
+
+.cart-loader{
+  background-color: #30302d;
+    opacity: 1;
+    color: #a09494;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
 }
 
 /* .addProduct--div .dynamic-div #flexSwitchCheckChecked{
@@ -6683,9 +6694,9 @@ form {
     width: 55%;
   }
 
-  .qr-code {
+  /* .qr-code {
     height: 55vh;
-  }
+  } */
 
   .firstDetail {
     flex-direction: column;
@@ -7374,8 +7385,11 @@ form {
   }
 
   .qr-code {
-    height: 50vh;
-  }
+    height: 490px;
+}
+
+/* .qr-code .qr-container {
+  width: 100%;} */
 
   .qr-code .copy-address {
     margin-top: 2rem;
@@ -7686,9 +7700,9 @@ form {
     margin: 0 auto 30px auto;
   }
 
-  .qr-code {
+  /* .qr-code {
     height: 62vh;
-  }
+  } */
 
   div#NFTPage-inner .new-dashboard section#nft-profile-sec form.funds-sec {
     padding: 0;
@@ -7746,9 +7760,9 @@ form {
 }
 
 @media (max-width: 380px) {
-  .qr-code {
+  /* .qr-code {
     height: 80vh;
-  }
+  } */
 
   .merchant-pop .merchant-btn button {
     padding: 10px 12px !important;

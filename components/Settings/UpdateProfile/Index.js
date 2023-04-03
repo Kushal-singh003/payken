@@ -27,6 +27,7 @@ const UpdateProfile = () => {
   const [showImage, setShowImage] = useState();
   const [spinner,setSpinner] = useState(false);
   const [profile,setProfile]=useState();
+  const [errMsg,setErrMsg] = useState(false)
   const router = useRouter();
 
 
@@ -57,6 +58,13 @@ const UpdateProfile = () => {
   async function updateUserProfile(e) {
     e.preventDefault();
     setIsLoading(true);
+    setErrMsg(false)
+    console.log(phoneNumber.length,'number')
+    if(phoneNumber.length != 10 ){
+      setIsLoading(false)
+      setErrMsg(true);
+      return;
+    }
 
     const { data, error } = await supabase.auth.updateUser({
       data: {
@@ -115,7 +123,7 @@ const UpdateProfile = () => {
                   <div className="card-body ">
                     <h3>PROFILE UPDATE FORM</h3>
                     <p>Please Fill Out This Form to Complete Your KYC</p>
-                    <form>
+                    <form onSubmit={updateUserProfile}>
                       <div className="form-group form mb-2">
                         {/* <label htmlFor="email">Email</label> */}
                         <input
@@ -244,6 +252,7 @@ const UpdateProfile = () => {
                         {spinner ? <span className="spinner-border "></span> : null }
                          */}
                       {/* </div> */}
+                        {errMsg && <span style={{color:'red',textAlign:'center'}} >Invalid Phone Number!!</span>}
 
                       <div className="google-btn mt-2" >
                       <Button
@@ -253,7 +262,6 @@ const UpdateProfile = () => {
                        style={{marginTop:"1rem !important"}}
                         type="submit"
                         disabled={isLoading}
-                        onClick={(e) => updateUserProfile(e)}
                       >
                         {isLoading ? "Loading…" : "Update "}
                       </Button>

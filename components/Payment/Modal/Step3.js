@@ -18,6 +18,7 @@ export default function Step3({
   setShow1,
   formData,
   customer,
+  
 }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
@@ -33,10 +34,12 @@ export default function Step3({
   const [newValue, setNewValue] = useState([]);
   const [routerQuery, setRouterQuery] = useState();
   const [price, setPrice] = useState(null);
+  const [maticPrice,setMaticPrice] = useState();
   const router = useRouter();
 
   useEffect(() => {
     getSession();
+    getMaticPriceFn()
   }, [nftDetails?.token]);
 
   console.log(formData, "formdata step3");
@@ -196,6 +199,7 @@ export default function Step3({
 
     let req = await axios.post("/api/create-payment-intent", {
       amount: price ? price * count : nftDetails?.nftPrice * count,
+      maticPrice:  price ? price * count * maticPrice : nftDetails?.nftPrice * count * maticPrice,
       description: nftDetails?.description,
       email: formData?.email,
       quantity: count,
@@ -217,6 +221,17 @@ export default function Step3({
     setShow3(true);
     setShow2(false);
     setShow1(false);
+  }
+
+  async function getMaticPriceFn(){
+    try {
+      const response = await axios.get('https://api.polygonscan.com/api?module=stats&action=maticprice&apikey=3DP8EIJ53A49TPYD6WWUCVE919S7W7N2RU');
+      console.log(response,'matic price')
+      setMaticPrice(response?.data?.result?.maticusd)
+    } catch (error) {
+      console.log(error,'error')
+    }
+   
   }
 
   console.log(formValues, "fomrdjfkjk");
@@ -322,7 +337,7 @@ export default function Step3({
           {" "}
           {loading
             ? "Loading..."
-            : `Pay ${price ? price * count : nftDetails?.nftPrice * count}`}
+            : <>Pay {price ? parseFloat(price * count * maticPrice).toFixed(3)  : parseFloat(nftDetails?.nftPrice * count * maticPrice).toFixed(3) }$</>}
         </button>
       </div>
     </div>

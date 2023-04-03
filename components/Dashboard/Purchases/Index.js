@@ -21,8 +21,12 @@ export default function Purchases() {
         query: "getPurchases",
       });
       console.log(response, "address");
-      setPurchasesData(response?.data?.data);
-      setLengthOfData(response?.data?.data?.length);
+      const a = response?.data?.data?.Purchases;
+      const b = response?.data?.data?.checkData;
+      const c = a?.concat(b)
+      console.log(c,'c')
+      setPurchasesData(c);
+      setLengthOfData(c?.length);
 
       setOpen(false);
     } catch (error) {
@@ -100,7 +104,7 @@ export default function Purchases() {
                           <div className="wallet-data">
                             {/* <span>Amount</span> */}
                             <span>
-                              <strong>{item.price}</strong>
+                              <strong>{parseFloat(item.price).toFixed(3)}</strong>
                             </span>
                           </div>
                         </td>

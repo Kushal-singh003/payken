@@ -19,12 +19,15 @@ export const DirectPay = () => {
   const [note,setNote] = useState();
   const [loading,setLoading] = useState(false)
   const [errMsg,setErrMsg] = useState(false);
+  const [errMsg2,setErrMsg2] = useState(false);
   const [instantAmount,setInstantAmount] = useState(10);
   const inputRef = useRef(null)
 
-  const DynamicQRCode = dynamic(() => import("@/components/Utils/DirectPayQr"), {
+  const DynamicQRCode = dynamic(() => import("@/components/Utils/QR"), {
     ssr: false,
   });
+
+  
 
   const closeHandler = () => {
     setVisible(false);
@@ -44,10 +47,17 @@ export const DirectPay = () => {
     e.preventDefault()
     setLoading(true)
     setErrMsg(false)
+    setErrMsg2(false)
 
     if(!amount){
       setErrMsg(true)
       setLoading(false)
+      return;
+    }
+
+    if(amount < 0.5) {
+      setLoading(false)
+      setErrMsg2(true);
       return;
     }
 
@@ -98,7 +108,7 @@ export const DirectPay = () => {
         <ToastContainer/>
         <div className='container'>
           <div className='directPay-form'>
-            <form>
+            <form onSubmit={requestFn}>
               {/* <div className='amtDiv'> */}
               {/* <h2>$</h2> */}
               {/* <input className='amount' ref={inputRef} defaultValue="$" placeholder='$0' type='number' /> */}
@@ -112,15 +122,16 @@ export const DirectPay = () => {
                 prefix="$"
                 decimalsLimit={2}
                 value={amount}
-                required
                 onValueChange={(value)=> setAmount(value)}
               />
               {errMsg && <span className='error-msg'>*Please enter amount!</span>}
+              {errMsg2 && <span className='error-msg'>*Minimum amount must be greater than 0.5$ </span>}
+
               {/* </div> */}
               <input className='note' onChange={(e)=> setNote(e.target.value)} placeholder='Add note' type='text' />
 
 
-              <button className='pay' type='submit' onClick={(e) => requestFn(e)}>{loading ? 'Loading...' : 'Generate Payment' }</button>
+              <button className='pay' type='submit' >{loading ? 'Loading...' : 'Generate Payment' }</button>
               {/* <DynamicQRCode props={'url'} /> */}
             </form>
             <div className='recent-payouts'>

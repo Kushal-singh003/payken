@@ -141,7 +141,7 @@ export default function NftDetail({ props }) {
             <div className="detail-right">
               <div className="detail-row">
                 <h6>{productData?.productName}</h6>
-                <span>{productData?.price == 999999999 ? 0 : productData?.price} MATIC </span>
+                <span>{productData?.price == 999999999 ? 0 : parseFloat(productData?.price).toFixed(3)} MATIC </span>
               </div>
               <p className="super-dope">{productData?.description}</p>
               <div className="accordion" id="accordionPanelsStayOpenExample">
@@ -219,7 +219,7 @@ export default function NftDetail({ props }) {
                             <li>{productData?.link || <span className="input-null">null</span>}</li>
                             <li>
                               {/* {!productData?.price == 999999999 || productData?.price   ? <>{productData?.price} MATIC </> : <span className="input-null">null</span>}  */}
-                            {productData?.price == 999999999 ? <> 0 MATIC </>: productData?.price ? <> {productData?.price} MATIC </> : <span className="input-null">null</span>}
+                            {productData?.price == 999999999 ? <> 0 MATIC </>: productData?.price ? <> {parseFloat(productData?.price).toFixed(3)} MATIC </> : <span className="input-null">null</span>}
                             </li>
                             <li>
                               {/* {!productData?.quantity == 999999999 || productData?.quantity  ? <>{productData?.quantity} MATIC </> : <span className="input-null">null</span>} */}

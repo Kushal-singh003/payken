@@ -8,8 +8,12 @@ import {
 import axios from "axios";
 import { PaymentRequestButtonElement } from "@stripe/react-stripe-js";
 import { ApplePay } from "react-square-web-payments-sdk";
+// const stripe = require("stripe")(
+//   "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"
+// );
+
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 // import { Square, CashApp, Payments } from "@square/web-sdk";
 // import { Payments } from "@square/web-sdk";
@@ -230,12 +234,10 @@ export default function CheckoutForm({ customer }) {
   //   return cashAppPay;
   // }
 
-  async function ClickFn(e){
+  async function ClickFn(e) {
     e.preventDefault();
-    console.log(e,'do something...')
+    console.log(e, "do something...");
   }
-
-
 
   return (
     <>
@@ -243,18 +245,18 @@ export default function CheckoutForm({ customer }) {
         {paymentRequest ? (
           <PaymentRequestButtonElement
             options={{
-              type: 'applePay',
+              type: "applePay",
               theme: {
-                style: 'dark',
-                height: '64px',
-                label: 'Pay Now',
-                icon: 'auto',
-                logo: 'auto',
+                style: "dark",
+                height: "64px",
+                label: "Pay Now",
+                icon: "auto",
+                logo: "auto",
               },
               onClick: (e) => {
-                ClickFn(e)
+                ClickFn(e);
               },
-              paymentRequest
+              paymentRequest,
             }}
           />
         ) : null}

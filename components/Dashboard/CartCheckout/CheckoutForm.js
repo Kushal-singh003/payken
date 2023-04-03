@@ -9,7 +9,7 @@
 // // import { PaymentRequestButtonElement } from "@stripe/react-stripe-js";
 // // import { ApplePay } from "react-square-web-payments-sdk";
 // const stripe = require("stripe")(
-//   "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+//   "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"
 // );
 // import LoginModal from "@/components/ui/LoginModal";
 // import supabase from "@/components/Utils/SupabaseClient";
@@ -128,9 +128,6 @@
 //   );
 // }
 
-
-
-
 import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
@@ -141,8 +138,12 @@ import {
 import axios from "axios";
 import { PaymentRequestButtonElement } from "@stripe/react-stripe-js";
 import { ApplePay } from "react-square-web-payments-sdk";
+// const stripe = require("stripe")(
+//   "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"
+// );
+
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 // import { Square, CashApp, Payments } from "@square/web-sdk";
 // import { Payments } from "@square/web-sdk";
@@ -157,13 +158,13 @@ export default function CheckoutForm({ customer }) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [paymentMethod, setPaymentMethod] = useState();
   const [paymentRequest, setPaymentRequest] = useState();
-     const [showModal,setShowModal] = useState(false);
-     const [sessionData,setSessionData] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [sessionData, setSessionData] = useState();
 
   console.log(customer);
 
   React.useEffect(() => {
-  getSession()
+    getSession();
     if (!stripe) {
       return;
     }
@@ -195,21 +196,21 @@ export default function CheckoutForm({ customer }) {
     });
   }, [stripe]);
 
-async function getSession() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  console.log(session, "session");
-  setSessionData(session)
-  if(session == null){
-    setShowModal(true);
-  }
-  const token = session?.access_token;
+  async function getSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(session, "session");
+    setSessionData(session);
+    if (session == null) {
+      setShowModal(true);
+    }
+    const token = session?.access_token;
   }
 
-  function handleModalFn(e){
+  function handleModalFn(e) {
     e.preventDefault();
-    setShowModal(true)
+    setShowModal(true);
   }
 
   const handleSubmit = async (e) => {
@@ -302,13 +303,10 @@ async function getSession() {
     }
   }, [stripe]);
 
-
-  async function ClickFn(e){
+  async function ClickFn(e) {
     e.preventDefault();
-    console.log(e,'do something...')
+    console.log(e, "do something...");
   }
-
-
 
   return (
     <>
@@ -316,39 +314,41 @@ async function getSession() {
         {paymentRequest ? (
           <PaymentRequestButtonElement
             options={{
-              type: 'applePay',
+              type: "applePay",
               theme: {
-                style: 'dark',
-                height: '64px',
-                label: 'Pay Now',
-                icon: 'auto',
-                logo: 'auto',
+                style: "dark",
+                height: "64px",
+                label: "Pay Now",
+                icon: "auto",
+                logo: "auto",
               },
               onClick: (e) => {
-                ClickFn(e)
+                ClickFn(e);
               },
-              paymentRequest
+              paymentRequest,
             }}
           />
         ) : null}
       </div>
 
-       <form id="payment-form" onSubmit={sessionData ? handleSubmit : handleModalFn}>
- <PaymentElement id="payment-element" options={paymentElementOptions} />
+      <form
+        id="payment-form"
+        onSubmit={sessionData ? handleSubmit : handleModalFn}
+      >
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
 
-<button disabled={isLoading || !stripe || !elements} id="submit">
-  <span id="button-text">
-    {isLoading ? (
-      <div className="spinner" id="spinner"></div>
-    ) : (
-      "Pay now"
-    )}
-  </span>
-</button>
-{message && <div id="payment-message">{message}</div>}
-</form> 
- <LoginModal showModal={showModal} setShowModal={setShowModal} /> 
-
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {message && <div id="payment-message">{message}</div>}
+      </form>
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 }

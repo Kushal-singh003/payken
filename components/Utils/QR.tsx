@@ -6,6 +6,7 @@ import QRCodeStyling from "qr-code-styling";
 import { useState,useRef,useEffect } from 'react';
 
 export default function QRCode({props}) {
+console.log(props,'props')
   const qrCode = new QRCodeStyling({
     width: 300,
     height: 300,

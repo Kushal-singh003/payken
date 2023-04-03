@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import axios from "axios";
@@ -7,15 +7,19 @@ import { useRouter } from "next/router";
 import CheckoutForm from "./CheckoutForm";
 import supabase from "@/components/Utils/SupabaseClient";
 
-const stripePromise = loadStripe("pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU5LoW1odTriiIm4vMZ7Vzk3aHf0YWOul4TFYpQU2JsR759vmsP0J00YDXzZqOm");
+// const stripePromise = loadStripe("pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1");
+
+const stripePromise = loadStripe(
+  "pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1"
+);
 
 export default function CartCheckout({ clientSecret }) {
-const [show,setShow] = useState(false)
-const [show1,setShow1] = useState(false)
-const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const router = useRouter();
 
   const appearance = {
-    theme: 'flat',
+    theme: "flat",
   };
 
   const options = {
@@ -23,7 +27,7 @@ const router = useRouter();
     appearance,
   };
 
-  console.log(options, 'options are here')
+  console.log(options, "options are here");
 
   function backFn(e) {
     e.preventDefault();
@@ -31,20 +35,20 @@ const router = useRouter();
     router.back();
   }
 
-  useEffect(()=>{
-    setShow(true)
-    setShow1(true)
-    getSession()
-  },[])
+  useEffect(() => {
+    setShow(true);
+    setShow1(true);
+    getSession();
+  }, []);
 
   async function getSession() {
     const {
       data: { session },
     } = await supabase.auth.getSession();
     console.log(session, "session");
-   
+
     const token = session?.access_token;
-    }
+  }
 
   return (
     <>
@@ -111,27 +115,19 @@ const router = useRouter();
                     tabindex="0"
                   >
                     <div className="pay">
-
                       {clientSecret && (
                         <Elements options={options} stripe={stripePromise}>
-
                           <CheckoutForm />
                         </Elements>
-                      )
-                      }
-
+                      )}
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>
           </Modal>
-
         </div>
       </section>
-
     </>
   );
 }

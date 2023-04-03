@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import supabase from "@/components/Utils/SupabaseClient";
 
 const SubmitKyc = () => {
-    
+
   let config = {
     lang: "en", //language of WebSDK texts and comments (ISO 639-1 format)
     email: "bpsr.rana@gmail.com",
@@ -26,37 +26,44 @@ const SubmitKyc = () => {
     //   // you may also use to pass string with plain styles `customCssStr:`
     // },
   };
-  let options =({ addViewportTag: false, adaptIframeHeight: true})
- let  errorHandler = ((error)=>console.log(error))
-  let messageHandler = ((msg)=>console.log(msg))
-let [accessToken,setAccessToken]=useState('')
-async function accessTokenExpirationHandler() {
+
+  
+  let options = ({ addViewportTag: false, adaptIframeHeight: true })
+  let errorHandler = ((error) => console.log(error))
+  let messageHandler = ((msg) => console.log(msg))
+  let [accessToken, setAccessToken] = useState('')
+
+
+  async function accessTokenExpirationHandler() {
     const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      console.log(session?.user?.id);
-      let data = await axios.post("/api/getaccesstoken",{id: session?.user?.id})
+      data: { session },
+    } = await supabase.auth.getSession();
+    console.log(session?.user?.id, 'access id');
+    let data = await axios.post("/api/getaccesstoken", { id: session?.user?.id })
     // return Promise.resolve(newAccessToken)// get a new token from your backend
-   setAccessToken(data.data.data.token)
+    setAccessToken(data.data.data.token)
     return data.data.data.token;
   }
   // accessTokenExpirationHandler()
   useEffect(() => {
     accessTokenExpirationHandler()
-  },[])
-  return (<>
-  <div className="submitkyc">
+  }, [])
 
-    {accessToken && <SumsubWebSdk
-      accessToken={accessToken}
-      expirationHandler={()=>Promise.resolve(accessTokenExpirationHandler)}
-      config={config}
-      options={options}
-      onMessage={messageHandler}
-      onError={errorHandler}
-      />}
+
+  return (
+    <>
+      <div className="submitkyc">
+
+        {accessToken && <SumsubWebSdk
+          accessToken={accessToken}
+          expirationHandler={() => Promise.resolve(accessTokenExpirationHandler)}
+          config={config}
+          options={options}
+          onMessage={messageHandler}
+          onError={errorHandler}
+        />}
       </div>
-      </>
+    </>
   );
 };
 

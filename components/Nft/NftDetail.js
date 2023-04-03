@@ -205,6 +205,7 @@ export default function NftDetail({props}) {
                 </Link>
               </div>
             </div>
+            
           </div>
         </div>
       </section>

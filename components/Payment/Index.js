@@ -1,16 +1,16 @@
 import React from "react";
-import  { useCallback } from "react";
+import { useCallback } from "react";
 // import { ApplePayButton } from "react-apple-pay-button";/
 import Step1 from "./Modal/Step2";
 import Link from "next/link";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withAuth } from "../Utils/Functions";
 import supabase from "../Utils/SupabaseClient";
 import {
   PaymentElement,
   useStripe,
   useElements,
-  CardElement
+  CardElement,
 } from "@stripe/react-stripe-js";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -18,74 +18,66 @@ import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
 // import {SquarePaymentsForm, CreditCardInput} from 'react-square-web-payments-sdk'
 
+// const stripe = require("stripe")(
+//   "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"
+// );
+
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 
-const stripePromise = loadStripe("pk_test_51MYlX2JhZEv5n0fUmXp4uTj3oLEEWxnMAXdIU5LoW1odTriiIm4vMZ7Vzk3aHf0YWOul4TFYpQU2JsR759vmsP0J00YDXzZqOm");
+// const stripePromise = loadStripe("pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1");
 
-
+const stripePromise = loadStripe(
+  "pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1"
+);
 
 export default function Payment() {
-
   // const [cardId,setCardId] = useState();
   // const [cId,setCId] = useState();
   // const [paymentIntentId,setPaymentIntentId] = useState();
-  const [token,setToken] = useState();
+  const [token, setToken] = useState();
   // const elements = useElements();
 
   async function getSession() {
     const {
       data: { session },
     } = await supabase.auth.getSession();
-    console.log(
-      session,
-      'session'
-    );
-    setToken(session?.access_token)
-
-   
-   
+    console.log(session, "session");
+    setToken(session?.access_token);
   }
 
   useEffect(() => {
     getSession();
-  }, [])
-
- 
+  }, []);
 
   const paymentLink = async (amount, description) => {
-    const data =   {
+    const data = {
       amount: amount,
-      currency: 'USD',
+      currency: "USD",
       note: description,
     };
     const token = "sandbox-sq0idb-w-eEbWJIaNm40jrqUq48qw";
-    const response = await axios.post(
-      '/api/cashApp',{data:data,token:token}
-    );
-    console.log(response)
+    const response = await axios.post("/api/cashApp", {
+      data: data,
+      token: token,
+    });
+    console.log(response);
   };
 
-
-  const [paymentUrl, setPaymentUrl] = useState('');
+  const [paymentUrl, setPaymentUrl] = useState("");
 
   const handlePayment = async () => {
-    const url = await paymentLink(10, 'Payment for goods');
+    const url = await paymentLink(10, "Payment for goods");
     setPaymentUrl(url);
   };
 
-
-  const onRequestApplePay = useCallback(() => console.log('done'), []);
-  
-
+  const onRequestApplePay = useCallback(() => console.log("done"), []);
 
   return (
     <div>
       <section className="payment">
         <div className="container">
-
-     
           <h2>
             {" "}
             <Link href=""> </Link> Payment
@@ -182,41 +174,16 @@ export default function Payment() {
                 {/* <button onClick={onApplePayButtonClicked}>
         <img src="apple-pay-button.png" alt="Apple Pay" />
       </button> */}
-
-
-
               </div>
             </div>
           </div>
         </div>
-
 
         {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
                 </button>
               <Step1/> */}
       </section>
-          
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

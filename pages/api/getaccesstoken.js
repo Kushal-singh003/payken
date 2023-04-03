@@ -30,7 +30,7 @@ console.log(ts,signature);
       });
     } catch (err) {
       console.log(err);
-      res.status(500).json({ Error: err });
+      res.status(400).json({ Error: err });
     }
   }
 }

@@ -26,6 +26,7 @@ const NftPrice = () => {
   const [loading, setLoading] = useState(false);
   const [dynamicCheck, setDynamicCheck] = useState(null);
   const [hideInput, setHideInput] = useState(false);
+  const [maticPrice,setMaticPrice] = useState(null);
 
   async function getToken() {
     const {
@@ -45,6 +46,7 @@ const NftPrice = () => {
     const data = localStorage.getItem("function");
     console.log(JSON.parse(data), "final data");
     setFinalData(JSON.parse(data));
+    getMaticPriceFn();
   }, []);
 
   // useEffect(() => {
@@ -177,6 +179,17 @@ const NftPrice = () => {
 
   console.log(dynamicCheck);
 
+  async function getMaticPriceFn(){
+    try {
+      const response = await axios.get('https://api.polygonscan.com/api?module=stats&action=maticprice&apikey=3DP8EIJ53A49TPYD6WWUCVE919S7W7N2RU');
+      console.log(response,'matic price')
+      setMaticPrice(response?.data?.result?.maticusd)
+    } catch (error) {
+      console.log(error,'error')
+    }
+   
+  }
+
   return (
     <div id="NFTAmt-inner">
       <div className="new-dashboard">
@@ -197,9 +210,10 @@ const NftPrice = () => {
                         What's the price of one NFT?
                       </h4>
                       <p className="nft-para">
-                        Price is in the network currency (eg. Ethereum) For
+                        {/* Price is in the network currency (eg. Ethereum) For
                         TestNet contracts ensure the price is no more than 0.001
-                        ETH.
+                        ETH. */}
+                        Minimum Price must be {parseFloat(0.54/maticPrice).toFixed(3)} MATIC
                       </p>
                       <div
                         className="input-group height-set flex-nowrap mt-0 "

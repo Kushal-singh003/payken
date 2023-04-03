@@ -1,16 +1,15 @@
 import axios from "axios";
 
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 
-const YOUR_DOMAIN = 'http://localhost:3000'
+const YOUR_DOMAIN = "http://localhost:3000";
 
 export default async function handler(req, res) {
   const { data } = req.body;
 
-
-    // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
+  // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
   // Typically this is stored alongside the authenticated user in your database.
   const { session_id } = req.body;
   const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
@@ -25,8 +24,4 @@ export default async function handler(req, res) {
   });
 
   res.redirect(303, portalSession.url);
-
 }
-
-
-

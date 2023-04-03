@@ -23,6 +23,7 @@ export default function Wallet() {
   const [errMsg,setErrMsg] = useState(false);
   const [errMsg2,setErrMsg2] = useState(null);
   const [successMsg,setSuccessMsg] = useState(null);
+  const [added,setAdded] = useState(0)
 
   async function getAddress(token) {
     try {
@@ -51,12 +52,14 @@ export default function Wallet() {
     console.log(session, "session");
     setTokenData(session?.access_token)
     getAddress(session?.access_token);
+    const id = session?.user?.id;
+    // getKycStatusFn(id)
   }
 
   useEffect(() => {
     setOpen(true);
     getSession();
-  }, []);
+  }, [added]);
 
   const closeHandler = () => {
     setVisible(false);
@@ -97,11 +100,22 @@ export default function Wallet() {
       setTimeout(()=>{
         setSuccessMsg(null)
         setVisible(false)
+        setAdded(added+1)
       },[1000])
     }
 
     console.log(response,'withdraw response')
   }
+
+  // async function getKycStatusFn(id){
+  //   try {
+  //     const response = await axios.get(
+  //       `https://api.sumsub.com/resources/applicants/${id}/status`);
+  //       console.log(response,'kyc response')
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   return (
     <div>

@@ -20,7 +20,8 @@ export default function Cart() {
   const [added, setAdded] = useState(0);
   const [itemId, setItemId] = useState(null);
   const [loading1, setLoading1] = useState(false);
-  const [loading2,setLoading2] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
   const [itemId2, setItemId2] = useState(null);
   const [open, setOpen] = useState(false);
   const [lengthOfData, setLengthOfData] = useState(null);
@@ -91,70 +92,94 @@ export default function Cart() {
     }
   }
 
-  async function changeQuantityFn({ e, id,title,totalQty }) {
-   
-    let d ;
- 
+  async function changeQuantityFn({ e, id, title, totalQty }) {
+    setLoading3(true);
+    setItemId2(id)
+
+    let d;
+
     const b = id;
     let newItem = [];
     let sum = 0;
     console.log(title)
 
-    if(title == true){
-      if(e == totalQty) return;
-      d = e+1;
-    }
-
-    if(title === false){
-      if(e == 1) return;
-      d = e-1;
-    }
-
-    console.log(e,d,'d')
-    const updatedData = cartData?.map((item, idx) => {
-      if (item.id == b) {
-        newItem[idx] = { ...item, quantity: d }
-        console.log(newItem, 'newItem')
-      } else {
-        newItem[idx] = item;
+    if (title == true) {
+      if (e == totalQty) {
+        setLoading3(false)
+        return;
       }
+      d = e + 1;
+    }
 
-    })
+    if (title === false) {
+      if (e == 1) {
+        setLoading3(false)
+        return;
+      }
+      d = e - 1;
+    }
 
-    newItem?.forEach(value => {
-      sum += value?.price * value?.quantity;
-    });
-    console.log(sum+1,'summmm')
-    setTotal(sum)
-    setCartData(newItem);
+    console.log(e, d, 'd')
+
+    const response = await withToken({ data: { quantity: d, id: id }, token: tokenData, query: 'updatequantity' });
+    console.log(response, 'quantity update response')
+
+    if (!response?.Error) {
+      console.log('success')
+
+      const updatedData = cartData?.map((item, idx) => {
+        if (item.id == b) {
+          newItem[idx] = { ...item, quantity: d }
+          console.log(newItem, 'newItem')
+        } else {
+          newItem[idx] = item;
+        }
+
+      })
+
+      newItem?.forEach(value => {
+        sum += value?.price * value?.quantity;
+      });
+      console.log(sum + 1, 'summmm')
+      setTotal(sum)
+      setCartData(newItem);
+      setLoading3(false)
+    }
+
+    if (response?.Error) {
+      console.log('error')
+      setLoading3(false)
+    }
+
+
 
   }
 
   async function cartCheckoutFn() {
-      setLoading2(true)
-        const data = {
-            amount: total,
-            cartId: 1,
-            cartData:cartData,
-            // tokenId: tokenId,
-            quantity: 1,
-        }
-        console.log(data,'data')
-        let req = await axios.post("/api/create-cartPayment-intent",{data:data,token:tokenData});
-        console.log(req,'res');
-       
-        setLoading2(false)
-        
-        if(req?.Error){
-          console.log('error')
-        }
+    setLoading2(true)
+    const data = {
+      amount: total,
+      cartId: 1,
+      cartData: cartData,
+      // tokenId: tokenId,
+      quantity: 1,
+    }
+    console.log(data, 'data')
+    let req = await axios.post("/api/create-cartPayment-intent", { data: data, token: tokenData });
+    console.log(req, 'res');
 
-        if(!req?.Error){
-          console.log('success')
-          router.push('/dashboard/cartCheckout/completePayment/'+req?.data?.clientSecret)
-        }
-    
-}
+    setLoading2(false)
+
+    if (req?.Error) {
+      console.log('error')
+    }
+
+    if (!req?.Error) {
+      console.log('success')
+      router.push('/dashboard/cartCheckout/completePayment/' + req?.data?.clientSecret)
+    }
+
+  }
 
 
   return (
@@ -211,34 +236,37 @@ export default function Cart() {
                             <div className="cart-div">{item?.price} MATIC</div>{" "}
                           </td>
                           <td data-th="Quantity">
-                            <div  className="cart-div--2">
+
+                            <div className="cart-div--2">
                               <img onClick={(e) =>
-                                  changeQuantityFn({ e:item.quantity, id: item.id,totalQty:item.totalquantity,title:false })
-                                } className='cart-subIcon' src="/img/sub.png" />
-                              <input
-                                type="number"
-                                disabled
-                                // onChange={(e) =>
-                                //   changeQuantityFn({ e, id: item.id })
-                                // }
-                                className="form-control text-center cart-input"
-                                // defaultValue={
-                                //   quantity && itemId2 == item?.id
-                                //     ? quantity
-                                //     : item?.quantity
-                                // }
-                                value={item?.quantity}
-                              />
-                               <img onClick={(e) =>
-                                  changeQuantityFn({ e:item.quantity,totalQty:item.totalquantity, id: item.id,title:true })
-                                } className="cart-addIcon" src="/img/add.png" />
+                                changeQuantityFn({ e: item.quantity, id: item.id, totalQty: item.totalquantity, title: false })
+                              } className='cart-subIcon' src="/img/sub.png" disabled={loading3 && itemId2 == item.id} />
+
+                              {loading3 && itemId2 == item.id ? <Loading  className="cart-loader" size="sm" color="white" /> :
+                                <input
+                                  type="number"
+                                  disabled
+                                  // onChange={(e) =>
+                                  //   changeQuantityFn({ e, id: item.id })
+                                  // }
+                                  className="form-control text-center cart-input"
+                                  // defaultValue={
+                                  //   quantity && itemId2 == item?.id
+                                  //     ? quantity
+                                  //     : item?.quantity
+                                  // }
+                                  value={item?.quantity}
+                                />}
+                              <img onClick={(e) =>
+                                changeQuantityFn({ e: item.quantity, totalQty: item.totalquantity, id: item.id, title: true })
+                              } disabled={loading3 && itemId2 == item.id} className="cart-addIcon" src="/img/add.png" />
                             </div>
                           </td>
                           <td>
                             <div className="cart-div">
                               {quantity && itemId2 == item?.id
-                                ?  parseFloat(quantity * item?.price)?.toFixed(3)
-                                :  parseFloat(item?.quantity * item?.price)?.toFixed(3) } MATIC
+                                ? parseFloat(quantity * item?.price)?.toFixed(3)
+                                : parseFloat(item?.quantity * item?.price)?.toFixed(3)} MATIC
                             </div>
                           </td>
                           <td
@@ -287,8 +315,8 @@ export default function Cart() {
                           onClick={cartCheckoutFn}
                           className="btn btn-success btn-block cartCheckout"
                         >
-                          {loading2 ?    <Loading size="sm" color="white" /> : 
-                          <>Checkout <i class="bi bi-arrow-right-short"></i></>}
+                          {loading2 ? <Loading size="sm" color="white" /> :
+                            <>Checkout <i class="bi bi-arrow-right-short"></i></>}
                         </button>
                       </td>
                     </tr>

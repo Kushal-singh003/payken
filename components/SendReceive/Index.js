@@ -5,6 +5,8 @@ import supabase from "../Utils/SupabaseClient";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+import dynamic from "next/dynamic";
+
 
 export default function SendReceive() {
   const [address, setAddress] = useState();
@@ -70,7 +72,6 @@ export default function SendReceive() {
     }, [1000]);
   }
 
-  // const qrCodeValue = `bitcoin:${address}`;
 
   return (
     <div className="send-recieve">
@@ -83,6 +84,7 @@ export default function SendReceive() {
       </Backdrop>
         <div className="qr-container">
           <QRCode size={250} style={{border:'1px solid'}} value={address} />
+
           <div className="copy-address">
             <span className="qr-text"> {address}</span>
             <img  className="copy-icon" onClick={copyTextFn} src="/img/copy.png" />
@@ -116,7 +118,7 @@ export default function SendReceive() {
                     </th>
                     <td>
                       <div className="wallet-data">
-                        <span>{item.value / Math.pow(10, 18)}</span>
+                        <span>{parseFloat(item.value / Math.pow(10, 18)).toFixed(3)}</span>
                       </div>
                     </td>
                     <td className="mnbvfrr">
@@ -145,286 +147,7 @@ export default function SendReceive() {
                 </>
               );
             })}
-            {/* <tr className="wallet-stripped">
-            <th>
-              <img src="/img/crypto.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <img src="/img/bitcoin.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr className="wallet-stripped">
-            <th>
-              <img src="/img/tron.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <img src="/img/crypto.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr className="wallet-stripped">
-            <th>
-              <img src="/img/bitcoin.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <img src="/img/tron.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr className="wallet-stripped">
-            <th>
-              <img src="/img/bitcoin.png" alt="" />
-            </th>
-            <td>
-              <div className="wallet-data">
-                <span>Token</span>
-                <span>
-                  <strong>0.00</strong>
-                </span>
-              </div>
-            </td>
-            <td className="mnbvfrr">
-              <div className="wallet-data">
-                <span>Price</span>
-                <span>
-                  <strong>
-                    <img src="/img/ethereum.png" alt="" />
-                    0.00
-                  </strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>Referral Link</span>
-                <span>
-                  <strong>--</strong>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div className="wallet-data">
-                <span>contract address</span>
-                <span>
-                  <strong>0x784578458542514784</strong>
-                </span>
-              </div>
-            </td>
-          </tr> */}
+         
           </tbody>
           
         </table>

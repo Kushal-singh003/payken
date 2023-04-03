@@ -11,8 +11,12 @@ import supabase from "@/components/Utils/SupabaseClient";
 import { withAuth } from "@/components/Utils/Functions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// const stripe = require("stripe")(
+//   "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"
+// );
+
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 
 export default function Index({ props, price }) {
@@ -61,7 +65,7 @@ export default function Index({ props, price }) {
       email: email,
     });
     localStorage.setItem("buyerEmail", email);
-    getCustomerFn(email,name,address,city,country);
+    getCustomerFn(email, name, address, city, country);
   }
 
   async function getCustomerFn(email, name, address, city, country) {

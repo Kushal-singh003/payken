@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const stripe = require("stripe")(
-  "sk_test_51MYlX2JhZEv5n0fUZylGp229UUoT4iXdCCnjzUOhXr8r6uxhLG4GwpI9hQOnkSAIDrpzshq5jP0aQhbEibRrXGmq004SyTiGYl"
+  "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"
 );
 
 export default async function handler(req, res) {
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   console.log(token, data, "token is here");
   const paymentIntent = await stripe.paymentIntents.create({
-    amount:Math.ceil(100 * data?.amount),
+    amount: Math.ceil(100 * data?.amount),
     // shipping: {
     //   name: "test",
     //   address: {
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     // automatic_payment_methods: {
     //   enabled: true,
     // },
-    payment_method_types: ['card', 'cashapp','us_bank_account'],
+    payment_method_types: ["card", "cashapp", "us_bank_account"],
   });
   console.log(paymentIntent, "payment intent");
 
@@ -36,7 +36,6 @@ export default async function handler(req, res) {
       amount: data?.amount,
       note: data?.note,
       paymentIntentId: paymentIntent?.id,
-      
     },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -48,6 +47,6 @@ export default async function handler(req, res) {
   res.send({
     clientSecret: paymentIntent?.client_secret,
     paymentIntentId: paymentIntent?.id,
-    response:response?.error
+    response: response?.error,
   });
 }
