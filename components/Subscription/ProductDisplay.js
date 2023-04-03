@@ -3,12 +3,10 @@ import { useState } from "react";
 import Logo from "./Logo";
 
 // const stripe = require("stripe")(
-//   "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"
+//   process.env.STRIPE_SECRET_KEY
 // );
 
-const stripe = require("stripe")(
-  "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"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import { useRouter } from "next/router";
 
 const YOUR_DOMAIN = "http://localhost:3000";

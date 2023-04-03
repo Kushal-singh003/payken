@@ -12,12 +12,10 @@ import { withAuth } from "@/components/Utils/Functions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // const stripe = require("stripe")(
-//   "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"
+//   process.env.STRIPE_SECRET_KEY
 // );
 
-const stripe = require("stripe")(
-  "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"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default function Index({ props, price }) {
   const [show, setShow] = useState(false);

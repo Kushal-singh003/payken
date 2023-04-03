@@ -23,7 +23,8 @@ export default function Wallet() {
   const [errMsg,setErrMsg] = useState(false);
   const [errMsg2,setErrMsg2] = useState(null);
   const [successMsg,setSuccessMsg] = useState(null);
-  const [added,setAdded] = useState(0)
+  const [added,setAdded] = useState(0);
+  const [accessToken,setAccessToken] = useState();
 
   async function getAddress(token) {
     try {
@@ -54,11 +55,13 @@ export default function Wallet() {
     getAddress(session?.access_token);
     const id = session?.user?.id;
     // getKycStatusFn(id)
+    // accessTokenExpirationHandler(id)
   }
 
   useEffect(() => {
     setOpen(true);
     getSession();
+    // accessTokenExpirationHandler()
   }, [added]);
 
   const closeHandler = () => {
@@ -107,15 +110,39 @@ export default function Wallet() {
     console.log(response,'withdraw response')
   }
 
-  // async function getKycStatusFn(id){
+  // async function getKycStatusFn({a,b}){
   //   try {
+  //     const config = {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json',
+  //         'Authorization': `Bearer ${b}`
+  //       }
+  //     };
   //     const response = await axios.get(
-  //       `https://api.sumsub.com/resources/applicants/${id}/status`);
+  //       `https://api.sumsub.com/resources/applicants/${a}/status`,config);
   //       console.log(response,'kyc response')
   //   } catch (error) {
   //     console.log(error)
   //   }
   // }
+
+  // async function accessTokenExpirationHandler(id) {
+  //   // const {
+  //   //   data: { session },
+  //   // } = await supabase.auth.getSession();
+  //   // console.log(session?.user?.id, 'access id');
+  //   let data = await axios.post("/api/getaccesstoken", { id: id })
+  //   // return Promise.resolve(newAccessToken)// get a new token from your backend
+  //   console.log(data,'kyc token')
+  //   setAccessToken(data.data.data.token)
+  //   console.log(data.data.data.token,'accessToken kyc')
+  //   const a = data.data.data.userId;
+  //   const b = data.data.data.token;
+  //   getKycStatusFn({id:a,b:b})
+  // }
+
+ 
 
   return (
     <div>

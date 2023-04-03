@@ -19,18 +19,14 @@ import axios from "axios";
 // import {SquarePaymentsForm, CreditCardInput} from 'react-square-web-payments-sdk'
 
 // const stripe = require("stripe")(
-//   "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"
+//   process.env.STRIPE_SECRET_KEY
 // );
 
-const stripe = require("stripe")(
-  "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"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// const stripePromise = loadStripe("pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1");
+// const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
 
-const stripePromise = loadStripe(
-  "pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1"
-);
+const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
 
 export default function Payment() {
   // const [cardId,setCardId] = useState();

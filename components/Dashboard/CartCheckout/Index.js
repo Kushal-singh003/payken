@@ -6,11 +6,9 @@ import CheckoutForm from "./CheckoutForm";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/router";
 
-// const stripePromise = loadStripe("pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1");
+// const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
 
-const stripePromise = loadStripe(
-  "pk_live_51MYlX2JhZEv5n0fUzSLjLGdoeM2ySsP6gOTUN6PnFNzT2mql3nn0gvxJYTXq9sEYKlf6gsI9um48dx74KIyrYJ8P00RsSmzjd1"
-);
+const stripePromise = loadStripe(process.env.STRIPE_PRIVATE_KEY);
 
 export default function CartCheckout({ clientSecret }) {
   const [show, setShow] = useState(false);
